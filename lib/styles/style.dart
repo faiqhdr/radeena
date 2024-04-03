@@ -33,4 +33,3 @@ var indigoTwoColor = const Color(0xff9fa8da);
 var cyanOneColor = const Color(0xff4ba2b6);
 var cyanTwoColor = const Color(0xff4dd0e1);
 var greenColor = const Color(0xff26a691);
-var greentwoColor = const Color(0xff26a691);
