@@ -37,7 +37,7 @@ class MenuPage extends StatelessWidget {
                   bottom: height * .03,
                 ),
                 child: Image(
-                  image: const AssetImage("assets/menu_page/radeena_logo.png"),
+                  image: const AssetImage("assets/menu_page/radeena.png"),
                   width: width * 0.3,
                 ),
               ),
