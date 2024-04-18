@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 
 class MenuPage extends StatelessWidget {
-  const MenuPage({super.key});
+  const MenuPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +13,12 @@ class MenuPage extends StatelessWidget {
       backgroundColor: backgroundColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        elevation: 0.9,
+        elevation: 0.1,
         centerTitle: true,
-        leading: Icon(
-          Icons.menu,
-          color: greenColor,
-        ),
+        // leading: Icon(
+        //   Icons.menu,
+        //   color: greenColor,
+        // ),
         title: Text(
           "Radeena",
           style: titleGreenStyle(),
@@ -44,7 +44,10 @@ class MenuPage extends StatelessWidget {
               DeterminationWidget(
                 height: height,
                 width: width,
-                onpressed: () {},
+                onPressed: () {
+                  print("DeterminationWidget pressed");
+                  Navigator.pushNamed(context, '/identificationPage');
+                },
               ),
               Row(
                 children: [
@@ -56,9 +59,12 @@ class MenuPage extends StatelessWidget {
                         image: 'assets/menu_page/location.png',
                         title: 'History',
                         subtitle: 'Past Calculation',
-                        colorOne: cyanOneColor,
-                        colorTwo: cyanTwoColor,
-                        onpressed: () {},
+                        colorOne: cyan01Color,
+                        colorTwo: cyan02Color,
+                        onPressed: () {
+                          print("DeterminationWidget pressed");
+                          Navigator.pushNamed(context, '/identificationPage');
+                        },
                       ),
                     ],
                   ),
@@ -71,9 +77,12 @@ class MenuPage extends StatelessWidget {
                         image: 'assets/menu_page/bookmark.png',
                         title: 'Library',
                         subtitle: 'Reference Source',
-                        colorOne: indigoOneColor,
-                        colorTwo: indigoTwoColor,
-                        onpressed: () {},
+                        colorOne: indigo01Color,
+                        colorTwo: indigo02Color,
+                        onPressed: () {
+                          print("DeterminationWidget pressed");
+                          Navigator.pushNamed(context, '/identificationPage');
+                        },
                       ),
                       CustomWidget(
                         width: width,
@@ -81,9 +90,12 @@ class MenuPage extends StatelessWidget {
                         image: 'assets/menu_page/prayer.png',
                         title: 'Ask Chatbot',
                         subtitle: 'Inquiry',
-                        colorOne: blueOneColor,
-                        colorTwo: blueTwoColor,
-                        onpressed: () {},
+                        colorOne: blue01Color,
+                        colorTwo: blue02Color,
+                        onPressed: () {
+                          print("DeterminationWidget pressed");
+                          Navigator.pushNamed(context, '/identificationPage');
+                        },
                       ),
                     ],
                   )
@@ -99,115 +111,23 @@ class MenuPage extends StatelessWidget {
 
 class DeterminationWidget extends StatelessWidget {
   const DeterminationWidget({
-    super.key,
+    Key? key,
     required this.height,
     required this.width,
-    required Null Function() onpressed,
-  });
+    required this.onPressed,
+  }) : super(key: key);
 
   final double height;
   final double width;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height * .14,
-      width: width,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.15),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: const Offset(1.5, 3),
-          )
-        ],
-        image: const DecorationImage(
-          image: AssetImage("assets/menu_page/dashboard.png"),
-          fit: BoxFit.fill,
-        ),
-        borderRadius: BorderRadius.circular(25),
-      ),
+    return GestureDetector(
+      onTap: onPressed,
       child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              primaryColor.withOpacity(0.7),
-              secondaryColor.withOpacity(0.7),
-            ],
-          ),
-          borderRadius: BorderRadius.circular(25),
-        ),
-        child: Row(
-          children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: width * .03),
-              child: SizedBox(
-                width: width * .46,
-                child: ListTile(
-                  title: Text(
-                    "Determine Heirs",
-                    style: titleStyle(),
-                  ),
-                  subtitle: Row(
-                    children: [
-                      Text(
-                        "Distribute Wealth",
-                        style: subtitleStyle(),
-                      ),
-                      const SizedBox(width: 5),
-                      const Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.white,
-                        size: 13,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const Spacer(),
-            Padding(
-              padding: EdgeInsets.only(right: width * .04),
-              child: SizedBox(
-                height: height * .15,
-                width: width * .3,
-                child: Image.asset("assets/menu_page/lamp.png"),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// ignore: must_be_immutable
-class CustomWidget extends StatelessWidget {
-  CustomWidget({
-    super.key,
-    required this.width,
-    required this.height,
-    required this.image,
-    required this.title,
-    required this.subtitle,
-    required this.colorOne,
-    required this.colorTwo,
-    required Null Function() onpressed,
-  });
-
-  final double width;
-  final double height;
-  String image, title, subtitle;
-  Color colorOne, colorTwo;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: width * .06),
-      child: Container(
-        height: height,
-        width: width * .4,
+        height: height * .14,
+        width: width,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -227,40 +147,140 @@ class CustomWidget extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                colorOne.withOpacity(0.7),
-                colorTwo.withOpacity(0.7),
+                primaryColor.withOpacity(0.7),
+                secondaryColor.withOpacity(0.7),
               ],
             ),
             borderRadius: BorderRadius.circular(25),
           ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: width * .04,
-              vertical: height * .15,
+          child: Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * .03),
+                child: SizedBox(
+                  width: width * .46,
+                  child: ListTile(
+                    title: Text(
+                      "Determine Heirs",
+                      style: titleStyle(),
+                    ),
+                    subtitle: Row(
+                      children: [
+                        Text(
+                          "Distribute Wealth",
+                          style: subtitleStyle(),
+                        ),
+                        const SizedBox(width: 5),
+                        const Icon(
+                          Icons.arrow_forward_ios,
+                          color: Colors.white,
+                          size: 13,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const Spacer(),
+              Padding(
+                padding: EdgeInsets.only(right: width * .04),
+                child: SizedBox(
+                  height: height * .15,
+                  width: width * .3,
+                  child: Image.asset("assets/menu_page/lamp.png"),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class CustomWidget extends StatelessWidget {
+  CustomWidget({
+    Key? key,
+    required this.width,
+    required this.height,
+    required this.image,
+    required this.title,
+    required this.subtitle,
+    required this.colorOne,
+    required this.colorTwo,
+    required this.onPressed,
+  }) : super(key: key);
+
+  final double width;
+  final double height;
+  String image, title, subtitle;
+  Color colorOne, colorTwo;
+  final VoidCallback onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Padding(
+        padding: EdgeInsets.only(top: width * .06),
+        child: Container(
+          height: height,
+          width: width * .4,
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.15),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: const Offset(1.5, 3),
+              )
+            ],
+            image: const DecorationImage(
+              image: AssetImage("assets/menu_page/dashboard.png"),
+              fit: BoxFit.fill,
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Image(
-                  image: AssetImage(image),
-                  width: width * .15,
-                ),
-                const Spacer(),
-                Padding(
-                  padding: EdgeInsets.only(left: width * .02),
-                  child: Text(
-                    title,
-                    style: titleStyle(),
+            borderRadius: BorderRadius.circular(25),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  colorOne.withOpacity(0.7),
+                  colorTwo.withOpacity(0.7),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(25),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: width * .04,
+                vertical: height * .15,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image(
+                    image: AssetImage(image),
+                    width: width * .15,
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(left: width * .02),
-                  child: SubtitleWidget(
-                    subtitle: subtitle,
-                    onpressed: () {},
+                  const Spacer(),
+                  Padding(
+                    padding: EdgeInsets.only(left: width * .02),
+                    child: Text(
+                      title,
+                      style: titleStyle(),
+                    ),
                   ),
-                )
-              ],
+                  Padding(
+                    padding: EdgeInsets.only(left: width * .02),
+                    child: SubtitleWidget(
+                      subtitle: subtitle,
+                      onPressed: () {},
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -272,28 +292,31 @@ class CustomWidget extends StatelessWidget {
 // ignore: must_be_immutable
 class SubtitleWidget extends StatelessWidget {
   SubtitleWidget({
-    super.key,
-    required this.onpressed,
+    Key? key,
+    required this.onPressed,
     required this.subtitle,
-  });
+  }) : super(key: key);
 
-  final VoidCallback? onpressed;
+  final VoidCallback onPressed;
   String subtitle;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(subtitle, style: miniStyle()),
-        const SizedBox(
-          width: 5,
-        ),
-        const Icon(
-          Icons.arrow_forward_ios,
-          color: Colors.white,
-          size: 13,
-        )
-      ],
+    return GestureDetector(
+      onTap: onPressed,
+      child: Row(
+        children: [
+          Text(subtitle, style: miniStyle()),
+          const SizedBox(
+            width: 5,
+          ),
+          const Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.white,
+            size: 13,
+          )
+        ],
+      ),
     );
   }
 }

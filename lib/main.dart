@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:radeena/views/identification_page.dart';
 import 'package:radeena/views/menu_page.dart';
 
 void main() {
   runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
 }
 
 class MyApp extends StatelessWidget {
@@ -18,6 +20,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MenuPage(),
+      routes: {
+        '/identificationPage': (context) => IdentificationPage(),
+      },
     );
   }
 }

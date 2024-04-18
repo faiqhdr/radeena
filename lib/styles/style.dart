@@ -8,7 +8,7 @@ titleStyle() {
 
 titleGreenStyle() {
   return TextStyle(
-      color: greenColor, fontWeight: FontWeight.bold, fontSize: 18);
+      color: teal01nColor, fontWeight: FontWeight.bold, fontSize: 18);
 }
 
 subtitleStyle() {
@@ -20,16 +20,27 @@ miniStyle() {
   return const TextStyle(color: Colors.white, fontSize: 12);
 }
 
+titleDetermineHeirsStyle() {
+  return TextStyle(
+      color: green01Color, fontWeight: FontWeight.bold, fontSize: 19);
+}
+
+textUnderTitleStyle() {
+  return TextStyle(
+      color: primaryColor, fontWeight: FontWeight.bold, fontSize: 24);
+}
+
 // App Colors
 var backgroundColor = const Color(0xffe5f0f4);
 var primaryColor = Colors.teal;
 var secondaryColor = const Color(0xff7bc496);
 
 // Dashboard Colors
-var blueOneColor = const Color(0xff42a5f5);
-var blueTwoColor = const Color(0xff90caf9);
-var indigoOneColor = const Color(0xff7986cb);
-var indigoTwoColor = const Color(0xff9fa8da);
-var cyanOneColor = const Color(0xff4ba2b6);
-var cyanTwoColor = const Color(0xff4dd0e1);
-var greenColor = const Color(0xff26a691);
+var blue01Color = const Color(0xff42a5f5);
+var blue02Color = const Color(0xff90caf9);
+var indigo01Color = const Color(0xff7986cb);
+var indigo02Color = const Color(0xff9fa8da);
+var cyan01Color = const Color(0xff4ba2b6);
+var cyan02Color = const Color(0xff4dd0e1);
+var teal01nColor = const Color(0xff26a691);
+var green01Color = const Color(0xff81c784);
