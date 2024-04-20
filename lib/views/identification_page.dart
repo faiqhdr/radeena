@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/controllers/identification_controller.dart';
-import 'package:radeena/styles/style.dart';
+import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/models/enums.dart';
+import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/impediment_page.dart';
 
 class IdentificationPage extends StatefulWidget {
   final IdentificationController controller;
-  const IdentificationPage({Key? key, required this.controller})
-      : super(key: key);
+  const IdentificationPage({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
 
   @override
   _IdentificationPageState createState() => _IdentificationPageState();
@@ -20,8 +23,14 @@ class _IdentificationPageState extends State<IdentificationPage> {
   bool hasMother = false;
   int numberOfWives = 0;
   bool hasHusband = false;
-  int numberOfSons = 0;
-  int numberOfDaughters = 0;
+  int numOfSons = 0;
+  int numOfDaughters = 0;
+  bool hasGrandfather = false;
+  bool hasGrandmother = false;
+  int numOfBrothers = 0;
+  int numOfSisters = 0;
+  int numOfGrandsons = 0;
+  int numOfGranddaughters = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -69,12 +78,12 @@ class _IdentificationPageState extends State<IdentificationPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Property of the Deceased",
+          "Input the Deceased's Property",
           style: textUnderTitleStyle(),
         ),
         TextFormField(
           decoration: InputDecoration(
-            labelText: "Amount of the Property",
+            labelText: "Property's Amount",
             hintText: "Enter amount",
           ),
           keyboardType: TextInputType.number,
@@ -165,146 +174,291 @@ class _IdentificationPageState extends State<IdentificationPage> {
   }
 
   Widget _buildFamilyInputStep() {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Text(
-        "Select Deceased's Family",
-        style: textUnderTitleStyle(),
-      ),
-      CheckboxListTile(
-        title: Text("Father"),
-        value: hasFather,
-        onChanged: (value) {
-          setState(() {
-            hasFather = value!;
-          });
-        },
-      ),
-      if (selectedGender == Gender.female)
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Select Deceased's Family",
+          style: textUnderTitleStyle(),
+        ),
         CheckboxListTile(
-          title: Text("Husband"),
-          value: hasHusband,
+          title: Text("Father"),
+          value: hasFather,
           onChanged: (value) {
             setState(() {
-              hasHusband = value!;
+              hasFather = value!;
             });
           },
         ),
-      if (!hasHusband && selectedGender == Gender.male)
         CheckboxListTile(
-          title: Text("Wife"),
-          value: numberOfWives > 0,
+          title: Text("Mother"),
+          value: hasMother,
+          onChanged: (value) {
+            setState(() {
+              hasMother = value!;
+            });
+          },
+        ),
+        if (selectedGender == Gender.female)
+          CheckboxListTile(
+            title: Text("Husband"),
+            value: hasHusband,
+            onChanged: (value) {
+              setState(() {
+                hasHusband = value!;
+              });
+            },
+          ),
+        if (!hasHusband && selectedGender == Gender.male)
+          CheckboxListTile(
+            title: Text("Wife"),
+            value: numberOfWives > 0,
+            onChanged: (value) {
+              setState(() {
+                if (value!) {
+                  numberOfWives = 1;
+                } else {
+                  numberOfWives = 0;
+                }
+              });
+            },
+          ),
+        if (numberOfWives > 0)
+          TextFormField(
+            decoration: InputDecoration(
+              labelText: "Number of Wives (Max 4)",
+              hintText: "Enter number",
+            ),
+            keyboardType: TextInputType.number,
+            onChanged: (value) {
+              setState(() {
+                numberOfWives = int.parse(value);
+                numberOfWives = numberOfWives.clamp(0, 4);
+              });
+            },
+          ),
+        CheckboxListTile(
+          title: Text("Sons"),
+          value: numOfSons > 0,
           onChanged: (value) {
             setState(() {
               if (value!) {
-                numberOfWives = 1;
+                numOfSons = 1;
               } else {
-                numberOfWives = 0;
+                numOfSons = 0;
               }
             });
           },
         ),
-      if (numberOfWives > 0)
-        TextFormField(
-          decoration: InputDecoration(
-            labelText: "Number of Wives (Max 4)",
-            hintText: "Enter number",
+        if (numOfSons > 0)
+          TextFormField(
+            decoration: InputDecoration(
+              labelText: "Number of Sons (Max 10)",
+              hintText: "Enter number",
+            ),
+            keyboardType: TextInputType.number,
+            onChanged: (value) {
+              setState(() {
+                numOfSons = int.parse(value);
+                numOfSons = numOfSons.clamp(0, 10);
+              });
+            },
           ),
-          keyboardType: TextInputType.number,
+        CheckboxListTile(
+          title: Text("Daughters"),
+          value: numOfDaughters > 0,
           onChanged: (value) {
             setState(() {
-              numberOfWives = int.parse(value);
-              numberOfWives = numberOfWives.clamp(0, 4);
+              if (value!) {
+                numOfDaughters = 1;
+              } else {
+                numOfDaughters = 0;
+              }
             });
           },
         ),
-      CheckboxListTile(
-        title: Text("Mother"),
-        value: hasMother,
-        onChanged: (value) {
-          setState(() {
-            hasMother = value!;
-          });
-        },
-      ),
-      CheckboxListTile(
-        title: Text("Sons"),
-        value: numberOfSons > 0,
-        onChanged: (value) {
-          setState(() {
-            if (value!) {
-              numberOfSons = 1;
-            } else {
-              numberOfSons = 0;
-            }
-          });
-        },
-      ),
-      if (numberOfSons > 0)
-        TextFormField(
-          decoration: InputDecoration(
-            labelText: "Number of Sons (Max 10)",
-            hintText: "Enter number",
+        if (numOfDaughters > 0)
+          TextFormField(
+            decoration: InputDecoration(
+              labelText: "Number of Daughters (Max 10)",
+              hintText: "Enter number",
+            ),
+            keyboardType: TextInputType.number,
+            onChanged: (value) {
+              setState(() {
+                numOfDaughters = int.parse(value);
+                numOfDaughters = numOfDaughters.clamp(0, 10);
+              });
+            },
           ),
-          keyboardType: TextInputType.number,
+        CheckboxListTile(
+          title: Text("Grandfather"),
+          value: hasGrandfather,
           onChanged: (value) {
             setState(() {
-              numberOfSons = int.parse(value);
-              numberOfSons = numberOfSons.clamp(0, 10);
+              hasGrandfather = value!;
             });
           },
         ),
-      CheckboxListTile(
-        title: Text("Daughters"),
-        value: numberOfDaughters > 0,
-        onChanged: (value) {
-          setState(() {
-            if (value!) {
-              numberOfDaughters = 1;
-            } else {
-              numberOfDaughters = 0;
-            }
-          });
-        },
-      ),
-      if (numberOfDaughters > 0)
-        TextFormField(
-          decoration: InputDecoration(
-            labelText: "Number of Daughters (Max 10)",
-            hintText: "Enter number",
-          ),
-          keyboardType: TextInputType.number,
+        CheckboxListTile(
+          title: Text("Grandmother"),
+          value: hasGrandmother,
           onChanged: (value) {
             setState(() {
-              numberOfDaughters = int.parse(value);
-              numberOfDaughters = numberOfDaughters.clamp(0, 10);
+              hasGrandmother = value!;
             });
           },
         ),
-      ElevatedButton(
-        onPressed: () {
-          // Update controller with family details
-          widget.controller.setFamilyDetails(
-            hasFather: hasFather,
-            hasHusband: hasHusband,
-            numberOfWives: numberOfWives,
-            hasMother: hasMother,
-            numberOfSons: numberOfSons,
-            numberOfDaughters: numberOfDaughters,
-          );
+        CheckboxListTile(
+          title: Text("Brother"),
+          value: numOfBrothers > 0,
+          onChanged: (value) {
+            setState(() {
+              if (value!) {
+                numOfBrothers = 1;
+              } else {
+                numOfBrothers = 0;
+              }
+            });
+          },
+        ),
+        if (numOfBrothers > 0)
+          TextFormField(
+            decoration: InputDecoration(
+              labelText: "Number of Brothers (Max 10)",
+              hintText: "Enter number",
+            ),
+            keyboardType: TextInputType.number,
+            onChanged: (value) {
+              setState(() {
+                numOfBrothers = int.parse(value);
+                numOfBrothers = numOfBrothers.clamp(0, 10);
+              });
+            },
+          ),
+        CheckboxListTile(
+          title: Text("Sister"),
+          value: numOfSisters > 0,
+          onChanged: (value) {
+            setState(() {
+              if (value!) {
+                numOfSisters = 1;
+              } else {
+                numOfSisters = 0;
+              }
+            });
+          },
+        ),
+        if (numOfSisters > 0)
+          TextFormField(
+            decoration: InputDecoration(
+              labelText: "Number of Sisters (Max 10)",
+              hintText: "Enter number",
+            ),
+            keyboardType: TextInputType.number,
+            onChanged: (value) {
+              setState(() {
+                numOfSisters = int.parse(value);
+                numOfSisters = numOfSisters.clamp(0, 10);
+              });
+            },
+          ),
+        CheckboxListTile(
+          title: Text("Grandson"),
+          value: numOfGrandsons > 0,
+          onChanged: (value) {
+            setState(() {
+              if (value!) {
+                numOfGrandsons = 1;
+              } else {
+                numOfGrandsons = 0;
+              }
+            });
+          },
+        ),
+        if (numOfGrandsons > 0)
+          TextFormField(
+            decoration: InputDecoration(
+              labelText: "Number of Grandsons (Max 10)",
+              hintText: "Enter number",
+            ),
+            keyboardType: TextInputType.number,
+            onChanged: (value) {
+              setState(() {
+                numOfGrandsons = int.parse(value);
+                numOfGrandsons = numOfGrandsons.clamp(0, 10);
+              });
+            },
+          ),
+        CheckboxListTile(
+          title: Text("Granddaughter"),
+          value: numOfGranddaughters > 0,
+          onChanged: (value) {
+            setState(() {
+              if (value!) {
+                numOfGranddaughters = 1;
+              } else {
+                numOfGranddaughters = 0;
+              }
+            });
+          },
+        ),
+        if (numOfGranddaughters > 0)
+          TextFormField(
+            decoration: InputDecoration(
+              labelText: "Number of Granddaughters (Max 10)",
+              hintText: "Enter number",
+            ),
+            keyboardType: TextInputType.number,
+            onChanged: (value) {
+              setState(() {
+                numOfGranddaughters = int.parse(value);
+                numOfGranddaughters = numOfGranddaughters.clamp(0, 10);
+              });
+            },
+          ),
+        ElevatedButton(
+          onPressed: () {
+            widget.controller.setFamilyDetails(
+              hasFather: hasFather,
+              hasHusband: hasHusband,
+              numberOfWives: numberOfWives,
+              hasMother: hasMother,
+              numberOfSons: numOfSons,
+              numberOfDaughters: numOfDaughters,
+            );
 
-          // Navigate to next page or perform calculation
-          // Replace 'NextPage()' with the next page widget
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => ImpedimentnPage()),
-          );
-        },
-        child: Text("Next"),
-      ),
-    ],
-  );
-}
+            var heirModel = widget.controller.prepareHeirModel();
 
+            var impedimentController = ImpedimentController();
+            var impediments = impedimentController.getImpediments(
+              gender: selectedGender!,
+              hasFather: hasFather,
+              hasMother: hasMother,
+              hasHusband: hasHusband,
+              numberOfWives: numberOfWives,
+              numberOfSons: numOfSons,
+              numberOfDaughters: numOfDaughters,
+              hasGrandfather: hasGrandfather,
+              hasGrandmother: hasGrandmother,
+              numOfBrothers: numOfBrothers,
+              numOfSisters: numOfSisters,
+              numOfGrandsons: numOfGrandsons,
+              numOfGranddaughters: numOfGranddaughters,
+            );
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ImpedimentPage(
+                  impediments: impediments,
+                ),
+              ),
+            );
+          },
+          child: Text("Next"),
+        ),
+      ],
+    );
+  }
 }

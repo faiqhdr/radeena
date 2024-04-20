@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/controllers/identification_controller.dart';
+import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/styles/style.dart';
 
 class MenuPage extends StatelessWidget {
-  MenuPage({Key? key, required IdentificationController controller})
+  MenuPage(
+      {Key? key,
+      required IdentificationController identificationController,
+      required ImpedimentController impedimentController})
       : super(key: key);
 
   @override
