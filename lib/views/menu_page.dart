@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:radeena/controllers/identification_controller.dart';
 import 'package:radeena/styles/style.dart';
 
 class MenuPage extends StatelessWidget {
-  const MenuPage({Key? key}) : super(key: key);
+  MenuPage({Key? key, required IdentificationController controller})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class MenuPage extends StatelessWidget {
                   bottom: height * .03,
                 ),
                 child: Image(
-                  image: const AssetImage("assets/menu_page/radeena.png"),
+                  image: AssetImage("assets/menu_page/radeena.png"),
                   width: width * 0.3,
                 ),
               ),
@@ -68,7 +70,7 @@ class MenuPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const Spacer(),
+                  Spacer(),
                   Column(
                     children: [
                       CustomWidget(
@@ -110,7 +112,7 @@ class MenuPage extends StatelessWidget {
 }
 
 class DeterminationWidget extends StatelessWidget {
-  const DeterminationWidget({
+  DeterminationWidget({
     Key? key,
     required this.height,
     required this.width,
@@ -134,10 +136,10 @@ class DeterminationWidget extends StatelessWidget {
               color: Colors.grey.withOpacity(0.15),
               spreadRadius: 5,
               blurRadius: 7,
-              offset: const Offset(1.5, 3),
+              offset: Offset(1.5, 3),
             )
           ],
-          image: const DecorationImage(
+          image: DecorationImage(
             image: AssetImage("assets/menu_page/dashboard.png"),
             fit: BoxFit.fill,
           ),
@@ -170,8 +172,8 @@ class DeterminationWidget extends StatelessWidget {
                           "Distribute Wealth",
                           style: subtitleStyle(),
                         ),
-                        const SizedBox(width: 5),
-                        const Icon(
+                        SizedBox(width: 5),
+                        Icon(
                           Icons.arrow_forward_ios,
                           color: Colors.white,
                           size: 13,
@@ -181,7 +183,7 @@ class DeterminationWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              const Spacer(),
+              Spacer(),
               Padding(
                 padding: EdgeInsets.only(right: width * .04),
                 child: SizedBox(
@@ -233,10 +235,10 @@ class CustomWidget extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.15),
                 spreadRadius: 5,
                 blurRadius: 7,
-                offset: const Offset(1.5, 3),
+                offset: Offset(1.5, 3),
               )
             ],
-            image: const DecorationImage(
+            image: DecorationImage(
               image: AssetImage("assets/menu_page/dashboard.png"),
               fit: BoxFit.fill,
             ),
@@ -264,7 +266,7 @@ class CustomWidget extends StatelessWidget {
                     image: AssetImage(image),
                     width: width * .15,
                   ),
-                  const Spacer(),
+                  Spacer(),
                   Padding(
                     padding: EdgeInsets.only(left: width * .02),
                     child: Text(
@@ -307,10 +309,10 @@ class SubtitleWidget extends StatelessWidget {
       child: Row(
         children: [
           Text(subtitle, style: miniStyle()),
-          const SizedBox(
+          SizedBox(
             width: 5,
           ),
-          const Icon(
+          Icon(
             Icons.arrow_forward_ios,
             color: Colors.white,
             size: 13,
