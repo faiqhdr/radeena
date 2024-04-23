@@ -42,7 +42,15 @@ class _IdentificationPageState extends State<IdentificationPage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new_rounded),
           color: green01Color,
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+            if (currentStep == 1) {
+              Navigator.of(context).pop(); // Go back to main page
+            } else {
+              setState(() {
+                currentStep = 1; // Go back to step 1
+              });
+            }
+          },
         ),
         title: Text("Determine Heirs", style: titleDetermineHeirsStyle()),
       ),
@@ -58,8 +66,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
       case 1:
         return _buildPropertyInputStep();
       case 2:
-        // Future implementations for gender input step
-        return Container();
+        return _buildGenderInputStep();
       case 3:
         // Future implementations for family input step
         return Container();
@@ -73,6 +80,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("Input the Deceased's Property", style: textUnderTitleStyle()),
+        SizedBox(height: 16.0),
         TextFormField(
           controller: _propertyAmountController,
           decoration: InputDecoration(
@@ -82,6 +90,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
           ),
           keyboardType: TextInputType.number,
         ),
+        SizedBox(height: 16.0),
         TextFormField(
           controller: _debtAmountController,
           decoration: InputDecoration(
@@ -91,6 +100,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
           ),
           keyboardType: TextInputType.number,
         ),
+        SizedBox(height: 16.0),
         TextFormField(
           controller: _bequestAmountController,
           decoration: InputDecoration(
@@ -100,6 +110,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
           ),
           keyboardType: TextInputType.number,
         ),
+        SizedBox(height: 16.0),
         TextFormField(
           controller: _funeralAmountController,
           decoration: InputDecoration(
@@ -109,6 +120,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
           ),
           keyboardType: TextInputType.number,
         ),
+        SizedBox(height: 26.0),
         GestureDetector(
           onTap: _submitPropertyDetails,
           child: Container(
@@ -139,7 +151,95 @@ class _IdentificationPageState extends State<IdentificationPage> {
           _debtError == null &&
           _bequestError == null &&
           _funeralError == null) {
-        currentStep = 2; // Proceed to next step if no errors
+        currentStep = 2;
+      }
+    });
+  }
+
+  Widget _buildGenderInputStep() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("Select Deceased's Gender", style: textUnderTitleStyle()),
+        SizedBox(height: 12.0),
+        Row(
+          children: [
+            Radio(
+              value: Gender.male,
+              groupValue: widget.controller.deceasedGender,
+              onChanged: (value) {
+                setState(() {
+                  widget.controller.setDeceasedGender(value);
+                });
+              },
+            ),
+            Text("Male"),
+            SizedBox(width: 26.0),
+            Radio(
+              value: Gender.female,
+              groupValue: widget.controller.deceasedGender,
+              onChanged: (value) {
+                setState(() {
+                  widget.controller.setDeceasedGender(value);
+                });
+              },
+            ),
+            Text("Female"),
+            SizedBox(width: 42.0),
+            GestureDetector(
+              onTap: () {
+                setState(() {
+                  widget.controller
+                      .setDeceasedGender(null); // Clear the gender selection
+                });
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(4.0),
+                ),
+                child: Text("Clear", style: TextStyle(fontSize: 14.0)),
+              ),
+            ),
+          ],
+        ),
+        SizedBox(height: 16.0),
+        GestureDetector(
+          onTap: _submitGenderDetails,
+          child: Container(
+            padding: EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: Text("Next",
+                style: TextStyle(color: Colors.white, fontSize: 16.0)),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _submitGenderDetails() {
+    setState(() {
+      String? genderError = widget.controller.validateGender();
+      if (genderError == null) {
+        currentStep = 3;
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Error'),
+            content: Text(genderError),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('Understand'),
+              ),
+            ],
+          ),
+        );
       }
     });
   }

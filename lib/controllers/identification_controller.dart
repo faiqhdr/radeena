@@ -1,3 +1,4 @@
+import 'package:radeena/models/enums.dart';
 import 'package:radeena/models/heir_model.dart';
 import 'package:radeena/models/deceased_model.dart';
 import 'package:radeena/models/property_model.dart';
@@ -5,10 +6,11 @@ import 'package:radeena/models/property_model.dart';
 class IdentificationController {
   PropertyModel _property =
       PropertyModel(propertyID: 1, amount: 0.0, total: 0.0);
+  Gender? _deceasedGender;
 
   PropertyModel get property => _property;
+  Gender? get deceasedGender => _deceasedGender;
 
-  // Update methods with validation and exception handling
   String? updatePropertyAmount(String input) {
     return _updateAmount(input, _property.setAmount);
   }
@@ -43,9 +45,9 @@ class IdentificationController {
         _property.bequest -
         _property.funeral;
     _property.setTotal(total);
+    print("Total Inheritance to be distributed: $total");
   }
 
-  // Validate the input and convert to a double
   Map<String, dynamic> validateAndConvert(String input) {
     if (input.isEmpty) {
       return {'error': 'Input cannot be empty'};
@@ -60,5 +62,18 @@ class IdentificationController {
       // Handle parsing error
       return {'error': 'Invalid input format'};
     }
+  }
+
+  void setDeceasedGender(Gender? gender) {
+    _deceasedGender = gender;
+    String genderString = gender == Gender.male ? 'Male' : 'Female';
+    print("The deceased's gender is: $genderString");
+  }
+
+  String? validateGender() {
+    if (_deceasedGender == null) {
+      return 'Please select the deceased\'s gender for determining the heirs.';
+    }
+    return null;
   }
 }
