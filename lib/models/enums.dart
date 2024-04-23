@@ -11,18 +11,16 @@ enum Position {
   daughter,
   grandson,
   granddaughter,
-  grandfather,
-  grandmother,
+  paternalGrandfather,
+  paternalGrandmother,
+  maternalGrandfather,
+  maternalGrandmother,
   germaneBrother,
   germaneSister,
   uterineBrother,
   uterineSister,
   consanguineBrother,
   consanguineSister,
-  paternalGrandfather,
-  paternalGrandmother,
-  maternalGrandfather,
-  maternalGrandmother
 }
 
 enum Status {
@@ -34,3 +32,5 @@ enum Status {
 }
 
 enum Portion { OneHalf, OneFourth, OneEighth, TwoThirds, OneThird, OneSixth }
+
+enum DivisionStatus { aul, radd }

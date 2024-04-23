@@ -1,127 +1,64 @@
 import 'package:radeena/models/heir_model.dart';
-import 'package:radeena/models/enums.dart';
+import 'package:radeena/models/deceased_model.dart';
+import 'package:radeena/models/property_model.dart';
 
 class IdentificationController {
-  double? propertyAmount;
-  Gender? selectedGender;
-  bool hasFather = false;
-  bool hasMother = false;
-  int numberOfWives = 0;
-  bool hasHusband = false;
-  int numOfSons = 0;
-  int numOfDaughters = 0;
-  bool hasGrandfather = false;
-  bool hasGrandmother = false;
-  int numOfBrothers = 0;
-  int numOfSisters = 0;
-  int numOfGrandsons = 0;
-  int numOfGranddaughters = 0;
+  PropertyModel _property =
+      PropertyModel(propertyID: 1, amount: 0.0, total: 0.0);
 
-  void setPropertyAmount(double value) {
-    propertyAmount = value;
+  PropertyModel get property => _property;
+
+  // Update methods with validation and exception handling
+  String? updatePropertyAmount(String input) {
+    return _updateAmount(input, _property.setAmount);
   }
 
-  void setFamilyDetails({
-    required bool hasFather,
-    required bool hasMother,
-    required int numberOfWives,
-    required bool hasHusband,
-    required int numberOfSons,
-    required int numberOfDaughters,
-  }) {
-    this.hasFather = hasFather;
-    this.hasMother = hasMother;
-    this.numberOfWives = numberOfWives;
-    this.hasHusband = hasHusband;
-    this.numOfSons = numberOfSons;
-    this.numOfDaughters = numberOfDaughters;
+  String? updateDebtAmount(String input) {
+    return _updateAmount(input, _property.setDebt);
   }
 
-  HeirModel prepareHeirModel() {
-    String position;
-    String status;
-    String category;
+  String? updateBequestAmount(String input) {
+    return _updateAmount(input, _property.setBequest);
+  }
 
-    // Determine position based on family details
-    if (hasFather) {
-      position = Position.father.toString().split('.').last;
-    } else if (hasMother) {
-      position = Position.mother.toString().split('.').last;
-    } else if (hasHusband) {
-      position = Position.husband.toString().split('.').last;
-    } else if (numberOfWives > 0) {
-      position = Position.wife.toString().split('.').last;
-    } else if (numOfSons > 0) {
-      position = Position.son.toString().split('.').last;
-    } else if (numOfDaughters > 0) {
-      position = Position.daughter.toString().split('.').last;
-    } else if (hasGrandfather) {
-      position = Position.grandfather.toString().split('.').last;
-    } else if (hasGrandmother) {
-      position = Position.grandmother.toString().split('.').last;
-    } else if (numOfBrothers > 0) {
-      position = Position.germaneBrother.toString().split('.').last;
-    } else if (numOfSisters > 0) {
-      position = Position.germaneSister.toString().split('.').last;
-    } else if (numOfGrandsons > 0) {
-      position = Position.grandson.toString().split('.').last;
-    } else if (numOfGranddaughters > 0) {
-      position = Position.granddaughter.toString().split('.').last;
-    } else {
-      position = "Unknown";
+  String? updateFuneralAmount(String input) {
+    return _updateAmount(input, _property.setFuneral);
+  }
+
+  // Helper method to update amounts
+  String? _updateAmount(String input, Function(double) setAmount) {
+    var result = validateAndConvert(input);
+    if (result['error'] != null) {
+      return result['error'];
     }
+    setAmount(result['value']!);
+    calculateTotal();
+    return null;
+  }
 
-    // Set category and status based on position
-    switch (position) {
-      case "father":
-      case "mother":
-      case "husband":
-      case "wife":
-        category = Category.quranic.toString();
-        status = Status.primary.toString();
-        break;
-      case "daughter":
-        category = Category.quranic.toString();
-        status = Status.substitute.toString();
-        break;
-      case "son":
-        category = Category.residuary.toString();
-        status = Status.residuaryByBlood.toString();
-        break;
-      case "grandson":
-      case "granddaughter":
-      case "grandfather":
-      case "grandmother":
-      case "paternalGrandfather":
-      case "paternalGrandmother":
-      case "maternalGrandfather":
-      case "maternalGrandmother":
-        category = Category.residuary.toString();
-        status = Status.substitute.toString();
-        break;
-      case "germaneBrother":
-      case "consanguineBrother":
-        category = Category.residuary.toString();
-        status = Status.residuaryByBlood.toString();
-        break;
-      case "germaneSister":
-      case "uterineBrother":
-      case "uterineSister":
-      case "consanguineSister":
-        category = Category.quranic.toString();
-        status = Status.secondary.toString();
-        break;
-      default:
-        category = "Unknown Category";
-        status = "Unknown Status";
+  // Calculate the total value
+  void calculateTotal() {
+    double total = _property.amount -
+        _property.debt -
+        _property.bequest -
+        _property.funeral;
+    _property.setTotal(total);
+  }
+
+  // Validate the input and convert to a double
+  Map<String, dynamic> validateAndConvert(String input) {
+    if (input.isEmpty) {
+      return {'error': 'Input cannot be empty'};
     }
-
-    return HeirModel(
-      heirID: 1, // Set the heir ID as needed
-      portion: 0, // Initialize with a default value; you may set this later
-      position: position,
-      category: category,
-      status: status,
-    );
+    try {
+      double value = double.parse(input);
+      if (value < 0) {
+        return {'error': 'Value cannot be negative'};
+      }
+      return {'value': value};
+    } catch (e) {
+      // Handle parsing error
+      return {'error': 'Invalid input format'};
+    }
   }
 }
