@@ -147,11 +147,74 @@ class _IdentificationPageState extends State<IdentificationPage> {
           widget.controller.updateBequestAmount(_bequestAmountController.text);
       _funeralError =
           widget.controller.updateFuneralAmount(_funeralAmountController.text);
+
       if (_propertyError == null &&
           _debtError == null &&
           _bequestError == null &&
-          _funeralError == null) {
+          _funeralError == null &&
+          widget.controller.property.total >= 0 &&
+          (widget.controller.property.debt +
+                  widget.controller.property.bequest +
+                  widget.controller.property.funeral) >
+              widget.controller.property.amount) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Error'),
+            content: Text(
+                'The amount of debt, bequest, and funeral arrangements, or the total of the debt, bequest, and funeral arrangements, must not exceed the property amount; inheritance cannot be calculated.'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('Understand'),
+              ),
+            ],
+          ),
+        );
+      } else if (_propertyError == null &&
+          _debtError == null &&
+          _bequestError == null &&
+          _funeralError == null &&
+          widget.controller.property.total >= 0 &&
+          widget.controller.property.total == 0) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Error'),
+            content: Text(
+                'The total inheritance is 0; inheritance cannot be calculated.'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('Understand'),
+              ),
+            ],
+          ),
+        );
+      } else if (_propertyError == null &&
+          _debtError == null &&
+          _bequestError == null &&
+          _funeralError == null &&
+          widget.controller.property.total >= 0) {
         currentStep = 2;
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Error'),
+            content: Text(_propertyError ??
+                _debtError ??
+                _bequestError ??
+                _funeralError ??
+                'An error occurred.'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('Understand'),
+              ),
+            ],
+          ),
+        );
       }
     });
   }

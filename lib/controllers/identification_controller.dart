@@ -44,8 +44,12 @@ class IdentificationController {
         _property.debt -
         _property.bequest -
         _property.funeral;
-    _property.setTotal(total);
-    print("Total Inheritance to be distributed: $total");
+    if (total < 0) {
+      print("Error: Total Inheritance cannot be negative.");
+    } else {
+      _property.setTotal(total);
+      print("Total Inheritance to be distributed: $total");
+    }
   }
 
   Map<String, dynamic> validateAndConvert(String input) {
@@ -59,7 +63,6 @@ class IdentificationController {
       }
       return {'value': value};
     } catch (e) {
-      // Handle parsing error
       return {'error': 'Invalid input format'};
     }
   }
