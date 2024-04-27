@@ -22,12 +22,12 @@ class _IdentificationPageState extends State<IdentificationPage> {
 
   final _propertyAmountController = TextEditingController();
   final _debtAmountController = TextEditingController();
-  final _bequestAmountController = TextEditingController();
+  final _testamentAmountController = TextEditingController();
   final _funeralAmountController = TextEditingController();
 
   String? _propertyError;
   String? _debtError;
-  String? _bequestError;
+  String? _testamentError;
   String? _funeralError;
 
   @override
@@ -68,7 +68,6 @@ class _IdentificationPageState extends State<IdentificationPage> {
       case 2:
         return _buildGenderInputStep();
       case 3:
-        // Future implementations for family input step
         return Container();
       default:
         return Container();
@@ -102,11 +101,11 @@ class _IdentificationPageState extends State<IdentificationPage> {
         ),
         SizedBox(height: 16.0),
         TextFormField(
-          controller: _bequestAmountController,
+          controller: _testamentAmountController,
           decoration: InputDecoration(
-            labelText: "Bequest Amount",
+            labelText: "Testament Amount",
             hintText: "Enter amount",
-            errorText: _bequestError,
+            errorText: _testamentError,
           ),
           keyboardType: TextInputType.number,
         ),
@@ -143,18 +142,18 @@ class _IdentificationPageState extends State<IdentificationPage> {
           .updatePropertyAmount(_propertyAmountController.text);
       _debtError =
           widget.controller.updateDebtAmount(_debtAmountController.text);
-      _bequestError =
-          widget.controller.updateBequestAmount(_bequestAmountController.text);
+      _testamentError = widget.controller
+          .updateTestamentAmount(_testamentAmountController.text);
       _funeralError =
           widget.controller.updateFuneralAmount(_funeralAmountController.text);
 
       if (_propertyError == null &&
           _debtError == null &&
-          _bequestError == null &&
+          _testamentError == null &&
           _funeralError == null &&
           widget.controller.property.total >= 0 &&
           (widget.controller.property.debt +
-                  widget.controller.property.bequest +
+                  widget.controller.property.testament +
                   widget.controller.property.funeral) >
               widget.controller.property.amount) {
         showDialog(
@@ -162,7 +161,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
           builder: (context) => AlertDialog(
             title: Text('Error'),
             content: Text(
-                'The amount of debt, bequest, and funeral arrangements, or the total of the debt, bequest, and funeral arrangements, must not exceed the property amount; inheritance cannot be calculated.'),
+                'The amount of debt, testament, and funeral arrangements, or the total of the debt, testament, and funeral arrangements, must not exceed the property amount; inheritance cannot be calculated.'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
@@ -173,7 +172,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
         );
       } else if (_propertyError == null &&
           _debtError == null &&
-          _bequestError == null &&
+          _testamentError == null &&
           _funeralError == null &&
           widget.controller.property.total >= 0 &&
           widget.controller.property.total == 0) {
@@ -193,20 +192,25 @@ class _IdentificationPageState extends State<IdentificationPage> {
         );
       } else if (_propertyError == null &&
           _debtError == null &&
-          _bequestError == null &&
+          _testamentError == null &&
           _funeralError == null &&
           widget.controller.property.total >= 0) {
         currentStep = 2;
       } else {
+        String errorMessage = _propertyError ??
+            _debtError ??
+            _funeralError ??
+            'An error occurred.';
+
+        if (_testamentError != null) {
+          errorMessage = _testamentError!;
+        }
+
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
             title: Text('Error'),
-            content: Text(_propertyError ??
-                _debtError ??
-                _bequestError ??
-                _funeralError ??
-                'An error occurred.'),
+            content: Text(errorMessage),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
@@ -311,7 +315,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
   void dispose() {
     _propertyAmountController.dispose();
     _debtAmountController.dispose();
-    _bequestAmountController.dispose();
+    _testamentAmountController.dispose();
     _funeralAmountController.dispose();
     super.dispose();
   }

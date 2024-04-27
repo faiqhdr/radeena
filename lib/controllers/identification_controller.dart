@@ -19,8 +19,8 @@ class IdentificationController {
     return _updateAmount(input, _property.setDebt);
   }
 
-  String? updateBequestAmount(String input) {
-    return _updateAmount(input, _property.setBequest);
+  String? updateTestamentAmount(String input) {
+    return _updateAmount(input, _property.setTestament);
   }
 
   String? updateFuneralAmount(String input) {
@@ -33,7 +33,15 @@ class IdentificationController {
     if (result['error'] != null) {
       return result['error'];
     }
-    setAmount(result['value']!);
+    double value = result['value']!;
+
+    if (setAmount == _property.setTestament) {
+      if (value > _property.amount / 3) {
+        return 'Testament amount cannot exceed 1/3 of the property amount.';
+      }
+    }
+
+    setAmount(value);
     calculateTotal();
     return null;
   }
@@ -42,7 +50,7 @@ class IdentificationController {
   void calculateTotal() {
     double total = _property.amount -
         _property.debt -
-        _property.bequest -
+        _property.testament -
         _property.funeral;
     if (total < 0) {
       print("Error: Total Inheritance cannot be negative.");

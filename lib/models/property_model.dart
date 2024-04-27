@@ -2,7 +2,7 @@ class PropertyModel {
   final int propertyID;
   double amount;
   double debt;
-  double bequest;
+  double testament;
   double funeral;
   double total;
 
@@ -10,7 +10,7 @@ class PropertyModel {
     required this.propertyID,
     required this.amount,
     this.debt = 0,
-    this.bequest = 0,
+    this.testament = 0,
     this.funeral = 0,
     required this.total,
   });
@@ -27,8 +27,8 @@ class PropertyModel {
     return debt;
   }
 
-  double getBequest() {
-    return bequest;
+  double getTestament() {
+    return testament;
   }
 
   double getFuneral() {
@@ -47,8 +47,8 @@ class PropertyModel {
     debt = debtAmount;
   }
 
-  void setBequest(double bequestAmount) {
-    bequest = bequestAmount;
+  void setTestament(double testamentAmount) {
+    testament = testamentAmount;
   }
 
   void setFuneral(double funeralAmount) {
