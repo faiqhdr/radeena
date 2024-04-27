@@ -3,7 +3,11 @@ import 'package:radeena/styles/style.dart';
 
 class ImpedimentPage extends StatelessWidget {
   final List<String> impediments;
-  ImpedimentPage({Key? key, required this.impediments}) : super(key: key);
+
+  const ImpedimentPage({
+    Key? key,
+    required this.impediments,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

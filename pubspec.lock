@@ -131,6 +131,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.7"
+  input_quantity:
+    dependency: "direct main"
+    description:
+      name: input_quantity
+      sha256: "50d8da78bdcee682771a3e1a200595d91d1b86f1bcf105b6788d6d2ac1dec374"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.2"
   js:
     dependency: transitive
     description:
@@ -314,3 +322,4 @@ packages:
     version: "3.1.2"
 sdks:
   dart: ">=3.3.1 <4.0.0"
+  flutter: ">=1.17.0"

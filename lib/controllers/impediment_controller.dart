@@ -1,88 +1,76 @@
-import 'package:radeena/models/enums.dart';
-
 class ImpedimentController {
-  List<String> getImpediments({
-    required Gender gender,
-    required bool hasFather,
-    required bool hasMother,
-    required bool hasHusband,
-    required int numberOfWives,
-    required int numberOfSons,
-    required int numberOfDaughters,
-    required bool hasGrandfather,
-    required bool hasGrandmother,
-    required int numOfBrothers,
-    required int numOfSisters,
-    required int numOfGrandsons,
-    required int numOfGranddaughters,
-  }) {
-    List<String> impediments = [];
+  // Map holding the initial quantities for each heir type
+  Map<String, int> heirQuantity = {
+    'Father': 0,
+    'Mother': 0,
+    'Paternal Grandfather': 0,
+    'Paternal Grandmother': 0,
+    'Maternal Grandmother': 0,
+    'Wife': 0,
+    'Husband': 0,
+    'Son': 0,
+    'Daughter': 0,
+    'Grandson': 0,
+    'Granddaughter': 0,
+    'Brother': 0,
+    'Sister': 0,
+    'Paternal Half Brother': 0,
+    'Paternal Half Sister': 0,
+    'Maternal Half Brother': 0,
+    'Maternal Half Sister': 0,
+    'Son of Brother': 0,
+    'Son of Paternal Half Brother': 0,
+    'Uncle': 0,
+    'Paternal Uncle': 0,
+    'Son of Uncle': 0,
+    'Son of Paternal Uncle': 0,
+  };
 
-    if (numberOfSons > 0) {
-      impediments.add(
-          "The grandson is impeded from receiving his inheritance due to the presence of the deceased's son.");
+  Map<String, int> getImpediments() {
+    final Map<String, int> impediments = {};
+
+    if ((heirQuantity['Father'] ?? 0) > 0) {
+      impediments[
+          'Paternal Grandfather is impeded because the Father is present.'] = 0;
     }
 
-    if (numberOfSons > 0 || numOfGrandsons > 0 || numberOfDaughters > 0) {
-      impediments.add(
-          "The granddaughter is impeded from receiving her inheritance because of the presence of the deceased's son, grandson, or daughter.");
+    if ((heirQuantity['Mother'] ?? 0) > 0) {
+      impediments[
+          'Maternal Grandmother is impeded because the Mother is present.'] = 0;
     }
 
-    if (hasFather) {
-      impediments.add(
-          "The grandfather is impeded from receiving his inheritance if there is a presence of the deceased's father.");
+    if ((heirQuantity['Father'] ?? 0) > 0 ||
+        (heirQuantity['Paternal Grandfather'] ?? 0) > 0 ||
+        (heirQuantity['Son'] ?? 0) > 0 ||
+        (heirQuantity['Grandson'] ?? 0) > 0) {
+      impediments[
+          'Brother is impeded due to the presence of direct male descendants or the Father.'] = 0;
     }
 
-    if (hasMother) {
-      impediments.add(
-          "The grandmother is impeded from receiving her inheritance due to the presence of the deceased's mother.");
+    if ((heirQuantity['Grandfather'] ?? 0) > 0 ||
+        (heirQuantity['Father'] ?? 0) > 0 ||
+        (heirQuantity['Son'] ?? 0) > 0 ||
+        (heirQuantity['Daughter'] ?? 0) > 0 ||
+        (heirQuantity['Grandson'] ?? 0) > 0 ||
+        (heirQuantity['Granddaughter'] ?? 0) > 0) {
+      impediments[
+          'Maternal Half Brother is impeded because of the presence of direct descendants or the Grandfather.'] = 0;
     }
 
-    if (hasFather || hasGrandfather || numberOfSons > 0 || numOfGrandsons > 0) {
-      impediments.add(
-          "The germane brother is impeded from receiving his inheritance because of the presence of the deceased's father, grandfather, son, or grandson.");
-    }
-
-    if (hasFather || hasGrandfather || numberOfSons > 0 || numOfGrandsons > 0) {
-      impediments.add(
-          "The germane sister is impeded from receiving her inheritance if there is a presence of the deceased's father, grandfather, son, or grandson.");
-    }
-
-    if (hasFather || hasGrandfather || numberOfSons > 0 || numOfGrandsons > 0) {
-      impediments.add(
-          "The uterine brother is impeded from receiving his inheritance because of the presence of the deceased's father, grandfather, son, or grandson.");
-    }
-
-    if (hasFather ||
-        hasGrandfather ||
-        numberOfSons > 0 ||
-        numOfGrandsons > 0 ||
-        numberOfDaughters > 0 ||
-        numOfGranddaughters > 0) {
-      impediments.add(
-          "The uterine sister is impeded from receiving her inheritance due to the presence of the deceased's father, grandfather, son, grandson, daughter, or granddaughter.");
-    }
-
-    if (hasFather ||
-        hasGrandfather ||
-        numberOfSons > 0 ||
-        numOfGrandsons > 0 ||
-        numOfBrothers > 0 ||
-        numOfSisters > 0) {
-      impediments.add(
-          "The consanguine brother is impeded if there is a presence of the deceased's father, grandfather, son, grandson, germane brother, or germane sister.");
-    }
-
-    if (hasFather) {
-      impediments.add(
-          "The paternal grandfather is impeded if there is a presence of father.");
-    }
-
-    if (hasMother) {
-      impediments.add(
-          "The maternal grandmother is impeded because of the presence of the deceased's mother.");
+    if ((heirQuantity['Father'] ?? 0) > 0 ||
+        (heirQuantity['Son'] ?? 0) > 0 ||
+        (heirQuantity['Maternal Half Brother'] ?? 0) > 0 ||
+        (heirQuantity['Daughter'] ?? 0) > 0 ||
+        (heirQuantity['Grandson'] ?? 0) > 0 ||
+        (heirQuantity['Granddaughter'] ?? 0) > 0) {
+      impediments[
+          'Paternal Half Brother is impeded because other direct descendants are present.'] = 0;
     }
 
     return impediments;
+  }
+
+  void updateHeirQuantity(String heir, int quantity) {
+    heirQuantity[heir] = quantity;
   }
 }

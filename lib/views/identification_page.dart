@@ -5,12 +5,15 @@ import 'package:radeena/models/enums.dart';
 import 'package:radeena/models/property_model.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/impediment_page.dart';
+import 'package:input_quantity/input_quantity.dart';
 
 class IdentificationPage extends StatefulWidget {
   final IdentificationController controller;
+  final ImpedimentController impedimentController;
   const IdentificationPage({
     Key? key,
     required this.controller,
+    required this.impedimentController,
   }) : super(key: key);
 
   @override
@@ -29,6 +32,8 @@ class _IdentificationPageState extends State<IdentificationPage> {
   String? _debtError;
   String? _testamentError;
   String? _funeralError;
+
+  final Map<Position, int> _heirQuantity = {};
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +73,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
       case 2:
         return _buildGenderInputStep();
       case 3:
-        return Container();
+        return _buildFamilyInputStep();
       default:
         return Container();
     }
@@ -309,6 +314,179 @@ class _IdentificationPageState extends State<IdentificationPage> {
         );
       }
     });
+  }
+
+  Widget _buildFamilyInputStep() {
+    Gender? gender = widget.controller.deceasedGender;
+
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(child: _buildFamilyMemberInput("Father", max: 1)),
+              Expanded(child: _buildFamilyMemberInput("Mother", max: 4)),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                  child:
+                      _buildFamilyMemberInput("Paternal Grandfather", max: 1)),
+              Expanded(
+                  child:
+                      _buildFamilyMemberInput("Paternal Grandmother", max: 1)),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                  child:
+                      _buildFamilyMemberInput("Maternal Grandmother", max: 1)),
+              Expanded(
+                child: gender == Gender.male
+                    ? _buildFamilyMemberInput("Wife", max: 4)
+                    : _buildFamilyMemberInput("Husband", max: 1),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(child: _buildFamilyMemberInput("Son", max: 10)),
+              Expanded(child: _buildFamilyMemberInput("Daughter", max: 10)),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(child: _buildFamilyMemberInput("Grandson", max: 10)),
+              Expanded(
+                  child: _buildFamilyMemberInput("Granddaughter", max: 10)),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(child: _buildFamilyMemberInput("Brother", max: 8)),
+              Expanded(child: _buildFamilyMemberInput("Sister", max: 8)),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                  child:
+                      _buildFamilyMemberInput("Paternal Half Brother", max: 8)),
+              Expanded(
+                  child:
+                      _buildFamilyMemberInput("Paternal Half Sister", max: 8)),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                  child:
+                      _buildFamilyMemberInput("Maternal Half Brother", max: 8)),
+              Expanded(
+                  child:
+                      _buildFamilyMemberInput("Maternal Half Sister", max: 8)),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                  child: _buildFamilyMemberInput("Son of Brother", max: 10)),
+              Expanded(
+                  child: _buildFamilyMemberInput("Son of Paternal Half Brother",
+                      max: 10)),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(child: _buildFamilyMemberInput("Uncle", max: 5)),
+              Expanded(
+                  child: _buildFamilyMemberInput("Paternal Uncle", max: 5)),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(child: _buildFamilyMemberInput("Son of Uncle", max: 10)),
+              Expanded(
+                  child: _buildFamilyMemberInput("Son of Paternal Uncle",
+                      max: 10)),
+            ],
+          ),
+          SizedBox(height: 26.0),
+          GestureDetector(
+            onTap: () {
+              // Handle navigation to ImpedimentPage
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ImpedimentPage(
+                    impediments: widget.impedimentController
+                        .getImpediments()
+                        .keys
+                        .toList(),
+                  ),
+                ),
+              );
+            },
+            child: Container(
+              padding: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Text(
+                "Go to Impediment Page",
+                style: TextStyle(color: Colors.white, fontSize: 16.0),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFamilyMemberInput(String title, {required int max}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("$title",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        InputQty(
+          initVal: _heirQuantity[title] ?? 0, // Initial value
+          minVal: 0, // Minimum value
+          maxVal: max, // Maximum value, passed as parameter
+          steps: 1, // Increment by 1
+          qtyFormProps:
+              QtyFormProps(enableTyping: true), // Allowing manual input
+          decoration: QtyDecorationProps(
+            isBordered: true,
+            border: OutlineInputBorder(
+                borderSide: BorderSide(width: 1, color: Colors.grey),
+                borderRadius: BorderRadius.circular(5)),
+            minusBtn: Icon(Icons.remove, color: Colors.red),
+            plusBtn: Icon(Icons.add, color: Colors.green),
+          ),
+          onQtyChanged: (val) {
+            int quantity = val is double ? val.toInt() : val;
+            widget.impedimentController.updateHeirQuantity(title, quantity);
+          },
+        ),
+        SizedBox(height: 16),
+      ],
+    );
   }
 
   @override

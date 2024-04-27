@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/controllers/identification_controller.dart';
-import 'package:radeena/controllers/impediment_controller.dart'; // Import the ImpedimentController
+import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/views/identification_page.dart';
 import 'package:radeena/views/menu_page.dart';
 
@@ -41,6 +41,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/identificationPage': (context) => IdentificationPage(
                 controller: identificationController,
+                impedimentController: impedimentController,
               ),
         });
   }

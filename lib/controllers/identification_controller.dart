@@ -27,7 +27,6 @@ class IdentificationController {
     return _updateAmount(input, _property.setFuneral);
   }
 
-  // Helper method to update amounts
   String? _updateAmount(String input, Function(double) setAmount) {
     var result = validateAndConvert(input);
     if (result['error'] != null) {
@@ -46,7 +45,6 @@ class IdentificationController {
     return null;
   }
 
-  // Calculate the total value
   void calculateTotal() {
     double total = _property.amount -
         _property.debt -
