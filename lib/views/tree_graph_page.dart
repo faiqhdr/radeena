@@ -1,0 +1,94 @@
+import 'package:flutter/material.dart';
+import 'package:graphview/GraphView.dart';
+import 'package:radeena/controllers/impediment_controller.dart';
+import 'package:radeena/styles/style.dart';
+
+class TreeGraphPage extends StatelessWidget {
+  final ImpedimentController controller;
+
+  const TreeGraphPage({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+
+    Graph graph = controller.buildGraph();
+    BuchheimWalkerConfiguration config = BuchheimWalkerConfiguration()
+      ..siblingSeparation = 70
+      ..levelSeparation = 90
+      ..subtreeSeparation = 10
+      ..orientation = BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM;
+
+    // Define a builder for each node widget
+    NodeWidgetBuilder builder = (node) {
+      return rectangleWidget(node.key?.value as String, Colors.green);
+    };
+
+    // Since the algorithm constructor expects a renderer, and null means it will use the default
+    BuchheimWalkerAlgorithm algorithm = BuchheimWalkerAlgorithm(config, null);
+
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.1,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new_rounded),
+          color: green01Color,
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text(
+          "Family Tree",
+          style: titleDetermineHeirsStyle(),
+        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: width * .06),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 16),
+              child: Text(
+                "Family Tree Graph",
+                style: textUnderTitleStyle(),
+              ),
+            ),
+            SizedBox(height: 10),
+            Expanded(
+              child: InteractiveViewer(
+                constrained: false,
+                boundaryMargin: EdgeInsets.all(280),
+                minScale: 0.01,
+                maxScale: 4.6,
+                child: GraphView(
+                  graph: graph,
+                  algorithm: algorithm, // Correctly configured algorithm
+                  builder: builder, // Pass the builder here
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Function to create a widget for each node
+  Widget rectangleWidget(String label, Color color) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(color: Colors.white),
+      ),
+    );
+  }
+}

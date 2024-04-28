@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:radeena/controllers/identification_controller.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/models/enums.dart';
-import 'package:radeena/models/property_model.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/impediment_page.dart';
 import 'package:input_quantity/input_quantity.dart';
@@ -437,6 +436,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
                         .getImpediments()
                         .keys
                         .toList(),
+                    controller: widget.impedimentController,
                   ),
                 ),
               );

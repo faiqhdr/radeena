@@ -1,5 +1,6 @@
+import 'package:graphview/GraphView.dart';
+
 class ImpedimentController {
-  // Map holding the initial quantities for each heir type
   Map<String, int> heirQuantity = {
     'Father': 0,
     'Mother': 0,
@@ -24,6 +25,16 @@ class ImpedimentController {
     'Paternal Uncle': 0,
     'Son of Uncle': 0,
     'Son of Paternal Uncle': 0,
+  };
+
+  Map<String, List<String>> familyRelations = {
+    'Father': ['Son', 'Daughter'],
+    'Mother': ['Son', 'Daughter'],
+    'Son': ['Grandson', 'Granddaughter'],
+    'Daughter': [],
+    'Brother': ['Son of Brother'],
+    'Son of Brother': [],
+    // Add other relationships as needed
   };
 
   Map<String, int> getImpediments() {
@@ -72,5 +83,30 @@ class ImpedimentController {
 
   void updateHeirQuantity(String heir, int quantity) {
     heirQuantity[heir] = quantity;
+  }
+
+  Graph buildGraph() {
+    Graph graph = Graph()..isTree = true;
+    Map<String, Node> nodes = {};
+    heirQuantity.forEach((heir, count) {
+      if (count > 0) {
+        Node node = Node.Id(heir);
+        nodes[heir] = node;
+        graph.addNode(node);
+      }
+    });
+
+    // Add edges based on relationships
+    familyRelations.forEach((parent, children) {
+      if (nodes.containsKey(parent)) {
+        children.forEach((child) {
+          if (nodes.containsKey(child)) {
+            graph.addEdge(nodes[parent]!, nodes[child]!);
+          }
+        });
+      }
+    });
+
+    return graph;
   }
 }

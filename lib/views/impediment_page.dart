@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
+import 'package:radeena/views/tree_graph_page.dart';
+import 'package:radeena/controllers/impediment_controller.dart';
 
 class ImpedimentPage extends StatelessWidget {
   final List<String> impediments;
+  final ImpedimentController controller;
 
   const ImpedimentPage({
     Key? key,
     required this.impediments,
+    required this.controller,
   }) : super(key: key);
 
   @override
@@ -58,6 +62,15 @@ class ImpedimentPage extends StatelessWidget {
                   );
                 },
               ),
+            ),
+            SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => TreeGraphPage(controller: controller),
+                ));
+              },
+              child: Text("See Family Tree"),
             ),
           ],
         ),
