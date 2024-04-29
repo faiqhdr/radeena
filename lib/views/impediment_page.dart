@@ -36,41 +36,49 @@ class ImpedimentPage extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: width * .06),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
           children: [
-            Padding(
-              padding: EdgeInsets.only(top: 16),
-              child: Text(
-                "Impeded Heirs",
-                style: textUnderTitleStyle(),
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 16),
+                  child: Text(
+                    "Impeded Heirs",
+                    style: textUnderTitleStyle(),
+                  ),
+                ),
+                SizedBox(height: 15),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: impediments.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(
+                          impediments[index],
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 10),
-            Expanded(
-              child: ListView.builder(
-                itemCount: impediments.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(
-                      impediments[index],
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  );
+            Positioned(
+              bottom: 370,
+              left: width * 0.06,
+              right: width * 0.06,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => TreeGraphPage(controller: controller),
+                  ));
                 },
+                child: Text("See Family Tree"),
               ),
-            ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => TreeGraphPage(controller: controller),
-                ));
-              },
-              child: Text("See Family Tree"),
             ),
           ],
         ),

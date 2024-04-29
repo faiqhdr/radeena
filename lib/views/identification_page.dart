@@ -317,6 +317,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
 
   Widget _buildFamilyInputStep() {
     Gender? gender = widget.controller.deceasedGender;
+    var width = MediaQuery.of(context).size.width;
 
     return SingleChildScrollView(
       child: Column(
@@ -424,32 +425,36 @@ class _IdentificationPageState extends State<IdentificationPage> {
                       max: 10)),
             ],
           ),
-          SizedBox(height: 26.0),
-          GestureDetector(
-            onTap: () {
-              // Handle navigation to ImpedimentPage
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ImpedimentPage(
-                    impediments: widget.impedimentController
-                        .getImpediments()
-                        .keys
-                        .toList(),
-                    controller: widget.impedimentController,
+          SizedBox(height: 15.0),
+          Positioned(
+            bottom: 16,
+            left: width * 0.06,
+            right: width * 0.06,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ImpedimentPage(
+                      impediments: widget.impedimentController
+                          .getImpediments()
+                          .keys
+                          .toList(),
+                      controller: widget.impedimentController,
+                    ),
                   ),
+                );
+              },
+              child: Container(
+                padding: EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(8.0),
                 ),
-              );
-            },
-            child: Container(
-              padding: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Text(
-                "Go to Impediment Page",
-                style: TextStyle(color: Colors.white, fontSize: 16.0),
+                child: Text(
+                  "Next",
+                  style: TextStyle(color: Colors.white, fontSize: 16.0),
+                ),
               ),
             ),
           ),

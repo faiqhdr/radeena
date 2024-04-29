@@ -22,12 +22,12 @@ class TreeGraphPage extends StatelessWidget {
       ..subtreeSeparation = 10
       ..orientation = BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM;
 
-    // Define a builder for each node widget
     NodeWidgetBuilder builder = (node) {
-      return rectangleWidget(node.key?.value as String, Colors.green);
+      bool isImpeded = controller.getImpediments().containsKey(node.key?.value);
+      return rectangleWidget(
+          node.key?.value as String, isImpeded ? Colors.red : Colors.green);
     };
 
-    // Since the algorithm constructor expects a renderer, and null means it will use the default
     BuchheimWalkerAlgorithm algorithm = BuchheimWalkerAlgorithm(config, null);
 
     return Scaffold(
