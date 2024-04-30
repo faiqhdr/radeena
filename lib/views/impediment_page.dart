@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/tree_graph_page.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
+import 'package:radeena/controllers/identification_controller.dart';
 
 class ImpedimentPage extends StatelessWidget {
   final List<String> impediments;
-  final ImpedimentController controller;
+  final IdentificationController identificationController;
+  final ImpedimentController impedimentController;
 
   const ImpedimentPage({
     Key? key,
     required this.impediments,
-    required this.controller,
+    required this.identificationController,
+    required this.impedimentController,
   }) : super(key: key);
 
   @override
@@ -74,9 +77,18 @@ class ImpedimentPage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => TreeGraphPage(controller: controller),
+                    builder: (context) => TreeGraphPage(
+                      identificationController: identificationController,
+                      impedimentController: impedimentController,
+                    ),
                   ));
                 },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.green,
+                  padding: EdgeInsets.symmetric(vertical: 12),
+                  textStyle: TextStyle(fontSize: 18),
+                ),
                 child: Text("See Family Tree"),
               ),
             ),

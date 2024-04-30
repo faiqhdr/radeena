@@ -260,8 +260,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
             GestureDetector(
               onTap: () {
                 setState(() {
-                  widget.controller
-                      .setDeceasedGender(null); // Clear the gender selection
+                  widget.controller.setDeceasedGender(null);
                 });
               },
               child: Container(
@@ -436,11 +435,12 @@ class _IdentificationPageState extends State<IdentificationPage> {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ImpedimentPage(
+                      identificationController: widget.controller,
+                      impedimentController: widget.impedimentController,
                       impediments: widget.impedimentController
                           .getImpediments()
                           .keys
                           .toList(),
-                      controller: widget.impedimentController,
                     ),
                   ),
                 );
@@ -474,8 +474,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
           minVal: 0, // Minimum value
           maxVal: max, // Maximum value, passed as parameter
           steps: 1, // Increment by 1
-          qtyFormProps:
-              QtyFormProps(enableTyping: true), // Allowing manual input
+          qtyFormProps: QtyFormProps(enableTyping: true),
           decoration: QtyDecorationProps(
             isBordered: true,
             border: OutlineInputBorder(

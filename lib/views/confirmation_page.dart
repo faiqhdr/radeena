@@ -1,0 +1,128 @@
+import 'package:flutter/material.dart';
+import 'package:radeena/styles/style.dart';
+
+class ConfirmationPage extends StatelessWidget {
+  final double totalProperty;
+  final Map<String, int> selectedHeirs;
+
+  const ConfirmationPage({
+    Key? key,
+    required this.totalProperty,
+    required this.selectedHeirs,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+
+    String formatNumber(double number) {
+      return number.toStringAsFixed(0).replaceAllMapped(
+          RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => "${m[1]}.");
+    }
+
+    List<DataRow> heirRows = selectedHeirs.entries
+        .where((entry) => entry.value > 0)
+        .map((entry) => DataRow(
+              cells: [
+                DataCell(Text(entry.key)),
+                DataCell(Text(entry.value.toString())),
+              ],
+            ))
+        .toList();
+
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.1,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new_rounded),
+          color: green01Color,
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text(
+          "Confirm Calculation",
+          style: titleDetermineHeirsStyle(),
+        ),
+      ),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: width * .06),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(top: 16),
+                    child: Text(
+                      "Check Property & Heirs",
+                      style: textUnderTitleStyle(),
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  Container(
+                    width: double.infinity,
+                    child: DataTable(
+                      columnSpacing: width * 0.03,
+                      horizontalMargin: width * 0.05,
+                      headingRowHeight: 48,
+                      dataRowMinHeight: 20,
+                      dataRowMaxHeight: 40,
+                      showCheckboxColumn: false,
+                      columns: [
+                        DataColumn(
+                          label: Center(
+                            child: Text(
+                              'Heir',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Center(
+                            child: Text(
+                              'Quantity',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ],
+                      rows: heirRows,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Text(
+                    "Total inheritance to be distributed: IDR ${formatNumber(totalProperty)}",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 60),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: width * 0.06,
+            right: width * 0.06,
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.popUntil(context, (route) => route.isFirst);
+              },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.green,
+                padding: EdgeInsets.symmetric(vertical: 12),
+                textStyle: TextStyle(fontSize: 18),
+              ),
+              child: Text("Confirm"),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

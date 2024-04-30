@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
+import 'package:radeena/controllers/identification_controller.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/styles/style.dart';
+import 'package:radeena/views/confirmation_page.dart'; // Make sure this import is correct
 
 class TreeGraphPage extends StatelessWidget {
-  final ImpedimentController controller;
+  final IdentificationController identificationController;
+  final ImpedimentController impedimentController;
 
   const TreeGraphPage({
     Key? key,
-    required this.controller,
+    required this.identificationController,
+    required this.impedimentController,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
 
-    Graph graph = controller.buildGraph();
+    Graph graph = impedimentController.buildGraph();
     BuchheimWalkerConfiguration config = BuchheimWalkerConfiguration()
       ..siblingSeparation = 70
       ..levelSeparation = 90
@@ -23,7 +27,8 @@ class TreeGraphPage extends StatelessWidget {
       ..orientation = BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM;
 
     NodeWidgetBuilder builder = (node) {
-      bool isImpeded = controller.getImpediments().containsKey(node.key?.value);
+      bool isImpeded =
+          impedimentController.getImpediments().containsKey(node.key?.value);
       return rectangleWidget(
           node.key?.value as String, isImpeded ? Colors.red : Colors.green);
     };
@@ -66,10 +71,32 @@ class TreeGraphPage extends StatelessWidget {
                 maxScale: 4.6,
                 child: GraphView(
                   graph: graph,
-                  algorithm: algorithm, // Correctly configured algorithm
-                  builder: builder, // Pass the builder here
+                  algorithm: algorithm,
+                  builder: builder,
                 ),
               ),
+            ),
+            SizedBox(height: 15),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ConfirmationPage(
+                      totalProperty:
+                          identificationController.property.getTotal(),
+                      selectedHeirs: impedimentController.heirQuantity,
+                    ),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.green,
+                padding: EdgeInsets.symmetric(vertical: 12),
+                textStyle: TextStyle(fontSize: 18),
+              ),
+              child: Text("Next"),
             ),
           ],
         ),
@@ -77,7 +104,6 @@ class TreeGraphPage extends StatelessWidget {
     );
   }
 
-  // Function to create a widget for each node
   Widget rectangleWidget(String label, Color color) {
     return Container(
       padding: EdgeInsets.all(10),
