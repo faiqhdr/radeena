@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 
-class ConfirmationPage extends StatelessWidget {
-  const ConfirmationPage({
+class CalculationPage extends StatelessWidget {
+  const CalculationPage({
     Key? key,
   }) : super(key: key);
 
