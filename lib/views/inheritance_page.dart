@@ -37,7 +37,7 @@ class InheritancePage extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(top: 16),
                   child: Text(
-                    "Inheritance Details",
+                    "Calculation Step by Step",
                     style: textUnderTitleStyle(),
                   ),
                 ),

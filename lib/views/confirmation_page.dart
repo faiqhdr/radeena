@@ -114,8 +114,8 @@ class ConfirmationPage extends StatelessWidget {
           ),
           Positioned(
             bottom: 0,
-            left: width * 0.06,
-            right: width * 0.06,
+            left: width * 0.37,
+            right: width * 0.37,
             child: ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -132,7 +132,7 @@ class ConfirmationPage extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
                 backgroundColor: Colors.green,
-                padding: EdgeInsets.symmetric(vertical: 12),
+                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
                 textStyle: TextStyle(fontSize: 18),
               ),
               child: Text("Calculate"),

@@ -50,4 +50,4 @@ enum Portion {
   Undefined
 }
 
-enum DivisionStatus { aul, radd }
+enum DivisionStatus { Aul, Radd }
