@@ -9,6 +9,7 @@ import 'package:input_quantity/input_quantity.dart';
 class IdentificationPage extends StatefulWidget {
   final IdentificationController controller;
   final ImpedimentController impedimentController;
+
   const IdentificationPage({
     Key? key,
     required this.controller,
@@ -32,12 +33,9 @@ class _IdentificationPageState extends State<IdentificationPage> {
   String? _testamentError;
   String? _funeralError;
 
-  final Map<Position, int> _heirQuantity = {};
-
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -83,47 +81,30 @@ class _IdentificationPageState extends State<IdentificationPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("Input the Deceased's Property", style: textUnderTitleStyle()),
-        SizedBox(height: 16.0),
-        TextFormField(
+        _buildTextInputField(
           controller: _propertyAmountController,
-          decoration: InputDecoration(
-            labelText: "Property's Amount",
-            hintText: "Enter amount",
-            errorText: _propertyError,
-          ),
-          keyboardType: TextInputType.number,
+          label: "Property's Amount",
+          hint: "Enter amount",
+          errorText: _propertyError,
         ),
-        SizedBox(height: 16.0),
-        TextFormField(
+        _buildTextInputField(
           controller: _debtAmountController,
-          decoration: InputDecoration(
-            labelText: "Debt Amount",
-            hintText: "Enter amount",
-            errorText: _debtError,
-          ),
-          keyboardType: TextInputType.number,
+          label: "Debt Amount",
+          hint: "Enter amount",
+          errorText: _debtError,
         ),
-        SizedBox(height: 16.0),
-        TextFormField(
+        _buildTextInputField(
           controller: _testamentAmountController,
-          decoration: InputDecoration(
-            labelText: "Testament Amount",
-            hintText: "Enter amount",
-            errorText: _testamentError,
-          ),
-          keyboardType: TextInputType.number,
+          label: "Testament Amount",
+          hint: "Enter amount",
+          errorText: _testamentError,
         ),
-        SizedBox(height: 16.0),
-        TextFormField(
+        _buildTextInputField(
           controller: _funeralAmountController,
-          decoration: InputDecoration(
-            labelText: "Funeral Amount",
-            hintText: "Enter amount",
-            errorText: _funeralError,
-          ),
-          keyboardType: TextInputType.number,
+          label: "Funeral Amount",
+          hint: "Enter amount",
+          errorText: _funeralError,
         ),
-        SizedBox(height: 26.0),
         GestureDetector(
           onTap: _submitPropertyDetails,
           child: Container(
@@ -136,6 +117,29 @@ class _IdentificationPageState extends State<IdentificationPage> {
                 style: TextStyle(color: Colors.white, fontSize: 16.0)),
           ),
         ),
+      ],
+    );
+  }
+
+  Widget _buildTextInputField({
+    required TextEditingController controller,
+    required String label,
+    required String hint,
+    String? errorText,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextFormField(
+          controller: controller,
+          decoration: InputDecoration(
+            labelText: label,
+            hintText: hint,
+            errorText: errorText,
+          ),
+          keyboardType: TextInputType.number,
+        ),
+        SizedBox(height: 16.0),
       ],
     );
   }
@@ -238,7 +242,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
             Radio(
               value: Gender.male,
               groupValue: widget.controller.deceasedGender,
-              onChanged: (value) {
+              onChanged: (Gender? value) {
                 setState(() {
                   widget.controller.setDeceasedGender(value);
                 });
@@ -249,7 +253,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
             Radio(
               value: Gender.female,
               groupValue: widget.controller.deceasedGender,
-              onChanged: (value) {
+              onChanged: (Gender? value) {
                 setState(() {
                   widget.controller.setDeceasedGender(value);
                 });
@@ -316,149 +320,93 @@ class _IdentificationPageState extends State<IdentificationPage> {
 
   Widget _buildFamilyInputStep() {
     Gender? gender = widget.controller.deceasedGender;
-    var width = MediaQuery.of(context).size.width;
-
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(child: _buildFamilyMemberInput("Father", max: 1)),
-              Expanded(child: _buildFamilyMemberInput("Mother", max: 4)),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                  child:
-                      _buildFamilyMemberInput("Paternal Grandfather", max: 1)),
-              Expanded(
-                  child:
-                      _buildFamilyMemberInput("Paternal Grandmother", max: 1)),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                  child:
-                      _buildFamilyMemberInput("Maternal Grandmother", max: 1)),
-              Expanded(
-                child: gender == Gender.male
-                    ? _buildFamilyMemberInput("Wife", max: 4)
-                    : _buildFamilyMemberInput("Husband", max: 1),
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(child: _buildFamilyMemberInput("Son", max: 10)),
-              Expanded(child: _buildFamilyMemberInput("Daughter", max: 10)),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(child: _buildFamilyMemberInput("Grandson", max: 10)),
-              Expanded(
-                  child: _buildFamilyMemberInput("Granddaughter", max: 10)),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(child: _buildFamilyMemberInput("Brother", max: 8)),
-              Expanded(child: _buildFamilyMemberInput("Sister", max: 8)),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                  child:
-                      _buildFamilyMemberInput("Paternal Half Brother", max: 8)),
-              Expanded(
-                  child:
-                      _buildFamilyMemberInput("Paternal Half Sister", max: 8)),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                  child:
-                      _buildFamilyMemberInput("Maternal Half Brother", max: 8)),
-              Expanded(
-                  child:
-                      _buildFamilyMemberInput("Maternal Half Sister", max: 8)),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                  child: _buildFamilyMemberInput("Son of Brother", max: 10)),
-              Expanded(
-                  child: _buildFamilyMemberInput("Son of Paternal Half Brother",
-                      max: 10)),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(child: _buildFamilyMemberInput("Uncle", max: 5)),
-              Expanded(
-                  child: _buildFamilyMemberInput("Paternal Uncle", max: 5)),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(child: _buildFamilyMemberInput("Son of Uncle", max: 10)),
-              Expanded(
-                  child: _buildFamilyMemberInput("Son of Paternal Uncle",
-                      max: 10)),
-            ],
-          ),
-          SizedBox(height: 15.0),
-          Positioned(
-            bottom: 16,
-            left: width * 0.06,
-            right: width * 0.06,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ImpedimentPage(
-                      identificationController: widget.controller,
-                      impedimentController: widget.impedimentController,
-                      impediments: widget.impedimentController
-                          .getImpediments()
-                          .keys
-                          .toList(),
-                    ),
-                  ),
-                );
-              },
-              child: Container(
-                padding: EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: Text(
-                  "Next",
-                  style: TextStyle(color: Colors.white, fontSize: 16.0),
-                ),
-              ),
+        children: _buildFamilyMemberInputs(gender),
+      ),
+    );
+  }
+
+  List<Widget> _buildFamilyMemberInputs(Gender? gender) {
+    var inputs = <Widget>[];
+    List<Map<String, dynamic>> familyMembers = [
+      {'title': "Father", 'max': 1},
+      {'title': "Mother", 'max': 4},
+      {'title': "Paternal Grandfather", 'max': 1},
+      {'title': "Paternal Grandmother", 'max': 1},
+      {'title': "Maternal Grandmother", 'max': 1},
+      {
+        'title': gender == Gender.male ? "Wife" : "Husband",
+        'max': gender == Gender.male ? 4 : 1
+      },
+      {'title': "Son", 'max': 10},
+      {'title': "Daughter", 'max': 10},
+      {'title': "Grandson", 'max': 10},
+      {'title': "Granddaughter", 'max': 10},
+      {'title': "Brother", 'max': 8},
+      {'title': "Sister", 'max': 8},
+      {'title': "Paternal Half Brother", 'max': 8},
+      {'title': "Paternal Half Sister", 'max': 8},
+      {'title': "Maternal Half Brother", 'max': 8},
+      {'title': "Maternal Half Sister", 'max': 8},
+      {'title': "Son of Brother", 'max': 10},
+      {'title': "Son of Paternal Half Brother", 'max': 10},
+      {'title': "Uncle", 'max': 5},
+      {'title': "Paternal Uncle", 'max': 5},
+      {'title': "Son of Uncle", 'max': 10},
+      {'title': "Son of Paternal Uncle", 'max': 10},
+    ];
+
+    for (var member in familyMembers) {
+      inputs.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Expanded(
+                child: _buildFamilyMemberInput(
+              member['title'] as String,
+              max: member['max'] as int,
+            )),
+          ],
+        ),
+      );
+    }
+
+    inputs.add(SizedBox(height: 15.0));
+    inputs.add(
+      Positioned(
+        bottom: 16,
+        left: 10,
+        right: 10,
+        child: GestureDetector(
+          onTap: _navigateToImpedimentPage,
+          child: Container(
+            padding: EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.circular(8.0),
             ),
+            child: Text("Next",
+                style: TextStyle(color: Colors.white, fontSize: 16.0)),
           ),
-        ],
+        ),
+      ),
+    );
+
+    return inputs;
+  }
+
+  void _navigateToImpedimentPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ImpedimentPage(
+          identificationController: widget.controller,
+          impedimentController: widget.impedimentController,
+          impediments:
+              widget.impedimentController.getImpediments().keys.toList(),
+        ),
       ),
     );
   }
@@ -470,9 +418,9 @@ class _IdentificationPageState extends State<IdentificationPage> {
         Text("$title",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
         InputQty(
-          initVal: _heirQuantity[title] ?? 0, // Initial value
+          initVal: 0, // Initial value
           minVal: 0, // Minimum value
-          maxVal: max, // Maximum value, passed as parameter
+          maxVal: max, // Maximum value
           steps: 1, // Increment by 1
           qtyFormProps: QtyFormProps(enableTyping: true),
           decoration: QtyDecorationProps(

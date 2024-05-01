@@ -83,6 +83,8 @@ class TreeGraphPage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ConfirmationPage(
+                      identificationController: identificationController,
+                      impedimentController: impedimentController,
                       totalProperty:
                           identificationController.property.getTotal(),
                       selectedHeirs: impedimentController.heirQuantity,

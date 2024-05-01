@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 
 class CalculationPage extends StatelessWidget {
+  final double totalProperty;
+  final Map<String, int> selectedHeirs;
+
   const CalculationPage({
     Key? key,
+    required this.totalProperty,
+    required this.selectedHeirs,
   }) : super(key: key);
 
   @override

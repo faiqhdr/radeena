@@ -1,43 +1,53 @@
 enum Gender { male, female }
 
-enum Category { quranic, residuary, distantKindreds }
+enum Category { Quranic, Residuary, Undefined }
 
 enum Position {
-  son,
-  grandson,
-  father,
-  paternalGrandfather,
-  brother,
-  paternalHalfBrother,
-  maternalHalfBrother,
-  sonOfBrother,
-  sonOfPaternalHalfBrother,
-  uncle,
-  paternalUncle,
-  sonOfUncle,
-  sonOfPaternalUncle,
-  husband,
-  maleSlaveEmancipator,
-  daughter,
-  granddaughter,
-  mother,
-  paternalGrandmother,
-  maternalGrandmother,
-  sister,
-  paternalSister,
-  maternalSister,
-  wife,
-  female,
+  Son,
+  Grandson,
+  Father,
+  PaternalGrandfather,
+  Brother,
+  PaternalHalfBrother,
+  MaternalHalfBrother,
+  SonOfBrother,
+  SonOfPaternalHalfBrother,
+  Uncle,
+  PaternalUncle,
+  SonOfUncle,
+  SonOfPaternalUncle,
+  Husband,
+  MaleSlaveEmancipator,
+  Daughter,
+  Granddaughter,
+  Mother,
+  PaternalGrandmother,
+  MaternalGrandmother,
+  Sister,
+  PaternalSister,
+  MaternalSister,
+  Wife,
+  FemaleSlaveEmancipator,
+  Undefined
 }
 
 enum Status {
-  primary,
-  substitute,
-  secondary,
-  residuaryByBlood,
-  residuaryByCause
+  Primary,
+  Substitute,
+  Secondary,
+  ResiduaryByBlood,
+  ResiduaryByCause
 }
 
-enum Portion { OneHalf, OneFourth, OneEighth, TwoThirds, OneThird, OneSixth }
+enum Portion {
+  OneHalf,
+  OneFourth,
+  OneEighth,
+  TwoThirds,
+  OneThird,
+  OneSixth,
+  Residue,
+  Undefined
+}
 
 enum DivisionStatus { aul, radd }

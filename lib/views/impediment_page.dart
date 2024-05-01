@@ -28,9 +28,7 @@ class ImpedimentPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new_rounded),
           color: green01Color,
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+          onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
           "Determine Heirs",
@@ -55,23 +53,21 @@ class ImpedimentPage extends StatelessWidget {
                 Expanded(
                   child: ListView.builder(
                     itemCount: impediments.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(
-                          impediments[index],
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
+                    itemBuilder: (context, index) => ListTile(
+                      title: Text(
+                        impediments[index],
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
                         ),
-                      );
-                    },
+                      ),
+                    ),
                   ),
                 ),
               ],
             ),
             Positioned(
-              bottom: 370,
+              bottom: 70, // Adjusted for better UI
               left: width * 0.06,
               right: width * 0.06,
               child: ElevatedButton(

@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
+import 'package:radeena/controllers/identification_controller.dart';
+import 'package:radeena/controllers/impediment_controller.dart';
+import 'package:radeena/views/calculation_page.dart';
 
 class ConfirmationPage extends StatelessWidget {
   final double totalProperty;
   final Map<String, int> selectedHeirs;
 
+  final IdentificationController identificationController;
+  final ImpedimentController impedimentController;
+
   const ConfirmationPage({
     Key? key,
     required this.totalProperty,
     required this.selectedHeirs,
+    required this.identificationController,
+    required this.impedimentController,
   }) : super(key: key);
 
   @override
@@ -93,7 +101,7 @@ class ConfirmationPage extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    "Total inheritance to be distributed: IDR ${formatNumber(totalProperty)}",
+                    "Total inheritance to be distributed: ${formatNumber(totalProperty)} IDR",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -110,7 +118,16 @@ class ConfirmationPage extends StatelessWidget {
             right: width * 0.06,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.popUntil(context, (route) => route.isFirst);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CalculationPage(
+                      totalProperty:
+                          identificationController.property.getTotal(),
+                      selectedHeirs: impedimentController.heirQuantity,
+                    ),
+                  ),
+                );
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -118,7 +135,7 @@ class ConfirmationPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 12),
                 textStyle: TextStyle(fontSize: 18),
               ),
-              child: Text("Confirm"),
+              child: Text("Calculate"),
             ),
           ),
         ],
