@@ -42,6 +42,27 @@ class InheritancePage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 15),
+                Text(
+                  "1. Total Property: 780,500,000 IDR\n"
+                  "2. Deductions:\n"
+                  "   - Debt: 8,500,000 IDR\n"
+                  "   - Testament: 8,500,000 IDR\n"
+                  "   - Funeral Expenses: 400,000 IDR\n"
+                  "3. Net Inheritance: 763,100,000 IDR\n\n"
+                  "Heirs and Portions:\n"
+                  "   - Father: 1/6 of the Net Property = 127,183,333 IDR\n"
+                  "   - Wife: 1/8 of the Net Property = 95,387,500 IDR\n"
+                  "   - Sons: Residuary, 4/5 of Residue = 432,423,333 IDR\n"
+                  "   - Daughters: Residuary, 1/5 of Residue = 108,105,833 IDR\n\n"
+                  "Division Status:\n"
+                  "   - Initial share is based on LCM of portions (6 and 8)\n"
+                  "   - Residuary calculated after fixed portions\n"
+                  "   - No Aul or Radd adjustments required\n\n"
+                  "Final Distribution:\n"
+                  "   - Each son receives: 108,105,833 IDR\n"
+                  "   - Each daughter receives: 54,052,916 IDR\n",
+                  style: TextStyle(fontSize: 16),
+                ),
               ],
             ),
           ],

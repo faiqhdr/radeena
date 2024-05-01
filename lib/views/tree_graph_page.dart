@@ -51,7 +51,11 @@ class TreeGraphPage extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: width * .06),
+        padding: EdgeInsets.only(
+          left: width * .06,
+          right: width * .06,
+          bottom: 60,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -76,29 +80,30 @@ class TreeGraphPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 15),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ConfirmationPage(
-                      identificationController: identificationController,
-                      impedimentController: impedimentController,
-                      totalProperty:
-                          identificationController.property.getTotal(),
-                      selectedHeirs: impedimentController.heirQuantity,
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ConfirmationPage(
+                        identificationController: identificationController,
+                        impedimentController: impedimentController,
+                        totalProperty:
+                            identificationController.property.getTotal(),
+                        selectedHeirs: impedimentController.heirQuantity,
+                      ),
                     ),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.green,
-                padding: EdgeInsets.symmetric(vertical: 12),
-                textStyle: TextStyle(fontSize: 18),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.green,
+                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 35),
+                  textStyle: TextStyle(fontSize: 18),
+                ),
+                child: Text("Next"),
               ),
-              child: Text("Next"),
             ),
           ],
         ),

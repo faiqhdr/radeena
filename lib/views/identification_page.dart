@@ -105,16 +105,16 @@ class _IdentificationPageState extends State<IdentificationPage> {
           hint: "Enter amount",
           errorText: _funeralError,
         ),
-        GestureDetector(
-          onTap: _submitPropertyDetails,
-          child: Container(
-            padding: EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(8.0),
+        Center(
+          child: ElevatedButton(
+            onPressed: _submitPropertyDetails,
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.green,
+              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+              textStyle: TextStyle(fontSize: 18),
             ),
-            child: Text("Next",
-                style: TextStyle(color: Colors.white, fontSize: 16.0)),
+            child: Text("Next"),
           ),
         ),
       ],
@@ -279,16 +279,16 @@ class _IdentificationPageState extends State<IdentificationPage> {
           ],
         ),
         SizedBox(height: 16.0),
-        GestureDetector(
-          onTap: _submitGenderDetails,
-          child: Container(
-            padding: EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(8.0),
+        Center(
+          child: ElevatedButton(
+            onPressed: _submitGenderDetails,
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.green,
+              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+              textStyle: TextStyle(fontSize: 18),
             ),
-            child: Text("Next",
-                style: TextStyle(color: Colors.white, fontSize: 16.0)),
+            child: Text("Next"),
           ),
         ),
       ],
@@ -323,7 +323,23 @@ class _IdentificationPageState extends State<IdentificationPage> {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: _buildFamilyMemberInputs(gender),
+        children: [
+          ..._buildFamilyMemberInputs(gender),
+          SizedBox(height: 15.0),
+          Center(
+            // Move the ElevatedButton to the center
+            child: ElevatedButton(
+              onPressed: _navigateToImpedimentPage,
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.green,
+                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                textStyle: TextStyle(fontSize: 18),
+              ),
+              child: Text("Next"),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -358,42 +374,36 @@ class _IdentificationPageState extends State<IdentificationPage> {
       {'title': "Son of Paternal Uncle", 'max': 10},
     ];
 
-    for (var member in familyMembers) {
+    int midpoint = (familyMembers.length / 2).ceil();
+
+    for (var i = 0; i < midpoint; i++) {
+      var member = familyMembers[i];
+      var nextMemberIndex = i + midpoint;
+
       inputs.add(
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Expanded(
+              child: _buildFamilyMemberInput(
+                member['title'] as String,
+                max: member['max'] as int,
+              ),
+            ),
+            SizedBox(width: 16), // Add spacing between columns
+            if (nextMemberIndex < familyMembers.length)
+              Expanded(
                 child: _buildFamilyMemberInput(
-              member['title'] as String,
-              max: member['max'] as int,
-            )),
+                  familyMembers[nextMemberIndex]['title'] as String,
+                  max: familyMembers[nextMemberIndex]['max'] as int,
+                ),
+              ),
           ],
         ),
       );
     }
 
-    inputs.add(SizedBox(height: 15.0));
-    inputs.add(
-      Positioned(
-        bottom: 16,
-        left: 10,
-        right: 10,
-        child: GestureDetector(
-          onTap: _navigateToImpedimentPage,
-          child: Container(
-            padding: EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            child: Text("Next",
-                style: TextStyle(color: Colors.white, fontSize: 16.0)),
-          ),
-        ),
-      ),
-    );
-
+    inputs.add(SizedBox(height: 0));
     return inputs;
   }
 

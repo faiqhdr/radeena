@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/controllers/calculation_controller.dart';
+import 'package:radeena/views/inheritance_page.dart';
 
 class CalculationPage extends StatelessWidget {
   final double totalProperty;
@@ -78,7 +79,14 @@ class CalculationPage extends StatelessWidget {
               SizedBox(height: 20),
               Center(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InheritancePage(),
+                      ),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: Colors.white,
                     backgroundColor: Colors.green,

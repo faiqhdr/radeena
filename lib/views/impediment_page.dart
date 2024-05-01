@@ -68,8 +68,8 @@ class ImpedimentPage extends StatelessWidget {
             ),
             Positioned(
               bottom: 70, // Adjusted for better UI
-              left: width * 0.06,
-              right: width * 0.06,
+              left: width * 0.22,
+              right: width * 0.22,
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
