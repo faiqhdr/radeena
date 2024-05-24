@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/controllers/calculation_controller.dart';
 import 'package:radeena/views/inheritance_page.dart';
+import 'package:radeena/views/heir_page.dart';
 
 class CalculationPage extends StatelessWidget {
   final double totalProperty;
@@ -30,9 +31,31 @@ class CalculationPage extends StatelessWidget {
         .where((entry) => entry.value > 0)
         .map((entry) => DataRow(
               cells: [
-                DataCell(Text(entry.key)),
-                DataCell(Text(entry.value.toString())),
-                DataCell(Text(formatNumber(distribution[entry.key] ?? 0))),
+                DataCell(
+                  Tooltip(
+                    message: "Click to see details",
+                    child: GestureDetector(
+                      child: Text(
+                        entry.key,
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HeirPage(
+                              heir: entry.key,
+                              quantity: entry.value,
+                              totalInheritance: distribution[entry.key] ?? 0,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                DataCell(Center(child: Text(entry.value.toString()))),
+                DataCell(
+                    Text("IDR ${formatNumber(distribution[entry.key] ?? 0)}")),
               ],
             ))
         .toList();
@@ -66,8 +89,28 @@ class CalculationPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              Text("Net Property: ${formatNumber(totalProperty)} IDR"),
-              Text("Division Status: $divisionStatus"),
+              Text(
+                "Net Property       : IDR ${formatNumber(totalProperty)}",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+              Text(
+                "Division Status   : $divisionStatus",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+              SizedBox(height: 15),
+              Row(
+                children: [
+                  Icon(Icons.info_outline,
+                      color: Colors.grey, size: 15), // Adjust the size here
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      "Click on the heir's row to see individual inheritance details.",
+                      style: TextStyle(color: Colors.grey, fontSize: 13),
+                    ),
+                  ),
+                ],
+              ),
               DataTable(
                 columns: const [
                   DataColumn(label: Text('Heir')),
