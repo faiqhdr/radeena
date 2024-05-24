@@ -1,5 +1,4 @@
 class PropertyModel {
-  final int propertyID;
   double amount;
   double debt;
   double testament;
@@ -7,17 +6,12 @@ class PropertyModel {
   double total;
 
   PropertyModel({
-    required this.propertyID,
     required this.amount,
     this.debt = 0,
     this.testament = 0,
     this.funeral = 0,
     required this.total,
   });
-
-  int getPropertyID() {
-    return propertyID;
-  }
 
   double getAmount() {
     return amount;

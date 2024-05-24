@@ -122,6 +122,8 @@ class ConfirmationPage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => CalculationPage(
+                      identificationController: identificationController,
+                      impedimentController: impedimentController,
                       totalProperty:
                           identificationController.property.getTotal(),
                       selectedHeirs: impedimentController.heirQuantity,

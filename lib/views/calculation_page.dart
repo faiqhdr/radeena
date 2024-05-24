@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:radeena/controllers/identification_controller.dart';
+import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/controllers/calculation_controller.dart';
 import 'package:radeena/views/inheritance_page.dart';
@@ -8,10 +10,15 @@ class CalculationPage extends StatelessWidget {
   final double totalProperty;
   final Map<String, int> selectedHeirs;
 
+  final IdentificationController identificationController;
+  final ImpedimentController impedimentController;
+
   const CalculationPage({
     Key? key,
     required this.totalProperty,
     required this.selectedHeirs,
+    required this.identificationController,
+    required this.impedimentController,
   }) : super(key: key);
 
   String formatNumber(double number) {
@@ -126,7 +133,21 @@ class CalculationPage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => InheritancePage(),
+                        builder: (context) => InheritancePage(
+                          identificationController: identificationController,
+                          impedimentController: impedimentController,
+                          totalProperty:
+                              identificationController.property.getTotal(),
+                          propertyAmount:
+                              identificationController.property.getAmount(),
+                          debtAmount:
+                              identificationController.property.getDebt(),
+                          testamentAmount:
+                              identificationController.property.getTestament(),
+                          funeralAmount:
+                              identificationController.property.getFuneral(),
+                          selectedHeirs: impedimentController.heirQuantity,
+                        ),
                       ),
                     );
                   },

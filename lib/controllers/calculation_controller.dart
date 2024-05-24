@@ -1,5 +1,3 @@
-import 'dart:math';
-
 class CalculationController {
   Map<String, dynamic> calculateInheritance(
       double totalProperty, Map<String, int> selectedHeirs) {
@@ -194,15 +192,5 @@ class CalculationController {
               ? "Radd"
               : "None",
     };
-
-    int _lcm(int a, int b) {
-      int greater = max(a, b);
-      while (true) {
-        if (greater % a == 0 && greater % b == 0) {
-          return greater;
-        }
-        ++greater;
-      }
-    }
   }
 }

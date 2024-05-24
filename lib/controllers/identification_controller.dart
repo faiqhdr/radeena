@@ -2,8 +2,7 @@ import 'package:radeena/models/enums.dart';
 import 'package:radeena/models/property_model.dart';
 
 class IdentificationController {
-  PropertyModel _property =
-      PropertyModel(propertyID: 1, amount: 0.0, total: 0.0);
+  PropertyModel _property = PropertyModel(amount: 0.0, total: 0.0);
   Gender? _deceasedGender;
 
   PropertyModel get property => _property;
