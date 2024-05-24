@@ -36,12 +36,7 @@ class CalculationController {
         'status': 'ResiduaryByBlood'
       },
       'Daughter': {
-        'portion': selectedHeirs['Daughter'] == 1
-            ? 1 / 2
-            : selectedHeirs['Daughter'] != null &&
-                    selectedHeirs['Daughter']! > 1
-                ? 2 / 3
-                : 'residue',
+        'portion': 'residue',
         'type': 'Quranic',
         'status': 'Substitute'
       },
@@ -141,58 +136,51 @@ class CalculationController {
       }
     };
 
-    // Calculating LCM for Quranic heirs
-    List<int> denominators = portions.entries
-        .where(
-            (entry) => entry.value != null && entry.value['portion'] is double)
-        .map((entry) => (1 / entry.value['portion']).round())
-        .toList();
-    int lcm = denominators.isNotEmpty ? denominators.reduce(_lcm) : 1;
-
-    // Calculate initial shares based on LCM
+    // Calculate initial shares based on fixed portions
     Map<String, double> initialShares = {};
     double totalInitialShares = 0;
     portions.forEach((heir, data) {
       double portion =
           data != null && data['portion'] is double ? data['portion'] : 0.0;
       if (selectedHeirs.containsKey(heir) && portion != 0.0) {
-        double shares = (lcm * portion).roundToDouble();
-        initialShares[heir] = shares;
-        totalInitialShares += shares;
+        initialShares[heir] = portion;
+        totalInitialShares += portion;
       }
     });
 
-    // Calculate the total property proportion to distribute based on the LCM
-    double propertyShare =
-        totalProperty / max(lcm, 1); // Ensure lcm is never zero
+    // Calculate the total property proportion to distribute based on the initial shares
+    double assignedProperty = 0.0;
     Map<String, double> distribution = {};
-    initialShares.forEach((heir, shares) {
-      // Safe access to distribution values
-      distribution[heir] = shares /
-          max(lcm, 1) *
-          totalProperty; // Protect against division by zero
+    initialShares.forEach((heir, portion) {
+      double share = totalProperty * portion;
+      distribution[heir] = share;
+      assignedProperty += share;
     });
 
-    double assignedProperty =
-        distribution.values.fold(0.0, (sum, v) => sum + v);
+    // Calculate the residue
     double residue = totalProperty - assignedProperty;
-    double totalResiduaryShares = selectedHeirs.entries
-        .where((entry) =>
-            portions[entry.key] != null &&
-            portions[entry.key]['portion'] == 'residue')
-        .fold(
-            0,
-            (prev, element) =>
-                prev +
-                (element.value ??
-                    0)); // Protect against null values in calculation
 
+    // Calculate total residue shares for sons and daughters
+    int totalResiduaryShares = 0;
     selectedHeirs.forEach((heir, count) {
       if (portions[heir] != null && portions[heir]['portion'] == 'residue') {
-        distribution[heir] = (residue *
-            (count /
-                max(totalResiduaryShares,
-                    1))); // Protect against division by zero
+        totalResiduaryShares += (heir == 'Son' ? 2 * count : count);
+      }
+    });
+
+    // Distribute the residue
+    selectedHeirs.forEach((heir, count) {
+      if (portions[heir] != null && portions[heir]['portion'] == 'residue') {
+        double share = residue *
+            ((heir == 'Son' ? 2 * count : count) / totalResiduaryShares);
+        distribution[heir] = (distribution[heir] ?? 0) + share;
+      }
+    });
+
+    // Ensure all shares are positive
+    distribution.forEach((heir, share) {
+      if (share < 0) {
+        distribution[heir] = -share;
       }
     });
 
@@ -200,21 +188,21 @@ class CalculationController {
       'distribution': distribution,
       'totalInitialShares': totalInitialShares,
       'initialShares': initialShares,
-      'divisionStatus': totalInitialShares > lcm
+      'divisionStatus': totalInitialShares > 1
           ? "Aul"
-          : totalInitialShares < lcm
+          : totalInitialShares < 1
               ? "Radd"
               : "None",
     };
-  }
 
-  int _lcm(int a, int b) {
-    int greater = max(a, b);
-    while (true) {
-      if (greater % a == 0 && greater % b == 0) {
-        return greater;
+    int _lcm(int a, int b) {
+      int greater = max(a, b);
+      while (true) {
+        if (greater % a == 0 && greater % b == 0) {
+          return greater;
+        }
+        ++greater;
       }
-      ++greater;
     }
   }
 }
