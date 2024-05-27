@@ -1,23 +1,17 @@
 import 'enums.dart';
 
 class HeirModel {
-  final int heirID;
   Portion portion;
   Position position;
   Category category;
   Status status;
 
   HeirModel({
-    required this.heirID,
     required this.portion,
     required this.position,
     required this.category,
     required this.status,
   });
-
-  int getHeirID() {
-    return heirID;
-  }
 
   Portion getPortion() {
     return portion;

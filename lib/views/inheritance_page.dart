@@ -39,6 +39,7 @@ class InheritancePage extends StatelessWidget {
     var result = controller.calculateInheritance(totalProperty, selectedHeirs);
     Map<String, double> distribution = result['distribution'];
     String divisionStatus = result['divisionStatus'];
+    int finalShare = result['finalShare'];
 
     Map<String, dynamic> portions = {
       'Father': '1/6',
@@ -159,7 +160,7 @@ class InheritancePage extends StatelessWidget {
               ),
               SizedBox(height: 5),
               Text(
-                "Total share is the sum of all shares of the heirs entitled to receive a share.",
+                "Total share is the sum of all shares of the heirs entitled to receive a share. Division status for this case is $divisionStatus.",
                 style: TextStyle(color: Colors.grey, fontSize: 13),
               ),
               SizedBox(height: 10),
@@ -178,19 +179,14 @@ class InheritancePage extends StatelessWidget {
                     DataCell(Text(
                         "IDR ${formatNumber(distribution[entry.key] ?? 0)}")),
                   ]);
-                }).toList()
-                  ..add(DataRow(cells: [
-                    DataCell(Text("Total Share")),
-                    DataCell(Text('')),
-                    DataCell(Text(
-                        "IDR ${formatNumber(distribution.values.fold(0, (sum, value) => sum + value))}")),
-                  ])),
+                }).toList(),
               ),
               SizedBox(height: 20),
               Text(
-                "Division Status: $divisionStatus",
+                "Final Share: ${selectedHeirs.values.fold(0, (sum, count) => sum + count)}/$finalShare",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
+              SizedBox(height: 40),
             ],
           ),
         ),

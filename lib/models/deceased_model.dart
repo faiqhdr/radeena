@@ -3,21 +3,15 @@ import 'heir_model.dart';
 import 'property_model.dart';
 
 class DeceasedModel {
-  final int deceasedID;
   Gender gender;
   List<HeirModel> selectedHeirs;
   PropertyModel inheritance;
 
   DeceasedModel({
-    required this.deceasedID,
     required this.gender,
     required this.selectedHeirs,
     required this.inheritance,
   });
-
-  int getDeceasedID() {
-    return deceasedID;
-  }
 
   Gender getGender() {
     return gender;

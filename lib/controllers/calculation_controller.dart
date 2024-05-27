@@ -1,4 +1,15 @@
 class CalculationController {
+  int lcm(int a, int b) {
+    return (a * b) ~/ gcd(a, b);
+  }
+
+  int gcd(int a, int b) {
+    if (b == 0) {
+      return a;
+    }
+    return gcd(b, a % b);
+  }
+
   Map<String, dynamic> calculateInheritance(
       double totalProperty, Map<String, int> selectedHeirs) {
     // Define the portion each heir receives based on Islamic law
@@ -134,41 +145,56 @@ class CalculationController {
       }
     };
 
+    // Filter out heirs not present in selectedHeirs
+    Map<String, dynamic> applicablePortions = {};
+    portions.forEach((heir, data) {
+      if (selectedHeirs.containsKey(heir)) {
+        applicablePortions[heir] = data;
+      }
+    });
+
+    // Calculate LCM of denominators for applicable Quranic portions
+    List<int> denominators = applicablePortions.values
+        .where((data) => data['portion'] is double)
+        .map((data) => 1 ~/ data['portion'])
+        .toList();
+
+    int lcmValue = denominators.fold(1, (prev, denom) => lcm(prev, denom));
+
     // Calculate initial shares based on fixed portions
     Map<String, double> initialShares = {};
     double totalInitialShares = 0;
-    portions.forEach((heir, data) {
-      double portion =
-          data != null && data['portion'] is double ? data['portion'] : 0.0;
-      if (selectedHeirs.containsKey(heir) && portion != 0.0) {
+
+    applicablePortions.forEach((heir, data) {
+      if (data['portion'] is double) {
+        double portion = data['portion'];
         initialShares[heir] = portion;
         totalInitialShares += portion;
       }
     });
 
-    // Calculate the total property proportion to distribute based on the initial shares
     double assignedProperty = 0.0;
     Map<String, double> distribution = {};
+
     initialShares.forEach((heir, portion) {
       double share = totalProperty * portion;
       distribution[heir] = share;
       assignedProperty += share;
     });
 
-    // Calculate the residue
     double residue = totalProperty - assignedProperty;
-
-    // Calculate total residue shares for sons and daughters
     int totalResiduaryShares = 0;
+
     selectedHeirs.forEach((heir, count) {
-      if (portions[heir] != null && portions[heir]['portion'] == 'residue') {
+      if (applicablePortions[heir] != null &&
+          applicablePortions[heir]['portion'] == 'residue') {
         totalResiduaryShares += (heir == 'Son' ? 2 * count : count);
       }
     });
 
-    // Distribute the residue
     selectedHeirs.forEach((heir, count) {
-      if (portions[heir] != null && portions[heir]['portion'] == 'residue') {
+      if (applicablePortions[heir] != null &&
+          applicablePortions[heir]['portion'] == 'residue') {
         double share = residue *
             ((heir == 'Son' ? 2 * count : count) / totalResiduaryShares);
         distribution[heir] = (distribution[heir] ?? 0) + share;
@@ -182,15 +208,22 @@ class CalculationController {
       }
     });
 
+    String divisionStatus = "No Affected Aul / Radd";
+    if (totalInitialShares > 1) {
+      divisionStatus = "Aul";
+    } else if (totalInitialShares < 1) {
+      divisionStatus = "Radd";
+    }
+
+    // Correcting final share value calculation
+    int finalShare = lcmValue;
+
     return {
       'distribution': distribution,
       'totalInitialShares': totalInitialShares,
       'initialShares': initialShares,
-      'divisionStatus': totalInitialShares > 1
-          ? "Aul"
-          : totalInitialShares < 1
-              ? "Radd"
-              : "None",
+      'divisionStatus': divisionStatus,
+      'finalShare': finalShare
     };
   }
 }
