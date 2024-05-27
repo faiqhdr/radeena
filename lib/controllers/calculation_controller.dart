@@ -208,8 +208,8 @@ class CalculationController {
       }
     });
 
-    String divisionStatus = "No Affected Aul / Radd";
-    if (totalInitialShares > 1) {
+    String divisionStatus = "No Aul / Radd";
+    if (totalInitialShares == 1) {
       divisionStatus = "Aul";
     } else if (totalInitialShares < 1) {
       divisionStatus = "Radd";

@@ -26,6 +26,33 @@ class CalculationPage extends StatelessWidget {
         RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => "${m[1]},");
   }
 
+  void _showResetConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Confirm Reset"),
+          content: Text(
+              "Are you sure you want to reset the calculation and go to the home page?"),
+          actions: [
+            TextButton(
+              child: Text("Cancel"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: Text("Yes"),
+              onPressed: () {
+                Navigator.of(context).popUntil((route) => route.isFirst);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -33,6 +60,7 @@ class CalculationPage extends StatelessWidget {
     var result = controller.calculateInheritance(totalProperty, selectedHeirs);
     Map<String, double> distribution = result['distribution'];
     String divisionStatus = result['divisionStatus'];
+    int finalShare = result['finalShare'];
 
     List<DataRow> heirRows = selectedHeirs.entries
         .where((entry) => entry.value > 0)
@@ -104,11 +132,14 @@ class CalculationPage extends StatelessWidget {
                 "Division Status   : $divisionStatus",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
+              Text(
+                "Final Share         : $finalShare",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
               SizedBox(height: 15),
               Row(
                 children: [
-                  Icon(Icons.info_outline,
-                      color: Colors.grey, size: 15), // Adjust the size here
+                  Icon(Icons.info_outline, color: Colors.grey, size: 15),
                   SizedBox(width: 8),
                   Expanded(
                     child: Text(
@@ -127,54 +158,89 @@ class CalculationPage extends StatelessWidget {
                 rows: heirRows,
               ),
               SizedBox(height: 20),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => InheritancePage(
-                          identificationController: identificationController,
-                          impedimentController: impedimentController,
-                          totalProperty:
-                              identificationController.property.getTotal(),
-                          propertyAmount:
-                              identificationController.property.getAmount(),
-                          debtAmount:
-                              identificationController.property.getDebt(),
-                          testamentAmount:
-                              identificationController.property.getTestament(),
-                          funeralAmount:
-                              identificationController.property.getFuneral(),
-                          selectedHeirs: impedimentController.heirQuantity,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => InheritancePage(
+                            identificationController: identificationController,
+                            impedimentController: impedimentController,
+                            totalProperty:
+                                identificationController.property.getTotal(),
+                            propertyAmount:
+                                identificationController.property.getAmount(),
+                            debtAmount:
+                                identificationController.property.getDebt(),
+                            testamentAmount: identificationController.property
+                                .getTestament(),
+                            funeralAmount:
+                                identificationController.property.getFuneral(),
+                            selectedHeirs: impedimentController.heirQuantity,
+                          ),
                         ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.teal,
+                      backgroundColor: Colors.white,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(17),
                       ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.green,
-                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
-                    textStyle: TextStyle(fontSize: 18),
+                    ),
+                    child: Text(
+                      "Distribution Detail",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                    ),
                   ),
-                  child: Text("See Calculation Steps"),
-                ),
+                ],
               ),
               SizedBox(height: 20),
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Logic to save or further process the results
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.green,
-                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
-                    textStyle: TextStyle(fontSize: 18),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      _showResetConfirmationDialog(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.teal,
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(19),
+                      ),
+                    ),
+                    child: Icon(Icons.home, color: Colors.white, size: 26),
                   ),
-                  child: Text("Save Result"),
-                ),
+                  SizedBox(width: 165),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Logic to save or further process the results
+                    },
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.teal,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(17),
+                      ),
+                    ),
+                    child: Text(
+                      "Save Result",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                    ),
+                  ),
+                ],
               ),
+              SizedBox(height: 20),
             ],
           ),
         ),

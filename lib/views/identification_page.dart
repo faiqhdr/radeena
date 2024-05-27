@@ -110,11 +110,16 @@ class _IdentificationPageState extends State<IdentificationPage> {
             onPressed: _submitPropertyDetails,
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
-              backgroundColor: Colors.green,
+              backgroundColor: Colors.teal,
               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-              textStyle: TextStyle(fontSize: 18),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(17),
+              ),
             ),
-            child: Text("Next"),
+            child: Text(
+              "Next",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+            ),
           ),
         ),
       ],
@@ -284,11 +289,16 @@ class _IdentificationPageState extends State<IdentificationPage> {
             onPressed: _submitGenderDetails,
             style: ElevatedButton.styleFrom(
               foregroundColor: Colors.white,
-              backgroundColor: Colors.green,
+              backgroundColor: Colors.teal,
               padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-              textStyle: TextStyle(fontSize: 18),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(17),
+              ),
             ),
-            child: Text("Next"),
+            child: Text(
+              "Next",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+            ),
           ),
         ),
       ],
@@ -332,11 +342,16 @@ class _IdentificationPageState extends State<IdentificationPage> {
               onPressed: _navigateToImpedimentPage,
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
-                backgroundColor: Colors.green,
+                backgroundColor: Colors.teal,
                 padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-                textStyle: TextStyle(fontSize: 18),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(17),
+                ),
               ),
-              child: Text("Next"),
+              child: Text(
+                "Next",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+              ),
             ),
           ),
         ],

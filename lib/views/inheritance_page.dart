@@ -55,8 +55,8 @@ class InheritancePage extends StatelessWidget {
               selectedHeirs.containsKey('Daughter'))
           ? '1/8'
           : '1/4',
-      'Son': 'residue',
-      'Daughter': 'residue',
+      'Son': 'Residue',
+      'Daughter': 'Residue',
       'Grandson': '1/6',
       'Granddaughter': '1/3',
       'Paternal Grandfather': '1/6',
@@ -67,26 +67,26 @@ class InheritancePage extends StatelessWidget {
           ? '1/2'
           : selectedHeirs['Sister'] != null && selectedHeirs['Sister']! > 1
               ? '2/3'
-              : 'residue',
-      'Maternal Half Brother': 'residue',
+              : 'Residue',
+      'Maternal Half Brother': 'Residue',
       'Maternal Half Sister': selectedHeirs['Maternal Half Sister'] == 1
           ? '1/2'
           : selectedHeirs['Maternal Half Sister'] != null &&
                   selectedHeirs['Maternal Half Sister']! > 1
               ? '2/3'
-              : 'residue',
-      'Paternal Half Brother': 'residue',
+              : 'Residue',
+      'Paternal Half Brother': 'Residue',
       'Paternal Half Sister': selectedHeirs['Paternal Half Sister'] == 1
           ? '1/2'
           : selectedHeirs['Paternal Half Sister'] != null &&
                   selectedHeirs['Paternal Half Sister']! > 1
               ? '2/3'
-              : 'residue',
-      'Son of Paternal Half Brother': 'residue',
-      'Uncle': 'residue',
-      'Paternal Uncle': 'residue',
-      'Son of Paternal Uncle': 'residue',
-      'Son of Uncle': 'residue'
+              : 'Residue',
+      'Son of Paternal Half Brother': 'Residue',
+      'Uncle': 'Residue',
+      'Paternal Uncle': 'Residue',
+      'Son of Paternal Uncle': 'Residue',
+      'Son of Uncle': 'Residue'
     };
 
     return Scaffold(

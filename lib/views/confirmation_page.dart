@@ -133,11 +133,16 @@ class ConfirmationPage extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
-                backgroundColor: Colors.green,
+                backgroundColor: Colors.teal,
                 padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
-                textStyle: TextStyle(fontSize: 18),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(17),
+                ),
               ),
-              child: Text("Calculate"),
+              child: Text(
+                "Calculate",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+              ),
             ),
           ),
         ],
