@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.6
   input_quantity: ^2.3.2
   graphview: ^1.2.0
+  animated_text_kit: ^4.2.2
+  lottie: ^3.1.2
 
 dev_dependencies:
   flutter_test:
@@ -67,6 +69,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/menu_page/
+    - assets/lottie/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

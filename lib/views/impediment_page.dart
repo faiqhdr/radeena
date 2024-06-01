@@ -3,6 +3,8 @@ import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/tree_graph_page.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/controllers/identification_controller.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:lottie/lottie.dart';
 
 class ImpedimentPage extends StatelessWidget {
   final List<String> impediments;
@@ -51,18 +53,58 @@ class ImpedimentPage extends StatelessWidget {
                 ),
                 SizedBox(height: 15),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: impediments.length,
-                    itemBuilder: (context, index) => ListTile(
-                      title: Text(
-                        impediments[index],
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
+                  child: impediments.isNotEmpty
+                      ? ListView.builder(
+                          itemCount: impediments.length,
+                          itemBuilder: (context, index) => ListTile(
+                            title: AnimatedTextKit(
+                              animatedTexts: [
+                                TypewriterAnimatedText(
+                                  impediments[index],
+                                  textStyle: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  speed: const Duration(milliseconds: 50),
+                                ),
+                              ],
+                              totalRepeatCount: 1,
+                              pause: const Duration(milliseconds: 1000),
+                              displayFullTextOnTap: true,
+                              stopPauseOnTap: true,
+                            ),
+                          ),
+                        )
+                      : Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Lottie.asset(
+                                'assets/lottie/no_impediments.json',
+                                width: 400,
+                                height: 360,
+                              ),
+                              SizedBox(height: 5),
+                              AnimatedTextKit(
+                                animatedTexts: [
+                                  TypewriterAnimatedText(
+                                    'No heirs impeded. \nAll will get the inheritance ✨',
+                                    textStyle: TextStyle(
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.green,
+                                    ),
+                                    speed: const Duration(milliseconds: 50),
+                                  ),
+                                ],
+                                totalRepeatCount: 4,
+                                pause: const Duration(milliseconds: 1000),
+                                displayFullTextOnTap: true,
+                                stopPauseOnTap: true,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
                 ),
               ],
             ),
