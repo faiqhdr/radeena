@@ -88,37 +88,37 @@ class CalculationController {
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'
       },
-      'Maternal Half Brother': {
+      'Maternal Half-Brother': {
         'portion': 'Residue',
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'
       },
-      'Maternal Half Sister': {
-        'portion': selectedHeirs['Maternal Half Sister'] == 1
+      'Maternal Half-Sister': {
+        'portion': selectedHeirs['Maternal Half-Sister'] == 1
             ? 1 / 2
-            : selectedHeirs['Maternal Half Sister'] != null &&
-                    selectedHeirs['Maternal Half Sister']! > 1
+            : selectedHeirs['Maternal Half-Sister'] != null &&
+                    selectedHeirs['Maternal Half-Sister']! > 1
                 ? 2 / 3
                 : 'Residue',
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'
       },
-      'Paternal Half Brother': {
+      'Paternal Half-Brother': {
         'portion': 'Residue',
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'
       },
-      'Paternal Half Sister': {
-        'portion': selectedHeirs['Paternal Half Sister'] == 1
+      'Paternal Half-Sister': {
+        'portion': selectedHeirs['Paternal Half-Sister'] == 1
             ? 1 / 2
-            : selectedHeirs['Paternal Half Sister'] != null &&
-                    selectedHeirs['Paternal Half Sister']! > 1
+            : selectedHeirs['Paternal Half-Sister'] != null &&
+                    selectedHeirs['Paternal Half-Sister']! > 1
                 ? 2 / 3
                 : 'Residue',
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'
       },
-      'Son of Paternal Half Brother': {
+      'Son of Paternal Half-Brother': {
         'portion': 'Residue',
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'

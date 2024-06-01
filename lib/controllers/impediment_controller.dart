@@ -15,12 +15,12 @@ class ImpedimentController {
     'Granddaughter': 0,
     'Brother': 0,
     'Sister': 0,
-    'Paternal Half Brother': 0,
-    'Paternal Half Sister': 0,
-    'Maternal Half Brother': 0,
-    'Maternal Half Sister': 0,
+    'Paternal Half-Brother': 0,
+    'Paternal Half-Sister': 0,
+    'Maternal Half-Brother': 0,
+    'Maternal Half-Sister': 0,
     'Son of Brother': 0,
-    'Son of Paternal Half Brother': 0,
+    'Son of Paternal Half-Brother': 0,
     'Uncle': 0,
     'Paternal Uncle': 0,
     'Son of Uncle': 0,
@@ -37,7 +37,7 @@ class ImpedimentController {
       'Paternal Grandfather',
       'Maternal Grandfather'
     ],
-    'Paternal Half Brother': [
+    'Paternal Half-Brother': [
       'Son',
       'Grandson',
       'Father',
@@ -46,7 +46,7 @@ class ImpedimentController {
       'Brother',
       'Sister'
     ],
-    'Maternal Half Brother': [
+    'Maternal Half-Brother': [
       'Son',
       'Daughter',
       'Grandson',
@@ -62,20 +62,20 @@ class ImpedimentController {
       'Paternal Grandfather',
       'Maternal Grandfather',
       'Brother',
-      'Paternal Half Brother',
+      'Paternal Half-Brother',
       'Sister',
-      'Paternal Half Sister'
+      'Paternal Half-Sister'
     ],
-    'Son of Paternal Half Brother': [
+    'Son of Paternal Half-Brother': [
       'Son',
       'Grandson',
       'Father',
       'Paternal Grandfather',
       'Maternal Grandfather',
       'Brother',
-      'Paternal Half Brother',
+      'Paternal Half-Brother',
       'Sister',
-      'Paternal Half Sister',
+      'Paternal Half-Sister',
       'Son of Brother'
     ],
     'Uncle': [
@@ -85,11 +85,11 @@ class ImpedimentController {
       'Paternal Grandfather',
       'Maternal Grandfather',
       'Brother',
-      'Paternal Half Brother',
+      'Paternal Half-Brother',
       'Sister',
-      'Paternal Half Sister',
+      'Paternal Half-Sister',
       'Son of Brother',
-      'Son of Paternal Half Brother'
+      'Son of Paternal Half-Brother'
     ],
     'Paternal Uncle': [
       'Son',
@@ -98,9 +98,9 @@ class ImpedimentController {
       'Paternal Grandfather',
       'Maternal Grandfather',
       'Brother',
-      'Paternal Half Brother',
+      'Paternal Half-Brother',
       'Sister',
-      'Paternal Half Sister',
+      'Paternal Half-Sister',
       'Son of Brother',
       'Son of Paternal Half Brother',
       'Uncle'
@@ -112,11 +112,11 @@ class ImpedimentController {
       'Paternal Grandfather',
       'Maternal Grandfather',
       'Brother',
-      'Paternal Half Brother',
+      'Paternal Half-Brother',
       'Sister',
-      'Paternal Half Sister',
+      'Paternal Half-Sister',
       'Son of Brother',
-      'Son of Paternal Half Brother',
+      'Son of Paternal Half-Brother',
       'Uncle',
       'Paternal Uncle'
     ],
@@ -127,11 +127,11 @@ class ImpedimentController {
       'Paternal Grandfather',
       'Maternal Grandfather',
       'Brother',
-      'Paternal Half Brother',
+      'Paternal Half-Brother',
       'Sister',
-      'Paternal Half Sister',
+      'Paternal Half-Sister',
       'Son of Brother',
-      'Son of Paternal Half Brother',
+      'Son of Paternal Half-Brother',
       'Uncle',
       'Son of Uncle'
     ],
@@ -145,16 +145,16 @@ class ImpedimentController {
       'Paternal Grandfather',
       'Maternal Grandfather'
     ],
-    'Paternal Half Sister': [
+    'Paternal Half-Sister': [
       'Son',
       'Grandson',
       'Father',
       'Paternal Grandfather',
       'Maternal Grandfather',
       'Sister',
-      'Paternal Half Brother'
+      'Paternal Half-Brother'
     ],
-    'Maternal Half Sister': [
+    'Maternal Half-Sister': [
       'Son',
       'Daughter',
       'Grandson',
@@ -177,12 +177,12 @@ class ImpedimentController {
       'Granddaughter',
       'Brother',
       'Sister',
-      'Paternal Half Brother',
-      'Paternal Half Sister',
-      'Maternal Half Brother',
-      'Maternal Half Sister',
+      'Paternal Half-Brother',
+      'Paternal Half-Sister',
+      'Maternal Half-Brother',
+      'Maternal Half-Sister',
       'Son of Brother',
-      'Son of Paternal Half Brother',
+      'Son of Paternal Half-Brother',
       'Uncle',
       'Paternal Uncle',
       'Son of Uncle',
