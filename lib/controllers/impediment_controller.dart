@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
 
 class ImpedimentController {
@@ -26,6 +27,8 @@ class ImpedimentController {
     'Son of Uncle': 0,
     'Son of Paternal Uncle': 0,
   };
+
+  String deceased = 'Deceased'; // Assuming the position of the deceased
 
   Map<String, List<String>> impedimentRules = {
     'Grandson': ['Son'],
@@ -229,25 +232,61 @@ class ImpedimentController {
   Graph buildGraph() {
     Graph graph = Graph()..isTree = true;
     Map<String, Node> nodes = {};
+    Node deceasedNode = Node.Id(deceased);
+    nodes[deceased] = deceasedNode;
+    graph.addNode(deceasedNode);
+
     heirQuantity.forEach((heir, count) {
-      if (count > 0) {
-        Node node = Node.Id(heir);
-        nodes[heir] = node;
-        graph.addNode(node);
-      }
+      Node node = Node.Id(heir);
+      nodes[heir] = node;
+      graph.addNode(node);
+      print('Added node for: $heir');
     });
 
-    // Add edges based on relationships
-    impedimentRules.forEach((parent, children) {
-      if (nodes.containsKey(parent)) {
-        children.forEach((child) {
-          if (nodes.containsKey(child)) {
-            graph.addEdge(nodes[parent]!, nodes[child]!);
-          }
-        });
-      }
-    });
+    // Predefined relationships based on family hierarchy
+    addEdge(graph, nodes, 'Paternal Grandfather', 'Father');
+    addEdge(graph, nodes, 'Paternal Grandmother', 'Mother');
+    addEdge(graph, nodes, 'Maternal Grandmother', 'Mother');
+    addEdge(graph, nodes, 'Father', 'Deceased');
+    addEdge(graph, nodes, 'Mother', 'Deceased');
+    addEdge(graph, nodes, 'Deceased', 'Wife');
+    addEdge(graph, nodes, 'Deceased', 'Husband');
+    addEdge(graph, nodes, 'Deceased', 'Son');
+    addEdge(graph, nodes, 'Deceased', 'Daughter');
+    addEdge(graph, nodes, 'Son', 'Grandson');
+    addEdge(graph, nodes, 'Son', 'Granddaughter');
+    addEdge(graph, nodes, 'Father', 'Brother');
+    addEdge(graph, nodes, 'Father', 'Sister');
+    addEdge(graph, nodes, 'Paternal Grandfather', 'Paternal Half-Brother');
+    addEdge(graph, nodes, 'Paternal Grandfather', 'Paternal Half-Sister');
+    addEdge(graph, nodes, 'Maternal Grandmother', 'Maternal Half-Brother');
+    addEdge(graph, nodes, 'Maternal Grandmother', 'Maternal Half-Sister');
+    addEdge(graph, nodes, 'Brother', 'Son of Brother');
+    addEdge(
+        graph, nodes, 'Paternal Half-Brother', 'Son of Paternal Half-Brother');
+    addEdge(graph, nodes, 'Uncle', 'Son of Uncle');
+    addEdge(graph, nodes, 'Paternal Uncle', 'Son of Paternal Uncle');
 
     return graph;
+  }
+
+  void addEdge(Graph graph, Map<String, Node> nodes, String from, String to) {
+    if (nodes.containsKey(from) && nodes.containsKey(to)) {
+      graph.addEdge(nodes[from]!, nodes[to]!);
+      print('Added edge from $from to $to');
+    }
+  }
+
+  Color getNodeColor(String heir) {
+    if (heir == deceased) {
+      return Colors.blue;
+    }
+    if (heirQuantity[heir] == 0) {
+      return Colors.grey;
+    }
+    if (getImpediments().any((imp) => imp.startsWith(heir))) {
+      return Colors.red;
+    }
+    return Colors.green;
   }
 }

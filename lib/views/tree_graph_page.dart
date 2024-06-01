@@ -27,13 +27,13 @@ class TreeGraphPage extends StatelessWidget {
       ..orientation = BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM;
 
     NodeWidgetBuilder builder = (node) {
-      bool isImpeded =
-          impedimentController.getImpediments().contains(node.key?.value);
-      return rectangleWidget(
-          node.key?.value as String, isImpeded ? Colors.red : Colors.green);
+      String label = node.key?.value as String;
+      Color color = impedimentController.getNodeColor(label);
+      return circleWidget(label, color);
     };
 
-    BuchheimWalkerAlgorithm algorithm = BuchheimWalkerAlgorithm(config, null);
+    BuchheimWalkerAlgorithm algorithm =
+        BuchheimWalkerAlgorithm(config, TreeEdgeRenderer(config));
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -70,9 +70,9 @@ class TreeGraphPage extends StatelessWidget {
             Expanded(
               child: InteractiveViewer(
                 constrained: false,
-                boundaryMargin: EdgeInsets.all(280),
+                boundaryMargin: EdgeInsets.all(250),
                 minScale: 0.01,
-                maxScale: 4.6,
+                maxScale: 2.6,
                 child: GraphView(
                   graph: graph,
                   algorithm: algorithm,
@@ -80,6 +80,7 @@ class TreeGraphPage extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(height: 10),
             Center(
               child: ElevatedButton(
                 onPressed: () {
@@ -116,16 +117,25 @@ class TreeGraphPage extends StatelessWidget {
     );
   }
 
-  Widget rectangleWidget(String label, Color color) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(5),
+  Widget circleWidget(String label, Color color) {
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        minWidth: 50,
+        minHeight: 50,
+        maxWidth: 80,
+        maxHeight: 80,
       ),
-      child: Text(
-        label,
-        style: TextStyle(color: Colors.white),
+      child: Container(
+        decoration: BoxDecoration(
+          color: color,
+          shape: BoxShape.circle,
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          label,
+          style: TextStyle(color: Colors.white),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
