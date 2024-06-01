@@ -28,7 +28,7 @@ class TreeGraphPage extends StatelessWidget {
 
     NodeWidgetBuilder builder = (node) {
       bool isImpeded =
-          impedimentController.getImpediments().containsKey(node.key?.value);
+          impedimentController.getImpediments().contains(node.key?.value);
       return rectangleWidget(
           node.key?.value as String, isImpeded ? Colors.red : Colors.green);
     };

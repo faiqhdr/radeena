@@ -28,7 +28,10 @@ class ConfirmationPage extends StatelessWidget {
           RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => "${m[1]}.");
     }
 
-    List<DataRow> heirRows = selectedHeirs.entries
+    Map<String, int> filteredHeirs =
+        impedimentController.getFilteredHeirs(selectedHeirs);
+
+    List<DataRow> heirRows = filteredHeirs.entries
         .where((entry) => entry.value > 0)
         .map((entry) => DataRow(
               cells: [
@@ -126,7 +129,7 @@ class ConfirmationPage extends StatelessWidget {
                       impedimentController: impedimentController,
                       totalProperty:
                           identificationController.property.getTotal(),
-                      selectedHeirs: impedimentController.heirQuantity,
+                      selectedHeirs: filteredHeirs,
                     ),
                   ),
                 );

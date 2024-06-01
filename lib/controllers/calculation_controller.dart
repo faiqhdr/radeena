@@ -40,12 +40,12 @@ class CalculationController {
         'status': 'Primary'
       },
       'Son': {
-        'portion': 'residue',
+        'portion': 'Residue',
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'
       },
       'Daughter': {
-        'portion': 'residue',
+        'portion': 'Residue',
         'type': 'Quranic',
         'status': 'Substitute'
       },
@@ -75,7 +75,7 @@ class CalculationController {
         'status': 'Substitute'
       },
       'Brother': {
-        'portion': 'residue',
+        'portion': 'Residue',
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'
       },
@@ -84,12 +84,12 @@ class CalculationController {
             ? 1 / 2
             : selectedHeirs['Sister'] != null && selectedHeirs['Sister']! > 1
                 ? 2 / 3
-                : 'residue',
+                : 'Residue',
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'
       },
       'Maternal Half Brother': {
-        'portion': 'residue',
+        'portion': 'Residue',
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'
       },
@@ -99,12 +99,12 @@ class CalculationController {
             : selectedHeirs['Maternal Half Sister'] != null &&
                     selectedHeirs['Maternal Half Sister']! > 1
                 ? 2 / 3
-                : 'residue',
+                : 'Residue',
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'
       },
       'Paternal Half Brother': {
-        'portion': 'residue',
+        'portion': 'Residue',
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'
       },
@@ -114,32 +114,32 @@ class CalculationController {
             : selectedHeirs['Paternal Half Sister'] != null &&
                     selectedHeirs['Paternal Half Sister']! > 1
                 ? 2 / 3
-                : 'residue',
+                : 'Residue',
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'
       },
       'Son of Paternal Half Brother': {
-        'portion': 'residue',
+        'portion': 'Residue',
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'
       },
       'Uncle': {
-        'portion': 'residue',
+        'portion': 'Residue',
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'
       },
       'Paternal Uncle': {
-        'portion': 'residue',
+        'portion': 'Residue',
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'
       },
       'Son of Paternal Uncle': {
-        'portion': 'residue',
+        'portion': 'Residue',
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'
       },
       'Son of Uncle': {
-        'portion': 'residue',
+        'portion': 'Residue',
         'type': 'Residuary',
         'status': 'ResiduaryByBlood'
       }

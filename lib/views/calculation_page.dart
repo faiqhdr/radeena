@@ -57,12 +57,16 @@ class CalculationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     CalculationController controller = CalculationController();
-    var result = controller.calculateInheritance(totalProperty, selectedHeirs);
+
+    Map<String, int> filteredHeirs =
+        impedimentController.getFilteredHeirs(selectedHeirs);
+
+    var result = controller.calculateInheritance(totalProperty, filteredHeirs);
     Map<String, double> distribution = result['distribution'];
     String divisionStatus = result['divisionStatus'];
     int finalShare = result['finalShare'];
 
-    List<DataRow> heirRows = selectedHeirs.entries
+    List<DataRow> heirRows = filteredHeirs.entries
         .where((entry) => entry.value > 0)
         .map((entry) => DataRow(
               cells: [

@@ -36,23 +36,27 @@ class InheritancePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     CalculationController controller = CalculationController();
-    var result = controller.calculateInheritance(totalProperty, selectedHeirs);
+
+    Map<String, int> filteredHeirs =
+        impedimentController.getFilteredHeirs(selectedHeirs);
+
+    var result = controller.calculateInheritance(totalProperty, filteredHeirs);
     Map<String, double> distribution = result['distribution'];
     String divisionStatus = result['divisionStatus'];
     int finalShare = result['finalShare'];
 
     Map<String, dynamic> portions = {
       'Father': '1/6',
-      'Mother': (selectedHeirs.containsKey('Son') ||
-              selectedHeirs.containsKey('Daughter'))
+      'Mother': (filteredHeirs.containsKey('Son') ||
+              filteredHeirs.containsKey('Daughter'))
           ? '1/6'
           : '1/3',
-      'Husband': (selectedHeirs.containsKey('Son') ||
-              selectedHeirs.containsKey('Daughter'))
+      'Husband': (filteredHeirs.containsKey('Son') ||
+              filteredHeirs.containsKey('Daughter'))
           ? '1/4'
           : '1/2',
-      'Wife': (selectedHeirs.containsKey('Son') ||
-              selectedHeirs.containsKey('Daughter'))
+      'Wife': (filteredHeirs.containsKey('Son') ||
+              filteredHeirs.containsKey('Daughter'))
           ? '1/8'
           : '1/4',
       'Son': 'Residue',
@@ -63,23 +67,23 @@ class InheritancePage extends StatelessWidget {
       'Paternal Grandmother': '1/6',
       'Maternal Grandmother': '1/6',
       'Brother': 'residue',
-      'Sister': selectedHeirs['Sister'] == 1
+      'Sister': filteredHeirs['Sister'] == 1
           ? '1/2'
-          : selectedHeirs['Sister'] != null && selectedHeirs['Sister']! > 1
+          : filteredHeirs['Sister'] != null && filteredHeirs['Sister']! > 1
               ? '2/3'
               : 'Residue',
       'Maternal Half Brother': 'Residue',
-      'Maternal Half Sister': selectedHeirs['Maternal Half Sister'] == 1
+      'Maternal Half Sister': filteredHeirs['Maternal Half Sister'] == 1
           ? '1/2'
-          : selectedHeirs['Maternal Half Sister'] != null &&
-                  selectedHeirs['Maternal Half Sister']! > 1
+          : filteredHeirs['Maternal Half Sister'] != null &&
+                  filteredHeirs['Maternal Half Sister']! > 1
               ? '2/3'
               : 'Residue',
       'Paternal Half Brother': 'Residue',
-      'Paternal Half Sister': selectedHeirs['Paternal Half Sister'] == 1
+      'Paternal Half Sister': filteredHeirs['Paternal Half Sister'] == 1
           ? '1/2'
-          : selectedHeirs['Paternal Half Sister'] != null &&
-                  selectedHeirs['Paternal Half Sister']! > 1
+          : filteredHeirs['Paternal Half Sister'] != null &&
+                  filteredHeirs['Paternal Half Sister']! > 1
               ? '2/3'
               : 'Residue',
       'Son of Paternal Half Brother': 'Residue',
@@ -170,7 +174,7 @@ class InheritancePage extends StatelessWidget {
                   DataColumn(label: Text('Portion')),
                   DataColumn(label: Text('Inheritance')),
                 ],
-                rows: selectedHeirs.entries
+                rows: filteredHeirs.entries
                     .where((entry) => entry.value > 0)
                     .map((entry) {
                   return DataRow(cells: [
@@ -183,7 +187,7 @@ class InheritancePage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Text(
-                "Final Share: ${selectedHeirs.values.fold(0, (sum, count) => sum + count)}/$finalShare",
+                "Final Share: ${filteredHeirs.values.fold(0, (sum, count) => sum + count)}/$finalShare",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
               SizedBox(height: 40),

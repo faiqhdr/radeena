@@ -84,10 +84,13 @@ class ImpedimentPage extends StatelessWidget {
                   backgroundColor: Colors.teal,
                   padding: EdgeInsets.symmetric(vertical: 12),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(17),
-                    ),
+                    borderRadius: BorderRadius.circular(17),
+                  ),
                 ),
-                child: Text("See Family Tree", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),),
+                child: Text(
+                  "See Family Tree",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                ),
               ),
             ),
           ],

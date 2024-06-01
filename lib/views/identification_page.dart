@@ -337,7 +337,6 @@ class _IdentificationPageState extends State<IdentificationPage> {
           ..._buildFamilyMemberInputs(gender),
           SizedBox(height: 15.0),
           Center(
-            // Move the ElevatedButton to the center
             child: ElevatedButton(
               onPressed: _navigateToImpedimentPage,
               style: ElevatedButton.styleFrom(
@@ -405,7 +404,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
                 max: member['max'] as int,
               ),
             ),
-            SizedBox(width: 16), // Add spacing between columns
+            SizedBox(width: 16),
             if (nextMemberIndex < familyMembers.length)
               Expanded(
                 child: _buildFamilyMemberInput(
@@ -429,8 +428,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
         builder: (context) => ImpedimentPage(
           identificationController: widget.controller,
           impedimentController: widget.impedimentController,
-          impediments:
-              widget.impedimentController.getImpediments().keys.toList(),
+          impediments: widget.impedimentController.getImpediments(),
         ),
       ),
     );
@@ -443,10 +441,10 @@ class _IdentificationPageState extends State<IdentificationPage> {
         Text("$title",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
         InputQty(
-          initVal: 0, // Initial value
-          minVal: 0, // Minimum value
-          maxVal: max, // Maximum value
-          steps: 1, // Increment by 1
+          initVal: 0,
+          minVal: 0,
+          maxVal: max,
+          steps: 1,
           qtyFormProps: QtyFormProps(enableTyping: true),
           decoration: QtyDecorationProps(
             isBordered: true,
