@@ -24,8 +24,8 @@ enum Position {
   PaternalGrandmother,
   MaternalGrandmother,
   Sister,
-  PaternalSister,
-  MaternalSister,
+  PaternalHalfSister,
+  MaternalHalfSister,
   Wife,
   FemaleSlaveEmancipator,
   Undefined

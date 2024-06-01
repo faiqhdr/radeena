@@ -34,7 +34,6 @@ class ImpedimentController {
     'Daughter': [],
     'Brother': ['Son of Brother'],
     'Son of Brother': [],
-    // Add other relationships as needed
   };
 
   Map<String, int> getImpediments() {
