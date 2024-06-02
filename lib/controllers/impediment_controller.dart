@@ -3,6 +3,7 @@ import 'package:graphview/GraphView.dart';
 import 'package:radeena/models/enums.dart';
 
 class ImpedimentController {
+  // ignore: unused_field
   Gender? _deceasedGender;
 
   Map<String, int> heirQuantity = {

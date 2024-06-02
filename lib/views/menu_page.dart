@@ -51,7 +51,7 @@ class MenuPage extends StatelessWidget {
                 height: height,
                 width: width,
                 onPressed: () {
-                  print("DeterminationWidget pressed");
+                  print("Directed to Determination Page");
                   Navigator.pushNamed(context, '/identificationPage');
                 },
               ),
@@ -68,8 +68,8 @@ class MenuPage extends StatelessWidget {
                         colorOne: cyan01Color,
                         colorTwo: cyan02Color,
                         onPressed: () {
-                          print("DeterminationWidget pressed");
-                          Navigator.pushNamed(context, '/identificationPage');
+                          print("Directed to History Page");
+                          Navigator.pushNamed(context, '/historyPage');
                         },
                       ),
                     ],
@@ -86,8 +86,8 @@ class MenuPage extends StatelessWidget {
                         colorOne: indigo01Color,
                         colorTwo: indigo02Color,
                         onPressed: () {
-                          print("DeterminationWidget pressed");
-                          Navigator.pushNamed(context, '/identificationPage');
+                          print("Directed to Library Page");
+                          Navigator.pushNamed(context, '/');
                         },
                       ),
                       CustomWidget(
@@ -99,8 +99,8 @@ class MenuPage extends StatelessWidget {
                         colorOne: blue01Color,
                         colorTwo: blue02Color,
                         onPressed: () {
-                          print("DeterminationWidget pressed");
-                          Navigator.pushNamed(context, '/identificationPage');
+                          print("Directed to Chatbot Page");
+                          Navigator.pushNamed(context, '/');
                         },
                       ),
                     ],

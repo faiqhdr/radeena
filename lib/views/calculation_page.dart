@@ -3,6 +3,7 @@ import 'package:radeena/controllers/identification_controller.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/controllers/calculation_controller.dart';
+import 'package:radeena/controllers/history_controller.dart';
 import 'package:radeena/views/inheritance_page.dart';
 import 'package:radeena/views/heir_page.dart';
 
@@ -224,8 +225,52 @@ class CalculationPage extends StatelessWidget {
                   ),
                   SizedBox(width: 165),
                   ElevatedButton(
-                    onPressed: () {
-                      // Logic to save or further process the results
+                    onPressed: () async {
+                      TextEditingController nameController =
+                          TextEditingController();
+
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Save Calculation"),
+                            content: TextField(
+                              controller: nameController,
+                              decoration: InputDecoration(
+                                  hintText: "Enter calculation name"),
+                            ),
+                            actions: [
+                              TextButton(
+                                child: Text("Cancel"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text("Save"),
+                                onPressed: () async {
+                                  String calculationName = nameController.text;
+                                  HistoryController historyController =
+                                      HistoryController();
+                                  await historyController.saveCalculation(
+                                    calculationName,
+                                    totalProperty,
+                                    selectedHeirs,
+                                    distribution,
+                                    divisionStatus,
+                                    finalShare,
+                                  );
+                                  Navigator.of(context).pop();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text("Calculation saved!")),
+                                  );
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.white,
@@ -241,7 +286,7 @@ class CalculationPage extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
                     ),
-                  ),
+                  )
                 ],
               ),
               SizedBox(height: 20),
