@@ -3,6 +3,7 @@ import 'package:graphview/GraphView.dart';
 import 'package:radeena/models/enums.dart';
 
 class ImpedimentController {
+  Gender? _deceasedGender;
 
   Map<String, int> heirQuantity = {
     'Father': 0,
@@ -217,6 +218,7 @@ class ImpedimentController {
   }
 
   void setDeceasedGender(Gender? gender) {
+    _deceasedGender = gender;
   }
 
   Map<String, int> getFilteredHeirs(Map<String, int> selectedHeirs) {
@@ -248,32 +250,37 @@ class ImpedimentController {
       print('Added node for: $heir');
     });
 
-    // Predefined relationships based on family hierarchy
+    // Add edges based on family hierarchy with clearer structure
     if (deceasedGender == Gender.male) {
       addEdge(graph, nodes, 'Deceased', 'Wife');
     } else {
       addEdge(graph, nodes, 'Deceased', 'Husband');
     }
+
     addEdge(graph, nodes, 'Paternal Grandfather', 'Father');
     addEdge(graph, nodes, 'Paternal Grandmother', 'Father');
     addEdge(graph, nodes, 'Maternal Grandfather', 'Mother');
     addEdge(graph, nodes, 'Maternal Grandmother', 'Mother');
     addEdge(graph, nodes, 'Father', 'Deceased');
     addEdge(graph, nodes, 'Mother', 'Deceased');
-    addEdge(graph, nodes, 'Father', 'Uncle');
-    addEdge(graph, nodes, 'Father', 'Paternal Uncle');
-    addEdge(graph, nodes, 'Uncle', 'Son of Uncle');
-    addEdge(graph, nodes, 'Paternal Uncle', 'Son of Paternal Uncle');
     addEdge(graph, nodes, 'Deceased', 'Son');
     addEdge(graph, nodes, 'Deceased', 'Daughter');
     addEdge(graph, nodes, 'Son', 'Grandson');
     addEdge(graph, nodes, 'Son', 'Granddaughter');
-    addEdge(graph, nodes, 'Deceased', 'Brother');
-    addEdge(graph, nodes, 'Deceased', 'Sister');
-    addEdge(graph, nodes, 'Deceased', 'Paternal Half-Brother');
-    addEdge(graph, nodes, 'Deceased', 'Paternal Half-Sister');
-    addEdge(graph, nodes, 'Deceased', 'Maternal Half-Brother');
-    addEdge(graph, nodes, 'Deceased', 'Maternal Half-Sister');
+
+    // Siblings
+    addEdge(graph, nodes, 'Father', 'Brother');
+    addEdge(graph, nodes, 'Father', 'Sister');
+    addEdge(graph, nodes, 'Father', 'Paternal Half-Brother');
+    addEdge(graph, nodes, 'Father', 'Paternal Half-Sister');
+    addEdge(graph, nodes, 'Mother', 'Maternal Half-Brother');
+    addEdge(graph, nodes, 'Mother', 'Maternal Half-Sister');
+
+    // Uncles and cousins
+    addEdge(graph, nodes, 'Paternal Grandfather', 'Uncle');
+    addEdge(graph, nodes, 'Paternal Grandfather', 'Paternal Uncle');
+    addEdge(graph, nodes, 'Uncle', 'Son of Uncle');
+    addEdge(graph, nodes, 'Paternal Uncle', 'Son of Paternal Uncle');
     addEdge(graph, nodes, 'Brother', 'Son of Brother');
     addEdge(
         graph, nodes, 'Paternal Half-Brother', 'Son of Paternal Half-Brother');

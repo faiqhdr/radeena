@@ -21,18 +21,22 @@ class TreeGraphPage extends StatelessWidget {
 
     Graph graph = impedimentController
         .buildGraph(identificationController.deceasedGender);
+
+    // Define the default configuration
     BuchheimWalkerConfiguration config = BuchheimWalkerConfiguration()
       ..siblingSeparation = 70
       ..levelSeparation = 90
       ..subtreeSeparation = 10
       ..orientation = BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM;
 
+    // Node Widget Builder
     NodeWidgetBuilder builder = (node) {
       String label = node.key?.value as String;
       Color color = impedimentController.getNodeColor(label);
       return circleWidget(label, color);
     };
 
+    // Apply the algorithm
     BuchheimWalkerAlgorithm algorithm =
         BuchheimWalkerAlgorithm(config, TreeEdgeRenderer(config));
 
