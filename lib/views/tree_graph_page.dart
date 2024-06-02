@@ -19,7 +19,8 @@ class TreeGraphPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
 
-    Graph graph = impedimentController.buildGraph();
+    Graph graph = impedimentController
+        .buildGraph(identificationController.deceasedGender);
     BuchheimWalkerConfiguration config = BuchheimWalkerConfiguration()
       ..siblingSeparation = 70
       ..levelSeparation = 90
@@ -70,7 +71,7 @@ class TreeGraphPage extends StatelessWidget {
             Expanded(
               child: InteractiveViewer(
                 constrained: false,
-                boundaryMargin: EdgeInsets.all(250),
+                boundaryMargin: EdgeInsets.all(255),
                 minScale: 0.01,
                 maxScale: 2.6,
                 child: GraphView(

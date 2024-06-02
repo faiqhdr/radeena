@@ -250,6 +250,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
               onChanged: (Gender? value) {
                 setState(() {
                   widget.controller.setDeceasedGender(value);
+                  widget.impedimentController.setDeceasedGender(value);
                 });
               },
             ),
@@ -261,6 +262,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
               onChanged: (Gender? value) {
                 setState(() {
                   widget.controller.setDeceasedGender(value);
+                  widget.impedimentController.setDeceasedGender(value);
                 });
               },
             ),

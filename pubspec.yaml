@@ -38,6 +38,7 @@ dependencies:
   graphview: ^1.2.0
   animated_text_kit: ^4.2.2
   lottie: ^3.1.2
+  sqflite: ^2.3.3+1
 
 dev_dependencies:
   flutter_test:
