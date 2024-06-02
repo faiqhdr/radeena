@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/controllers/history_controller.dart';
 import 'saved_calculation_page.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:lottie/lottie.dart';
 
 class HistoryPage extends StatelessWidget {
   @override
@@ -35,14 +37,63 @@ class HistoryPage extends StatelessWidget {
             } else if (snapshot.hasError) {
               return Center(child: Text("Error: ${snapshot.error}"));
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Center(child: Text("No calculation history found."));
+              return Center(
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Positioned(
+                      top: 80,
+                      child: Lottie.asset(
+                        'assets/lottie/no_calculation.json',
+                        width: 500,
+                        height: 400,
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 280,
+                      child: AnimatedTextKit(
+                        animatedTexts: [
+                          TypewriterAnimatedText(
+                            'No calculation history found.',
+                            textStyle: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green,
+                            ),
+                            speed: const Duration(milliseconds: 50),
+                          ),
+                        ],
+                        totalRepeatCount: 4,
+                        pause: const Duration(milliseconds: 1000),
+                        displayFullTextOnTap: true,
+                        stopPauseOnTap: true,
+                      ),
+                    ),
+                  ],
+                ),
+              );
             } else {
               return ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
                   final calculation = snapshot.data![index];
                   return ListTile(
-                    title: Text(calculation['calculationName']),
+                    title: AnimatedTextKit(
+                      animatedTexts: [
+                        TypewriterAnimatedText(
+                          calculation['calculationName'],
+                          textStyle: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          speed: const Duration(milliseconds: 50),
+                        ),
+                      ],
+                      totalRepeatCount: 1,
+                      pause: const Duration(milliseconds: 1000),
+                      displayFullTextOnTap: true,
+                      stopPauseOnTap: true,
+                    ),
                     trailing: IconButton(
                       icon: Icon(Icons.delete),
                       onPressed: () async {
@@ -51,8 +102,7 @@ class HistoryPage extends StatelessWidget {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text("Calculation deleted!")),
                         );
-                        // ignore: invalid_use_of_protected_member
-                        (context as Element).reassemble();
+                        (context as StatefulElement).reassemble();
                       },
                     ),
                     onTap: () {

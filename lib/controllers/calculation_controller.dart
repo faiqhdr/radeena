@@ -10,6 +10,10 @@ class CalculationController {
     return gcd(b, a % b);
   }
 
+  int calculateLCM(List<int> numbers) {
+    return numbers.reduce((a, b) => lcm(a, b));
+  }
+
   Map<String, dynamic> calculateInheritance(
       double totalProperty, Map<String, int> selectedHeirs) {
     // Define the portion each heir receives based on Islamic law
@@ -159,7 +163,7 @@ class CalculationController {
         .map((data) => 1 ~/ data['portion'])
         .toList();
 
-    int lcmValue = denominators.fold(1, (prev, denom) => lcm(prev, denom));
+    int lcmValue = calculateLCM(denominators);
 
     // Calculate initial shares based on fixed portions
     Map<String, double> initialShares = {};
@@ -187,14 +191,14 @@ class CalculationController {
 
     selectedHeirs.forEach((heir, count) {
       if (applicablePortions[heir] != null &&
-          applicablePortions[heir]['portion'] == 'residue') {
+          applicablePortions[heir]['portion'] == 'Residue') {
         totalResiduaryShares += (heir == 'Son' ? 2 * count : count);
       }
     });
 
     selectedHeirs.forEach((heir, count) {
       if (applicablePortions[heir] != null &&
-          applicablePortions[heir]['portion'] == 'residue') {
+          applicablePortions[heir]['portion'] == 'Residue') {
         double share = residue *
             ((heir == 'Son' ? 2 * count : count) / totalResiduaryShares);
         distribution[heir] = (distribution[heir] ?? 0) + share;
@@ -209,7 +213,7 @@ class CalculationController {
     });
 
     String divisionStatus = "No Aul / Radd";
-    if (totalInitialShares == 1) {
+    if (totalInitialShares > 1) {
       divisionStatus = "Aul";
     } else if (totalInitialShares < 1) {
       divisionStatus = "Radd";
