@@ -263,7 +263,8 @@ class CalculationPage extends StatelessWidget {
                                   Navigator.of(context).pop();
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
-                                        content: Text("Calculation saved!")),
+                                        content: Text(
+                                            "Calculation successfully saved!")),
                                   );
                                 },
                               ),
