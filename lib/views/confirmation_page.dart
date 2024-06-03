@@ -119,7 +119,7 @@ class ConfirmationPage extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 1,
+            top: 640,
             left: width * 0.25,
             right: width * 0.25,
             child: CommonButton(

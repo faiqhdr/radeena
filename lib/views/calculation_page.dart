@@ -178,7 +178,7 @@ class CalculationPage extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 1,
+            top: 640,
             left: 20,
             right: 20,
             child: Row(
