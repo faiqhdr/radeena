@@ -9,6 +9,10 @@ import 'package:radeena/views/heir_page.dart';
 
 class CalculationPage extends StatelessWidget {
   final double totalProperty;
+  final double propertyAmount;
+  final double debtAmount;
+  final double testamentAmount;
+  final double funeralAmount;
   final Map<String, int> selectedHeirs;
 
   final IdentificationController identificationController;
@@ -17,7 +21,11 @@ class CalculationPage extends StatelessWidget {
   const CalculationPage({
     Key? key,
     required this.totalProperty,
+    required this.propertyAmount,
     required this.selectedHeirs,
+    required this.debtAmount,
+    required this.testamentAmount,
+    required this.funeralAmount,
     required this.identificationController,
     required this.impedimentController,
   }) : super(key: key);
@@ -255,6 +263,10 @@ class CalculationPage extends StatelessWidget {
                                   await historyController.saveCalculation(
                                     calculationName,
                                     totalProperty,
+                                    propertyAmount,
+                                    debtAmount,
+                                    testamentAmount,
+                                    funeralAmount,
                                     selectedHeirs,
                                     distribution,
                                     divisionStatus,

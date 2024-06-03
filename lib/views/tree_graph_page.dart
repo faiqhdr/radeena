@@ -97,6 +97,13 @@ class TreeGraphPage extends StatelessWidget {
                         impedimentController: impedimentController,
                         totalProperty:
                             identificationController.property.getTotal(),
+                        propertyAmount:
+                            identificationController.property.getAmount(),
+                        debtAmount: identificationController.property.getDebt(),
+                        testamentAmount:
+                            identificationController.property.getTestament(),
+                        funeralAmount:
+                            identificationController.property.getFuneral(),
                         selectedHeirs: impedimentController.heirQuantity,
                       ),
                     ),

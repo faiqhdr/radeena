@@ -6,6 +6,10 @@ import 'package:radeena/views/calculation_page.dart';
 
 class ConfirmationPage extends StatelessWidget {
   final double totalProperty;
+  final double propertyAmount;
+  final double debtAmount;
+  final double testamentAmount;
+  final double funeralAmount;
   final Map<String, int> selectedHeirs;
 
   final IdentificationController identificationController;
@@ -14,6 +18,10 @@ class ConfirmationPage extends StatelessWidget {
   const ConfirmationPage({
     Key? key,
     required this.totalProperty,
+    required this.propertyAmount,
+    required this.debtAmount,
+    required this.testamentAmount,
+    required this.funeralAmount,
     required this.selectedHeirs,
     required this.identificationController,
     required this.impedimentController,
@@ -129,6 +137,13 @@ class ConfirmationPage extends StatelessWidget {
                       impedimentController: impedimentController,
                       totalProperty:
                           identificationController.property.getTotal(),
+                      propertyAmount:
+                          identificationController.property.getAmount(),
+                      debtAmount: identificationController.property.getDebt(),
+                      testamentAmount:
+                          identificationController.property.getTestament(),
+                      funeralAmount:
+                          identificationController.property.getFuneral(),
                       selectedHeirs: filteredHeirs,
                     ),
                   ),

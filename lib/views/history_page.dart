@@ -25,30 +25,30 @@ class _HistoryPageState extends State<HistoryPage> {
     });
   }
 
-  void _confirmDelete(BuildContext context, int id) {
+  void _showDeleteConfirmationDialog(BuildContext context, int id) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Confirm Delete'),
-          content: Text('Are you sure you want to delete this calculation?'),
-          actions: <Widget>[
+          title: Text("Confirm Delete"),
+          content: Text("Are you sure you want to delete this calculation?"),
+          actions: [
             TextButton(
+              child: Text("Cancel"),
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancel'),
             ),
             TextButton(
+              child: Text("Delete"),
               onPressed: () async {
                 await HistoryController().deleteHistory(id);
+                Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text("Calculation successfully deleted!")),
                 );
                 _refreshHistory();
-                Navigator.of(context).pop();
               },
-              child: Text('Delete'),
             ),
           ],
         );
@@ -83,7 +83,7 @@ class _HistoryPageState extends State<HistoryPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 0),
+              padding: EdgeInsets.only(top: 0, bottom: 30),
               child: Text(
                 "Calculation List",
                 style: textUnderTitleStyle(),
@@ -103,7 +103,7 @@ class _HistoryPageState extends State<HistoryPage> {
                         alignment: Alignment.center,
                         children: [
                           Positioned(
-                            top: 55,
+                            top: 30,
                             child: Lottie.asset(
                               'assets/lottie/no_calculation.json',
                               width: 430,
@@ -138,32 +138,81 @@ class _HistoryPageState extends State<HistoryPage> {
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         final calculation = snapshot.data![index];
-                        return Card(
-                          margin: EdgeInsets.symmetric(vertical: 10),
-                          child: ListTile(
-                            title: Text(
-                              calculation['calculationName'],
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            trailing: IconButton(
-                              icon: Icon(Icons.delete),
-                              onPressed: () {
-                                _confirmDelete(context, calculation['id']);
-                              },
-                            ),
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SavedCalculationPage(
-                                    calculation: calculation,
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 5.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 5,
+                                child: Container(
+                                  width: 50.0,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        primaryColor.withOpacity(0.7),
+                                        secondaryColor.withOpacity(0.7),
+                                      ],
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                    ),
+                                    borderRadius: BorderRadius.circular(13.0),
+                                  ),
+                                  child: ListTile(
+                                    title: Text(
+                                      calculation['calculationName'],
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        shadows: [
+                                          Shadow(
+                                            blurRadius: 15.0,
+                                            color:
+                                                Colors.black.withOpacity(0.25),
+                                            offset: Offset(3.0, 3.0),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              SavedCalculationPage(
+                                            calculation: calculation,
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
-                              );
-                            },
+                              ),
+                              SizedBox(width: 8),
+                              Container(
+                                width: 55.0,
+                                height: 55.0,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      primaryColor.withOpacity(0.7),
+                                      secondaryColor.withOpacity(0.7),
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                  borderRadius: BorderRadius.circular(13.0),
+                                ),
+                                child: IconButton(
+                                  icon: Icon(Icons.delete,
+                                      color: Colors.white, size: 35),
+                                  onPressed: () {
+                                    _showDeleteConfirmationDialog(
+                                        context, calculation['id']);
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
                         );
                       },
