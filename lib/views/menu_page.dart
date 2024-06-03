@@ -4,11 +4,14 @@ import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/styles/style.dart';
 
 class MenuPage extends StatelessWidget {
-  MenuPage(
-      {Key? key,
-      required IdentificationController identificationController,
-      required ImpedimentController impedimentController})
-      : super(key: key);
+  final IdentificationController identificationController;
+  final ImpedimentController impedimentController;
+
+  MenuPage({
+    Key? key,
+    required this.identificationController,
+    required this.impedimentController,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +24,6 @@ class MenuPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0.1,
         centerTitle: true,
-        // leading: Icon(
-        //   Icons.menu,
-        //   color: greenColor,
-        // ),
         title: Text(
           "Radeena",
           style: titleGreenStyle(),
@@ -62,11 +61,13 @@ class MenuPage extends StatelessWidget {
                       CustomWidget(
                         width: width,
                         height: height * .45,
-                        image: 'assets/menu_page/location.png',
+                        image: 'assets/menu_page/save.png',
+                        iconHeight: 80,
+                        iconWidth: 80,
                         title: 'History',
                         subtitle: 'Past Calculation',
-                        colorOne: cyan01Color,
-                        colorTwo: cyan02Color,
+                        colorOne: grey01nColor,
+                        colorTwo: grey01Color,
                         onPressed: () {
                           print("Directed to History Page");
                           Navigator.pushNamed(context, '/historyPage');
@@ -80,7 +81,9 @@ class MenuPage extends StatelessWidget {
                       CustomWidget(
                         width: width,
                         height: height * .23,
-                        image: 'assets/menu_page/bookmark.png',
+                        image: 'assets/menu_page/al_quran.png',
+                        iconHeight: 80,
+                        iconWidth: 80,
                         title: 'Library',
                         subtitle: 'Reference Source',
                         colorOne: indigo01Color,
@@ -93,7 +96,9 @@ class MenuPage extends StatelessWidget {
                       CustomWidget(
                         width: width,
                         height: height * .19,
-                        image: 'assets/menu_page/prayer.png',
+                        image: 'assets/menu_page/chat_information.png',
+                        iconHeight: 65,
+                        iconWidth: 80,
                         title: 'Ask Chatbot',
                         subtitle: 'Inquiry',
                         colorOne: blue01Color,
@@ -116,16 +121,16 @@ class MenuPage extends StatelessWidget {
 }
 
 class DeterminationWidget extends StatelessWidget {
+  final double height;
+  final double width;
+  final VoidCallback onPressed;
+
   DeterminationWidget({
     Key? key,
     required this.height,
     required this.width,
     required this.onPressed,
   }) : super(key: key);
-
-  final double height;
-  final double width;
-  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -191,9 +196,11 @@ class DeterminationWidget extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(right: width * .04),
                 child: SizedBox(
-                  height: height * .15,
+                  height: height * .09,
                   width: width * .3,
-                  child: Image.asset("assets/menu_page/lamp.png"),
+                  child: Image.asset(
+                    "assets/menu_page/calculator.png",
+                  ),
                 ),
               ),
             ],
@@ -206,23 +213,30 @@ class DeterminationWidget extends StatelessWidget {
 
 // ignore: must_be_immutable
 class CustomWidget extends StatelessWidget {
+  final double width;
+  final double height;
+  final String image;
+  final double iconHeight;
+  final double iconWidth;
+  final String title;
+  final String subtitle;
+  final Color colorOne;
+  final Color colorTwo;
+  final VoidCallback onPressed;
+
   CustomWidget({
     Key? key,
     required this.width,
     required this.height,
     required this.image,
+    required this.iconHeight,
+    required this.iconWidth,
     required this.title,
     required this.subtitle,
     required this.colorOne,
     required this.colorTwo,
     required this.onPressed,
   }) : super(key: key);
-
-  final double width;
-  final double height;
-  String image, title, subtitle;
-  Color colorOne, colorTwo;
-  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -268,7 +282,8 @@ class CustomWidget extends StatelessWidget {
                 children: [
                   Image(
                     image: AssetImage(image),
-                    width: width * .15,
+                    height: iconHeight,
+                    width: iconWidth,
                   ),
                   Spacer(),
                   Padding(
@@ -282,7 +297,7 @@ class CustomWidget extends StatelessWidget {
                     padding: EdgeInsets.only(left: width * .02),
                     child: SubtitleWidget(
                       subtitle: subtitle,
-                      onPressed: () {},
+                      onPressed: onPressed,
                     ),
                   )
                 ],
@@ -297,14 +312,14 @@ class CustomWidget extends StatelessWidget {
 
 // ignore: must_be_immutable
 class SubtitleWidget extends StatelessWidget {
+  final VoidCallback onPressed;
+  final String subtitle;
+
   SubtitleWidget({
     Key? key,
     required this.onPressed,
     required this.subtitle,
   }) : super(key: key);
-
-  final VoidCallback onPressed;
-  String subtitle;
 
   @override
   Widget build(BuildContext context) {
@@ -313,9 +328,7 @@ class SubtitleWidget extends StatelessWidget {
       child: Row(
         children: [
           Text(subtitle, style: miniStyle()),
-          SizedBox(
-            width: 5,
-          ),
+          SizedBox(width: 5),
           Icon(
             Icons.arrow_forward_ios,
             color: Colors.white,

@@ -166,9 +166,9 @@ class _HistoryPageState extends State<HistoryPage> {
                                         fontWeight: FontWeight.bold,
                                         shadows: [
                                           Shadow(
-                                            blurRadius: 15.0,
+                                            blurRadius: 5.0,
                                             color:
-                                                Colors.black.withOpacity(0.25),
+                                                Colors.black.withOpacity(0.1),
                                             offset: Offset(3.0, 3.0),
                                           ),
                                         ],
@@ -190,8 +190,8 @@ class _HistoryPageState extends State<HistoryPage> {
                               ),
                               SizedBox(width: 8),
                               Container(
-                                width: 55.0,
-                                height: 55.0,
+                                width: 58.0,
+                                height: 58.0,
                                 decoration: BoxDecoration(
                                   gradient: LinearGradient(
                                     colors: [

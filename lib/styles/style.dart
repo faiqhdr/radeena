@@ -44,3 +44,7 @@ var cyan01Color = const Color(0xff4ba2b6);
 var cyan02Color = const Color(0xff4dd0e1);
 var teal01nColor = const Color(0xff26a691);
 var green01Color = const Color(0xff81c784);
+var gold01nColor = const Color(0xffffca28);
+var gold01Color = const Color(0xffffd54f);
+var grey01nColor = const Color(0xff616161);
+var grey01Color = const Color(0xff9e9e9e);
