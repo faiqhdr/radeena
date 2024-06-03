@@ -83,7 +83,7 @@ class _HistoryPageState extends State<HistoryPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 0, bottom: 30),
+              padding: EdgeInsets.only(top: 0, bottom: 25),
               child: Text(
                 "Calculation List",
                 style: textUnderTitleStyle(),

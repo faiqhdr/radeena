@@ -296,16 +296,32 @@ class ImpedimentController {
     }
   }
 
-  Color getNodeColor(String heir) {
+  LinearGradient getNodeGradient(String heir) {
     if (heir == deceased) {
-      return Colors.blue;
+      return LinearGradient(
+        colors: [Colors.blue.shade600, Colors.blue.shade400],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      );
     }
     if (heirQuantity[heir] == 0) {
-      return Colors.grey;
+      return LinearGradient(
+        colors: [Colors.grey.shade500, Colors.grey.shade400],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      );
     }
     if (getImpediments().any((imp) => imp.startsWith(heir))) {
-      return Colors.red;
+      return LinearGradient(
+        colors: [Colors.red.shade600, Colors.red.shade400],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      );
     }
-    return Colors.green;
+    return LinearGradient(
+      colors: [Colors.green.shade600, Colors.green.shade400],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    );
   }
 }

@@ -46,90 +46,110 @@ class HeirPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 16),
+              padding: EdgeInsets.only(top: 0),
               child: Text(
                 "$heir Details",
                 style: textUnderTitleStyle(),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 25),
             Card(
-              color: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(13),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Icon(Icons.account_balance_wallet,
-                            color: Colors.teal, size: 20),
-                        SizedBox(width: 10),
-                        Expanded(
-                          child: Text(
-                            'Total Inheritance',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w500),
+              child: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.white.withOpacity(0.7),
+                      Colors.white.withOpacity(0.2),
+                      Colors.white.withOpacity(0.1),
+                      Colors.grey.withOpacity(0.1),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(13),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.account_balance_wallet,
+                              color: Colors.teal, size: 20),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'Total Inheritance',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
+                            ),
                           ),
-                        ),
-                        Text(
-                          'IDR ${formatNumber(totalInheritance)}',
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.teal,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    Divider(),
-                    Row(
-                      children: [
-                        Icon(Icons.people, color: Colors.teal, size: 20),
-                        SizedBox(width: 10),
-                        Expanded(
-                          child: Text(
-                            'Quantity',
+                          Text(
+                            'IDR ${formatNumber(totalInheritance)}',
                             style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w500),
+                                fontSize: 16,
+                                color: Colors.teal,
+                                fontWeight: FontWeight.bold),
                           ),
-                        ),
-                        Text(
-                          '$quantity $heir(s)',
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.teal,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    Divider(),
-                    Row(
-                      children: [
-                        Icon(Icons.monetization_on,
-                            color: Colors.teal, size: 20),
-                        SizedBox(width: 10),
-                        Expanded(
-                          child: Text(
-                            'Individual Inheritance',
+                        ],
+                      ),
+                      Divider(),
+                      Row(
+                        children: [
+                          Icon(Icons.people, color: Colors.teal, size: 20),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'Quantity',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
+                            ),
+                          ),
+                          Text(
+                            '$quantity $heir(s)',
                             style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w500),
+                                fontSize: 16,
+                                color: Colors.teal,
+                                fontWeight: FontWeight.bold),
                           ),
-                        ),
-                        Text(
-                          'IDR ${formatNumber(individualInheritance)}',
-                          style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.teal,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                      Divider(),
+                      Row(
+                        children: [
+                          Icon(Icons.monetization_on,
+                              color: Colors.teal, size: 20),
+                          SizedBox(width: 10),
+                          Expanded(
+                            child: Text(
+                              'Individual Inheritance',
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
+                            ),
+                          ),
+                          Text(
+                            'IDR ${formatNumber(individualInheritance)}',
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.teal,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
+            )
           ],
         ),
       ),

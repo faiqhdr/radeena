@@ -81,6 +81,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("Input the Deceased's Property", style: textUnderTitleStyle()),
+        SizedBox(height: 25.0),
         _buildTextInputField(
           controller: _propertyAmountController,
           label: "Property's Amount",
@@ -241,7 +242,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("Select Deceased's Gender", style: textUnderTitleStyle()),
-        SizedBox(height: 12.0),
+        SizedBox(height: 25.0),
         Row(
           children: [
             Radio(
@@ -255,7 +256,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
               },
             ),
             Text("Male"),
-            SizedBox(width: 26.0),
+            SizedBox(width: 25.0),
             Radio(
               value: Gender.female,
               groupValue: widget.controller.deceasedGender,

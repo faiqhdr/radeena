@@ -130,13 +130,13 @@ class CalculationPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 16),
+                padding: EdgeInsets.only(top: 0),
                 child: Text(
                   "Inheritance Distribution",
                   style: textUnderTitleStyle(),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 25),
               Text(
                 "Net Property       : IDR ${formatNumber(totalProperty)}",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),

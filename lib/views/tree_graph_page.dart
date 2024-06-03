@@ -24,16 +24,16 @@ class TreeGraphPage extends StatelessWidget {
 
     // Define the default configuration
     BuchheimWalkerConfiguration config = BuchheimWalkerConfiguration()
-      ..siblingSeparation = 70
-      ..levelSeparation = 90
-      ..subtreeSeparation = 10
+      ..siblingSeparation = 60
+      ..levelSeparation = 60
+      ..subtreeSeparation = 60
       ..orientation = BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM;
 
     // Node Widget Builder
     NodeWidgetBuilder builder = (node) {
       String label = node.key?.value as String;
-      Color color = impedimentController.getNodeColor(label);
-      return circleWidget(label, color);
+      LinearGradient gradient = impedimentController.getNodeGradient(label);
+      return gradientCircleWidget(label, gradient);
     };
 
     // Apply the algorithm
@@ -65,7 +65,7 @@ class TreeGraphPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 16),
+              padding: EdgeInsets.only(top: 0),
               child: Text(
                 "Family Tree Graph",
                 style: textUnderTitleStyle(),
@@ -77,7 +77,6 @@ class TreeGraphPage extends StatelessWidget {
                 constrained: false,
                 boundaryMargin: EdgeInsets.all(255),
                 minScale: 0.01,
-                maxScale: 2.6,
                 child: GraphView(
                   graph: graph,
                   algorithm: algorithm,
@@ -129,23 +128,23 @@ class TreeGraphPage extends StatelessWidget {
     );
   }
 
-  Widget circleWidget(String label, Color color) {
+  Widget gradientCircleWidget(String label, LinearGradient gradient) {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        minWidth: 50,
-        minHeight: 50,
+        minWidth: 40,
+        minHeight: 40,
         maxWidth: 80,
         maxHeight: 80,
       ),
       child: Container(
         decoration: BoxDecoration(
-          color: color,
+          gradient: gradient,
           shape: BoxShape.circle,
         ),
         alignment: Alignment.center,
         child: Text(
           label,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
           textAlign: TextAlign.center,
         ),
       ),

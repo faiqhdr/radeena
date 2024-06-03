@@ -73,22 +73,16 @@ class ConfirmationPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: 16),
+                    padding: EdgeInsets.only(top: 0),
                     child: Text(
                       "Check Property & Heirs",
                       style: textUnderTitleStyle(),
                     ),
                   ),
-                  SizedBox(height: 15),
+                  SizedBox(height: 25),
                   Container(
                     width: double.infinity,
                     child: DataTable(
-                      columnSpacing: width * 0.03,
-                      horizontalMargin: width * 0.05,
-                      headingRowHeight: 48,
-                      dataRowMinHeight: 20,
-                      dataRowMaxHeight: 40,
-                      showCheckboxColumn: false,
                       columns: [
                         DataColumn(
                           label: Center(

@@ -45,13 +45,13 @@ class ImpedimentPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 16),
+                  padding: EdgeInsets.only(top: 0),
                   child: Text(
                     "Impeded Heirs",
                     style: textUnderTitleStyle(),
                   ),
                 ),
-                SizedBox(height: 15),
+                SizedBox(height: 25),
                 Expanded(
                   child: impediments.isNotEmpty
                       ? ListView.builder(
@@ -76,31 +76,36 @@ class ImpedimentPage extends StatelessWidget {
                           ),
                         )
                       : Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                          child: Stack(
+                            alignment: Alignment.center,
                             children: [
-                              Lottie.asset(
-                                'assets/lottie/no_impediments.json',
-                                width: 400,
-                                height: 360,
+                              Positioned(
+                                top: 5,
+                                child: Lottie.asset(
+                                  'assets/lottie/no_impediments.json',
+                                  width: 400,
+                                  height: 400,
+                                ),
                               ),
-                              SizedBox(height: 5),
-                              AnimatedTextKit(
-                                animatedTexts: [
-                                  TypewriterAnimatedText(
-                                    'No heirs impeded. \nAll will get the inheritance ✨',
-                                    textStyle: TextStyle(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.green,
+                              Positioned(
+                                bottom: 240,
+                                child: AnimatedTextKit(
+                                  animatedTexts: [
+                                    TypewriterAnimatedText(
+                                      'No heirs impeded. \nAll will get the inheritance ✨',
+                                      textStyle: TextStyle(
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.green,
+                                      ),
+                                      speed: const Duration(milliseconds: 50),
                                     ),
-                                    speed: const Duration(milliseconds: 50),
-                                  ),
-                                ],
-                                totalRepeatCount: 4,
-                                pause: const Duration(milliseconds: 1000),
-                                displayFullTextOnTap: true,
-                                stopPauseOnTap: true,
+                                  ],
+                                  totalRepeatCount: 4,
+                                  pause: const Duration(milliseconds: 1000),
+                                  displayFullTextOnTap: true,
+                                  stopPauseOnTap: true,
+                                ),
                               ),
                             ],
                           ),
