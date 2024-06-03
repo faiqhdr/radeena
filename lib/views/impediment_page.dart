@@ -5,6 +5,7 @@ import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/controllers/identification_controller.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:lottie/lottie.dart';
+import 'package:radeena/widgets/common_button.dart';
 
 class ImpedimentPage extends StatelessWidget {
   final List<String> impediments;
@@ -117,7 +118,8 @@ class ImpedimentPage extends StatelessWidget {
               bottom: 70, // Adjusted for better UI
               left: width * 0.22,
               right: width * 0.22,
-              child: ElevatedButton(
+              child: CommonButton(
+                text: "See Family Tree",
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => TreeGraphPage(
@@ -126,18 +128,6 @@ class ImpedimentPage extends StatelessWidget {
                     ),
                   ));
                 },
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.teal,
-                  padding: EdgeInsets.symmetric(vertical: 12),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(17),
-                  ),
-                ),
-                child: Text(
-                  "See Family Tree",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-                ),
               ),
             ),
           ],

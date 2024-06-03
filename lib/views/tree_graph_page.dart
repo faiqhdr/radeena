@@ -4,6 +4,7 @@ import 'package:radeena/controllers/identification_controller.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/confirmation_page.dart';
+import 'package:radeena/widgets/common_button.dart';
 
 class TreeGraphPage extends StatelessWidget {
   final IdentificationController identificationController;
@@ -86,7 +87,8 @@ class TreeGraphPage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Center(
-              child: ElevatedButton(
+              child: CommonButton(
+                text: "Next",
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -108,18 +110,6 @@ class TreeGraphPage extends StatelessWidget {
                     ),
                   );
                 },
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.teal,
-                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 35),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(17),
-                  ),
-                ),
-                child: Text(
-                  "Next",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-                ),
               ),
             ),
           ],

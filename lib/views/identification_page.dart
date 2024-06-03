@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:radeena/widgets/common_button.dart';
 import 'package:radeena/controllers/identification_controller.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/models/enums.dart';
@@ -106,22 +107,9 @@ class _IdentificationPageState extends State<IdentificationPage> {
           hint: "Enter amount",
           errorText: _funeralError,
         ),
-        Center(
-          child: ElevatedButton(
-            onPressed: _submitPropertyDetails,
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white,
-              backgroundColor: Colors.teal,
-              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(17),
-              ),
-            ),
-            child: Text(
-              "Next",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-            ),
-          ),
+        CommonButton(
+          text: "Next",
+          onPressed: _submitPropertyDetails,
         ),
       ],
     );
@@ -287,22 +275,9 @@ class _IdentificationPageState extends State<IdentificationPage> {
           ],
         ),
         SizedBox(height: 16.0),
-        Center(
-          child: ElevatedButton(
-            onPressed: _submitGenderDetails,
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white,
-              backgroundColor: Colors.teal,
-              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(17),
-              ),
-            ),
-            child: Text(
-              "Next",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-            ),
-          ),
+        CommonButton(
+          text: "Next",
+          onPressed: _submitGenderDetails,
         ),
       ],
     );
@@ -339,22 +314,9 @@ class _IdentificationPageState extends State<IdentificationPage> {
         children: [
           ..._buildFamilyMemberInputs(gender),
           SizedBox(height: 15.0),
-          Center(
-            child: ElevatedButton(
-              onPressed: _navigateToImpedimentPage,
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.teal,
-                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(17),
-                ),
-              ),
-              child: Text(
-                "Next",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-              ),
-            ),
+          CommonButton(
+            text: "Next",
+            onPressed: _navigateToImpedimentPage,
           ),
         ],
       ),

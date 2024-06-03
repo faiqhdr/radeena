@@ -3,6 +3,7 @@ import 'package:radeena/styles/style.dart';
 import 'package:radeena/controllers/identification_controller.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/views/calculation_page.dart';
+import 'package:radeena/widgets/common_button.dart';
 
 class ConfirmationPage extends StatelessWidget {
   final double totalProperty;
@@ -118,10 +119,11 @@ class ConfirmationPage extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 0,
-            left: width * 0.37,
-            right: width * 0.37,
-            child: ElevatedButton(
+            bottom: 10,
+            left: width * 0.25,
+            right: width * 0.25,
+            child: CommonButton(
+              text: "Calculate",
               onPressed: () {
                 Navigator.push(
                   context,
@@ -143,18 +145,6 @@ class ConfirmationPage extends StatelessWidget {
                   ),
                 );
               },
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.teal,
-                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(17),
-                ),
-              ),
-              child: Text(
-                "Calculate",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-              ),
             ),
           ),
         ],

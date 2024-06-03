@@ -172,132 +172,164 @@ class CalculationPage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => InheritancePage(
-                            identificationController: identificationController,
-                            impedimentController: impedimentController,
-                            totalProperty:
-                                identificationController.property.getTotal(),
-                            propertyAmount:
-                                identificationController.property.getAmount(),
-                            debtAmount:
-                                identificationController.property.getDebt(),
-                            testamentAmount: identificationController.property
-                                .getTestament(),
-                            funeralAmount:
-                                identificationController.property.getFuneral(),
-                            selectedHeirs: impedimentController.heirQuantity,
-                          ),
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.teal,
-                      backgroundColor: Colors.white,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 12, horizontal: 15),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(17),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.teal.shade300, Colors.teal.shade700],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
                       ),
+                      borderRadius: BorderRadius.circular(17),
                     ),
-                    child: Text(
-                      "Distribution Detail",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      _showResetConfirmationDialog(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.teal,
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(19),
-                      ),
-                    ),
-                    child: Icon(Icons.home, color: Colors.white, size: 26),
-                  ),
-                  SizedBox(width: 165),
-                  ElevatedButton(
-                    onPressed: () async {
-                      TextEditingController nameController =
-                          TextEditingController();
-
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text("Save Calculation"),
-                            content: TextField(
-                              controller: nameController,
-                              decoration: InputDecoration(
-                                  hintText: "Enter calculation name"),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => InheritancePage(
+                              identificationController:
+                                  identificationController,
+                              impedimentController: impedimentController,
+                              totalProperty:
+                                  identificationController.property.getTotal(),
+                              propertyAmount:
+                                  identificationController.property.getAmount(),
+                              debtAmount:
+                                  identificationController.property.getDebt(),
+                              testamentAmount: identificationController.property
+                                  .getTestament(),
+                              funeralAmount: identificationController.property
+                                  .getFuneral(),
+                              selectedHeirs: impedimentController.heirQuantity,
                             ),
-                            actions: [
-                              TextButton(
-                                child: Text("Cancel"),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                              TextButton(
-                                child: Text("Save"),
-                                onPressed: () async {
-                                  String calculationName = nameController.text;
-                                  HistoryController historyController =
-                                      HistoryController();
-                                  await historyController.saveCalculation(
-                                    calculationName,
-                                    totalProperty,
-                                    propertyAmount,
-                                    debtAmount,
-                                    testamentAmount,
-                                    funeralAmount,
-                                    selectedHeirs,
-                                    distribution,
-                                    divisionStatus,
-                                    finalShare,
-                                  );
-                                  Navigator.of(context).pop();
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text(
-                                            "Calculation successfully saved!")),
-                                  );
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.teal,
-                      padding:
-                          EdgeInsets.symmetric(vertical: 12, horizontal: 15),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(17),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                        padding:
+                            EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(17),
+                        ),
+                      ),
+                      child: Text(
+                        "Distribution Detail",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700),
                       ),
                     ),
-                    child: Text(
-                      "Save Result",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                  ),
+                  SizedBox(width: 7),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.teal.shade300, Colors.teal.shade700],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(19),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _showResetConfirmationDialog(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                        padding: EdgeInsets.symmetric(vertical: 10),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(19),
+                        ),
+                      ),
+                      child: Icon(Icons.home, color: Colors.white, size: 26),
+                    ),
+                  ),
+                  SizedBox(width: 7),
+                  Container(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.teal.shade300, Colors.teal.shade700],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(17),
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        TextEditingController nameController =
+                            TextEditingController();
+
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text("Save Calculation"),
+                              content: TextField(
+                                controller: nameController,
+                                decoration: InputDecoration(
+                                    hintText: "Enter calculation name"),
+                              ),
+                              actions: [
+                                TextButton(
+                                  child: Text("Cancel"),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                TextButton(
+                                  child: Text("Save"),
+                                  onPressed: () async {
+                                    String calculationName =
+                                        nameController.text;
+                                    HistoryController historyController =
+                                        HistoryController();
+                                    await historyController.saveCalculation(
+                                      calculationName,
+                                      totalProperty,
+                                      propertyAmount,
+                                      debtAmount,
+                                      testamentAmount,
+                                      funeralAmount,
+                                      selectedHeirs,
+                                      distribution,
+                                      divisionStatus,
+                                      finalShare,
+                                    );
+                                    Navigator.of(context).pop();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                          content: Text(
+                                              "Calculation successfully saved!")),
+                                    );
+                                  },
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        shadowColor: Colors.transparent,
+                        padding:
+                            EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(17),
+                        ),
+                      ),
+                      child: Text(
+                        "Save Result",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700),
+                      ),
                     ),
                   )
                 ],

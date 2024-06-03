@@ -117,13 +117,13 @@ class InheritancePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 16),
+                padding: EdgeInsets.only(top: 0),
                 child: Text(
                   "Distribution Detail",
                   style: textUnderTitleStyle(),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 25),
               Text(
                 "Property Details",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
