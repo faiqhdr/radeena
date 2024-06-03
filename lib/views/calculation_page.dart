@@ -123,221 +123,192 @@ class CalculationPage extends StatelessWidget {
           style: titleDetermineHeirsStyle(),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * .06),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.only(top: 0),
-                child: Text(
-                  "Inheritance Distribution",
-                  style: textUnderTitleStyle(),
-                ),
-              ),
-              SizedBox(height: 25),
-              Text(
-                "Net Property       : IDR ${formatNumber(totalProperty)}",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              Text(
-                "Division Status   : $divisionStatus",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              Text(
-                "Final Share         : $finalShare",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-              ),
-              SizedBox(height: 15),
-              Row(
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: width * .06),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(Icons.info_outline, color: Colors.grey, size: 15),
-                  SizedBox(width: 8),
-                  Expanded(
+                  Padding(
+                    padding: EdgeInsets.only(top: 0),
                     child: Text(
-                      "Click on the heir's row to see individual inheritance details.",
-                      style: TextStyle(color: Colors.grey, fontSize: 13),
+                      "Inheritance Distribution",
+                      style: textUnderTitleStyle(),
                     ),
                   ),
-                ],
-              ),
-              DataTable(
-                columns: const [
-                  DataColumn(label: Text('Heir')),
-                  DataColumn(label: Text('Quantity')),
-                  DataColumn(label: Text('Inheritance')),
-                ],
-                rows: heirRows,
-              ),
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Colors.teal.shade300, Colors.teal.shade700],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(17),
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => InheritancePage(
-                              identificationController:
-                                  identificationController,
-                              impedimentController: impedimentController,
-                              totalProperty:
-                                  identificationController.property.getTotal(),
-                              propertyAmount:
-                                  identificationController.property.getAmount(),
-                              debtAmount:
-                                  identificationController.property.getDebt(),
-                              testamentAmount: identificationController.property
-                                  .getTestament(),
-                              funeralAmount: identificationController.property
-                                  .getFuneral(),
-                              selectedHeirs: impedimentController.heirQuantity,
-                            ),
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        shadowColor: Colors.transparent,
-                        padding:
-                            EdgeInsets.symmetric(vertical: 12, horizontal: 15),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(17),
+                  SizedBox(height: 25),
+                  Text(
+                    "Net Property       : IDR ${formatNumber(totalProperty)}",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                  Text(
+                    "Division Status   : $divisionStatus",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                  Text(
+                    "Final Share         : $finalShare",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(height: 15),
+                  Row(
+                    children: [
+                      Icon(Icons.info_outline, color: Colors.grey, size: 15),
+                      SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          "Click on the heir's row to see individual inheritance details.",
+                          style: TextStyle(color: Colors.grey, fontSize: 13),
                         ),
                       ),
-                      child: Text(
-                        "Distribution Detail",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
+                    ],
                   ),
-                  SizedBox(width: 7),
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Colors.teal.shade300, Colors.teal.shade700],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(19),
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        _showResetConfirmationDialog(context);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        shadowColor: Colors.transparent,
-                        padding: EdgeInsets.symmetric(vertical: 10),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(19),
+                  DataTable(
+                    columns: const [
+                      DataColumn(label: Text('Heir')),
+                      DataColumn(label: Text('Quantity')),
+                      DataColumn(label: Text('Inheritance')),
+                    ],
+                    rows: heirRows,
+                  ),
+                  SizedBox(height: 355),
+                ],
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 1,
+            left: 20,
+            right: 20,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildGradientButton(
+                  text: "Distribution Detail",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InheritancePage(
+                          identificationController: identificationController,
+                          impedimentController: impedimentController,
+                          totalProperty:
+                              identificationController.property.getTotal(),
+                          propertyAmount:
+                              identificationController.property.getAmount(),
+                          debtAmount:
+                              identificationController.property.getDebt(),
+                          testamentAmount:
+                              identificationController.property.getTestament(),
+                          funeralAmount:
+                              identificationController.property.getFuneral(),
+                          selectedHeirs: impedimentController.heirQuantity,
                         ),
                       ),
-                      child: Icon(Icons.home, color: Colors.white, size: 26),
-                    ),
-                  ),
-                  SizedBox(width: 7),
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [Colors.teal.shade300, Colors.teal.shade700],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(17),
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        TextEditingController nameController =
-                            TextEditingController();
+                    );
+                  },
+                ),
+                _buildGradientButton(
+                  text: "Save Result",
+                  onPressed: () async {
+                    TextEditingController nameController =
+                        TextEditingController();
 
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text("Save Calculation"),
-                              content: TextField(
-                                controller: nameController,
-                                decoration: InputDecoration(
-                                    hintText: "Enter calculation name"),
-                              ),
-                              actions: [
-                                TextButton(
-                                  child: Text("Cancel"),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                                TextButton(
-                                  child: Text("Save"),
-                                  onPressed: () async {
-                                    String calculationName =
-                                        nameController.text;
-                                    HistoryController historyController =
-                                        HistoryController();
-                                    await historyController.saveCalculation(
-                                      calculationName,
-                                      totalProperty,
-                                      propertyAmount,
-                                      debtAmount,
-                                      testamentAmount,
-                                      funeralAmount,
-                                      selectedHeirs,
-                                      distribution,
-                                      divisionStatus,
-                                      finalShare,
-                                    );
-                                    Navigator.of(context).pop();
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                          content: Text(
-                                              "Calculation successfully saved!")),
-                                    );
-                                  },
-                                ),
-                              ],
-                            );
-                          },
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("Save Calculation"),
+                          content: TextField(
+                            controller: nameController,
+                            decoration: InputDecoration(
+                                hintText: "Enter calculation name"),
+                          ),
+                          actions: [
+                            TextButton(
+                              child: Text("Cancel"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            TextButton(
+                              child: Text("Save"),
+                              onPressed: () async {
+                                String calculationName = nameController.text;
+                                HistoryController historyController =
+                                    HistoryController();
+                                await historyController.saveCalculation(
+                                  calculationName,
+                                  totalProperty,
+                                  propertyAmount,
+                                  debtAmount,
+                                  testamentAmount,
+                                  funeralAmount,
+                                  selectedHeirs,
+                                  distribution,
+                                  divisionStatus,
+                                  finalShare,
+                                );
+                                Navigator.of(context).pop();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                      content: Text(
+                                          "Calculation successfully saved!")),
+                                );
+                              },
+                            ),
+                          ],
                         );
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        shadowColor: Colors.transparent,
-                        padding:
-                            EdgeInsets.symmetric(vertical: 12, horizontal: 15),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(17),
-                        ),
-                      ),
-                      child: Text(
-                        "Save Result",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 20),
-            ],
+                    );
+                  },
+                ),
+                _buildGradientButton(
+                  icon: Icons.home,
+                  onPressed: () {
+                    _showResetConfirmationDialog(context);
+                  },
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildGradientButton(
+      {String? text, IconData? icon, required VoidCallback onPressed}) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.teal.shade300, Colors.teal.shade700],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(17),
+      ),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          padding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(17),
           ),
         ),
+        child: text != null
+            ? Text(
+                text,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
+              )
+            : Icon(icon, color: Colors.white, size: 26),
       ),
     );
   }

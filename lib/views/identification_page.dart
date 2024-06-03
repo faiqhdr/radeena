@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:radeena/widgets/common_button.dart';
 import 'package:radeena/controllers/identification_controller.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/models/enums.dart';
@@ -47,19 +46,54 @@ class _IdentificationPageState extends State<IdentificationPage> {
           color: green01Color,
           onPressed: () {
             if (currentStep == 1) {
-              Navigator.of(context).pop(); // Go back to main page
+              Navigator.of(context).pop();
             } else {
               setState(() {
-                currentStep = 1; // Go back to step 1
+                currentStep = 1;
               });
             }
           },
         ),
         title: Text("Determine Heirs", style: titleDetermineHeirsStyle()),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: width * 0.06),
-        child: _buildInputStep(currentStep),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: width * 0.06),
+            child: _buildInputStep(currentStep),
+          ),
+          Positioned(
+            right: 40,
+            top: 640,
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Colors.teal.shade300, Colors.teal.shade700],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(17),
+              ),
+              child: FloatingActionButton(
+                onPressed: () {
+                  if (currentStep == 1) {
+                    _submitPropertyDetails();
+                  } else if (currentStep == 2) {
+                    _submitGenderDetails();
+                  } else if (currentStep == 3) {
+                    _navigateToImpedimentPage();
+                  }
+                },
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                child: Icon(
+                  Icons.arrow_forward,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -107,10 +141,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
           hint: "Enter amount",
           errorText: _funeralError,
         ),
-        CommonButton(
-          text: "Next",
-          onPressed: _submitPropertyDetails,
-        ),
+        SizedBox(height: 360),
       ],
     );
   }
@@ -274,11 +305,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
             ),
           ],
         ),
-        SizedBox(height: 16.0),
-        CommonButton(
-          text: "Next",
-          onPressed: _submitGenderDetails,
-        ),
+        SizedBox(height: 600),
       ],
     );
   }
@@ -313,11 +340,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ..._buildFamilyMemberInputs(gender),
-          SizedBox(height: 15.0),
-          CommonButton(
-            text: "Next",
-            onPressed: _navigateToImpedimentPage,
-          ),
+          SizedBox(height: 600),
         ],
       ),
     );

@@ -107,19 +107,19 @@ class ConfirmationPage extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    "Total inheritance to be distributed: ${formatNumber(totalProperty)} IDR",
+                    "Total inheritance to be distributed: IDR ${formatNumber(totalProperty)}",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 60),
+                  SizedBox(height: 400),
                 ],
               ),
             ),
           ),
           Positioned(
-            bottom: 10,
+            bottom: 1,
             left: width * 0.25,
             right: width * 0.25,
             child: CommonButton(

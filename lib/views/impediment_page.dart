@@ -83,8 +83,8 @@ class ImpedimentPage extends StatelessWidget {
                               Positioned(
                                 top: 5,
                                 child: Lottie.asset(
-                                  'assets/lottie/no_impediments.json',
-                                  width: 300,
+                                  'assets/lottie/no_impediment.json',
+                                  width: 340,
                                   height: 450,
                                 ),
                               ),
@@ -115,7 +115,7 @@ class ImpedimentPage extends StatelessWidget {
               ],
             ),
             Positioned(
-              bottom: 70, // Adjusted for better UI
+              bottom: 60,
               left: width * 0.22,
               right: width * 0.22,
               child: CommonButton(

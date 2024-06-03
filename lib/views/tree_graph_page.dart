@@ -56,64 +56,69 @@ class TreeGraphPage extends StatelessWidget {
           style: titleDetermineHeirsStyle(),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.only(
-          left: width * .06,
-          right: width * .06,
-          bottom: 60,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 0),
-              child: Text(
-                "Family Tree Graph",
-                style: textUnderTitleStyle(),
-              ),
+      body: Stack(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+              left: width * .06,
+              right: width * .06,
             ),
-            SizedBox(height: 10),
-            Expanded(
-              child: InteractiveViewer(
-                constrained: false,
-                boundaryMargin: EdgeInsets.all(255),
-                minScale: 0.01,
-                child: GraphView(
-                  graph: graph,
-                  algorithm: algorithm,
-                  builder: builder,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 0),
+                  child: Text(
+                    "Family Tree Graph",
+                    style: textUnderTitleStyle(),
+                  ),
                 ),
-              ),
-            ),
-            SizedBox(height: 10),
-            Center(
-              child: CommonButton(
-                text: "Next",
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ConfirmationPage(
-                        identificationController: identificationController,
-                        impedimentController: impedimentController,
-                        totalProperty:
-                            identificationController.property.getTotal(),
-                        propertyAmount:
-                            identificationController.property.getAmount(),
-                        debtAmount: identificationController.property.getDebt(),
-                        testamentAmount:
-                            identificationController.property.getTestament(),
-                        funeralAmount:
-                            identificationController.property.getFuneral(),
-                        selectedHeirs: impedimentController.heirQuantity,
-                      ),
+                SizedBox(height: 25),
+                Expanded(
+                  child: InteractiveViewer(
+                    constrained: false,
+                    boundaryMargin: EdgeInsets.all(255),
+                    minScale: 0.01,
+                    child: GraphView(
+                      graph: graph,
+                      algorithm: algorithm,
+                      builder: builder,
                     ),
-                  );
-                },
-              ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          Positioned(
+            bottom: 55,
+            left: width * 0.25,
+            right: width * 0.25,
+            child: CommonButton(
+              text: "Next",
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ConfirmationPage(
+                      identificationController: identificationController,
+                      impedimentController: impedimentController,
+                      totalProperty:
+                          identificationController.property.getTotal(),
+                      propertyAmount:
+                          identificationController.property.getAmount(),
+                      debtAmount: identificationController.property.getDebt(),
+                      testamentAmount:
+                          identificationController.property.getTestament(),
+                      funeralAmount:
+                          identificationController.property.getFuneral(),
+                      selectedHeirs: impedimentController.heirQuantity,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
