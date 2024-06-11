@@ -1,7 +1,7 @@
 {
     "evidence": [
         {
-            "tag": "0",
+            "tag": 0,
             "heir": "Sample Heir",
             "portion": "0/0",
             "condition": "Sample Condition",
@@ -10,7 +10,7 @@
             "evidenceContent": "Sample evidence Content"
         },
         {
-            "tag": "1",
+            "tag": 1,
             "heir": "Son",
             "portion": "Ashabah",
             "condition": "The son will inherit as Ashabah and will cause the daughter to inherit as Ashabah bil Ghair, if any.",
@@ -19,7 +19,7 @@
             "evidenceContent": "... a male's share is equal to the share of two females, ..."
         },
         {
-            "tag": "3",
+            "tag": 3,
             "heir": "Daughter",
             "source": "QS. An-Nisa’ : 11",
             "portion": "1/2",
@@ -28,7 +28,7 @@
             "evidenceContent": "... if there is only one daughter, she will receive half the inheritance."
             },
         {
-            "tag": "2",
+            "tag": 2,
             "heir": "Daughter",
             "portion": "2/3",
             "condition": "The daughter will receive 2/3 of the inheritance under the following conditions: - The deceased does not have a son. - The deceased has more than one daughter.",
@@ -37,7 +37,7 @@
             "evidenceContent": "... and if there are two or more daughters, they will receive two-thirds of the inheritance, ..."
         },
         {
-            "tag": "4",
+            "tag": 4,
             "heir": "Daughter",
             "source": "QS. An-Nisa’ : 11",
             "portion": "Ashabah (bil Ghair)",
@@ -46,7 +46,7 @@
             "evidenceContent": "... a male's share is equal to the share of two females, ..."
         },
         {
-            "tag": "5",
+            "tag": 5,
             "heir": "Grandson",
             "portion": "Ashabah",
             "condition": "The grandson will inherit as Ashabah and will cause the granddaughter to inherit as Ashabah bil Ghair, if any.",
@@ -55,7 +55,7 @@
             "evidenceContent": "... a male's share is equal to the share of two females, ..."
         },
         {
-            "tag": "7",
+            "tag": 7,
             "heir": "Granddaughter",
             "source": "QS. An-Nisa’ : 11",
             "portion": "1/2",
@@ -64,7 +64,7 @@
             "evidenceContent": "... if there is only one daughter, she will receive half the inheritance."
         },
         {
-            "tag": "6",
+            "tag": 6,
             "heir": "Granddaughter",
             "portion": "2/3",
             "condition": "The granddaughter will receive 2/3 of the inheritance under the following conditions: - The deceased does not have a grandson. - The deceased has more than one granddaughter. - The deceased does not have a daughter.",
@@ -73,7 +73,7 @@
             "evidenceContent": "... and if there are two or more daughters, they will receive two-thirds of the inheritance, ..."
         },
         {
-            "tag": "8",
+            "tag": 8,
             "heir": "Granddaughter",
             "source": "QS. An-Nisa’ : 11",
             "portion": "1/6",
@@ -82,7 +82,7 @@
             "evidenceContent": "... a daughter gets half (1/2) of the inheritance, and a granddaughter receives one-sixth (1/6) to complete two-thirds, ..."
         },
         {
-            "tag": "9",
+            "tag": 9,
             "heir": "Granddaughter",
             "source": "QS. An-Nisa’ : 11",
             "portion": "Ashabah (bil Ghair)",
@@ -91,7 +91,7 @@
             "evidenceContent": "... a male's share is equal to the share of two females, ..."
         },
         {
-            "tag": "10",
+            "tag": 10,
             "heir": "Father",
             "source": "QS. An-Nisa’ : 11",
             "portion": "1/6",
@@ -100,7 +100,7 @@
             "evidenceContent": "For the parents, each one gets a sixth of the inheritance if the deceased has children, ..."
         },
         {
-            "tag": "11",
+            "tag": 11,
             "heir": "Father",
             "source": "QS. An-Nisa’ : 11",
             "portion": "Ashabah",
@@ -109,7 +109,7 @@
             "evidenceContent": "... if the deceased has no children and is inherited by the parents (only), the mother gets a third (and the father inherits the rest), ..."
         },
         {
-            "tag": "12",
+            "tag": 12,
             "heir": "Father",
             "source": "HR. Bukhari no. 6238",
             "portion": "Additional Ashabah",
@@ -118,7 +118,7 @@
             "evidenceContent": "... Distribute the inheritance to those entitled to it, and what is left is the right of the nearest male relative ..."
         },
         {
-            "tag": "13",
+            "tag": 13,
             "heir": "Grandfather",
             "source": "QS. An-Nisa’ : 11",
             "portion": "1/6",
@@ -127,7 +127,7 @@
             "evidenceContent": "For the parents, each one gets a sixth of the inheritance if the deceased has children, ..."
         },
         {
-            "tag": "14",
+            "tag": 14,
             "heir": "Grandfather",
             "source": "QS. An-Nisa’ : 11",
             "portion": "Ashabah",
@@ -136,7 +136,7 @@
             "evidenceContent": "... if the deceased has no children and is inherited by the parents (only), the mother gets a third (and the father inherits the rest), ..."
         },
         {
-            "tag": "15",
+            "tag": 15,
             "heir": "Grandfather",
             "source": "HR. Bukhari no. 6238",
             "portion": "Additional Ashabah",
@@ -145,7 +145,7 @@
             "evidenceContent": "... Distribute the inheritance to those entitled to it, and what is left is the right of the nearest male relative ..."
         },
         {
-            "tag": "16",
+            "tag": 16,
             "heir": "Mother",
             "source": "QS. An-Nisa’ : 11",
             "portion": "1/6",
@@ -154,7 +154,7 @@
             "evidenceContent": "For the parents, each one gets a sixth of the inheritance if the deceased has children..."
         },
         {
-            "tag": "17",
+            "tag": 17,
             "heir": "Mother",
             "source": "QS. An-Nisa’ : 11",
             "portion": "1/3",
@@ -163,7 +163,7 @@
             "evidenceContent": "... if the deceased has no children and is inherited by the parents (only), the mother gets a third (and the father inherits the rest), ..."
         },
         {
-            "tag": "18",
+            "tag": 18,
             "heir": "Mother",
             "source": "QS. An-Nisa’ : 11",
             "portion": "Ashabah",
@@ -172,7 +172,7 @@
             "evidenceContent": "... if the deceased has no children and is inherited by the parents (only), the mother gets a third (and the father inherits the rest), ..."
         },
         {
-            "tag": "19",
+            "tag": 19,
             "heir": "Grandmother",
             "source": "HR. Ibnu Majah no. 2715",
             "portion": "1/6",
@@ -181,7 +181,7 @@
             "evidenceContent": "... Indeed, the Prophet gave the grandmother a share of one-sixth (1/6) of the inheritance ..."
         },
         {
-            "tag": "20",
+            "tag": 20,
             "heir": "Husband",
             "source": "QS. An-Nisa’ : 12",
             "portion": "1/2",
@@ -190,7 +190,7 @@
             "evidenceContent": "And for you (husband) half of the inheritance left by your wives if they do not have children. ..."
         },
         {
-            "tag": "21",
+            "tag": 21,
             "heir": "Husband",
             "source": "QS. An-Nisa’ : 12",
             "portion": "1/4",
@@ -199,7 +199,7 @@
             "evidenceContent": "... If your wives have children, then you get a quarter of the inheritance they leave ..."
         },
         {
-            "tag": "22",
+            "tag": 22,
             "heir": "Wife",
             "source": "QS. An-Nisa’ : 12",
             "portion": "1/4",
@@ -208,7 +208,7 @@
             "evidenceContent": "... The wives receive a quarter of the inheritance you leave if you do not have children ..."
         },
         {
-            "tag": "23",
+            "tag": 23,
             "heir": "Wife",
             "source": "QS. An-Nisa’ : 12",
             "portion": "1/8",
@@ -217,7 +217,7 @@
             "evidenceContent": "... If you have children, then the wives receive an eighth of the inheritance you leave ..."
         },
         {
-            "tag": "24",
+            "tag": 24,
             "heir": "Maternal Sibling",
             "source": "QS. An-Nisa’ : 12",
             "portion": "1/6",
@@ -226,7 +226,7 @@
             "evidenceContent": "... If a person dies, whether male or female, without leaving a father and children, but has a maternal brother or sister, then he/she receives a sixth of the inheritance, ..."
         },
         {
-            "tag": "25",
+            "tag": 25,
             "heir": "Maternal Sibling",
             "source": "QS. An-Nisa’ : 12",
             "portion": "1/3",
@@ -235,8 +235,8 @@
             "evidenceContent": "... But if there are more than one maternal sibling, they share one-third equally ..."
         },
         {
-            "tag": "26",
-            "heir": "Full Sister",
+            "tag": 26,
+            "heir": "Sister",
             "source": "QS. An-Nisa’ : 176",
             "portion": "1/2",
             "condition": "The full sister will receive 1/2 of the inheritance under the following conditions: - The deceased does not have children or grandchildren. - There is no full brother. - There is only one full sister.",
@@ -244,8 +244,8 @@
             "evidenceContent": "... If a person dies and does not have children but has a sister, then the sister receives half the inheritance ..."
         },
         {
-            "tag": "27",
-            "heir": "Full Sister",
+            "tag": 27,
+            "heir": "Sister",
             "source": "QS. An-Nisa’ : 176",
             "portion": "2/3",
             "condition": "The full sister will receive 2/3 of the inheritance under the following conditions: - The deceased does not have children or grandchildren. - There is no full brother. - There is more than one full sister.",
@@ -253,8 +253,8 @@
             "evidenceContent": "... if there are two or more sisters, they receive two-thirds of the inheritance ..."
         },
         {
-            "tag": "28",
-            "heir": "Full Sister",
+            "tag": 28,
+            "heir": "Sister",
             "source": "QS. An-Nisa’ : 176",
             "portion": "Ashabah (bil Ghair)",
             "condition": "The full sister will receive the inheritance as Ashabah bil Ghair under the following conditions: - The deceased has a full brother. - The inheritance is divided with the stipulation that a male's share is equal to the share of two females.",
@@ -262,8 +262,8 @@
             "evidenceContent": "... if they are brothers and sisters, then a brother's share is equal to the share of two sisters ..."
         },
         {
-            "tag": "29",
-            "heir": "Full Sister",
+            "tag": 29,
+            "heir": "Sister",
             "source": "HR. Bukhari no. 6245",
             "portion": "Ashabah (Ma'al Ghair)",
             "condition": "The full sister will receive the inheritance as Ashabah Ma'al Ghair under the following conditions: - The deceased does not have a full brother. - The deceased has a daughter or granddaughter.",
@@ -271,8 +271,8 @@
             "evidenceContent": "... a daughter gets half (1/2) of the inheritance, and a granddaughter receives one-sixth (1/6) to complete two-thirds, and the rest is for the full sister."
         },
         {
-            "tag": "30",
-            "heir": "Full Brother",
+            "tag": 30,
+            "heir": "Brother",
             "source": "QS. An-Nisa’ : 176",
             "portion": "Ashabah",
             "condition": "The full brother will inherit as Ashabah and will cause the full sister to inherit as Ashabah bil Ghair, if any.",
@@ -280,7 +280,7 @@
             "evidenceContent": "... if they are brothers and sisters, then a brother's share is equal to the share of two sisters ..."
         },
         {
-            "tag": "31",
+            "tag": 31,
             "heir": "Paternal Sister",
             "source": "QS. An-Nisa’ : 176",
             "portion": "1/2",
@@ -289,7 +289,7 @@
             "evidenceContent": "... If a person dies and does not have children but has a sister, then the sister receives half the inheritance ..."
         },
         {
-            "tag": "32",
+            "tag": 32,
             "heir": "Paternal Sister",
             "source": "QS. An-Nisa’ : 176",
             "portion": "2/3",
@@ -298,7 +298,7 @@
             "evidenceContent": "... if there are two or more sisters, they receive two-thirds of the inheritance ..."
         },
         {
-            "tag": "33",
+            "tag": 33,
             "heir": "Paternal Sister",
             "source": "QS. An-Nisa’ : 176",
             "portion": "1/6",
@@ -307,7 +307,7 @@
             "evidenceContent": "... a daughter gets half (1/2) of the inheritance, and a granddaughter receives one-sixth (1/6) to complete two-thirds, ..."
         },
         {
-            "tag": "34",
+            "tag": 34,
             "heir": "Paternal Sister",
             "source": "QS. An-Nisa’ : 176",
             "portion": "Ashabah (bil Ghair)",
@@ -316,7 +316,7 @@
             "evidenceContent": "... if they are brothers and sisters, then a brother's share is equal to the share of two sisters ..."
         },
         {
-            "tag": "35",
+            "tag": 35,
             "heir": "Paternal Sister",
             "source": "HR. Bukhari no. 6245",
             "portion": "Ashabah (Ma'al Ghair)",
@@ -325,7 +325,7 @@
             "evidenceContent": "... a daughter gets half (1/2) of the inheritance, and a granddaughter receives one-sixth (1/6) to complete two-thirds, and the rest is for the sister."
         },
         {
-            "tag": "36",
+            "tag": 36,
             "heir": "Paternal Brother",
             "source": "QS. An-Nisa’ : 176",
             "portion": "Ashabah",
@@ -334,7 +334,7 @@
             "evidenceContent": "... if they are brothers and sisters, then a brother's share is equal to the share of two sisters ..."
         },
         {
-            "tag": "37",
+            "tag": 37,
             "heir": "Nephew (son of full brother)",
             "source": "HR. Bukhari no. 6238",
             "portion": "Ashabah",
@@ -343,7 +343,7 @@
             "evidenceContent": "... Distribute the inheritance to those entitled to it, and what is left is the right of the nearest male relative ..."
         },
         {
-            "tag": "38",
+            "tag": 38,
             "heir": "Nephew (son of paternal brother)",
             "source": "HR. Bukhari no. 6238",
             "portion": "Ashabah",
@@ -352,7 +352,7 @@
             "evidenceContent": "... Distribute the inheritance to those entitled to it, and what is left is the right of the nearest male relative ..."
         },
         {
-            "tag": "39",
+            "tag": 39,
             "heir": "Uncle (full brother of father)",
             "source": "HR. Bukhari no. 6238",
             "portion": "Ashabah",
@@ -361,7 +361,7 @@
             "evidenceContent": "... Distribute the inheritance to those entitled to it, and what is left is the right of the nearest male relative ..."
         },
         {
-            "tag": "40",
+            "tag": 40,
             "heir": "Uncle (brother of grandfather)",
             "source": "HR. Bukhari no. 6238",
             "portion": "Ashabah",
@@ -370,7 +370,7 @@
             "evidenceContent": "... Distribute the inheritance to those entitled to it, and what is left is the right of the nearest male relative ..."
         },
         {
-            "tag": "41",
+            "tag": 41,
             "heir": "Cousin (son of full uncle)",
             "source": "HR. Bukhari no. 6238",
             "portion": "Ashabah",
@@ -379,7 +379,7 @@
             "evidenceContent": "... Distribute the inheritance to those entitled to it, and what is left is the right of the nearest male relative ..."
         },
         {
-            "tag": "42",
+            "tag": 42,
             "heir": "Cousin (son of uncle, brother of grandfather)",
             "source": "HR. Bukhari no. 6238",
             "portion": "Ashabah",
@@ -388,7 +388,7 @@
             "evidenceContent": "... Distribute the inheritance to those entitled to it, and what is left is the right of the nearest male relative ..."
         },
         {
-            "tag": "43",
+            "tag": 43,
             "heir": "Son",
             "portion": "Ashabah",
             "condition": "The son will inherit as Ashabah and will cause the daughter to inherit as Ashabah bil Ghair, if any.",
@@ -397,7 +397,7 @@
             "evidenceContent": "... Distribute the inheritance to those entitled to it, and what is left is the right of the nearest male relative ..."
         },
         {
-            "tag": "44",
+            "tag": 44,
             "heir": "Grandson",
             "portion": "Ashabah",
             "condition": "The grandson will inherit as Ashabah and will cause the granddaughter to inherit as Ashabah bil Ghair, if any.",
@@ -406,7 +406,7 @@
             "evidenceContent": "... Distribute the inheritance to those entitled to it, and what is left is the right of the nearest male relative ..."
         },
         {
-            "tag": "45",
+            "tag": 45,
             "heir": "Mother",
             "source": "QS. An-Nisa’ : 11",
             "portion": "1/6",
@@ -415,7 +415,7 @@
             "evidenceContent": "... if the deceased has several siblings, the mother gets a sixth, ..."
         },
         {
-            "tag": "46",
+            "tag": 46,
             "heir": "Full Brother",
             "source": "HR. Bukhari no. 6238",
             "portion": "Ashabah",
@@ -424,7 +424,7 @@
             "evidenceContent": "... Distribute the inheritance to those entitled to it, and what is left is the right of the nearest male relative ..."
         },
         {
-            "tag": "47",
+            "tag": 47,
             "heir": "Paternal Brother",
             "source": "HR. Bukhari no. 6238",
             "portion": "Ashabah",
