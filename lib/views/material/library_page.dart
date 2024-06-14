@@ -39,57 +39,65 @@ class LibraryPage extends StatelessWidget {
                 style: textUnderTitleStyle(),
               ),
             ),
-            SizedBox(height: 15),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TheoryListPage()),
-                );
-              },
-              child: Container(
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 10,
-                    ),
-                  ],
-                ),
-                child: Text(
-                  'Theory',
-                ),
-              ),
-            ),
             SizedBox(height: 25),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildLibraryButton(
                   context,
-                  MaterialPageRoute(builder: (context) => DalilHeirPage()),
-                );
-              },
-              child: Container(
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      blurRadius: 10,
-                    ),
-                  ],
+                  'Theory',
+                  TheoryListPage(),
                 ),
-                child: Text(
+                _buildLibraryButton(
+                  context,
                   'Dalil',
+                  DalilHeirPage(),
                 ),
-              ),
+              ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLibraryButton(BuildContext context, String title, Widget page) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => page),
+        );
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.4,
+        height: 100,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              primaryColor.withOpacity(0.7),
+              secondaryColor.withOpacity(0.7),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(17.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 10,
+            ),
+          ],
+        ),
+        child: Center(
+          child: Text(
+            title,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       ),
     );
