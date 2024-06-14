@@ -90,7 +90,7 @@ class MenuPage extends StatelessWidget {
                         colorTwo: indigo02Color,
                         onPressed: () {
                           print("Directed to Library Page");
-                          Navigator.pushNamed(context, '/');
+                          Navigator.pushNamed(context, '/libraryPage');
                         },
                       ),
                       CustomWidget(
