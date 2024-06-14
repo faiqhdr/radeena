@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/controllers/identification_controller.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
-import 'package:radeena/views/identification_page.dart';
-import 'package:radeena/views/library_page.dart';
+import 'package:radeena/views/distribution/identification_page.dart';
+import 'package:radeena/views/material/library_page.dart';
 import 'package:radeena/views/menu_page.dart';
-import 'package:radeena/views/history_page.dart';
+import 'package:radeena/views/history/history_page.dart';
 
 void main() {
   IdentificationController identificationController =

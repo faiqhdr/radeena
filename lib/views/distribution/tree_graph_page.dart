@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:graphview/GraphView.dart';
 import 'package:radeena/widgets/common_button.dart';
-import 'package:radeena/views/confirmation_page.dart';
+import 'package:radeena/views/distribution/confirmation_page.dart';
 import 'package:radeena/controllers/identification_controller.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
 

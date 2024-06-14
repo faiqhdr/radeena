@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/widgets/common_button.dart';
-import 'package:radeena/views/calculation_page.dart';
+import 'package:radeena/views/distribution/calculation_page.dart';
 import 'package:radeena/controllers/identification_controller.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
 

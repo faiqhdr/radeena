@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
-import 'package:radeena/views/dalil_heir_page.dart';
-import 'package:radeena/views/theory_list_page.dart';
+import 'package:radeena/views/material/dalil_heir_page.dart';
+import 'package:radeena/views/material/theory_list_page.dart';
 
 class LibraryPage extends StatelessWidget {
   const LibraryPage({

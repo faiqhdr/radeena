@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
-import 'package:radeena/views/dalil_content_page.dart';
+import 'package:radeena/views/material/dalil_list_page.dart';
 import 'package:radeena/controllers/library_controller.dart';
 
-class DalilListPage extends StatefulWidget {
-  final String heir;
-  const DalilListPage({required this.heir, Key? key}) : super(key: key);
+class DalilHeirPage extends StatefulWidget {
+  const DalilHeirPage({Key? key}) : super(key: key);
 
   @override
-  _DalilListPageState createState() => _DalilListPageState();
+  _DalilHeirPageState createState() => _DalilHeirPageState();
 }
 
-class _DalilListPageState extends State<DalilListPage> {
-  late Future<List<Map<String, dynamic>>> dalilListFuture;
+class _DalilHeirPageState extends State<DalilHeirPage> {
+  late Future<List> uniqueHeirsFuture;
   final libraryController = LibraryController();
 
   @override
   void initState() {
     super.initState();
-    dalilListFuture = _loadData();
+    uniqueHeirsFuture = _loadData();
   }
 
-  Future<List<Map<String, dynamic>>> _loadData() async {
+  Future<List> _loadData() async {
     await libraryController.loadDalilData();
-    return libraryController.getDalilForHeir(widget.heir);
+    return libraryController.getUniqueHeirs();
   }
 
   @override
@@ -53,32 +52,31 @@ class _DalilListPageState extends State<DalilListPage> {
             Padding(
               padding: EdgeInsets.only(top: 0),
               child: Text(
-                "Dalil for ${widget.heir}",
+                "Dalil",
                 style: textUnderTitleStyle(),
               ),
             ),
             SizedBox(height: 25),
             Expanded(
-              child: FutureBuilder<List<Map<String, dynamic>>>(
-                future: dalilListFuture,
+              child: FutureBuilder<List>(
+                future: uniqueHeirsFuture,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error loading data'));
                   } else {
-                    final dalilList = snapshot.data!;
+                    final uniqueHeirs = snapshot.data!;
                     return ListView.builder(
-                      itemCount: dalilList.length,
+                      itemCount: uniqueHeirs.length,
                       itemBuilder: (context, index) {
-                        final dalil = dalilList[index];
+                        final heir = uniqueHeirs[index];
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    DalilContentPage(dalil: dalil),
+                                builder: (context) => DalilListPage(heir: heir),
                               ),
                             );
                           },
@@ -99,7 +97,7 @@ class _DalilListPageState extends State<DalilListPage> {
                             ),
                             child: Center(
                               child: Text(
-                                dalil['source'],
+                                heir,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
