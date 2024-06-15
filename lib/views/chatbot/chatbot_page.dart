@@ -14,11 +14,20 @@ class ChatbotPage extends StatefulWidget {
 class _ChatbotPageState extends State<ChatbotPage> {
   final ChatbotController chatbotController = ChatbotController();
   List<Map<String, String>> messages = [];
+  bool isTyping = false;
+  List<Map<String, String>> predefinedOptions = [];
+  String selectedValue = '';
 
   @override
   void initState() {
     super.initState();
-    _addMessage("How can I help you?", "Chatbot");
+    _addMessage("Assalamualaikum Warahmatullah Wabarakatuh! 👋", "Chatbot");
+    Future.delayed(Duration(seconds: 2), () {
+      _addMessage("How can I help you? 🤓", "Chatbot");
+      setState(() {
+        predefinedOptions = chatbotController.model.getInitialOptions();
+      });
+    });
   }
 
   void _addMessage(String message, String sender) {
@@ -27,22 +36,36 @@ class _ChatbotPageState extends State<ChatbotPage> {
     });
   }
 
-  void _handleSelection(String selected) async {
+  void _handleInitialSelection(String selected) async {
     _addMessage(selected, "User");
+    setState(() {
+      isTyping = true;
+      predefinedOptions = [];
+      selectedValue = selected;
+    });
     List<Map<String, String>> response =
         await chatbotController.getResponse(selected);
-    for (var item in response) {
-      _addMessage(item['question']!, "Chatbot");
-    }
-    if (selected.toLowerCase().contains('theory') ||
-        selected.toLowerCase().contains('dalil')) {
-      _addMessage(
-          chatbotController.getExplanationMessage(
-              selected.toLowerCase().contains('theory') ? 'theory' : 'dalil',
-              selected),
-          "Chatbot");
-      _addMessage("See the content", "Chatbot");
-    }
+    Future.delayed(Duration(seconds: 2), () {
+      setState(() {
+        isTyping = false;
+        predefinedOptions = response;
+        _addMessage(
+          selected.toLowerCase().contains('theory')
+              ? "Which theory do you want to know?"
+              : "Which dalil do you want to know?",
+          "Chatbot",
+        );
+      });
+    });
+  }
+
+  void _handleDetailedSelection(String selected) {
+    _addMessage(selected, "User");
+    String type =
+        selectedValue.toLowerCase().contains('theory') ? 'theory' : 'dalil';
+    _addMessage(
+        chatbotController.getExplanationMessage(type, selected), "Chatbot");
+    _addMessage("See the content", "Chatbot");
   }
 
   void _navigateToPage(String selected) async {
@@ -115,14 +138,31 @@ class _ChatbotPageState extends State<ChatbotPage> {
   }
 
   List<Widget> _buildPredefinedUserOptions() {
-    return [
-      _buildPredefinedUserOption(
-          "I would like to know more about Faraid’s Theory",
-          () => _handleSelection("Theory")),
-      _buildPredefinedUserOption(
-          "I would like to know more about Faraid’s Dalil",
-          () => _handleSelection("Dalil")),
-    ];
+    return predefinedOptions
+        .map((option) => _buildPredefinedUserOption(option['question']!,
+            () => _handleDetailedSelection(option['question']!)))
+        .toList();
+  }
+
+  Widget _buildSeeContentButton(String selected) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.teal.shade700,
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(13),
+          ),
+        ),
+        onPressed: () => _navigateToPage(selected),
+        child: Text(
+          "See the content",
+          style: TextStyle(fontSize: 16),
+        ),
+      ),
+    );
   }
 
   @override
@@ -162,17 +202,56 @@ class _ChatbotPageState extends State<ChatbotPage> {
                 itemCount: messages.length,
                 itemBuilder: (context, index) {
                   final message = messages[index];
-                  return _buildChatBubble(
-                      message['message']!, message['sender']!);
+                  return Column(
+                    children: [
+                      _buildChatBubble(message['message']!, message['sender']!),
+                      if (message['message'] == "See the content")
+                        _buildSeeContentButton(selectedValue)
+                    ],
+                  );
                 },
               ),
             ),
+            if (isTyping)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 10,
+                    height: 10,
+                    margin: EdgeInsets.symmetric(horizontal: 2.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  Container(
+                    width: 10,
+                    height: 10,
+                    margin: EdgeInsets.symmetric(horizontal: 2.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  Container(
+                    width: 10,
+                    height: 10,
+                    margin: EdgeInsets.symmetric(horizontal: 2.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
             SizedBox(height: 10),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ..._buildPredefinedUserOptions(),
-              ],
+            Container(
+              height: 50,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: _buildPredefinedUserOptions(),
+              ),
             ),
             SizedBox(height: 15),
           ],

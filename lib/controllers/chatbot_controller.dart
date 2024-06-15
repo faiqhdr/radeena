@@ -32,7 +32,7 @@ class ChatbotController {
     return null;
   }
 
-  String getExplanationMessage(String type, String titleOrHeir) {
-    return model.getDetailedExplanationMessage(type, titleOrHeir);
+  String getExplanationMessage(String type, String value) {
+    return model.getDetailedExplanationMessage(type, value);
   }
 }

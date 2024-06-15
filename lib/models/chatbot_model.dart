@@ -1,12 +1,12 @@
 class ChatbotModel {
   List<Map<String, String>> predefinedQuestions = [
-    {"question": "How can I help you?", "response": "How can I help you?"},
+    {"question": "How can I help you? 🤓", "response": "How can I help you?"},
   ];
 
   List<Map<String, String>> getInitialOptions() {
     return [
-      {"question": "Theory"},
-      {"question": "Dalil"}
+      {"question": "I would like to know more about Faraid’s Theory"},
+      {"question": "I would like to know more about Faraid’s Dalil"}
     ];
   }
 
@@ -23,11 +23,11 @@ class ChatbotModel {
     return questions;
   }
 
-  String getDetailedExplanationMessage(String type, String titleOrHeir) {
+  String getDetailedExplanationMessage(String type, String value) {
     if (type.toLowerCase() == 'theory') {
-      return 'Sure! Click the button below for a more detailed explanation of "$titleOrHeir". Hope it helps 😊';
+      return 'Sure! Click the button below for a more detailed explanation of **$value**. Hope it helps 😊';
     } else if (type.toLowerCase() == 'dalil') {
-      return 'Sure! Click the button below for a more detailed explanation of "dalil for $titleOrHeir". Hope it helps 😊';
+      return 'Sure! Click the button below for a more detailed explanation of **$value**. Hope it helps 😊';
     }
     return '';
   }
