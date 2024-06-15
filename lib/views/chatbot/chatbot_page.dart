@@ -95,7 +95,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
 
   Widget _buildPredefinedUserOption(String text, VoidCallback onTap) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 1, horizontal: 10),
+      margin: EdgeInsets.symmetric(vertical: 2, horizontal: 15),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.black,
