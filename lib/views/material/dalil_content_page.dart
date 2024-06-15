@@ -43,7 +43,7 @@ class DalilContentPage extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: green01Color),
+                    color: green02Color),
               ),
               SizedBox(height: 5),
               Text(
@@ -56,7 +56,7 @@ class DalilContentPage extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: green01Color),
+                    color: green02Color),
               ),
               SizedBox(height: 5),
               Text(
@@ -69,7 +69,7 @@ class DalilContentPage extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: green01Color),
+                    color: green02Color),
               ),
               SizedBox(height: 5),
               Text(
@@ -82,7 +82,7 @@ class DalilContentPage extends StatelessWidget {
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: green01Color),
+                    color: green02Color),
               ),
               SizedBox(height: 5),
               Text(
