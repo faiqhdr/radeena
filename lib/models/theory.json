@@ -1,0 +1,148 @@
+{
+    "theory": [
+        {
+            "tag": 0,
+            "title": "Sample Theory",
+            "content": "Sample content theory.",
+            "subContent": "Sample sub content theory."
+        },
+        {
+            "tag": 1,
+            "title": "Definition of Inheritance Law",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 2,
+            "title": "Rights Related to Inherited Property",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 3,
+            "title": "Pillars of Inheritance",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 4,
+            "title": "Conditions of Inheritance",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 5,
+            "title": "Causes of Inheritance",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 6,
+            "title": "Barriers to Inheritance",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 7,
+            "title": "Male Heirs",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 8,
+            "title": "Female Heirs",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 9,
+            "title": "How to Calculate Inheritance",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 10,
+            "title": "At-Ta'shib",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 11,
+            "title": "Al-Hajb",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 12,
+            "title": "Al-'Aul",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 13,
+            "title": "Ar-Radd",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 14,
+            "title": "Al-Munasakhat",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 15,
+            "title": "Inheritance of Al-Khuntsa Musykil (Intersex)",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 16,
+            "title": "Inheritance of Al-Mafqud (Missing Person)",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 17,
+            "title": "Inheritance of Al-Haml (Unborn Child)",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 18,
+            "title": "Inheritance of Al-Hadma, Gharqa, and the Like (Mass Death)",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 19,
+            "title": "Inheritance of Dzawil Arham",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 20,
+            "title": "Al-Musytarikah",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 21,
+            "title": "Al-Mu'addah",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 22,
+            "title": "Al-Akdariyyah",
+            "content": "Sample.",
+            "subContent": "Sample."
+        },
+        {
+            "tag": 23,
+            "title": "Testament",
+            "content": "Sample.",
+            "subContent": "Sample."
+        }
+    ]
+}
