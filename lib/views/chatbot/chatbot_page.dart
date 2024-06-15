@@ -93,16 +93,35 @@ class _ChatbotPageState extends State<ChatbotPage> {
     );
   }
 
+  Widget _buildPredefinedUserOption(String text, VoidCallback onTap) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 1, horizontal: 10),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.black,
+          backgroundColor: Colors.green.shade100,
+          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(13),
+          ),
+        ),
+        onPressed: onTap,
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 16),
+        ),
+      ),
+    );
+  }
+
   List<Widget> _buildPredefinedUserOptions() {
     return [
-      ListTile(
-        title: Text("I would like to know more about Faraid’s Theory"),
-        onTap: () => _handleSelection("Theory"),
-      ),
-      ListTile(
-        title: Text("I would like to know more about Faraid’s Dalil"),
-        onTap: () => _handleSelection("Dalil"),
-      ),
+      _buildPredefinedUserOption(
+          "I would like to know more about Faraid’s Theory",
+          () => _handleSelection("Theory")),
+      _buildPredefinedUserOption(
+          "I would like to know more about Faraid’s Dalil",
+          () => _handleSelection("Dalil")),
     ];
   }
 
@@ -148,9 +167,14 @@ class _ChatbotPageState extends State<ChatbotPage> {
                 },
               ),
             ),
+            SizedBox(height: 10),
             Column(
-              children: _buildPredefinedUserOptions(),
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ..._buildPredefinedUserOptions(),
+              ],
             ),
+            SizedBox(height: 15),
           ],
         ),
       ),
