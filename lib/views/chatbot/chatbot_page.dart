@@ -1,10 +1,110 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
+import 'package:radeena/controllers/chatbot_controller.dart';
+import 'package:radeena/views/material/dalil_list_page.dart';
+import 'package:radeena/views/material/theory_content_page.dart';
 
-class ChatbotPage extends StatelessWidget {
-  const ChatbotPage({
-    Key? key,
-  }) : super(key: key);
+class ChatbotPage extends StatefulWidget {
+  const ChatbotPage({Key? key}) : super(key: key);
+
+  @override
+  _ChatbotPageState createState() => _ChatbotPageState();
+}
+
+class _ChatbotPageState extends State<ChatbotPage> {
+  final ChatbotController chatbotController = ChatbotController();
+  List<Map<String, String>> messages = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _addMessage("How can I help you?", "Chatbot");
+  }
+
+  void _addMessage(String message, String sender) {
+    setState(() {
+      messages.add({"message": message, "sender": sender});
+    });
+  }
+
+  void _handleSelection(String selected) async {
+    _addMessage(selected, "User");
+    List<Map<String, String>> response =
+        await chatbotController.getResponse(selected);
+    for (var item in response) {
+      _addMessage(item['question']!, "Chatbot");
+    }
+    if (selected.toLowerCase().contains('theory') ||
+        selected.toLowerCase().contains('dalil')) {
+      _addMessage(
+          chatbotController.getExplanationMessage(
+              selected.toLowerCase().contains('theory') ? 'theory' : 'dalil',
+              selected),
+          "Chatbot");
+      _addMessage("See the content", "Chatbot");
+    }
+  }
+
+  void _navigateToPage(String selected) async {
+    final detailedInfo = await chatbotController.getDetailedInfo(selected);
+    if (detailedInfo != null) {
+      if (detailedInfo.containsKey('title')) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TheoryContentPage(theory: detailedInfo),
+          ),
+        );
+      } else if (detailedInfo.containsKey('heir')) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DalilListPage(heir: detailedInfo['heir']),
+          ),
+        );
+      }
+    }
+  }
+
+  Widget _buildChatBubble(String message, String sender) {
+    bool isBot = sender == "Chatbot";
+    return Align(
+      alignment: isBot ? Alignment.centerLeft : Alignment.centerRight,
+      child: Container(
+        margin: EdgeInsets.symmetric(vertical: 5),
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        decoration: BoxDecoration(
+          color: isBot ? Colors.teal.shade100 : Colors.green.shade100,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(isBot ? 0 : 15),
+            topRight: Radius.circular(isBot ? 15 : 0),
+            bottomLeft: Radius.circular(15),
+            bottomRight: Radius.circular(15),
+          ),
+        ),
+        child: Text(
+          message,
+          style: TextStyle(
+            color: isBot ? Colors.black : Colors.black,
+            fontSize: 16,
+          ),
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _buildPredefinedUserOptions() {
+    return [
+      ListTile(
+        title: Text("I would like to know more about Faraid’s Theory"),
+        onTap: () => _handleSelection("Theory"),
+      ),
+      ListTile(
+        title: Text("I would like to know more about Faraid’s Dalil"),
+        onTap: () => _handleSelection("Dalil"),
+      ),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +138,19 @@ class ChatbotPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 25),
+            Expanded(
+              child: ListView.builder(
+                itemCount: messages.length,
+                itemBuilder: (context, index) {
+                  final message = messages[index];
+                  return _buildChatBubble(
+                      message['message']!, message['sender']!);
+                },
+              ),
+            ),
+            Column(
+              children: _buildPredefinedUserOptions(),
+            ),
           ],
         ),
       ),
