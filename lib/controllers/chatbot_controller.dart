@@ -14,7 +14,7 @@ class ChatbotController {
       return model.getQuestionsForInput(libraryController.dalilList, 'heir');
     } else {
       return Future.value([
-        {"question": "How can I help you?"}
+        {"question": "Halo?"}
       ]);
     }
   }

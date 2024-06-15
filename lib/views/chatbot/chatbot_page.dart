@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/controllers/chatbot_controller.dart';
-import 'package:radeena/views/material/dalil_list_page.dart';
-import 'package:radeena/views/material/theory_content_page.dart';
 
 class ChatbotPage extends StatefulWidget {
   const ChatbotPage({Key? key}) : super(key: key);
@@ -67,25 +65,32 @@ class _ChatbotPageState extends State<ChatbotPage> {
     });
   }
 
-  void _navigateToPage(String selected) async {
+  void _provideDetailedExplanation(String selected) async {
     final detailedInfo = await chatbotController.getDetailedInfo(selected);
     if (detailedInfo != null) {
+      String detailedMessage;
       if (detailedInfo.containsKey('title')) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => TheoryContentPage(theory: detailedInfo),
-          ),
-        );
+        detailedMessage =
+            "Sure! Here is the detailed explanation of \"${detailedInfo['title']}\".\n\nContent: ${detailedInfo['content']}\n\nSubContent: ${detailedInfo['subContent']}\n\nHope it helps 😊";
       } else if (detailedInfo.containsKey('heir')) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DalilListPage(heir: detailedInfo['heir']),
-          ),
-        );
+        detailedMessage =
+            "Sure! Here is the detailed explanation of dalil for \"${detailedInfo['heir']}\".\n\nPortion: ${detailedInfo['portion']}\n\nCondition: ${detailedInfo['condition']}\n\nSource: ${detailedInfo['source']}\n\nEvidenceContent: ${detailedInfo['evidenceContent']}\n\nFullEvidence: ${detailedInfo['fullEvidence']}\n\nHope it helps 😊";
+      } else {
+        detailedMessage = "Sorry, I couldn't find any information on that.";
       }
+
+      _addMessage(detailedMessage, "Chatbot");
+      _restartChat();
     }
+  }
+
+  void _restartChat() {
+    Future.delayed(Duration(seconds: 2), () {
+      _addMessage("Anything else I can help you with? 🤓", "Chatbot");
+      setState(() {
+        predefinedOptions = chatbotController.model.getInitialOptions();
+      });
+    });
   }
 
   Widget _buildChatBubble(String message, String sender) {
@@ -124,7 +129,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
           backgroundColor: Colors.green.shade100,
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(13),
+            borderRadius: BorderRadius.circular(12),
           ),
         ),
         onPressed: onTap,
@@ -142,27 +147,6 @@ class _ChatbotPageState extends State<ChatbotPage> {
               _handleDetailedSelection(option['question']!);
             }))
         .toList();
-  }
-
-  Widget _buildSeeContentButton(String selected) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white,
-          backgroundColor: Colors.teal.shade700,
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(13),
-          ),
-        ),
-        onPressed: () => _navigateToPage(selected),
-        child: Text(
-          "See the content",
-          style: TextStyle(fontSize: 16),
-        ),
-      ),
-    );
   }
 
   @override
@@ -205,8 +189,6 @@ class _ChatbotPageState extends State<ChatbotPage> {
                   return Column(
                     children: [
                       _buildChatBubble(message['message']!, message['sender']!),
-                      if (message['message'] == "See the content")
-                        _buildSeeContentButton(selectedValue)
                     ],
                   );
                 },

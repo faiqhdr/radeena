@@ -16,6 +16,6 @@ class ChatbotModel {
   }
 
   String getDetailedExplanationMessage(String type, String value) {
-    return 'Sure! Click the button below for a more detailed explanation of **$value**. Hope it helps 😊';
+    return 'Sure! Here is the detailed explanation of "$value".';
   }
 }
