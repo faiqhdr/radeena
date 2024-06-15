@@ -18,7 +18,6 @@ class LibraryController {
 
   List getUniqueHeirs() {
     final heirs = dalilList.map((dalil) => dalil['heir']).toSet().toList();
-    heirs.sort();
     return heirs;
   }
 

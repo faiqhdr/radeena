@@ -84,8 +84,7 @@ class _DalilListPageState extends State<DalilListPage> {
                           },
                           child: Container(
                             margin: EdgeInsets.only(bottom: 10),
-                            width: 58.0,
-                            height: 58.0,
+                            padding: EdgeInsets.all(16),
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
                                 colors: [
@@ -97,15 +96,34 @@ class _DalilListPageState extends State<DalilListPage> {
                               ),
                               borderRadius: BorderRadius.circular(13.0),
                             ),
-                            child: Center(
-                              child: Text(
-                                dalil['source'],
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  dalil['source'],
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
-                              ),
+                                RichText(
+                                  text: TextSpan(
+                                    style: TextStyle(
+                                      color: Colors.yellow.shade100,
+                                      fontSize: 13,
+                                    ),
+                                    children: [
+                                      TextSpan(text: 'Portion: '),
+                                      TextSpan(
+                                        text: dalil['portion'],
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         );

@@ -95,13 +95,18 @@ class _DalilHeirPageState extends State<DalilHeirPage> {
                               ),
                               borderRadius: BorderRadius.circular(13.0),
                             ),
-                            child: Center(
-                              child: Text(
-                                heir,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
+                                child: Text(
+                                  heir,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                             ),
