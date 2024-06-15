@@ -6,16 +6,12 @@ class ChatbotController {
   final LibraryController libraryController = LibraryController();
 
   Future<List<Map<String, String>>> getResponse(String input) async {
-    if (input.toLowerCase().contains('faraid')) {
-      return Future.value(model.getInitialOptions());
-    } else if (input.toLowerCase().contains('theory')) {
+    if (input.toLowerCase().contains('theory')) {
       await libraryController.loadTheoryData();
-      return model.getQuestionsForInput(
-          input, libraryController.theoryList, 'title');
+      return model.getQuestionsForInput(libraryController.theoryList, 'title');
     } else if (input.toLowerCase().contains('dalil')) {
       await libraryController.loadDalilData();
-      return model.getQuestionsForInput(
-          input, libraryController.dalilList, 'heir');
+      return model.getQuestionsForInput(libraryController.dalilList, 'heir');
     } else {
       return Future.value([
         {"question": "How can I help you?"}
@@ -25,14 +21,12 @@ class ChatbotController {
 
   Future<Map<String, dynamic>?> getDetailedInfo(String input) async {
     if (input.toLowerCase().contains('theory')) {
+      await libraryController.loadTheoryData();
       return libraryController.getTheoryByTitle(input);
     } else if (input.toLowerCase().contains('dalil')) {
+      await libraryController.loadDalilData();
       return libraryController.getDalilByHeir(input);
     }
     return null;
-  }
-
-  String getExplanationMessage(String type, String value) {
-    return model.getDetailedExplanationMessage(type, value);
   }
 }

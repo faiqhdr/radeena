@@ -43,6 +43,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
       predefinedOptions = [];
       selectedValue = selected;
     });
+
     List<Map<String, String>> response =
         await chatbotController.getResponse(selected);
     Future.delayed(Duration(seconds: 2), () {
@@ -116,7 +117,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
 
   Widget _buildPredefinedUserOption(String text, VoidCallback onTap) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 2, horizontal: 15),
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.black,

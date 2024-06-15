@@ -11,7 +11,7 @@ class ChatbotModel {
   }
 
   List<Map<String, String>> getQuestionsForInput(
-      String input, List<Map<String, dynamic>> dataList, String key) {
+      List<Map<String, dynamic>> dataList, String key) {
     return dataList.map((data) => {"question": data[key] as String}).toList();
   }
 
