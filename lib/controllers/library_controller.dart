@@ -3,9 +3,11 @@ import 'package:flutter/services.dart';
 
 class LibraryController {
   List<Map<String, dynamic>> dalilList = [];
+  List<Map<String, dynamic>> theoryList = [];
 
   LibraryController() {
     loadDalilData();
+    loadTheoryData();
   }
 
   Future<void> loadDalilData() async {
@@ -13,7 +15,13 @@ class LibraryController {
         await rootBundle.loadString('lib/models/dalil.json');
     final data = await json.decode(response);
     dalilList = List<Map<String, dynamic>>.from(data['evidence']);
-    print('Dalil data loaded: $dalilList'); // Debugging line
+  }
+
+  Future<void> loadTheoryData() async {
+    final String response =
+        await rootBundle.loadString('lib/models/theory.json');
+    final data = await json.decode(response);
+    theoryList = List<Map<String, dynamic>>.from(data['theory']);
   }
 
   List getUniqueHeirs() {
