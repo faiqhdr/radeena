@@ -105,7 +105,7 @@ class MenuPage extends StatelessWidget {
                         colorTwo: blue02Color,
                         onPressed: () {
                           print("Directed to Chatbot Page");
-                          Navigator.pushNamed(context, '/');
+                          Navigator.pushNamed(context, '/chatbotPage');
                         },
                       ),
                     ],
