@@ -36,7 +36,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
     });
   }
 
-  void _handleInitialSelection(String selected) async {
+  void _handleDetailedSelection(String selected) async {
     _addMessage(selected, "User");
     setState(() {
       isTyping = true;
@@ -49,23 +49,21 @@ class _ChatbotPageState extends State<ChatbotPage> {
       setState(() {
         isTyping = false;
         predefinedOptions = response;
-        _addMessage(
-          selected.toLowerCase().contains('theory')
-              ? "Which theory do you want to know?"
-              : "Which dalil do you want to know?",
-          "Chatbot",
-        );
+        if (response.isEmpty) {
+          _addMessage(
+            "Sorry, I couldn't find any information on that. Please try another query.",
+            "Chatbot",
+          );
+        } else {
+          _addMessage(
+            selected.toLowerCase().contains('theory')
+                ? "Which theory do you want to know?"
+                : "Which dalil do you want to know?",
+            "Chatbot",
+          );
+        }
       });
     });
-  }
-
-  void _handleDetailedSelection(String selected) {
-    _addMessage(selected, "User");
-    String type =
-        selectedValue.toLowerCase().contains('theory') ? 'theory' : 'dalil';
-    _addMessage(
-        chatbotController.getExplanationMessage(type, selected), "Chatbot");
-    _addMessage("See the content", "Chatbot");
   }
 
   void _navigateToPage(String selected) async {
@@ -139,8 +137,9 @@ class _ChatbotPageState extends State<ChatbotPage> {
 
   List<Widget> _buildPredefinedUserOptions() {
     return predefinedOptions
-        .map((option) => _buildPredefinedUserOption(option['question']!,
-            () => _handleDetailedSelection(option['question']!)))
+        .map((option) => _buildPredefinedUserOption(option['question']!, () {
+              _handleDetailedSelection(option['question']!);
+            }))
         .toList();
   }
 
