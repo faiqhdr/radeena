@@ -19,11 +19,20 @@ class _ChatbotPageState extends State<ChatbotPage> {
   @override
   void initState() {
     super.initState();
-    _addMessage("Assalamu'alaikum warahmatullah wabarakatuh! 👋", "Chatbot");
+    _initialGreeting();
+  }
+
+  void _initialGreeting() {
     Future.delayed(Duration(seconds: 1), () {
-      _addMessage("How can I help you? 🤓", "Chatbot");
-      setState(() {
-        predefinedOptions = chatbotController.model.getInitialOptions();
+      _addMessage("Assalamu'alaikum warahmatullah wabarakatuh! 👋", "Chatbot");
+    });
+    Future.delayed(Duration(seconds: 2), () {
+      _addMessage("How can I help you? 😇🙏", "Chatbot");
+    }).then((_) {
+      Future.delayed(Duration(seconds: 1), () {
+        setState(() {
+          predefinedOptions = chatbotController.model.getInitialOptions();
+        });
       });
     });
   }
@@ -79,14 +88,22 @@ class _ChatbotPageState extends State<ChatbotPage> {
           isTyping = false;
           if (detailedInfo != null) {
             String detailedMessage;
+            String confirmMessage;
             if (detailedInfo.containsKey('title')) {
+              confirmMessage =
+                  "Sure! Here is the detailed explanation of \"${detailedInfo['title']}\". 😉👌";
+              _addMessage(confirmMessage, "Chatbot");
               detailedMessage =
-                  "Sure! Here is the detailed explanation of \"${detailedInfo['title']}\".\n\nContent: ${detailedInfo['content']}\n\nSubContent: ${detailedInfo['subContent']}";
+                  "Content: ${detailedInfo['content']}\n\nSubContent: ${detailedInfo['subContent']}";
             } else {
               detailedMessage =
                   "Sorry, I couldn't display the explanation on that. 😵";
             }
-            _addMessage(detailedMessage, "Chatbot");
+            Future.delayed(Duration(seconds: 2), () {
+              setState(() {
+                _addMessage(detailedMessage, "Chatbot");
+              });
+            });
 
             Future.delayed(Duration(seconds: 2), () {
               setState(() {
@@ -134,9 +151,16 @@ class _ChatbotPageState extends State<ChatbotPage> {
 
   void _restartChat() {
     Future.delayed(Duration(seconds: 2), () {
-      _addMessage("Anything else I can help you with? 🤓", "Chatbot");
       setState(() {
-        predefinedOptions = chatbotController.model.getInitialOptions();
+        isTyping = false;
+        predefinedOptions = [];
+        selectedValue = '';
+      });
+      _addMessage("Anything else I can help you with? 🤓", "Chatbot");
+      Future.delayed(Duration(seconds: 1), () {
+        setState(() {
+          predefinedOptions = chatbotController.model.getInitialOptions();
+        });
       });
     });
   }
