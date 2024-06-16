@@ -324,8 +324,8 @@ class _ChatbotPageState extends State<ChatbotPage> {
                     ],
                   ),
                 SizedBox(height: 10),
-                Positioned(
-                  child: Column(
+                if (predefinedOptions.isNotEmpty)
+                  Column(
                     children: [
                       Padding(
                         padding: EdgeInsets.only(bottom: 5),
@@ -347,7 +347,6 @@ class _ChatbotPageState extends State<ChatbotPage> {
                       ),
                     ],
                   ),
-                ),
                 SizedBox(height: 15),
               ],
             ),
