@@ -86,6 +86,16 @@ class _ChatbotPageState extends State<ChatbotPage> {
       final detailedInfo = await chatbotController.getDetailedInfo(selected);
 
       if (detailedInfo != null && detailedInfo.containsKey('theories')) {
+        setState(() {
+          isTyping = true;
+        });
+        await Future.delayed(Duration(seconds: 2));
+        setState(() {
+          isTyping = false;
+          String introMessage =
+              "Sure! Here is the detailed explanation of \"${selected}\". 😉👌";
+          _addMessage(introMessage, "Chatbot");
+        });
         for (var theory in detailedInfo['theories']) {
           setState(() {
             isTyping = true;
@@ -125,6 +135,18 @@ class _ChatbotPageState extends State<ChatbotPage> {
   }
 
   void _showDalilList(List<Map<String, dynamic>> dalilList) async {
+    if (dalilList.isNotEmpty) {
+      setState(() {
+        isTyping = true;
+      });
+      await Future.delayed(Duration(seconds: 2));
+      setState(() {
+        isTyping = false;
+        String introMessage =
+            "Sure! Here is the detailed dalil of \"${dalilList[0]['heir']}\". 😉👌";
+        _addMessage(introMessage, "Chatbot");
+      });
+    }
     for (var dalil in dalilList) {
       setState(() {
         isTyping = true;
@@ -170,7 +192,13 @@ class _ChatbotPageState extends State<ChatbotPage> {
         margin: EdgeInsets.symmetric(vertical: 5),
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         decoration: BoxDecoration(
-          color: isBot ? Colors.teal.shade100 : Colors.green.shade100,
+          gradient: LinearGradient(
+            colors: isBot
+                ? [Colors.teal.shade100, Colors.blue.shade100]
+                : [Colors.deepPurple.shade100, Colors.indigo.shade100],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(isBot ? 0 : 15),
             topRight: Radius.circular(isBot ? 15 : 0),
@@ -192,19 +220,32 @@ class _ChatbotPageState extends State<ChatbotPage> {
   Widget _buildPredefinedUserOption(String text, VoidCallback onTap) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.black,
-          backgroundColor: Colors.green.shade100,
-          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [primaryColor, Colors.teal.shade300],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        onPressed: onTap,
-        child: Text(
-          text,
-          style: TextStyle(fontSize: 16),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(12),
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            child: Center(
+              child: Text(
+                text,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );
