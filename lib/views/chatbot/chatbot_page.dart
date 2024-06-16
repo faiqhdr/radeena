@@ -10,17 +10,34 @@ class ChatbotPage extends StatefulWidget {
   _ChatbotPageState createState() => _ChatbotPageState();
 }
 
-class _ChatbotPageState extends State<ChatbotPage> {
+class _ChatbotPageState extends State<ChatbotPage>
+    with TickerProviderStateMixin {
   final ChatbotController chatbotController = ChatbotController();
   List<Map<String, String>> messages = [];
   bool isTyping = false;
   List<Map<String, String>> predefinedOptions = [];
   String selectedValue = '';
 
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+
   @override
   void initState() {
     super.initState();
     _initialGreeting();
+
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 850),
+      vsync: this,
+    )..repeat(reverse: true);
+    _animation =
+        Tween<double>(begin: 0.3, end: 1.0).animate(_animationController);
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   void _initialGreeting() {
@@ -251,6 +268,65 @@ class _ChatbotPageState extends State<ChatbotPage> {
     );
   }
 
+  Widget _buildTypingIndicator() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        AnimatedBuilder(
+          animation: _animation,
+          builder: (context, child) {
+            return Opacity(
+              opacity: _animation.value,
+              child: Container(
+                width: 15,
+                height: 15,
+                margin: EdgeInsets.symmetric(horizontal: 2.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.teal,
+                ),
+              ),
+            );
+          },
+        ),
+        AnimatedBuilder(
+          animation: _animation,
+          builder: (context, child) {
+            return Opacity(
+              opacity: _animation.value,
+              child: Container(
+                width: 15,
+                height: 15,
+                margin: EdgeInsets.symmetric(horizontal: 2.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.teal,
+                ),
+              ),
+            );
+          },
+        ),
+        AnimatedBuilder(
+          animation: _animation,
+          builder: (context, child) {
+            return Opacity(
+              opacity: _animation.value,
+              child: Container(
+                width: 15,
+                height: 15,
+                margin: EdgeInsets.symmetric(horizontal: 2.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.teal,
+                ),
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
   List<Widget> _buildPredefinedUserOptions() {
     return predefinedOptions
         .map((option) => _buildPredefinedUserOption(option['question']!, () {
@@ -323,43 +399,10 @@ class _ChatbotPageState extends State<ChatbotPage> {
                   ),
                 ),
                 if (isTyping)
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 10,
-                            height: 10,
-                            margin: EdgeInsets.symmetric(horizontal: 2.0),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          Container(
-                            width: 10,
-                            height: 10,
-                            margin: EdgeInsets.symmetric(horizontal: 2.0),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          Container(
-                            width: 10,
-                            height: 10,
-                            margin: EdgeInsets.symmetric(horizontal: 2.0),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 1),
+                    child: _buildTypingIndicator(),
                   ),
-                SizedBox(height: 10),
                 if (predefinedOptions.isNotEmpty)
                   Column(
                     children: [
