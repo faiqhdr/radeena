@@ -14,8 +14,4 @@ class ChatbotModel {
       List<Map<String, dynamic>> dataList, String key) {
     return dataList.map((data) => {"question": data[key] as String}).toList();
   }
-
-  String getDetailedExplanationMessage(String type, String value) {
-    return 'Sure! Here is the detailed explanation of "$value".';
-  }
 }

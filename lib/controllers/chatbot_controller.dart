@@ -20,13 +20,15 @@ class ChatbotController {
   }
 
   Future<Map<String, dynamic>?> getDetailedInfo(String input) async {
-    if (input.toLowerCase().contains('theory')) {
-      await libraryController.loadTheoryData();
-      return libraryController.getTheoryByTitle(input);
-    } else if (input.toLowerCase().contains('dalil')) {
-      await libraryController.loadDalilData();
-      return libraryController.getDalilByHeir(input);
-    }
+    await libraryController.loadTheoryData();
+    await libraryController.loadDalilData();
+
+    var theory = libraryController.getTheoryByTitle(input);
+    if (theory != null) return theory;
+
+    var dalil = libraryController.getDalilByHeir(input);
+    if (dalil != null) return dalil;
+
     return null;
   }
 }

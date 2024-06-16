@@ -34,7 +34,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
     });
   }
 
-  void _handleDetailedSelection(String selected) async {
+  void _handleInitialSelection(String selected) async {
     _addMessage(selected, "User");
     setState(() {
       isTyping = true;
@@ -47,17 +47,17 @@ class _ChatbotPageState extends State<ChatbotPage> {
     Future.delayed(Duration(seconds: 2), () {
       setState(() {
         isTyping = false;
-        predefinedOptions = response;
         if (response.isEmpty) {
           _addMessage(
             "Sorry, I couldn't find any information on that. Please try another query.",
             "Chatbot",
           );
         } else {
+          predefinedOptions = response;
           _addMessage(
             selected.toLowerCase().contains('theory')
-                ? "Which theory do you want to know?"
-                : "Which dalil do you want to know?",
+                ? "Which theory do you want to know more about?"
+                : "Which dalil do you want to know more about?",
             "Chatbot",
           );
         }
@@ -66,22 +66,37 @@ class _ChatbotPageState extends State<ChatbotPage> {
   }
 
   void _provideDetailedExplanation(String selected) async {
-    final detailedInfo = await chatbotController.getDetailedInfo(selected);
-    if (detailedInfo != null) {
-      String detailedMessage;
-      if (detailedInfo.containsKey('title')) {
-        detailedMessage =
-            "Sure! Here is the detailed explanation of \"${detailedInfo['title']}\".\n\nContent: ${detailedInfo['content']}\n\nSubContent: ${detailedInfo['subContent']}\n\nHope it helps 😊";
-      } else if (detailedInfo.containsKey('heir')) {
-        detailedMessage =
-            "Sure! Here is the detailed explanation of dalil for \"${detailedInfo['heir']}\".\n\nPortion: ${detailedInfo['portion']}\n\nCondition: ${detailedInfo['condition']}\n\nSource: ${detailedInfo['source']}\n\nEvidenceContent: ${detailedInfo['evidenceContent']}\n\nFullEvidence: ${detailedInfo['fullEvidence']}\n\nHope it helps 😊";
-      } else {
-        detailedMessage = "Sorry, I couldn't find any information on that.";
-      }
+    _addMessage(selected, "User");
+    setState(() {
+      isTyping = true;
+      predefinedOptions = [];
+    });
 
-      _addMessage(detailedMessage, "Chatbot");
-      _restartChat();
-    }
+    final detailedInfo = await chatbotController.getDetailedInfo(selected);
+    Future.delayed(Duration(seconds: 2), () {
+      setState(() {
+        isTyping = false;
+        if (detailedInfo != null) {
+          String detailedMessage;
+          if (detailedInfo.containsKey('title')) {
+            detailedMessage =
+                "Sure! Here is the detailed explanation of \"${detailedInfo['title']}\".\n\nContent: ${detailedInfo['content']}\n\nSubContent: ${detailedInfo['subContent']}\n\nHope it helps 😊";
+          } else if (detailedInfo.containsKey('heir')) {
+            detailedMessage =
+                "Sure! Here is the detailed explanation of dalil for \"${detailedInfo['heir']}\".\n\nPortion: ${detailedInfo['portion']}\n\nCondition: ${detailedInfo['condition']}\n\nSource: ${detailedInfo['source']}\n\nEvidenceContent: ${detailedInfo['evidenceContent']}\n\nFullEvidence: ${detailedInfo['fullEvidence']}\n\nHope it helps 😊";
+          } else {
+            detailedMessage = "Sorry, I couldn't find any information on that.";
+          }
+          _addMessage(detailedMessage, "Chatbot");
+        } else {
+          _addMessage(
+            "Sorry, I couldn't find any information on that.",
+            "Chatbot",
+          );
+        }
+        _restartChat();
+      });
+    });
   }
 
   void _restartChat() {
@@ -144,7 +159,12 @@ class _ChatbotPageState extends State<ChatbotPage> {
   List<Widget> _buildPredefinedUserOptions() {
     return predefinedOptions
         .map((option) => _buildPredefinedUserOption(option['question']!, () {
-              _handleDetailedSelection(option['question']!);
+              if (selectedValue.toLowerCase().contains('theory') ||
+                  selectedValue.toLowerCase().contains('dalil')) {
+                _provideDetailedExplanation(option['question']!);
+              } else {
+                _handleInitialSelection(option['question']!);
+              }
             }))
         .toList();
   }
