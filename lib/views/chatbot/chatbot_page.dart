@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:lottie/lottie.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/controllers/chatbot_controller.dart';
 
@@ -240,81 +242,117 @@ class _ChatbotPageState extends State<ChatbotPage> {
           color: green01Color,
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: Text(
-          "Chatbot",
-          style: titleDetermineHeirsStyle(),
-        ),
-      ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: width * .06),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        title: Row(
           children: [
-            Padding(
-              padding: EdgeInsets.only(top: 0),
-              child: Text(
-                "Ask Radeena",
-                style: textUnderTitleStyle(),
-              ),
+            Text(
+              "Chatbot",
+              style: titleDetermineHeirsStyle(),
             ),
-            SizedBox(height: 25),
-            Expanded(
-              child: ListView.builder(
-                itemCount: messages.length,
-                itemBuilder: (context, index) {
-                  final message = messages[index];
-                  return Column(
-                    children: [
-                      _buildChatBubble(message['message']!, message['sender']!),
-                    ],
-                  );
-                },
-              ),
+            Spacer(),
+            Lottie.asset(
+              'assets/lottie/chatbot.json',
+              width: 90,
+              height: 90,
             ),
-            if (isTyping)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 10,
-                    height: 10,
-                    margin: EdgeInsets.symmetric(horizontal: 2.0),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  Container(
-                    width: 10,
-                    height: 10,
-                    margin: EdgeInsets.symmetric(horizontal: 2.0),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  Container(
-                    width: 10,
-                    height: 10,
-                    margin: EdgeInsets.symmetric(horizontal: 2.0),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-            SizedBox(height: 10),
-            Container(
-              height: 50,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: _buildPredefinedUserOptions(),
-              ),
-            ),
-            SizedBox(height: 15),
           ],
         ),
+      ),
+      body: Stack(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: width * .06),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 0),
+                  child: Text(
+                    "Ask Radeena",
+                    style: textUnderTitleStyle(),
+                  ),
+                ),
+                SizedBox(height: 25),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: messages.length,
+                    itemBuilder: (context, index) {
+                      final message = messages[index];
+                      return Column(
+                        children: [
+                          _buildChatBubble(
+                              message['message']!, message['sender']!),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                if (isTyping)
+                  Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 10,
+                            height: 10,
+                            margin: EdgeInsets.symmetric(horizontal: 2.0),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Container(
+                            width: 10,
+                            height: 10,
+                            margin: EdgeInsets.symmetric(horizontal: 2.0),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          Container(
+                            width: 10,
+                            height: 10,
+                            margin: EdgeInsets.symmetric(horizontal: 2.0),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                SizedBox(height: 10),
+                Positioned(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 5),
+                        child: Text(
+                          "----------------- << Select Response >> -----------------",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: primaryColor,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: 55,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: _buildPredefinedUserOptions(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 15),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

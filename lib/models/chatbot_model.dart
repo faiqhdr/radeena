@@ -16,8 +16,4 @@ class ChatbotModel {
         dataList.map((data) => data[key] as String).toSet().toList();
     return uniqueQuestions.map((question) => {"question": question}).toList();
   }
-
-  String getDetailedExplanationMessage(String type, String value) {
-    return 'Sure! Here is the detailed explanation of "$value".';
-  }
 }
