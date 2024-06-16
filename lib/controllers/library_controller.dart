@@ -33,9 +33,8 @@ class LibraryController {
     return dalilList.where((dalil) => dalil['heir'] == heir).toList();
   }
 
-  Map<String, dynamic> getTheoryByTitle(String title) {
-    return theoryList.firstWhere((theory) => theory['title'] == title,
-        orElse: () => {});
+  List<Map<String, dynamic>> getTheoriesByTitle(String title) {
+    return theoryList.where((theory) => theory['title'] == title).toList();
   }
 
   Map<String, dynamic> getDalilByHeir(String heir) {

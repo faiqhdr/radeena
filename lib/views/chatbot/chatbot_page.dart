@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:lottie/lottie.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/controllers/chatbot_controller.dart';
@@ -85,44 +84,40 @@ class _ChatbotPageState extends State<ChatbotPage> {
 
     if (selectedValue.toLowerCase().contains('theory')) {
       final detailedInfo = await chatbotController.getDetailedInfo(selected);
-      Future.delayed(Duration(seconds: 2), () {
+
+      if (detailedInfo != null && detailedInfo.containsKey('theories')) {
+        for (var theory in detailedInfo['theories']) {
+          setState(() {
+            isTyping = true;
+          });
+          await Future.delayed(Duration(seconds: 2));
+          setState(() {
+            isTyping = false;
+            String detailedMessage =
+                "Content: ${theory['content']}\n\nSubContent: ${theory['subContent']}";
+            _addMessage(detailedMessage, "Chatbot");
+          });
+        }
+        setState(() {
+          isTyping = true;
+        });
+        await Future.delayed(Duration(seconds: 2));
         setState(() {
           isTyping = false;
-          if (detailedInfo != null) {
-            String detailedMessage;
-            String confirmMessage;
-            if (detailedInfo.containsKey('title')) {
-              confirmMessage =
-                  "Sure! Here is the detailed explanation of \"${detailedInfo['title']}\". 😉👌";
-              _addMessage(confirmMessage, "Chatbot");
-              detailedMessage =
-                  "Content: ${detailedInfo['content']}\n\nSubContent: ${detailedInfo['subContent']}";
-            } else {
-              detailedMessage =
-                  "Sorry, I couldn't display the explanation on that. 😵";
-            }
-            Future.delayed(Duration(seconds: 2), () {
-              setState(() {
-                _addMessage(detailedMessage, "Chatbot");
-              });
-            });
-
-            Future.delayed(Duration(seconds: 2), () {
-              setState(() {
-                String detailedMessage = "Hope it helps! 😊";
-                _addMessage(detailedMessage, "Chatbot");
-              });
-              _restartChat();
-            });
-          } else {
-            _addMessage(
-              "Sorry, I couldn't find any information on that. 🥲",
-              "Chatbot",
-            );
-            _restartChat();
-          }
+          _addMessage("Hope it helps! 😊", "Chatbot");
+          _restartChat();
         });
-      });
+      } else {
+        await Future.delayed(Duration(seconds: 2));
+        setState(() {
+          isTyping = false;
+          _addMessage(
+            "Sorry, I couldn't display the explanation on that. 😵",
+            "Chatbot",
+          );
+          _restartChat();
+        });
+      }
     } else {
       final dalilList = await chatbotController.getDalilList(selected);
       _showDalilList(dalilList);

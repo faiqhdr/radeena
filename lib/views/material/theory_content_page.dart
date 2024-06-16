@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
+import 'package:radeena/controllers/library_controller.dart';
 
 class TheoryContentPage extends StatelessWidget {
-  final Map<String, dynamic> theory;
+  final String title;
+  final LibraryController libraryController;
 
-  const TheoryContentPage({required this.theory, Key? key}) : super(key: key);
+  const TheoryContentPage(
+      {required this.title, required this.libraryController, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
+    final theories = libraryController.getTheoriesByTitle(title);
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -34,44 +39,47 @@ class TheoryContentPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(top: 0),
                 child: Text(
-                  theory['title'],
+                  title,
                   style: textUnderTitleStyle(),
                 ),
               ),
               SizedBox(height: 25),
-              Text(
-                "Content:",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: green02Color,
+              for (var theory in theories) ...[
+                Text(
+                  "Content:",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: green02Color,
+                  ),
                 ),
-              ),
-              SizedBox(height: 5),
-              Text(
-                theory['content'],
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                SizedBox(height: 5),
+                Text(
+                  theory['content'],
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-              SizedBox(height: 25),
-              Text(
-                "Sub Content:",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: green02Color,
+                SizedBox(height: 25),
+                Text(
+                  "Sub Content:",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: green02Color,
+                  ),
                 ),
-              ),
-              SizedBox(height: 5),
-              Text(
-                theory['subContent'],
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                SizedBox(height: 5),
+                Text(
+                  theory['subContent'],
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
+                SizedBox(height: 25),
+              ],
             ],
           ),
         ),

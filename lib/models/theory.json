@@ -1,148 +1,286 @@
 {
     "theory": [
         {
-            "tag": 0,
-            "title": "Sample Theory",
-            "content": "Sample content theory.",
-            "subContent": "Sample sub content theory."
+            "tag": 1,
+            "title": "Definition of Inheritance Law",
+            "content": "Definition of Inheritance Law",
+            "subContent": "Inheritance law refers to the set of rules and principles that determine the distribution of a deceased person's estate among their heirs. It encompasses the legal processes involved in the transfer of assets and liabilities from the deceased to their beneficiaries."
         },
         {
             "tag": 1,
             "title": "Definition of Inheritance Law",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Importance of Inheritance Law",
+            "subContent": "The principles of inheritance law ensure that the assets of the deceased are distributed fairly and in accordance with legal statutes and religious guidelines, providing a structured approach to asset allocation among heirs."
         },
         {
             "tag": 2,
             "title": "Rights Related to Inherited Property",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Rights of Heirs",
+            "subContent": "Rights related to inherited property include the entitlements and claims that heirs have on the assets left by the deceased. These rights ensure that each beneficiary receives their lawful share of the estate."
+        },
+        {
+            "tag": 2,
+            "title": "Rights Related to Inherited Property",
+            "content": "Protection of Heirs' Rights",
+            "subContent": "Heirs' rights to inherited property are protected by law, ensuring the proper distribution of assets and preventing disputes among beneficiaries."
         },
         {
             "tag": 3,
             "title": "Pillars of Inheritance",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Pillars of Inheritance",
+            "subContent": "The pillars of inheritance are fundamental elements required for the proper execution of inheritance law. These pillars include the deceased (al-muwarrits), the heir (al-warits), and the inherited estate (al-mauruts)."
+        },
+        {
+            "tag": 3,
+            "title": "Pillars of Inheritance",
+            "content": "Conditions for Inheritance",
+            "subContent": "The deceased must be confirmed dead, the heir must be alive at the time of the deceased's death, and there must be an estate to be inherited for the inheritance process to proceed."
         },
         {
             "tag": 4,
             "title": "Conditions of Inheritance",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Conditions of Inheritance",
+            "subContent": "Conditions of inheritance refer to specific requirements that must be met for an inheritance to be valid. These conditions ensure that the distribution of the estate adheres to legal and religious guidelines."
+        },
+        {
+            "tag": 4,
+            "title": "Conditions of Inheritance",
+            "content": "Specific Conditions",
+            "subContent": "Conditions include the certainty of the deceased's death, the heir's existence at the time of death, and the relationship between the heir and the deceased."
         },
         {
             "tag": 5,
             "title": "Causes of Inheritance",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Causes of Inheritance",
+            "subContent": "Causes of inheritance are the factors that determine who is eligible to inherit from the deceased. These causes include blood relations, marital bonds, and other legal relationships."
+        },
+        {
+            "tag": 5,
+            "title": "Causes of Inheritance",
+            "content": "Types of Causes",
+            "subContent": "Blood relations (nasab), marital bonds (nikah), and the freeing of a slave (wala') are the primary causes that establish an heir's right to inherit."
         },
         {
             "tag": 6,
             "title": "Barriers to Inheritance",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Barriers to Inheritance",
+            "subContent": "Barriers to inheritance are factors that disqualify an individual from receiving an inheritance. Common barriers include murder, differences in religion, and slavery."
+        },
+        {
+            "tag": 6,
+            "title": "Barriers to Inheritance",
+            "content": "Specific Barriers",
+            "subContent": "A person who kills the deceased, belongs to a different religion, or is enslaved cannot inherit from the deceased's estate."
         },
         {
             "tag": 7,
             "title": "Male Heirs",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Definition of Male Heirs",
+            "subContent": "Male heirs are those male relatives of the deceased who are eligible to inherit. These include sons, grandsons, fathers, grandfathers, brothers, and other male relatives."
+        },
+        {
+            "tag": 7,
+            "title": "Male Heirs",
+            "content": "Types of Male Heirs",
+            "subContent": "Male heirs generally receive a specified portion of the estate, with priority given to closer relatives in accordance with inheritance laws."
         },
         {
             "tag": 8,
             "title": "Female Heirs",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Definition of Female Heirs",
+            "subContent": "Female heirs are those female relatives of the deceased who are eligible to inherit. These include daughters, granddaughters, mothers, grandmothers, and sisters."
+        },
+        {
+            "tag": 8,
+            "title": "Female Heirs",
+            "content": "Types of Female Heirs",
+            "subContent": "Female heirs receive a specified portion of the estate, ensuring fair distribution and consideration of their rights within the inheritance framework."
         },
         {
             "tag": 9,
             "title": "How to Calculate Inheritance",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Steps in Calculating Inheritance",
+            "subContent": "Calculating inheritance involves determining the shares of each heir based on their relationship to the deceased and the applicable legal and religious guidelines."
+        },
+        {
+            "tag": 9,
+            "title": "How to Calculate Inheritance",
+            "content": "Factors in Calculation",
+            "subContent": "The calculation process takes into account the type and value of the estate, the number of heirs, and their respective entitlements as defined by inheritance laws."
+        },
+        {
+            "tag": 9,
+            "title": "How to Calculate Inheritance",
+            "content": "Example Calculation",
+            "subContent": "Example: If a man dies leaving behind a wife, a son, and a daughter, the wife's share is 1/8 of the estate. The remainder is divided between the son and daughter, with the son receiving twice the share of the daughter. If the estate is worth $800,000, the wife's share is $100,000, leaving $700,000 to be divided. The son receives $466,667 and the daughter receives $233,333."
         },
         {
             "tag": 10,
             "title": "At-Ta'shib",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Definition of At-Ta'shib",
+            "subContent": "At-Ta'shib refers to a category of heirs who inherit the remaining estate after the fixed shares have been distributed to the primary heirs."
+        },
+        {
+            "tag": 10,
+            "title": "At-Ta'shib",
+            "content": "Example of At-Ta'shib",
+            "subContent": "These heirs, typically male relatives, receive the residual estate in accordance with their priority and proximity to the deceased. For instance, if after distributing the fixed shares there is $100,000 remaining, this amount is given to the nearest male relative."
         },
         {
             "tag": 11,
             "title": "Al-Hajb",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Definition of Al-Hajb",
+            "subContent": "Al-Hajb refers to the exclusion of certain heirs from inheriting due to the presence of closer or more entitled relatives."
+        },
+        {
+            "tag": 11,
+            "title": "Al-Hajb",
+            "content": "Example of Al-Hajb",
+            "subContent": "This concept ensures that only those heirs with the closest relationship to the deceased receive their due share of the estate. For example, a brother is excluded from inheriting if the deceased has a son."
         },
         {
             "tag": 12,
             "title": "Al-'Aul",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Definition of Al-'Aul",
+            "subContent": "Al-'Aul is a concept in inheritance law where the shares of the estate are proportionally reduced when the total allocated shares exceed the available estate."
+        },
+        {
+            "tag": 12,
+            "title": "Al-'Aul",
+            "content": "Example Calculation of Al-'Aul",
+            "subContent": "Example: If the total shares allocated to the heirs exceed the estate, each share is proportionally reduced. If an estate is worth $600,000 and the shares exceed this amount by 20%, each share is reduced by 20%. Thus, if an heir was to receive $100,000, they now receive $80,000."
         },
         {
             "tag": 13,
             "title": "Ar-Radd",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Definition of Ar-Radd",
+            "subContent": "Ar-Radd refers to the redistribution of the remaining estate to the primary heirs when there are no eligible secondary heirs (At-Ta'shib)."
+        },
+        {
+            "tag": 13,
+            "title": "Ar-Radd",
+            "content": "Example of Ar-Radd",
+            "subContent": "This process ensures that the entire estate is allocated among the primary heirs, preventing any portion from remaining undistributed. For example, if an estate of $500,000 is initially divided with some shares remaining, those shares are redistributed among the primary heirs."
         },
         {
             "tag": 14,
             "title": "Al-Munasakhat",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Definition of Al-Munasakhat",
+            "subContent": "Al-Munasakhat deals with the inheritance process when multiple deaths occur within a short period, leading to a complex distribution of estates among successive heirs."
+        },
+        {
+            "tag": 14,
+            "title": "Al-Munasakhat",
+            "content": "Example of Al-Munasakhat",
+            "subContent": "This concept addresses the distribution of estates when the initial heir also dies before the estate is fully distributed, necessitating a re-evaluation of shares. For instance, if a father and son die in quick succession, the father's estate is distributed first, followed by a re-distribution including the son's estate."
         },
         {
             "tag": 15,
             "title": "Inheritance of Al-Khuntsa Musykil (Intersex)",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Definition of Al-Khuntsa Musykil",
+            "subContent": "The inheritance of Al-Khuntsa Musykil addresses the unique circumstances of intersex individuals and their entitlement to inheritance."
+        },
+        {
+            "tag": 15,
+            "title": "Inheritance of Al-Khuntsa Musykil (Intersex)",
+            "content": "Example of Al-Khuntsa Musykil",
+            "subContent": "Specific guidelines ensure that intersex individuals receive a fair share of the estate based on their legal and recognized gender identity. For example, if an intersex individual is legally recognized as male, they inherit according to male inheritance laws."
         },
         {
             "tag": 16,
             "title": "Inheritance of Al-Mafqud (Missing Person)",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Definition of Al-Mafqud",
+            "subContent": "The inheritance of Al-Mafqud deals with the distribution of an estate when an heir is missing and their status (alive or dead) is uncertain."
+        },
+        {
+            "tag": 16,
+            "title": "Inheritance of Al-Mafqud (Missing Person)",
+            "content": "Example of Al-Mafqud",
+            "subContent": "Legal provisions dictate the handling of such cases, ensuring that the estate is distributed fairly while considering the possibility of the missing person's return. For example, if an heir is declared missing, their share may be held in trust until their status is confirmed."
         },
         {
             "tag": 17,
             "title": "Inheritance of Al-Haml (Unborn Child)",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Definition of Al-Haml",
+            "subContent": "The inheritance of Al-Haml pertains to the rights of an unborn child to inherit from the deceased, provided the child is born alive."
+        },
+        {
+            "tag": 17,
+            "title": "Inheritance of Al-Haml (Unborn Child)",
+            "content": "Example of Al-Haml",
+            "subContent": "The estate is reserved or partially distributed to accommodate the potential inheritance rights of the unborn child upon birth. For example, if an estate is worth $300,000 and an unborn child is expected, a portion is reserved until the child's birth to determine their share."
         },
         {
             "tag": 18,
             "title": "Inheritance of Mass Death",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Definition of Mass Death",
+            "subContent": "The inheritance of mass death addresses the distribution of estates when multiple family members die simultaneously or in quick succession."
+        },
+        {
+            "tag": 18,
+            "title": "Inheritance of Mass Death",
+            "content": "Example of Mass Death",
+            "subContent": "This scenario requires careful legal consideration to determine the rightful heirs and their shares in the absence of clear succession. For example, if a family of four dies in an accident, their estates are evaluated together to determine the distribution to remaining heirs."
         },
         {
             "tag": 19,
             "title": "Inheritance of Dzawil Arham",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Definition of Dzawil Arham",
+            "subContent": "The inheritance of Dzawil Arham involves distant relatives who may inherit in the absence of closer heirs. These include uncles, aunts, and their descendants."
+        },
+        {
+            "tag": 19,
+            "title": "Inheritance of Dzawil Arham",
+            "content": "Example of Dzawil Arham",
+            "subContent": "This provision ensures that even distant family members have a right to inherit when no primary heirs are available. For example, if an estate of $400,000 is left without close relatives, it may be distributed to aunts and uncles."
         },
         {
             "tag": 20,
             "title": "Al-Musytarikah",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Definition of Al-Musytarikah",
+            "subContent": "Al-Musytarikah refers to a specific inheritance scenario involving a shared estate among multiple heirs with overlapping entitlements."
+        },
+        {
+            "tag": 20,
+            "title": "Al-Musytarikah",
+            "content": "Example of Al-Musytarikah",
+            "subContent": "This concept addresses the complex distribution of an estate where multiple heirs have concurrent claims, ensuring fair allocation. For instance, if an estate is worth $1,000,000 and multiple heirs have equal claims, it is divided equally among them."
         },
         {
             "tag": 21,
             "title": "Al-Mu'addah",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Definition of Al-Mu'addah",
+            "subContent": "Al-Mu'addah deals with the inheritance rights of spouses in specific situations, such as when the marriage is dissolved or contested."
+        },
+        {
+            "tag": 21,
+            "title": "Al-Mu'addah",
+            "content": "Example of Al-Mu'addah",
+            "subContent": "This provision ensures that the surviving spouse's inheritance rights are upheld in accordance with legal and religious guidelines. For example, if a marriage is dissolved, the spouse's entitlement may be evaluated based on the duration and circumstances of the marriage."
         },
         {
             "tag": 22,
             "title": "Al-Akdariyyah",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Definition of Al-Akdariyyah",
+            "subContent": "Al-Akdariyyah addresses unique and complex inheritance cases that do not fall under standard inheritance rules, often requiring judicial interpretation."
+        },
+        {
+            "tag": 22,
+            "title": "Al-Akdariyyah",
+            "content": "Example of Al-Akdariyyah",
+            "subContent": "This provision ensures that justice is served in atypical inheritance scenarios through careful legal and judicial analysis. For instance, if an estate includes unusual assets or conflicting claims, judicial interpretation may be required to determine fair distribution."
         },
         {
             "tag": 23,
             "title": "Testament",
-            "content": "Sample.",
-            "subContent": "Sample."
+            "content": "Definition of Testament",
+            "subContent": "A testament is a legal document by which a person expresses their wishes as to how their estate is to be distributed after their death. It may also include other directives, such as guardianship of minors."
+        },
+        {
+            "tag": 23,
+            "title": "Testament",
+            "content": "Execution of Testament",
+            "subContent": "Testaments are executed according to legal statutes, ensuring that the deceased's final wishes are honored and legally binding upon their heirs."
         }
     ]
 }

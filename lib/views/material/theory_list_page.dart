@@ -66,18 +66,22 @@ class _TheoryListPageState extends State<TheoryListPage> {
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error loading data'));
                   } else {
-                    final theories = snapshot.data!;
+                    final titles = snapshot.data!
+                        .map((theory) => theory['title'])
+                        .toSet()
+                        .toList();
                     return ListView.builder(
-                      itemCount: theories.length,
+                      itemCount: titles.length,
                       itemBuilder: (context, index) {
-                        final theory = theories[index];
+                        final title = titles[index];
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => TheoryContentPage(
-                                  theory: theory,
+                                  title: title,
+                                  libraryController: libraryController,
                                 ),
                               ),
                             );
@@ -103,7 +107,7 @@ class _TheoryListPageState extends State<TheoryListPage> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16.0),
                                 child: Text(
-                                  theory['title'],
+                                  title,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 18,

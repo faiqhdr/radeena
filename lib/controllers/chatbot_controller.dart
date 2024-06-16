@@ -25,11 +25,11 @@ class ChatbotController {
     await libraryController.loadTheoryData();
     await libraryController.loadDalilData();
 
-    var theory = libraryController.getTheoryByTitle(input);
-    if (theory != null) return theory;
+    var theories = libraryController.getTheoriesByTitle(input);
+    if (theories.isNotEmpty) return {"theories": theories};
 
     var dalil = libraryController.getDalilByHeir(input);
-    if (dalil != null) return dalil;
+    if (dalil != null && dalil.isNotEmpty) return dalil;
 
     return null;
   }
