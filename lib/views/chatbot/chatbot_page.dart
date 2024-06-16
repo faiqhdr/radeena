@@ -19,8 +19,8 @@ class _ChatbotPageState extends State<ChatbotPage> {
   @override
   void initState() {
     super.initState();
-    _addMessage("Assalamualaikum Warahmatullah Wabarakatuh! 👋", "Chatbot");
-    Future.delayed(Duration(seconds: 2), () {
+    _addMessage("Assalamu'alaikum warahmatullah wabarakatuh! 👋", "Chatbot");
+    Future.delayed(Duration(seconds: 1), () {
       _addMessage("How can I help you? 🤓", "Chatbot");
       setState(() {
         predefinedOptions = chatbotController.model.getInitialOptions();
@@ -56,8 +56,8 @@ class _ChatbotPageState extends State<ChatbotPage> {
           predefinedOptions = response;
           _addMessage(
             selected.toLowerCase().contains('theory')
-                ? "Which theory do you want to know more about?"
-                : "Which dalil do you want to know more about?",
+                ? "Which theory do you want to know more about? 🧐"
+                : "Which dalil do you want to know more about? 🧐",
             "Chatbot",
           );
         }
@@ -72,10 +72,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
       predefinedOptions = [];
     });
 
-    if (selectedValue.toLowerCase().contains('dalil')) {
-      final dalilList = await chatbotController.getDalilList(selected);
-      _showDalilList(dalilList);
-    } else {
+    if (selectedValue.toLowerCase().contains('theory')) {
       final detailedInfo = await chatbotController.getDetailedInfo(selected);
       Future.delayed(Duration(seconds: 2), () {
         setState(() {
@@ -84,37 +81,55 @@ class _ChatbotPageState extends State<ChatbotPage> {
             String detailedMessage;
             if (detailedInfo.containsKey('title')) {
               detailedMessage =
-                  "Sure! Here is the detailed explanation of \"${detailedInfo['title']}\".\n\nContent: ${detailedInfo['content']}\n\nSubContent: ${detailedInfo['subContent']}\n\nHope it helps 😊";
-            } else if (detailedInfo.containsKey('heir')) {
-              detailedMessage =
-                  "Sure! Here is the detailed explanation of dalil for \"${detailedInfo['heir']}\".\n\nPortion: ${detailedInfo['portion']}\n\nCondition: ${detailedInfo['condition']}\n\nSource: ${detailedInfo['source']}\n\nEvidenceContent: ${detailedInfo['evidenceContent']}\n\nFullEvidence: ${detailedInfo['fullEvidence']}";
+                  "Sure! Here is the detailed explanation of \"${detailedInfo['title']}\".\n\nContent: ${detailedInfo['content']}\n\nSubContent: ${detailedInfo['subContent']}";
             } else {
               detailedMessage =
-                  "Sorry, I couldn't find any information on that.";
+                  "Sorry, I couldn't display the explanation on that. 😵";
             }
             _addMessage(detailedMessage, "Chatbot");
+
+            Future.delayed(Duration(seconds: 2), () {
+              setState(() {
+                String detailedMessage = "Hope it helps! 😊";
+                _addMessage(detailedMessage, "Chatbot");
+              });
+              _restartChat();
+            });
           } else {
             _addMessage(
-              "Sorry, I couldn't find any information on that.",
+              "Sorry, I couldn't find any information on that. 🥲",
               "Chatbot",
             );
+            _restartChat();
           }
-          _restartChat();
         });
       });
+    } else {
+      final dalilList = await chatbotController.getDalilList(selected);
+      _showDalilList(dalilList);
     }
   }
 
-  void _showDalilList(List<Map<String, dynamic>> dalilList) {
+  void _showDalilList(List<Map<String, dynamic>> dalilList) async {
+    for (var dalil in dalilList) {
+      setState(() {
+        isTyping = true;
+      });
+      await Future.delayed(Duration(seconds: 2));
+      setState(() {
+        isTyping = false;
+        String detailedMessage =
+            "Source: ${dalil['source']}\n\nPortion: ${dalil['portion']}\n\nExplanation: ${dalil['condition']}\n\nDalil: ${dalil['evidenceContent']}\n\nComplete Dalil: ${dalil['fullEvidence']}";
+        _addMessage(detailedMessage, "Chatbot");
+      });
+    }
+    await Future.delayed(Duration(seconds: 2));
     setState(() {
       isTyping = false;
-      for (var dalil in dalilList) {
-        String detailedMessage =
-            "Source: ${dalil['source']}\n\nPortion: ${dalil['portion']}\n\nCondition: ${dalil['condition']}\n\nEvidenceContent: ${dalil['evidenceContent']}\n\nFullEvidence: ${dalil['fullEvidence']}\n\n";
-        _addMessage(detailedMessage, "Chatbot");
-      }
-      _restartChat();
+      String detailedMessage = "Hope it helps! 😊";
+      _addMessage(detailedMessage, "Chatbot");
     });
+    _restartChat();
   }
 
   void _restartChat() {

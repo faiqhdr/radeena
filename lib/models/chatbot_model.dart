@@ -1,8 +1,4 @@
 class ChatbotModel {
-  List<Map<String, String>> predefinedQuestions = [
-    {"question": "How can I help you? 🤓", "response": "How can I help you?"},
-  ];
-
   List<Map<String, String>> getInitialOptions() {
     return [
       {"question": "I would like to know more about Faraid’s Theory"},
