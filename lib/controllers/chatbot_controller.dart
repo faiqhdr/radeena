@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:radeena/models/chatbot_model.dart';
 import 'package:radeena/controllers/library_controller.dart';
 
@@ -14,7 +16,7 @@ class ChatbotController {
       return model.getQuestionsForInput(libraryController.dalilList, 'heir');
     } else {
       return Future.value([
-        {"question": "Halo?"}
+        {"question": "Hmm... Something is not right. 🤔"}
       ]);
     }
   }
@@ -30,5 +32,10 @@ class ChatbotController {
     if (dalil != null) return dalil;
 
     return null;
+  }
+
+  Future<List<Map<String, dynamic>>> getDalilList(String heir) async {
+    await libraryController.loadDalilData();
+    return libraryController.getDalilForHeir(heir);
   }
 }

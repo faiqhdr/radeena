@@ -72,30 +72,48 @@ class _ChatbotPageState extends State<ChatbotPage> {
       predefinedOptions = [];
     });
 
-    final detailedInfo = await chatbotController.getDetailedInfo(selected);
-    Future.delayed(Duration(seconds: 2), () {
-      setState(() {
-        isTyping = false;
-        if (detailedInfo != null) {
-          String detailedMessage;
-          if (detailedInfo.containsKey('title')) {
-            detailedMessage =
-                "Sure! Here is the detailed explanation of \"${detailedInfo['title']}\".\n\nContent: ${detailedInfo['content']}\n\nSubContent: ${detailedInfo['subContent']}\n\nHope it helps 😊";
-          } else if (detailedInfo.containsKey('heir')) {
-            detailedMessage =
-                "Sure! Here is the detailed explanation of dalil for \"${detailedInfo['heir']}\".\n\nPortion: ${detailedInfo['portion']}\n\nCondition: ${detailedInfo['condition']}\n\nSource: ${detailedInfo['source']}\n\nEvidenceContent: ${detailedInfo['evidenceContent']}\n\nFullEvidence: ${detailedInfo['fullEvidence']}\n\nHope it helps 😊";
+    if (selectedValue.toLowerCase().contains('dalil')) {
+      final dalilList = await chatbotController.getDalilList(selected);
+      _showDalilList(dalilList);
+    } else {
+      final detailedInfo = await chatbotController.getDetailedInfo(selected);
+      Future.delayed(Duration(seconds: 2), () {
+        setState(() {
+          isTyping = false;
+          if (detailedInfo != null) {
+            String detailedMessage;
+            if (detailedInfo.containsKey('title')) {
+              detailedMessage =
+                  "Sure! Here is the detailed explanation of \"${detailedInfo['title']}\".\n\nContent: ${detailedInfo['content']}\n\nSubContent: ${detailedInfo['subContent']}\n\nHope it helps 😊";
+            } else if (detailedInfo.containsKey('heir')) {
+              detailedMessage =
+                  "Sure! Here is the detailed explanation of dalil for \"${detailedInfo['heir']}\".\n\nPortion: ${detailedInfo['portion']}\n\nCondition: ${detailedInfo['condition']}\n\nSource: ${detailedInfo['source']}\n\nEvidenceContent: ${detailedInfo['evidenceContent']}\n\nFullEvidence: ${detailedInfo['fullEvidence']}";
+            } else {
+              detailedMessage =
+                  "Sorry, I couldn't find any information on that.";
+            }
+            _addMessage(detailedMessage, "Chatbot");
           } else {
-            detailedMessage = "Sorry, I couldn't find any information on that.";
+            _addMessage(
+              "Sorry, I couldn't find any information on that.",
+              "Chatbot",
+            );
           }
-          _addMessage(detailedMessage, "Chatbot");
-        } else {
-          _addMessage(
-            "Sorry, I couldn't find any information on that.",
-            "Chatbot",
-          );
-        }
-        _restartChat();
+          _restartChat();
+        });
       });
+    }
+  }
+
+  void _showDalilList(List<Map<String, dynamic>> dalilList) {
+    setState(() {
+      isTyping = false;
+      for (var dalil in dalilList) {
+        String detailedMessage =
+            "Source: ${dalil['source']}\n\nPortion: ${dalil['portion']}\n\nCondition: ${dalil['condition']}\n\nEvidenceContent: ${dalil['evidenceContent']}\n\nFullEvidence: ${dalil['fullEvidence']}\n\n";
+        _addMessage(detailedMessage, "Chatbot");
+      }
+      _restartChat();
     });
   }
 
