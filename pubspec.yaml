@@ -39,6 +39,7 @@ dependencies:
   animated_text_kit: ^4.2.2
   lottie: ^3.1.2
   sqflite: ^2.3.3+1
+  google_fonts: ^6.2.1
 
 dev_dependencies:
   flutter_test:
@@ -85,7 +86,13 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+    - family: UthmaniHafs
+      fonts:
+        - asset: assets/fonts/Uthmani-Hafs.ttf
+    - family: Amiri
+      fonts:
+        - asset: assets/fonts/AmiriQuran-Regular.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

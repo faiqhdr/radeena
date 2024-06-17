@@ -46,27 +46,10 @@ class TheoryContentPage extends StatelessWidget {
               SizedBox(height: 25),
               for (var theory in theories) ...[
                 Text(
-                  "Content:",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: green02Color,
-                  ),
-                ),
-                SizedBox(height: 5),
-                Text(
                   theory['content'],
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: 25),
-                Text(
-                  "Sub Content:",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
                     color: green02Color,
                   ),
                 ),
@@ -74,8 +57,8 @@ class TheoryContentPage extends StatelessWidget {
                 Text(
                   theory['subContent'],
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 SizedBox(height: 25),

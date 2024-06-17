@@ -9,6 +9,10 @@ class DalilContentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
 
+    List<String> evidenceParts = dalil['fullEvidence'].split('\n\n');
+    String arabicPart = evidenceParts[0];
+    String englishPart = evidenceParts.length > 1 ? evidenceParts[1] : '';
+
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -48,7 +52,7 @@ class DalilContentPage extends StatelessWidget {
               SizedBox(height: 5),
               Text(
                 dalil['portion'],
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
               ),
               SizedBox(height: 25),
               Text(
@@ -61,7 +65,7 @@ class DalilContentPage extends StatelessWidget {
               SizedBox(height: 5),
               Text(
                 dalil['condition'],
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
               ),
               SizedBox(height: 25),
               Text(
@@ -74,7 +78,11 @@ class DalilContentPage extends StatelessWidget {
               SizedBox(height: 5),
               Text(
                 dalil['evidenceContent'],
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400,
+                  fontStyle: FontStyle.italic,
+                ),
               ),
               SizedBox(height: 25),
               Text(
@@ -84,11 +92,34 @@ class DalilContentPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     color: green02Color),
               ),
-              SizedBox(height: 5),
-              Text(
-                dalil['fullEvidence'],
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              SizedBox(height: 20),
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: arabicPart,
+                      style: TextStyle(
+                          fontFamily: 'UthmaniHafs',
+                          fontSize: 22,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
+                    ),
+                    TextSpan(
+                      text: '\n\n',
+                    ),
+                    TextSpan(
+                      text: englishPart,
+                      style: TextStyle(
+                          fontFamily: 'UthmaniHafs',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black),
+                    ),
+                  ],
+                ),
               ),
+              SizedBox(height: 25),
             ],
           ),
         ),

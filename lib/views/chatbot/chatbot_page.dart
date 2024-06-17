@@ -172,7 +172,7 @@ class _ChatbotPageState extends State<ChatbotPage>
       setState(() {
         isTyping = false;
         String detailedMessage =
-            "Source from ${dalil['source']} that stated the portion is ${dalil['portion']}\n\nExplanation:\n ${dalil['condition']}\n\nThis the dalil: ${dalil['evidenceContent']}\n\nComplete Dalil: ${dalil['fullEvidence']}";
+            "The source of the dalil is ${dalil['source']}, which states that the heir's portion is ${dalil['portion']}.\n\n${dalil['condition']}\n\nThis dalil says \"${dalil['evidenceContent']}\"\n\nHere is the complete dalil for the heir along with the translation. 👇 \n\n${dalil['fullEvidence']}";
         _addMessage(detailedMessage, "Chatbot");
       });
     }
