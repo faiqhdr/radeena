@@ -121,7 +121,7 @@ class _ChatbotPageState extends State<ChatbotPage>
           setState(() {
             isTyping = false;
             String detailedMessage =
-                "Content: ${theory['content']}\n\nSubContent: ${theory['subContent']}";
+                "${theory['content']}\n\n${theory['subContent']}";
             _addMessage(detailedMessage, "Chatbot");
           });
         }
@@ -172,7 +172,7 @@ class _ChatbotPageState extends State<ChatbotPage>
       setState(() {
         isTyping = false;
         String detailedMessage =
-            "Source: ${dalil['source']}\n\nPortion: ${dalil['portion']}\n\nExplanation: ${dalil['condition']}\n\nDalil: ${dalil['evidenceContent']}\n\nComplete Dalil: ${dalil['fullEvidence']}";
+            "Source from ${dalil['source']} that stated the portion is ${dalil['portion']}\n\nExplanation:\n ${dalil['condition']}\n\nThis the dalil: ${dalil['evidenceContent']}\n\nComplete Dalil: ${dalil['fullEvidence']}";
         _addMessage(detailedMessage, "Chatbot");
       });
     }
