@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:restart_app/restart_app.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/distribution/inheritance_page.dart';
@@ -7,6 +8,7 @@ import 'package:radeena/controllers/identification_controller.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/controllers/calculation_controller.dart';
 import 'package:radeena/controllers/history_controller.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class CalculationPage extends StatelessWidget {
   final double totalProperty;
@@ -140,49 +142,83 @@ class CalculationPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 25),
-                  Text(
-                    "Net Property       : Rp${formatNumber(totalProperty)}",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                  Text(
-                    "Division Status   : $divisionStatus",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                  Text(
-                    "Final Share         : $finalShare",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(height: 15),
-                  Row(
-                    children: [
-                      Icon(Icons.info_outline, color: Colors.grey, size: 15),
-                      SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          "Click on the heir's row to see individual inheritance details.",
-                          style: TextStyle(color: Colors.grey, fontSize: 13),
+                  if (filteredHeirs.isNotEmpty) ...[
+                    Text(
+                      "Net Property       : Rp${formatNumber(totalProperty)}",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      "Division Status   : $divisionStatus",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      "Final Share         : $finalShare",
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(height: 15),
+                    Row(
+                      children: [
+                        Icon(Icons.info_outline, color: Colors.grey, size: 15),
+                        SizedBox(width: 8),
+                        Expanded(
+                          child: Text(
+                            "Click on the heir's row to see individual inheritance details.",
+                            style: TextStyle(color: Colors.grey, fontSize: 13),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  DataTable(
-                    columns: const [
-                      DataColumn(label: Text('Heir')),
-                      DataColumn(label: Text('Quantity')),
-                      DataColumn(label: Text('Inheritance')),
-                    ],
-                    rows: heirRows,
-                  ),
-                  if (distribution.containsKey('Kinsfolk or Baitul Maal'))
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
-                      child: Text(
-                        "All the inheritance will be given to kinsfolk or Baitul Maal.",
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                      ],
+                    ),
+                    DataTable(
+                      columns: const [
+                        DataColumn(label: Text('Heir')),
+                        DataColumn(label: Text('Quantity')),
+                        DataColumn(label: Text('Inheritance')),
+                      ],
+                      rows: heirRows,
+                    ),
+                    SizedBox(height: 500),
+                  ] else ...[
+                    Center(
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Positioned(
+                            top: 360,
+                            left: 20,
+                            right: 20,
+                            child: AnimatedTextKit(
+                              animatedTexts: [
+                                TypewriterAnimatedText(
+                                  'No heir has been selected. All assets (Rp${formatNumber(totalProperty)}) will be distributed to the kinsfolk or to the treasury (baitul maal).',
+                                  textAlign: TextAlign.left,
+                                  textStyle: TextStyle(
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.teal.shade800,
+                                  ),
+                                  speed: const Duration(milliseconds: 50),
+                                ),
+                              ],
+                              totalRepeatCount: 1,
+                              pause: const Duration(milliseconds: 1000),
+                              displayFullTextOnTap: true,
+                              stopPauseOnTap: true,
+                            ),
+                          ),
+                          SizedBox(height: 450),
+                          Lottie.asset(
+                            'assets/lottie/treasury.json',
+                            width: 340,
+                            height: 410,
+                          ),
+                        ],
                       ),
                     ),
-                  SizedBox(height: 500),
+                    SizedBox(height: 500),
+                  ],
                 ],
               ),
             ),
@@ -194,86 +230,88 @@ class CalculationPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _buildGradientButton(
-                  text: "Distribution Detail",
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => InheritancePage(
-                          identificationController: identificationController,
-                          impedimentController: impedimentController,
-                          totalProperty:
-                              identificationController.property.getTotal(),
-                          propertyAmount:
-                              identificationController.property.getAmount(),
-                          debtAmount:
-                              identificationController.property.getDebt(),
-                          testamentAmount:
-                              identificationController.property.getTestament(),
-                          funeralAmount:
-                              identificationController.property.getFuneral(),
-                          selectedHeirs: impedimentController.heirQuantity,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                _buildGradientButton(
-                  text: "Save Result",
-                  onPressed: () async {
-                    TextEditingController nameController =
-                        TextEditingController();
-
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text("Save Calculation"),
-                          content: TextField(
-                            controller: nameController,
-                            decoration: InputDecoration(
-                                hintText: "Enter calculation name"),
+                if (filteredHeirs.isNotEmpty) ...[
+                  _buildGradientButton(
+                    text: "Distribution Detail",
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => InheritancePage(
+                            identificationController: identificationController,
+                            impedimentController: impedimentController,
+                            totalProperty:
+                                identificationController.property.getTotal(),
+                            propertyAmount:
+                                identificationController.property.getAmount(),
+                            debtAmount:
+                                identificationController.property.getDebt(),
+                            testamentAmount: identificationController.property
+                                .getTestament(),
+                            funeralAmount:
+                                identificationController.property.getFuneral(),
+                            selectedHeirs: impedimentController.heirQuantity,
                           ),
-                          actions: [
-                            TextButton(
-                              child: Text("Cancel"),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
+                        ),
+                      );
+                    },
+                  ),
+                  _buildGradientButton(
+                    text: "Save Result",
+                    onPressed: () async {
+                      TextEditingController nameController =
+                          TextEditingController();
+
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Save Calculation"),
+                            content: TextField(
+                              controller: nameController,
+                              decoration: InputDecoration(
+                                  hintText: "Enter calculation name"),
                             ),
-                            TextButton(
-                              child: Text("Save"),
-                              onPressed: () async {
-                                String calculationName = nameController.text;
-                                HistoryController historyController =
-                                    HistoryController();
-                                await historyController.saveCalculation(
-                                  calculationName,
-                                  totalProperty,
-                                  propertyAmount,
-                                  debtAmount,
-                                  testamentAmount,
-                                  funeralAmount,
-                                  selectedHeirs,
-                                  distribution,
-                                  divisionStatus,
-                                  finalShare,
-                                );
-                                Navigator.of(context).pop();
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                      content: Text(
-                                          "Calculation successfully saved!")),
-                                );
-                              },
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-                ),
+                            actions: [
+                              TextButton(
+                                child: Text("Cancel"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text("Save"),
+                                onPressed: () async {
+                                  String calculationName = nameController.text;
+                                  HistoryController historyController =
+                                      HistoryController();
+                                  await historyController.saveCalculation(
+                                    calculationName,
+                                    totalProperty,
+                                    propertyAmount,
+                                    debtAmount,
+                                    testamentAmount,
+                                    funeralAmount,
+                                    selectedHeirs,
+                                    distribution,
+                                    divisionStatus,
+                                    finalShare,
+                                  );
+                                  Navigator.of(context).pop();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                        content: Text(
+                                            "Calculation successfully saved!")),
+                                  );
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
                 _buildGradientButton(
                   icon: Icons.home,
                   onPressed: () {
