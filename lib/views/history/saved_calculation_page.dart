@@ -124,78 +124,211 @@ class SavedCalculationPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              Text(
-                "Property Details",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 123, vertical: 7),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      primaryColor.withOpacity(0.7),
+                      secondaryColor.withOpacity(0.7),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  "Property Details",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
               ),
               SizedBox(height: 10),
               DataTable(
                 columns: const [
-                  DataColumn(label: Text('Property')),
-                  DataColumn(label: Text('Amount')),
+                  DataColumn(
+                      label: Text(
+                    'Property',
+                    style: TextStyle(
+                        color: Colors.teal,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  )),
+                  DataColumn(
+                      label: Text(
+                    'Amount',
+                    style: TextStyle(
+                        color: Colors.teal,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  )),
                 ],
                 rows: [
                   DataRow(cells: [
-                    DataCell(Text("Total Property")),
                     DataCell(Text(
-                        "IDR ${formatNumber(calculation['propertyAmount'])}")),
+                      "Total Property",
+                      style: TextStyle(color: Colors.teal.shade800),
+                    )),
+                    DataCell(Text(
+                      "IDR ${formatNumber(calculation['propertyAmount'])}",
+                      style: TextStyle(color: Colors.teal.shade800),
+                    )),
                   ]),
                   DataRow(cells: [
-                    DataCell(Text("Deceased's Debt")),
-                    DataCell(
-                        Text("IDR ${formatNumber(calculation['debtAmount'])}")),
+                    DataCell(Text(
+                      "Deceased's Debt",
+                      style: TextStyle(color: Colors.teal.shade800),
+                    )),
+                    DataCell(Text(
+                      "IDR ${formatNumber(calculation['debtAmount'])}",
+                      style: TextStyle(color: Colors.teal.shade800),
+                    )),
                   ]),
                   DataRow(cells: [
-                    DataCell(Text("Deceased's Bequest")),
                     DataCell(Text(
-                        "IDR ${formatNumber(calculation['testamentAmount'])}")),
+                      "Deceased's Bequest",
+                      style: TextStyle(color: Colors.teal.shade800),
+                    )),
+                    DataCell(Text(
+                      "IDR ${formatNumber(calculation['testamentAmount'])}",
+                      style: TextStyle(color: Colors.teal.shade800),
+                    )),
                   ]),
                   DataRow(cells: [
-                    DataCell(Text("Funeral Arrangement")),
                     DataCell(Text(
-                        "IDR ${formatNumber(calculation['funeralAmount'])}")),
+                      "Funeral Arrangement",
+                      style: TextStyle(color: Colors.teal.shade800),
+                    )),
+                    DataCell(Text(
+                      "IDR ${formatNumber(calculation['funeralAmount'])}",
+                      style: TextStyle(color: Colors.teal.shade800),
+                    )),
                   ]),
                   DataRow(cells: [
-                    DataCell(Text("Net Property")),
                     DataCell(Text(
-                        "IDR ${formatNumber(calculation['totalProperty'])}")),
+                      "Net Property",
+                      style: TextStyle(
+                          color: Colors.teal.shade800,
+                          fontWeight: FontWeight.w600),
+                    )),
+                    DataCell(Text(
+                      "IDR ${formatNumber(calculation['totalProperty'])}",
+                      style: TextStyle(
+                          color: Colors.teal.shade800,
+                          fontWeight: FontWeight.w600),
+                    )),
                   ]),
                 ],
               ),
               SizedBox(height: 20),
-              Text(
-                "Total Share",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 137, vertical: 7),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      primaryColor.withOpacity(0.7),
+                      secondaryColor.withOpacity(0.7),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  "Total Share",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
               ),
               SizedBox(height: 5),
               Text(
                 "Total share is the sum of all shares of the heirs entitled to receive a share. Division status for this case is ${calculation['divisionStatus']}.",
-                style: TextStyle(color: Colors.grey, fontSize: 13),
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.grey.shade700, fontSize: 13),
               ),
               SizedBox(height: 10),
               DataTable(
                 columns: const [
-                  DataColumn(label: Text('Heir')),
-                  DataColumn(label: Text('Portion')),
-                  DataColumn(label: Text('Inheritance')),
+                  DataColumn(
+                      label: Text(
+                    'Heir',
+                    style: TextStyle(
+                        color: Colors.teal,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  )),
+                  DataColumn(
+                      label: Text(
+                    'Portion',
+                    style: TextStyle(
+                        color: Colors.teal,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  )),
+                  DataColumn(
+                      label: Text(
+                    'Inheritance',
+                    style: TextStyle(
+                        color: Colors.teal,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  )),
                 ],
                 rows: selectedHeirs.entries
                     .where((entry) => entry.value > 0)
                     .map((entry) {
                   return DataRow(cells: [
-                    DataCell(Text(entry.key)),
-                    DataCell(Text(portions[entry.key].toString())),
-                    DataCell(Text(
-                        "IDR ${formatNumber(distribution[entry.key] ?? 0)}")),
+                    DataCell(
+                      Text(
+                        entry.key,
+                        style: TextStyle(color: Colors.teal.shade800),
+                      ),
+                    ),
+                    DataCell(
+                      Text(
+                        portions[entry.key].toString(),
+                        style: TextStyle(color: Colors.teal.shade800),
+                      ),
+                    ),
+                    DataCell(
+                      Text(
+                        "IDR ${formatNumber(distribution[entry.key] ?? 0)}",
+                        style: TextStyle(color: Colors.teal.shade800),
+                      ),
+                    ),
                   ]);
                 }).toList(),
               ),
               SizedBox(height: 20),
-              Text(
-                "Final Share: ${selectedHeirs.values.fold(0, (sum, count) => sum + count)}/${calculation['finalShare']}",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 121, vertical: 7),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      primaryColor.withOpacity(0.7),
+                      secondaryColor.withOpacity(0.7),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  "Final Share: ${selectedHeirs.values.fold(0, (sum, count) => sum + count)}/${calculation['finalShare']}",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white,
+                  ),
+                ),
               ),
-              SizedBox(height: 40),
+              SizedBox(height: 25),
             ],
           ),
         ),

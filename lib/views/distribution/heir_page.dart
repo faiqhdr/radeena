@@ -15,7 +15,7 @@ class HeirPage extends StatelessWidget {
 
   String formatNumber(double number) {
     return number.toStringAsFixed(0).replaceAllMapped(
-        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => "${m[1]},");
+        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => "${m[1]}.");
   }
 
   @override
@@ -86,11 +86,11 @@ class HeirPage extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black),
+                                  color: Colors.teal.shade800),
                             ),
                           ),
                           Text(
-                            'Rp${formatNumber(totalInheritance)}',
+                            'IDR ${formatNumber(totalInheritance)}',
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.teal,
@@ -109,7 +109,7 @@ class HeirPage extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black),
+                                  color: Colors.teal.shade800),
                             ),
                           ),
                           Text(
@@ -133,11 +133,11 @@ class HeirPage extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
-                                  color: Colors.black),
+                                  color: Colors.teal.shade800),
                             ),
                           ),
                           Text(
-                            'Rp${formatNumber(individualInheritance)}',
+                            'IDR ${formatNumber(individualInheritance)}',
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.teal,

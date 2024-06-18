@@ -171,7 +171,7 @@ class ConfirmationPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Rp",
+                          "IDR",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,

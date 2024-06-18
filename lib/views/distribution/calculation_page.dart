@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:restart_app/restart_app.dart';
 import 'package:radeena/styles/style.dart';
+import 'package:restart_app/restart_app.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:radeena/views/distribution/inheritance_page.dart';
 import 'package:radeena/views/distribution/heir_page.dart';
 import 'package:radeena/controllers/identification_controller.dart';
@@ -35,7 +36,7 @@ class CalculationPage extends StatelessWidget {
 
   String formatNumber(double number) {
     return number.toStringAsFixed(0).replaceAllMapped(
-        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => "${m[1]},");
+        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => "${m[1]}.");
   }
 
   void _showResetConfirmationDialog(BuildContext context) {
@@ -88,6 +89,7 @@ class CalculationPage extends StatelessWidget {
                     child: GestureDetector(
                       child: Text(
                         entry.key,
+                        style: TextStyle(color: Colors.teal.shade800),
                       ),
                       onTap: () {
                         Navigator.push(
@@ -104,9 +106,15 @@ class CalculationPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                DataCell(Center(child: Text(entry.value.toString()))),
-                DataCell(
-                    Text("Rp${formatNumber(distribution[entry.key] ?? 0)}")),
+                DataCell(Center(
+                    child: Text(
+                  entry.value.toString(),
+                  style: TextStyle(color: Colors.teal.shade800),
+                ))),
+                DataCell(Text(
+                  "IDR ${formatNumber(distribution[entry.key] ?? 0)}",
+                  style: TextStyle(color: Colors.teal.shade800),
+                )),
               ],
             ))
         .toList();
@@ -143,39 +151,96 @@ class CalculationPage extends StatelessWidget {
                   ),
                   SizedBox(height: 25),
                   if (filteredHeirs.isNotEmpty) ...[
-                    Text(
-                      "Net Property       : Rp${formatNumber(totalProperty)}",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                    ),
-                    Text(
-                      "Division Status   : $divisionStatus",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                    ),
-                    Text(
-                      "Final Share         : $finalShare",
-                      style:
-                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    StaggeredGrid.count(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 1.0,
+                      crossAxisSpacing: 1.0,
+                      children: [
+                        buildContainer(
+                          "Net Property",
+                          backgroundColor,
+                          Colors.white,
+                          Colors.teal.shade800,
+                          1,
+                        ),
+                        buildContainer(
+                          "IDR ${formatNumber(totalProperty)}",
+                          primaryColor,
+                          secondaryColor,
+                          Colors.white,
+                          2,
+                        ),
+                        buildContainer(
+                          "Final Share",
+                          backgroundColor,
+                          Colors.white,
+                          Colors.teal.shade800,
+                          1,
+                        ),
+                        buildContainer(
+                          "$finalShare",
+                          primaryColor,
+                          secondaryColor,
+                          Colors.white,
+                          2,
+                        ),
+                        buildContainer(
+                          "Division Status",
+                          backgroundColor,
+                          Colors.white,
+                          Colors.teal.shade800,
+                          1,
+                        ),
+                        buildContainer(
+                          "$divisionStatus",
+                          primaryColor,
+                          secondaryColor,
+                          Colors.white,
+                          2,
+                        ),
+                      ],
                     ),
                     SizedBox(height: 15),
                     Row(
                       children: [
-                        Icon(Icons.info_outline, color: Colors.grey, size: 15),
+                        Icon(Icons.info_outline,
+                            color: Colors.grey.shade700, size: 12),
                         SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             "Click on the heir's row to see individual inheritance details.",
-                            style: TextStyle(color: Colors.grey, fontSize: 13),
+                            style: TextStyle(
+                                color: Colors.grey.shade700, fontSize: 14),
                           ),
                         ),
                       ],
                     ),
                     DataTable(
                       columns: const [
-                        DataColumn(label: Text('Heir')),
-                        DataColumn(label: Text('Quantity')),
-                        DataColumn(label: Text('Inheritance')),
+                        DataColumn(
+                            label: Text(
+                          'Heir',
+                          style: TextStyle(
+                              color: Colors.teal,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Qty',
+                          style: TextStyle(
+                              color: Colors.teal,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        )),
+                        DataColumn(
+                            label: Text(
+                          'Inheritance',
+                          style: TextStyle(
+                              color: Colors.teal,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        )),
                       ],
                       rows: heirRows,
                     ),
@@ -192,7 +257,7 @@ class CalculationPage extends StatelessWidget {
                             child: AnimatedTextKit(
                               animatedTexts: [
                                 TypewriterAnimatedText(
-                                  'No heir has been selected. All assets (Rp${formatNumber(totalProperty)}) will be distributed to the kinsfolk or to the treasury (baitul maal).',
+                                  'No heir has been selected. All assets (IDR ${formatNumber(totalProperty)}) will be distributed to the kinsfolk or to the treasury (baitul maal).',
                                   textAlign: TextAlign.left,
                                   textStyle: TextStyle(
                                     fontSize: 15.0,
@@ -357,6 +422,36 @@ class CalculationPage extends StatelessWidget {
                 ),
               )
             : Icon(icon, color: Colors.white, size: 26),
+      ),
+    );
+  }
+
+  Widget buildContainer(
+      String text, Color color1, Color color2, Color color3, int flex) {
+    return Flexible(
+      flex: flex,
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              color1.withOpacity(0.7),
+              color2.withOpacity(0.7),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: color3,
+          ),
+        ),
       ),
     );
   }
