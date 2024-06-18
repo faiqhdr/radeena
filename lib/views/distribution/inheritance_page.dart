@@ -137,23 +137,23 @@ class InheritancePage extends StatelessWidget {
                 rows: [
                   DataRow(cells: [
                     DataCell(Text("Total Property")),
-                    DataCell(Text("IDR ${formatNumber(propertyAmount)}")),
+                    DataCell(Text("Rp${formatNumber(propertyAmount)}")),
                   ]),
                   DataRow(cells: [
                     DataCell(Text("Deceased's Debt")),
-                    DataCell(Text("IDR ${formatNumber(debtAmount)}")),
+                    DataCell(Text("Rp${formatNumber(debtAmount)}")),
                   ]),
                   DataRow(cells: [
                     DataCell(Text("Deceased's Bequest")),
-                    DataCell(Text("IDR ${formatNumber(testamentAmount)}")),
+                    DataCell(Text("Rp${formatNumber(testamentAmount)}")),
                   ]),
                   DataRow(cells: [
                     DataCell(Text("Funeral Arrangement")),
-                    DataCell(Text("IDR ${formatNumber(funeralAmount)}")),
+                    DataCell(Text("Rp${formatNumber(funeralAmount)}")),
                   ]),
                   DataRow(cells: [
                     DataCell(Text("Net Property")),
-                    DataCell(Text("IDR ${formatNumber(totalProperty)}")),
+                    DataCell(Text("Rp${formatNumber(totalProperty)}")),
                   ]),
                 ],
               ),
@@ -181,7 +181,7 @@ class InheritancePage extends StatelessWidget {
                     DataCell(Text(entry.key)),
                     DataCell(Text(portions[entry.key].toString())),
                     DataCell(Text(
-                        "IDR ${formatNumber(distribution[entry.key] ?? 0)}")),
+                        "Rp${formatNumber(distribution[entry.key] ?? 0)}")),
                   ]);
                 }).toList(),
               ),

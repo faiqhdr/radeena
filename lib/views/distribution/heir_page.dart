@@ -90,7 +90,7 @@ class HeirPage extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'IDR ${formatNumber(totalInheritance)}',
+                            'Rp${formatNumber(totalInheritance)}',
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.teal,
@@ -137,7 +137,7 @@ class HeirPage extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            'IDR ${formatNumber(individualInheritance)}',
+                            'Rp${formatNumber(individualInheritance)}',
                             style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.teal,

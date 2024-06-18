@@ -407,7 +407,7 @@ class _ChatbotPageState extends State<ChatbotPage>
                   Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(bottom: 5, top: 2),
+                        padding: EdgeInsets.only(bottom: 5, top: 10),
                         child: Text(
                           "----------------- << Select Response >> -----------------",
                           style: TextStyle(

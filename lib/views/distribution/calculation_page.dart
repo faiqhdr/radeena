@@ -103,7 +103,7 @@ class CalculationPage extends StatelessWidget {
                 ),
                 DataCell(Center(child: Text(entry.value.toString()))),
                 DataCell(
-                    Text("IDR ${formatNumber(distribution[entry.key] ?? 0)}")),
+                    Text("Rp${formatNumber(distribution[entry.key] ?? 0)}")),
               ],
             ))
         .toList();
@@ -140,7 +140,7 @@ class CalculationPage extends StatelessWidget {
                   ),
                   SizedBox(height: 25),
                   Text(
-                    "Net Property       : IDR ${formatNumber(totalProperty)}",
+                    "Net Property       : Rp${formatNumber(totalProperty)}",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                   ),
                   Text(
