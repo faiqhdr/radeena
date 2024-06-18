@@ -112,7 +112,7 @@
             "tag": 9,
             "title": "How to Calculate Inheritance",
             "content": "Example Calculation",
-            "subContent": "If a man dies leaving behind \n➥ A wife, \n➥ A son, and \n➥A daughter. \n\nThe wife's share is 1/8 of the estate. The remainder is divided between the son and daughter, with the son receiving twice the share of the daughter. If the estate is worth Rp800,000,000, \n➥ The wife's share is Rp100,000,000, leaving Rp700,000,000 to be divided. \n➥ The son receives Rp466,667,000 and \n➥ The daughter receives Rp233,333,333."
+            "subContent": "If a man dies leaving behind \n➥ A wife, \n➥ A son, and \n➥A daughter. \n\nThe wife's share is 1/8 of the estate. The remainder is divided between the son and daughter, with the son receiving twice the share of the daughter. If the estate is worth IDR 800,000,000, \n➥ The wife's share is IDR 100,000,000, leaving IDR 700,000,000 to be divided. \n➥ The son receives IDR 466,667,000 and \n➥ The daughter receives IDR 233,333,333."
         },
         {
             "tag": 10,
@@ -160,7 +160,7 @@
             "tag": 12,
             "title": "Al-'Aul",
             "content": "Example Calculation of Al-'Aul",
-            "subContent": "If the total shares allocated to the heirs exceed the estate, each share is proportionally reduced. If an estate is worth Rp600,000,000 and the shares exceed this amount by 20%, each share is reduced by 20%. Thus, if an heir was to receive Rp100,000,000, they now receive Rp80,000,000."
+            "subContent": "If the total shares allocated to the heirs exceed the estate, each share is proportionally reduced. If an estate is worth IDR 600,000,000 and the shares exceed this amount by 20%, each share is reduced by 20%. Thus, if an heir was to receive IDR 100,000,000, they now receive IDR 80,000,000."
         },
         {
             "tag": 13,
@@ -172,7 +172,7 @@
             "tag": 13,
             "title": "Ar-Radd",
             "content": "Example of Ar-Radd",
-            "subContent": "This process ensures that the entire estate is allocated among the primary heirs, preventing any portion from remaining undistributed. \n\nFor example, if an estate of Rp500,000,000 is initially divided with some shares remaining, those shares are redistributed among the primary heirs."
+            "subContent": "This process ensures that the entire estate is allocated among the primary heirs, preventing any portion from remaining undistributed. \n\nFor example, if an estate of IDR 500,000,000 is initially divided with some shares remaining, those shares are redistributed among the primary heirs."
         },
         {
             "tag": 14,
@@ -220,7 +220,7 @@
             "tag": 17,
             "title": "Inheritance of Al-Haml (Unborn Child)",
             "content": "Example of Al-Haml",
-            "subContent": "The estate is reserved or partially distributed to accommodate the potential inheritance rights of the unborn child upon birth. \n\nFor example, if an estate is worth Rp300,000,000 and an unborn child is expected, a portion is reserved until the child's birth to determine their share."
+            "subContent": "The estate is reserved or partially distributed to accommodate the potential inheritance rights of the unborn child upon birth. \n\nFor example, if an estate is worth IDR 300,000,000 and an unborn child is expected, a portion is reserved until the child's birth to determine their share."
         },
         {
             "tag": 18,
@@ -244,7 +244,7 @@
             "tag": 19,
             "title": "Inheritance of Dzawil Arham",
             "content": "Example of Dzawil Arham",
-            "subContent": "This provision ensures that even distant family members have a right to inherit when no primary heirs are available. \n\nFor example, if an estate of Rp400,000,000 is left without close relatives, it may be distributed to aunts and uncles."
+            "subContent": "This provision ensures that even distant family members have a right to inherit when no primary heirs are available. \n\nFor example, if an estate of IDR 400,000,000 is left without close relatives, it may be distributed to aunts and uncles."
         },
         {
             "tag": 20,
@@ -256,7 +256,7 @@
             "tag": 20,
             "title": "Al-Musytarikah",
             "content": "Example of Al-Musytarikah",
-            "subContent": "This concept addresses the complex distribution of an estate where multiple heirs have concurrent claims, ensuring fair allocation. \n\nFor instance, if an estate is worth Rp1,000,000 and multiple heirs have equal claims, it is divided equally among them."
+            "subContent": "This concept addresses the complex distribution of an estate where multiple heirs have concurrent claims, ensuring fair allocation. \n\nFor instance, if an estate is worth IDR 1,000,000 and multiple heirs have equal claims, it is divided equally among them."
         },
         {
             "tag": 21,
