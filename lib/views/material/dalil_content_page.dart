@@ -52,7 +52,10 @@ class DalilContentPage extends StatelessWidget {
               SizedBox(height: 5),
               Text(
                 dalil['portion'],
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.teal.shade800),
               ),
               SizedBox(height: 25),
               Text(
@@ -65,7 +68,10 @@ class DalilContentPage extends StatelessWidget {
               SizedBox(height: 5),
               Text(
                 dalil['condition'],
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.teal.shade800),
               ),
               SizedBox(height: 25),
               Text(
@@ -81,6 +87,7 @@ class DalilContentPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w400,
+                  color: Colors.teal.shade800,
                   fontStyle: FontStyle.italic,
                 ),
               ),
@@ -103,7 +110,7 @@ class DalilContentPage extends StatelessWidget {
                           fontFamily: 'UthmaniHafs',
                           fontSize: 22,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                          color: Colors.teal.shade800),
                     ),
                     TextSpan(
                       text: '\n\n',
@@ -114,7 +121,7 @@ class DalilContentPage extends StatelessWidget {
                           fontFamily: 'UthmaniHafs',
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black),
+                          color: Colors.teal.shade800),
                     ),
                   ],
                 ),

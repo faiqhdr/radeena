@@ -226,8 +226,9 @@ class _ChatbotPageState extends State<ChatbotPage>
         child: Text(
           message,
           style: TextStyle(
-            color: isBot ? Colors.black : Colors.black,
+            color: isBot ? Colors.cyan.shade900 : Colors.purple.shade600,
             fontSize: 16,
+            fontWeight: FontWeight.w500,
           ),
         ),
       ),

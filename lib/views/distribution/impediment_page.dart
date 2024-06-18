@@ -73,8 +73,8 @@ class ImpedimentPage extends StatelessWidget {
                                     decoration: BoxDecoration(
                                       gradient: LinearGradient(
                                         colors: [
-                                          Colors.blue.shade400,
-                                          Colors.deepPurple.shade300
+                                          primaryColor.withOpacity(0.7),
+                                          secondaryColor.withOpacity(0.7),
                                         ],
                                         begin: Alignment.topLeft,
                                         end: Alignment.bottomRight,
@@ -121,7 +121,7 @@ class ImpedimentPage extends StatelessWidget {
                                             textStyle: TextStyle(
                                               fontSize: 13,
                                               fontWeight: FontWeight.w500,
-                                              color: Colors.indigo.shade900,
+                                              color: Colors.teal.shade800,
                                             ),
                                             speed: const Duration(
                                                 milliseconds: 50),
@@ -162,7 +162,7 @@ class ImpedimentPage extends StatelessWidget {
                                       textStyle: TextStyle(
                                         fontSize: 20.0,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.green,
+                                        color: Colors.teal.shade800,
                                       ),
                                       speed: const Duration(milliseconds: 50),
                                     ),

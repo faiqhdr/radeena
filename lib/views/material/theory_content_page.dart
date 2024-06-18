@@ -57,9 +57,9 @@ class TheoryContentPage extends StatelessWidget {
                 Text(
                   theory['subContent'],
                   style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                  ),
+                      fontSize: 18,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.teal.shade800),
                 ),
                 SizedBox(height: 25),
               ],

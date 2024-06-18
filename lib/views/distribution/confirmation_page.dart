@@ -37,18 +37,73 @@ class ConfirmationPage extends StatelessWidget {
           RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => "${m[1]}.");
     }
 
+    List<Widget> buildHeirWidgets(Map<String, int> heirs) {
+      List<Widget> heirWidgets = [];
+      heirs.forEach((heir, qty) {
+        heirWidgets.add(
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            child: Row(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    gradient: LinearGradient(
+                      colors: [
+                        primaryColor.withOpacity(0.7),
+                        secondaryColor.withOpacity(0.7),
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                  ),
+                  child: CircleAvatar(
+                    radius: 23,
+                    backgroundColor: Colors.transparent,
+                    child: Text(
+                      qty.toString(),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          primaryColor.withOpacity(0.7),
+                          secondaryColor.withOpacity(0.7),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    child: Text(
+                      heir,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      });
+      return heirWidgets;
+    }
+
     Map<String, int> filteredHeirs =
         impedimentController.getFilteredHeirs(selectedHeirs);
-
-    List<DataRow> heirRows = filteredHeirs.entries
-        .where((entry) => entry.value > 0)
-        .map((entry) => DataRow(
-              cells: [
-                DataCell(Text(entry.key)),
-                DataCell(Text(entry.value.toString())),
-              ],
-            ))
-        .toList();
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -81,39 +136,61 @@ class ConfirmationPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 25),
+                  Text(
+                    "The following are the selected Heirs:",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal.shade800),
+                  ),
+                  SizedBox(height: 16),
+                  ...buildHeirWidgets(filteredHeirs),
+                  SizedBox(height: 32),
+                  Text(
+                    "The inheritable property ready for distribution is:",
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal.shade800),
+                  ),
+                  SizedBox(height: 16),
                   Container(
-                    width: double.infinity,
-                    child: DataTable(
-                      columns: [
-                        DataColumn(
-                          label: Center(
-                            child: Text(
-                              'Heir',
-                              textAlign: TextAlign.center,
-                            ),
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          primaryColor.withOpacity(0.7),
+                          secondaryColor.withOpacity(0.7),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Rp",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
-                        DataColumn(
-                          label: Center(
-                            child: Text(
-                              'Quantity',
-                              textAlign: TextAlign.center,
-                            ),
+                        SizedBox(width: 4),
+                        Text(
+                          formatNumber(totalProperty),
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
                         ),
                       ],
-                      rows: heirRows,
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Text(
-                    "Total inheritance to be distributed: Rp${formatNumber(totalProperty)}",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 400),
+                  SizedBox(height: 300),
                 ],
               ),
             ),
