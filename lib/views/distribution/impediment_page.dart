@@ -67,28 +67,77 @@ class ImpedimentPage extends StatelessWidget {
                           itemCount: impediments.length,
                           itemBuilder: (context, index) => Column(
                             children: [
-                              ListTile(
-                                title: AnimatedTextKit(
-                                  animatedTexts: [
-                                    TypewriterAnimatedText(
-                                      impediments[index],
-                                      textStyle: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
+                              Row(
+                                children: [
+                                  Container(
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        colors: [
+                                          Colors.blue.shade400,
+                                          Colors.deepPurple.shade300
+                                        ],
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
                                       ),
-                                      speed: const Duration(milliseconds: 50),
+                                      borderRadius: BorderRadius.circular(20),
                                     ),
-                                  ],
-                                  totalRepeatCount: 1,
-                                  pause: const Duration(milliseconds: 1000),
-                                  displayFullTextOnTap: true,
-                                  stopPauseOnTap: true,
-                                ),
+                                    child: TextButton(
+                                      onPressed: () =>
+                                          _speak(impediments[index]),
+                                      style: TextButton.styleFrom(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 15, vertical: 15),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                        ),
+                                        textStyle: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Icon(Icons.volume_up,
+                                              color: Colors.white, size: 16),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            'Hear Sound',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 10),
+                                  Expanded(
+                                    child: ListTile(
+                                      title: AnimatedTextKit(
+                                        animatedTexts: [
+                                          TypewriterAnimatedText(
+                                            impediments[index],
+                                            textStyle: TextStyle(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.indigo.shade900,
+                                            ),
+                                            speed: const Duration(
+                                                milliseconds: 50),
+                                          ),
+                                        ],
+                                        totalRepeatCount: 1,
+                                        pause:
+                                            const Duration(milliseconds: 500),
+                                        displayFullTextOnTap: true,
+                                        stopPauseOnTap: true,
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
-                              TextButton(
-                                onPressed: () => _speak(impediments[index]),
-                                child: Text('Hear Sound'),
-                              ),
+                              SizedBox(height: 10),
                             ],
                           ),
                         )

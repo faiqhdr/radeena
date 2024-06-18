@@ -141,7 +141,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
           hint: "Enter amount",
           errorText: _funeralError,
         ),
-        SizedBox(height: 360),
+        SizedBox(height: 420),
       ],
     );
   }

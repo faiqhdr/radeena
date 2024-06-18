@@ -204,7 +204,8 @@ class ImpedimentController {
       if (count > 0 && impedimentRules.containsKey(heir)) {
         for (var rule in impedimentRules[heir]!) {
           if ((heirQuantity[rule] ?? 0) > 0) {
-            impediments.add('$heir is impeded because $rule is present.');
+            impediments.add(
+                '$heir is impeded because $rule is present. Means, the $heir can\'t inherit.');
             break;
           }
         }
