@@ -18,18 +18,42 @@ class CalculationController {
       double totalProperty, Map<String, int> selectedHeirs) {
     // Define the portion each heir receives based on Islamic law
     Map<String, dynamic> portions = {
-      'Father': {'portion': 1 / 6, 'type': 'Quranic', 'status': 'Primary'},
+      'Father': {
+        'portion': (selectedHeirs.containsKey('Son') ||
+                selectedHeirs.containsKey('Daughter') ||
+                selectedHeirs.containsKey('Grandson') ||
+                selectedHeirs.containsKey('Granddaughter'))
+            ? 1 / 6
+            : (selectedHeirs.containsKey('Mother')
+                ? 'DoubleMother'
+                : 'Residue'),
+        'type': 'Quranic',
+        'status': 'Primary'
+      },
       'Mother': {
         'portion': (selectedHeirs.containsKey('Son') ||
-                selectedHeirs.containsKey('Daughter'))
+                selectedHeirs.containsKey('Daughter') ||
+                selectedHeirs.containsKey('Grandson') ||
+                selectedHeirs.containsKey('Granddaughter') ||
+                selectedHeirs.containsKey('Brother') ||
+                selectedHeirs.containsKey('Sister') ||
+                selectedHeirs.containsKey('Paternal Half-Brother') ||
+                selectedHeirs.containsKey('Paternal Half-Sister') ||
+                selectedHeirs.containsKey('Maternal Half-Brother') ||
+                selectedHeirs.containsKey('Maternal Half-Sister'))
             ? 1 / 6
-            : 1 / 3,
+            : (selectedHeirs.keys.toSet().difference(
+                    {'Father', 'Mother', 'Husband', 'Wife'}).isEmpty)
+                ? 'Residue'
+                : 1 / 3,
         'type': 'Quranic',
         'status': 'Primary'
       },
       'Husband': {
         'portion': (selectedHeirs.containsKey('Son') ||
-                selectedHeirs.containsKey('Daughter'))
+                selectedHeirs.containsKey('Daughter') ||
+                selectedHeirs.containsKey('Grandson') ||
+                selectedHeirs.containsKey('Granddaughter'))
             ? 1 / 4
             : 1 / 2,
         'type': 'Quranic',
@@ -37,7 +61,9 @@ class CalculationController {
       },
       'Wife': {
         'portion': (selectedHeirs.containsKey('Son') ||
-                selectedHeirs.containsKey('Daughter'))
+                selectedHeirs.containsKey('Daughter') ||
+                selectedHeirs.containsKey('Grandson') ||
+                selectedHeirs.containsKey('Granddaughter'))
             ? 1 / 8
             : 1 / 4,
         'type': 'Quranic',
@@ -49,32 +75,61 @@ class CalculationController {
         'status': 'ResiduaryByBlood'
       },
       'Daughter': {
-        'portion': 'Residue',
+        'portion': selectedHeirs.containsKey('Son')
+            ? 'Residue'
+            : (selectedHeirs['Daughter'] == 1
+                ? 1 / 2
+                : (selectedHeirs['Daughter'] != null &&
+                        selectedHeirs['Daughter']! > 1)
+                    ? 2 / 3
+                    : 'Residue'),
         'type': 'Quranic',
         'status': 'Substitute'
       },
       'Grandson': {
-        'portion': 1 / 6,
+        'portion': 'Residue',
         'type': 'Residuary',
         'status': 'Substitute'
       },
       'Granddaughter': {
-        'portion': 1 / 3,
-        'type': 'Residuary',
+        'portion': selectedHeirs.containsKey('Grandson')
+            ? 'Residue'
+            : (selectedHeirs['Granddaughter'] == 1
+                ? 1 / 2
+                : (selectedHeirs['Granddaughter'] != null &&
+                        selectedHeirs['Granddaughter']! > 1)
+                    ? 2 / 3
+                    : 'Residue'),
+        'type': 'Quranic',
         'status': 'Substitute'
       },
       'Paternal Grandfather': {
-        'portion': 1 / 6,
+        'portion': (selectedHeirs.containsKey('Son') ||
+                selectedHeirs.containsKey('Daughter') ||
+                selectedHeirs.containsKey('Grandson') ||
+                selectedHeirs.containsKey('Granddaughter'))
+            ? 1 / 6
+            : 'Residue',
         'type': 'Quranic',
         'status': 'Substitute'
       },
       'Paternal Grandmother': {
-        'portion': 1 / 6,
+        'portion': (selectedHeirs.containsKey('Son') ||
+                selectedHeirs.containsKey('Daughter') ||
+                selectedHeirs.containsKey('Grandson') ||
+                selectedHeirs.containsKey('Granddaughter'))
+            ? 1 / 6
+            : 'Residue',
         'type': 'Quranic',
         'status': 'Substitute'
       },
       'Maternal Grandmother': {
-        'portion': 1 / 6,
+        'portion': (selectedHeirs.containsKey('Son') ||
+                selectedHeirs.containsKey('Daughter') ||
+                selectedHeirs.containsKey('Grandson') ||
+                selectedHeirs.containsKey('Granddaughter'))
+            ? 1 / 6
+            : 'Residue',
         'type': 'Quranic',
         'status': 'Substitute'
       },
@@ -86,7 +141,7 @@ class CalculationController {
       'Sister': {
         'portion': selectedHeirs['Sister'] == 1
             ? 1 / 2
-            : selectedHeirs['Sister'] != null && selectedHeirs['Sister']! > 1
+            : (selectedHeirs['Sister'] != null && selectedHeirs['Sister']! > 1)
                 ? 2 / 3
                 : 'Residue',
         'type': 'Residuary',
@@ -100,8 +155,8 @@ class CalculationController {
       'Maternal Half-Sister': {
         'portion': selectedHeirs['Maternal Half-Sister'] == 1
             ? 1 / 2
-            : selectedHeirs['Maternal Half-Sister'] != null &&
-                    selectedHeirs['Maternal Half-Sister']! > 1
+            : (selectedHeirs['Maternal Half-Sister'] != null &&
+                    selectedHeirs['Maternal Half-Sister']! > 1)
                 ? 2 / 3
                 : 'Residue',
         'type': 'Residuary',
@@ -115,8 +170,8 @@ class CalculationController {
       'Paternal Half-Sister': {
         'portion': selectedHeirs['Paternal Half-Sister'] == 1
             ? 1 / 2
-            : selectedHeirs['Paternal Half-Sister'] != null &&
-                    selectedHeirs['Paternal Half-Sister']! > 1
+            : (selectedHeirs['Paternal Half-Sister'] != null &&
+                    selectedHeirs['Paternal Half-Sister']! > 1)
                 ? 2 / 3
                 : 'Residue',
         'type': 'Residuary',
@@ -192,7 +247,20 @@ class CalculationController {
     selectedHeirs.forEach((heir, count) {
       if (applicablePortions[heir] != null &&
           applicablePortions[heir]['portion'] == 'Residue') {
-        totalResiduaryShares += (heir == 'Son' ? 2 * count : count);
+        totalResiduaryShares += (heir == 'Son' ||
+                heir == 'Brother' ||
+                heir == 'Maternal Half-Brother' ||
+                heir == 'Paternal Half-Brother' ||
+                heir == 'Son of Paternal Half-Brother' ||
+                heir == 'Uncle' ||
+                heir == 'Paternal Uncle' ||
+                heir == 'Son of Paternal Uncle' ||
+                heir == 'Son of Uncle'
+            ? 2 * count
+            : count);
+      } else if (applicablePortions[heir] != null &&
+          applicablePortions[heir]['portion'] == 'DoubleMother') {
+        totalResiduaryShares += 2 * selectedHeirs['Mother']!;
       }
     });
 
@@ -200,7 +268,23 @@ class CalculationController {
       if (applicablePortions[heir] != null &&
           applicablePortions[heir]['portion'] == 'Residue') {
         double share = residue *
-            ((heir == 'Son' ? 2 * count : count) / totalResiduaryShares);
+            ((heir == 'Son' ||
+                        heir == 'Brother' ||
+                        heir == 'Maternal Half-Brother' ||
+                        heir == 'Paternal Half-Brother' ||
+                        heir == 'Son of Paternal Half-Brother' ||
+                        heir == 'Uncle' ||
+                        heir == 'Paternal Uncle' ||
+                        heir == 'Son of Paternal Uncle' ||
+                        heir == 'Son of Uncle'
+                    ? 2 * count
+                    : count) /
+                totalResiduaryShares);
+        distribution[heir] = (distribution[heir] ?? 0) + share;
+      } else if (applicablePortions[heir] != null &&
+          applicablePortions[heir]['portion'] == 'DoubleMother') {
+        double share =
+            residue * (2 * selectedHeirs['Mother']! / totalResiduaryShares);
         distribution[heir] = (distribution[heir] ?? 0) + share;
       }
     });
@@ -212,11 +296,28 @@ class CalculationController {
       }
     });
 
-    String divisionStatus = "No Aul / Radd";
+    String divisionStatus = "Unavailable";
     if (totalInitialShares > 1) {
-      divisionStatus = "Aul";
+      divisionStatus = "Aul / Radd";
     } else if (totalInitialShares < 1) {
-      divisionStatus = "Radd";
+      divisionStatus = "No Aul / Radd";
+    }
+
+    // Check for residue
+    // if (residue > 0 && totalResiduaryShares > 0) {
+    //   divisionStatus +=
+    //       "\nThere is residue that can be distributed to the relatives.";
+    // }
+
+    // Check if no heirs are selected
+    if (selectedHeirs.isEmpty) {
+      return {
+        'distribution': {'Kinsfolk': totalProperty},
+        'totalInitialShares': totalInitialShares,
+        'initialShares': initialShares,
+        'divisionStatus': "All the inheritance will be given to kinsfolk.",
+        'finalShare': lcmValue
+      };
     }
 
     // Correcting final share value calculation

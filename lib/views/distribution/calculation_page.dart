@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restart_app/restart_app.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/distribution/inheritance_page.dart';
 import 'package:radeena/views/distribution/heir_page.dart';
@@ -53,7 +54,7 @@ class CalculationPage extends StatelessWidget {
             TextButton(
               child: Text("Yes"),
               onPressed: () {
-                Navigator.of(context).popUntil((route) => route.isFirst);
+                Restart.restartApp();
               },
             ),
           ],
@@ -172,7 +173,7 @@ class CalculationPage extends StatelessWidget {
                     ],
                     rows: heirRows,
                   ),
-                  SizedBox(height: 355),
+                  SizedBox(height: 500),
                 ],
               ),
             ),

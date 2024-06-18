@@ -190,7 +190,7 @@ class ConfirmationPage extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 300),
+                  SizedBox(height: 500),
                 ],
               ),
             ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:radeena/styles/style.dart';
 import 'package:input_quantity/input_quantity.dart';
+import 'package:radeena/styles/style.dart';
 import 'package:radeena/models/enums.dart';
 import 'package:radeena/views/distribution/impediment_page.dart';
 import 'package:radeena/controllers/identification_controller.dart';
