@@ -11,11 +11,23 @@ class CalculationController {
   }
 
   int calculateLCM(List<int> numbers) {
+    if (numbers.isEmpty) return 1;
     return numbers.reduce((a, b) => lcm(a, b));
   }
 
   Map<String, dynamic> calculateInheritance(
       double totalProperty, Map<String, int> selectedHeirs) {
+    if (selectedHeirs.isEmpty) {
+      return {
+        'distribution': {'Kinsfolk or Baitul Maal': totalProperty},
+        'totalInitialShares': 0.0,
+        'initialShares': {},
+        'divisionStatus':
+            "All the inheritance will be given to kinsfolk or Baitul Maal.",
+        'finalShare': 1
+      };
+    }
+
     // Define the portion each heir receives based on Islamic law
     Map<String, dynamic> portions = {
       'Father': {
@@ -212,6 +224,23 @@ class CalculationController {
       }
     });
 
+    // If all selected heirs have "Residue" portion, assign all property to them
+    bool onlyResidueHeirs = applicablePortions.values.every((data) =>
+        data['portion'] == 'Residue' || data['portion'] == 'DoubleMother');
+    if (onlyResidueHeirs) {
+      Map<String, double> allResidueDistribution = {};
+      selectedHeirs.forEach((heir, count) {
+        allResidueDistribution[heir] = totalProperty;
+      });
+      return {
+        'distribution': allResidueDistribution,
+        'totalInitialShares': 0.0,
+        'initialShares': {},
+        'divisionStatus': "All the property is given to the residuary heirs.",
+        'finalShare': 1
+      };
+    }
+
     // Calculate LCM of denominators for applicable Quranic portions
     List<int> denominators = applicablePortions.values
         .where((data) => data['portion'] is double)
@@ -308,17 +337,6 @@ class CalculationController {
     //   divisionStatus +=
     //       "\nThere is residue that can be distributed to the relatives.";
     // }
-
-    // Check if no heirs are selected
-    if (selectedHeirs.isEmpty) {
-      return {
-        'distribution': {'Kinsfolk': totalProperty},
-        'totalInitialShares': totalInitialShares,
-        'initialShares': initialShares,
-        'divisionStatus': "All the inheritance will be given to kinsfolk.",
-        'finalShare': lcmValue
-      };
-    }
 
     // Correcting final share value calculation
     int finalShare = lcmValue;

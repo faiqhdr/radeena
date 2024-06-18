@@ -173,6 +173,15 @@ class CalculationPage extends StatelessWidget {
                     ],
                     rows: heirRows,
                   ),
+                  if (distribution.containsKey('Kinsfolk or Baitul Maal'))
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15.0),
+                      child: Text(
+                        "All the inheritance will be given to kinsfolk or Baitul Maal.",
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w500),
+                      ),
+                    ),
                   SizedBox(height: 500),
                 ],
               ),
