@@ -82,22 +82,67 @@ class ConfirmationPage extends StatelessWidget {
                   ),
                   SizedBox(height: 25),
                   Container(
-                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
                     child: DataTable(
+                      headingRowHeight: 56,
+                      dataRowHeight: 56,
                       columns: [
                         DataColumn(
-                          label: Center(
-                            child: Text(
-                              'Heir',
-                              textAlign: TextAlign.center,
+                          label: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.teal.shade300,
+                                  Colors.teal.shade100
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15)),
+                            ),
+                            padding: EdgeInsets.all(8),
+                            child: Center(
+                              child: Text(
+                                'Heir',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
                           ),
                         ),
                         DataColumn(
-                          label: Center(
-                            child: Text(
-                              'Quantity',
-                              textAlign: TextAlign.center,
+                          label: Container(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.teal.shade300,
+                                  Colors.teal.shade100
+                                ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(15)),
+                            ),
+                            padding: EdgeInsets.all(8),
+                            child: Center(
+                              child: Text(
+                                'Quantity',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
                           ),
                         ),

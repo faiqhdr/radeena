@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:radeena/styles/style.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:lottie/lottie.dart';
+import 'package:radeena/styles/style.dart';
 import 'package:radeena/widgets/common_button.dart';
 import 'package:radeena/views/distribution/tree_graph_page.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
@@ -11,13 +12,20 @@ class ImpedimentPage extends StatelessWidget {
   final List<String> impediments;
   final IdentificationController identificationController;
   final ImpedimentController impedimentController;
+  final FlutterTts flutterTts = FlutterTts();
 
-  const ImpedimentPage({
+  ImpedimentPage({
     Key? key,
     required this.impediments,
     required this.identificationController,
     required this.impedimentController,
   }) : super(key: key);
+
+  Future<void> _speak(String text) async {
+    await flutterTts.setLanguage("en-US");
+    await flutterTts.setPitch(1.0);
+    await flutterTts.speak(text);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,23 +65,31 @@ class ImpedimentPage extends StatelessWidget {
                   child: impediments.isNotEmpty
                       ? ListView.builder(
                           itemCount: impediments.length,
-                          itemBuilder: (context, index) => ListTile(
-                            title: AnimatedTextKit(
-                              animatedTexts: [
-                                TypewriterAnimatedText(
-                                  impediments[index],
-                                  textStyle: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  speed: const Duration(milliseconds: 50),
+                          itemBuilder: (context, index) => Column(
+                            children: [
+                              ListTile(
+                                title: AnimatedTextKit(
+                                  animatedTexts: [
+                                    TypewriterAnimatedText(
+                                      impediments[index],
+                                      textStyle: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      speed: const Duration(milliseconds: 50),
+                                    ),
+                                  ],
+                                  totalRepeatCount: 1,
+                                  pause: const Duration(milliseconds: 1000),
+                                  displayFullTextOnTap: true,
+                                  stopPauseOnTap: true,
                                 ),
-                              ],
-                              totalRepeatCount: 1,
-                              pause: const Duration(milliseconds: 1000),
-                              displayFullTextOnTap: true,
-                              stopPauseOnTap: true,
-                            ),
+                              ),
+                              TextButton(
+                                onPressed: () => _speak(impediments[index]),
+                                child: Text('Hear Sound'),
+                              ),
+                            ],
                           ),
                         )
                       : Center(
