@@ -131,7 +131,7 @@ class _ChatbotPageState extends State<ChatbotPage>
         await Future.delayed(Duration(seconds: 2));
         setState(() {
           isTyping = false;
-          _addMessage("Hope it helps! 😊", "Chatbot");
+          _addMessage("I hope that clarifies your question! 😊", "Chatbot");
           _restartChat();
         });
       } else {
@@ -172,14 +172,14 @@ class _ChatbotPageState extends State<ChatbotPage>
       setState(() {
         isTyping = false;
         String detailedMessage =
-            "The source of the dalil is ${dalil['source']}, which states that the heir's portion is ${dalil['portion']}.\n\n${dalil['condition']}\n\nThis dalil says \"${dalil['evidenceContent']}\"\n\nHere is the complete dalil for the heir along with the translation. 👇 \n\n${dalil['fullEvidence']}";
+            "The source of the dalil is ${dalil['source']}, which states that the heir's portion is ${dalil['portion']}.\n\n${dalil['condition']}\n\nThis dalil says, \"${dalil['evidenceContent']}\"\n\nHere is the complete dalil for the heir along with the translation. 👇 \n\n${dalil['fullEvidence']}";
         _addMessage(detailedMessage, "Chatbot");
       });
     }
     await Future.delayed(Duration(seconds: 2));
     setState(() {
       isTyping = false;
-      String detailedMessage = "Hope it helps! 😊";
+      String detailedMessage = "Hopefully that answers your question! 😊";
       _addMessage(detailedMessage, "Chatbot");
     });
     _restartChat();
@@ -192,7 +192,7 @@ class _ChatbotPageState extends State<ChatbotPage>
         predefinedOptions = [];
         selectedValue = '';
       });
-      _addMessage("Anything else I can help you with? 🤓", "Chatbot");
+      _addMessage("Anything else you want to ask? 🤓", "Chatbot");
       Future.delayed(Duration(seconds: 1), () {
         setState(() {
           predefinedOptions = chatbotController.model.getInitialOptions();
