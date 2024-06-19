@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-import 'package:radeena/styles/style.dart';
-import 'package:restart_app/restart_app.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter/material.dart';
+import 'package:restart_app/restart_app.dart';
+import 'package:lottie/lottie.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/distribution/inheritance_page.dart';
 import 'package:radeena/views/distribution/heir_page.dart';
 import 'package:radeena/controllers/identification_controller.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/controllers/calculation_controller.dart';
 import 'package:radeena/controllers/history_controller.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 
 class CalculationPage extends StatelessWidget {
   final double totalProperty;

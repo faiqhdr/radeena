@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:radeena/styles/style.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:lottie/lottie.dart';
-import 'saved_calculation_page.dart';
+import 'package:radeena/styles/style.dart';
+import 'package:radeena/views/history/saved_calculation_page.dart';
 import 'package:radeena/controllers/history_controller.dart';
 
 class HistoryPage extends StatefulWidget {
