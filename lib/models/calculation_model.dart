@@ -5,9 +5,7 @@ class CalculationModel {
   static final CalculationModel _instance = CalculationModel._internal();
   static Database? _database;
 
-  factory CalculationModel() {
-    return _instance;
-  }
+  factory CalculationModel() { return _instance; }
 
   CalculationModel._internal();
 
