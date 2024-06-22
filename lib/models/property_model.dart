@@ -13,43 +13,15 @@ class PropertyModel {
     required this.total,
   });
 
-  double getAmount() {
-    return amount;
-  }
+  double getAmount() { return amount; }
+  double getDebt() { return debt; }
+  double getTestament() { return testament; }
+  double getFuneral() { return funeral; }
+  double getTotal() { return total; }
 
-  double getDebt() {
-    return debt;
-  }
-
-  double getTestament() {
-    return testament;
-  }
-
-  double getFuneral() {
-    return funeral;
-  }
-
-  double getTotal() {
-    return total;
-  }
-
-  void setAmount(double propertyAmount) {
-    amount = propertyAmount;
-  }
-
-  void setDebt(double debtAmount) {
-    debt = debtAmount;
-  }
-
-  void setTestament(double testamentAmount) {
-    testament = testamentAmount;
-  }
-
-  void setFuneral(double funeralAmount) {
-    funeral = funeralAmount;
-  }
-
-  void setTotal(double totalAmount) {
-    total = totalAmount;
-  }
+  void setAmount(double propertyAmount) { amount = propertyAmount; }
+  void setDebt(double debtAmount) { debt = debtAmount; }
+  void setTestament(double testamentAmount) { testament = testamentAmount; }
+  void setFuneral(double funeralAmount) { funeral = funeralAmount; }
+  void setTotal(double totalAmount) { total = totalAmount; }
 }
