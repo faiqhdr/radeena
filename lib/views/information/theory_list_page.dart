@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
-import 'package:radeena/views/material/theory_content_page.dart';
+import 'package:radeena/views/information/theory_content_page.dart';
 import 'package:radeena/controllers/library_controller.dart';
 
 class TheoryListPage extends StatefulWidget {

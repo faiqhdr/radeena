@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
-import 'package:radeena/views/material/dalil_list_page.dart';
+import 'package:radeena/views/information/dalil_list_page.dart';
 import 'package:radeena/controllers/library_controller.dart';
 
 class DalilHeirPage extends StatefulWidget {

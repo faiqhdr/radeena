@@ -4,7 +4,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:lottie/lottie.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/widgets/common_button.dart';
-import 'package:radeena/views/distribution/tree_graph_page.dart';
+import 'package:radeena/views/division/tree_graph_page.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/controllers/identification_controller.dart';
 
