@@ -21,7 +21,7 @@ class CalculationModel {
     String path = join(await getDatabasesPath(), 'calculation_history.db');
     return await openDatabase(
       path,
-      version: 2, // Increment version number
+      version: 2,
       onCreate: _onCreate,
     );
   }

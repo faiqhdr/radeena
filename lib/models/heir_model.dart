@@ -13,35 +13,13 @@ class HeirModel {
     required this.status,
   });
 
-  Portion getPortion() {
-    return portion;
-  }
+  Portion getPortion() { return portion; }
+  Position getPosition() { return position; }
+  Category getCategory() { return category; }
+  Status getStatus() { return status; }
 
-  Position getPosition() {
-    return position;
-  }
-
-  Category getCategory() {
-    return category;
-  }
-
-  Status getStatus() {
-    return status;
-  }
-
-  void setPortion(Portion heirPortion) {
-    portion = heirPortion;
-  }
-
-  void setPosition(Position heirPosition) {
-    position = heirPosition;
-  }
-
-  void setCategory(Category heirCategory) {
-    category = heirCategory;
-  }
-
-  void setStatus(Status heirStatus) {
-    status = heirStatus;
-  }
+  void setPortion(Portion heirPortion) { portion = heirPortion; }
+  void setPosition(Position heirPosition) { position = heirPosition; }
+  void setCategory(Category heirCategory) { category = heirCategory; }
+  void setStatus(Status heirStatus) { status = heirStatus; }
 }
