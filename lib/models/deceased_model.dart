@@ -13,23 +13,9 @@ class DeceasedModel {
     required this.inheritance,
   });
 
-  Gender getGender() {
-    return gender;
-  }
-
-  List<HeirModel> getSelectedHeirs() {
-    return selectedHeirs;
-  }
-
-  PropertyModel getInheritance() {
-    return inheritance;
-  }
-
-  void setGender(Gender deceasedGender) {
-    gender = deceasedGender;
-  }
-
-  void setInheritance(PropertyModel inheritanceAmount) {
-    inheritance = inheritanceAmount;
-  }
+  Gender getGender() { return gender; }
+  List<HeirModel> getSelectedHeirs() { return selectedHeirs; }
+  PropertyModel getInheritance() { return inheritance; }
+  void setGender(Gender deceasedGender) { gender = deceasedGender; }
+  void setInheritance(PropertyModel inheritanceAmount) { inheritance = inheritanceAmount; }
 }
