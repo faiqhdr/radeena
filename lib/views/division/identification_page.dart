@@ -319,7 +319,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text('Error'),
+            title: Text('Gender Notice'),
             content: Text(genderError),
             actions: [
               TextButton(

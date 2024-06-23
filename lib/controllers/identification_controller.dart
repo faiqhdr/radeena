@@ -48,7 +48,7 @@ class IdentificationController {
         _property.testament -
         _property.funeral;
     if (total < 0) {
-      print("Error: Total Inheritance cannot be negative.");
+      print("Asset Notice: Total Inheritance cannot be negative.");
     } else {
       _property.setTotal(total);
       print("Total Inheritance to be distributed: $total");
