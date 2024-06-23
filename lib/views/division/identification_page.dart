@@ -287,22 +287,6 @@ class _IdentificationPageState extends State<IdentificationPage> {
               },
             ),
             Text("Female"),
-            SizedBox(width: 42.0),
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  widget.controller.setDeceasedGender(null);
-                });
-              },
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black),
-                  borderRadius: BorderRadius.circular(4.0),
-                ),
-                child: Text("Clear", style: TextStyle(fontSize: 14.0)),
-              ),
-            ),
           ],
         ),
         SizedBox(height: 600),
