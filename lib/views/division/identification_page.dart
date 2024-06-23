@@ -192,7 +192,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text('Error'),
+            title: Text('Asset Notice'),
             content: Text(
                 'The amount of debt, testament, and funeral arrangements, or the total of the debt, testament, and funeral arrangements, must not exceed the property amount; inheritance cannot be calculated.'),
             actions: [
@@ -212,7 +212,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text('Error'),
+            title: Text('Asset Notice'),
             content: Text(
                 'The total inheritance is 0; inheritance cannot be calculated.'),
             actions: [
@@ -233,7 +233,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
         String errorMessage = _propertyError ??
             _debtError ??
             _funeralError ??
-            'An error occurred.';
+            'Something is not right.';
 
         if (_testamentError != null) {
           errorMessage = _testamentError!;
@@ -242,7 +242,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text('Error'),
+            title: Text('Asset Notice'),
             content: Text(errorMessage),
             actions: [
               TextButton(
