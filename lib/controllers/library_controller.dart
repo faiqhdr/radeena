@@ -3,11 +3,11 @@ import 'package:flutter/services.dart';
 
 class LibraryController {
   List<Map<String, dynamic>> dalilList = [];
-  List<Map<String, dynamic>> theoryList = [];
+  List<Map<String, dynamic>> lessonList = [];
 
   LibraryController() {
     loadDalilData();
-    loadTheoryData();
+    loadLessonData();
   }
 
   Future<void> loadDalilData() async {
@@ -17,11 +17,11 @@ class LibraryController {
     dalilList = List<Map<String, dynamic>>.from(data['evidence']);
   }
 
-  Future<void> loadTheoryData() async {
+  Future<void> loadLessonData() async {
     final String response =
-        await rootBundle.loadString('lib/models/theory.json');
+        await rootBundle.loadString('lib/models/lesson.json');
     final data = await json.decode(response);
-    theoryList = List<Map<String, dynamic>>.from(data['theory']);
+    lessonList = List<Map<String, dynamic>>.from(data['lesson']);
   }
 
   List getUniqueHeirs() {
@@ -33,8 +33,8 @@ class LibraryController {
     return dalilList.where((dalil) => dalil['heir'] == heir).toList();
   }
 
-  List<Map<String, dynamic>> getTheoriesByTitle(String title) {
-    return theoryList.where((theory) => theory['title'] == title).toList();
+  List<Map<String, dynamic>> getLessonsByTitle(String title) {
+    return lessonList.where((lesson) => lesson['title'] == title).toList();
   }
 
   Map<String, dynamic> getDalilByHeir(String heir) {

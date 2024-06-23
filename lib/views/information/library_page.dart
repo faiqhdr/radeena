@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/information/dalil_heir_page.dart';
-import 'package:radeena/views/information/theory_list_page.dart';
+import 'package:radeena/views/information/topic_list_page.dart';
 
 class LibraryPage extends StatelessWidget {
   const LibraryPage({
@@ -45,8 +45,8 @@ class LibraryPage extends StatelessWidget {
               children: [
                 _buildLibraryButton(
                   context,
-                  'Theory',
-                  TheoryListPage(),
+                  'Insight',
+                  TopicListPage(),
                 ),
                 _buildLibraryButton(
                   context,

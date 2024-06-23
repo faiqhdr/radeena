@@ -76,7 +76,7 @@ flutter:
     - assets/menu_page/
     - assets/lottie/
     - lib/models/dalil.json
-    - lib/models/theory.json
+    - lib/models/lesson.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

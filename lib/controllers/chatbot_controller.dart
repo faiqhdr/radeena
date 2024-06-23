@@ -8,9 +8,9 @@ class ChatbotController {
   final LibraryController libraryController = LibraryController();
 
   Future<List<Map<String, String>>> getResponse(String input) async {
-    if (input.toLowerCase().contains('theory')) {
-      await libraryController.loadTheoryData();
-      return model.getQuestionsForInput(libraryController.theoryList, 'title');
+    if (input.toLowerCase().contains('lesson')) {
+      await libraryController.loadLessonData();
+      return model.getQuestionsForInput(libraryController.lessonList, 'title');
     } else if (input.toLowerCase().contains('dalil')) {
       await libraryController.loadDalilData();
       return model.getQuestionsForInput(libraryController.dalilList, 'heir');
@@ -22,11 +22,11 @@ class ChatbotController {
   }
 
   Future<Map<String, dynamic>?> getDetailedInfo(String input) async {
-    await libraryController.loadTheoryData();
+    await libraryController.loadLessonData();
     await libraryController.loadDalilData();
 
-    var theories = libraryController.getTheoriesByTitle(input);
-    if (theories.isNotEmpty) return {"theories": theories};
+    var lessons = libraryController.getLessonsByTitle(input);
+    if (lessons.isNotEmpty) return {"lessons": lessons};
 
     var dalil = libraryController.getDalilByHeir(input);
     if (dalil != null && dalil.isNotEmpty) return dalil;

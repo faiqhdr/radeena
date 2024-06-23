@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
-import 'package:radeena/views/information/theory_content_page.dart';
+import 'package:radeena/views/information/topic_content_page.dart';
 import 'package:radeena/controllers/library_controller.dart';
 
-class TheoryListPage extends StatefulWidget {
-  const TheoryListPage({Key? key}) : super(key: key);
+class TopicListPage extends StatefulWidget {
+  const TopicListPage({Key? key}) : super(key: key);
 
   @override
-  _TheoryListPageState createState() => _TheoryListPageState();
+  _TopicListPageState createState() => _TopicListPageState();
 }
 
-class _TheoryListPageState extends State<TheoryListPage> {
-  late Future<List> theoriesFuture;
+class _TopicListPageState extends State<TopicListPage> {
+  late Future<List> lessonsFuture;
   final libraryController = LibraryController();
 
   @override
   void initState() {
     super.initState();
-    theoriesFuture = _loadData();
+    lessonsFuture = _loadData();
   }
 
   Future<List> _loadData() async {
-    await libraryController.loadTheoryData();
-    return libraryController.theoryList;
+    await libraryController.loadLessonData();
+    return libraryController.lessonList;
   }
 
   @override
@@ -52,14 +52,14 @@ class _TheoryListPageState extends State<TheoryListPage> {
             Padding(
               padding: EdgeInsets.only(top: 0),
               child: Text(
-                "Theory",
+                "Topic",
                 style: textUnderTitleStyle(),
               ),
             ),
             SizedBox(height: 25),
             Expanded(
               child: FutureBuilder<List>(
-                future: theoriesFuture,
+                future: lessonsFuture,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
@@ -67,7 +67,7 @@ class _TheoryListPageState extends State<TheoryListPage> {
                     return Center(child: Text('Error loading data'));
                   } else {
                     final titles = snapshot.data!
-                        .map((theory) => theory['title'])
+                        .map((lesson) => lesson['title'])
                         .toSet()
                         .toList();
                     return ListView.builder(
@@ -79,7 +79,7 @@ class _TheoryListPageState extends State<TheoryListPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => TheoryContentPage(
+                                builder: (context) => TopicContentPage(
                                   title: title,
                                   libraryController: libraryController,
                                 ),

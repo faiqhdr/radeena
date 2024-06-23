@@ -5,7 +5,7 @@ class ChatbotModel {
 
   List<Map<String, String>> getInitialOptions() {
     return [
-      {"question": "I would like to know more about Faraid’s Lesson"},
+      {"question": "I would like to know more about Faraid’s lesson"},
       {"question": "I would like to know more about Faraid’s Dalil"}
     ];
   }

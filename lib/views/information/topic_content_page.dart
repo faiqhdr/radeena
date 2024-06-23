@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/controllers/library_controller.dart';
 
-class TheoryContentPage extends StatelessWidget {
+class TopicContentPage extends StatelessWidget {
   final String title;
   final LibraryController libraryController;
 
-  const TheoryContentPage(
+  const TopicContentPage(
       {required this.title, required this.libraryController, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    final theories = libraryController.getTheoriesByTitle(title);
+    final lessons = libraryController.getLessonsByTitle(title);
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -44,9 +44,9 @@ class TheoryContentPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 25),
-              for (var theory in theories) ...[
+              for (var lesson in lessons) ...[
                 Text(
-                  theory['content'],
+                  lesson['content'],
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w700,
@@ -55,7 +55,7 @@ class TheoryContentPage extends StatelessWidget {
                 ),
                 SizedBox(height: 5),
                 Text(
-                  theory['subContent'],
+                  lesson['subContent'],
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w400,

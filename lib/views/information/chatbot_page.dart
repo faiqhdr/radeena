@@ -82,8 +82,8 @@ class _ChatbotPageState extends State<ChatbotPage>
         } else {
           predefinedOptions = response;
           _addMessage(
-            selected.toLowerCase().contains('theory')
-                ? "Which theory do you want to know more about? 🧐"
+            selected.toLowerCase().contains('lesson')
+                ? "Which topic do you want to know more about? 🧐"
                 : "Which dalil do you want to know more about? 🧐",
             "Chatbot",
           );
@@ -99,10 +99,10 @@ class _ChatbotPageState extends State<ChatbotPage>
       predefinedOptions = [];
     });
 
-    if (selectedValue.toLowerCase().contains('theory')) {
+    if (selectedValue.toLowerCase().contains('lesson')) {
       final detailedInfo = await chatbotController.getDetailedInfo(selected);
 
-      if (detailedInfo != null && detailedInfo.containsKey('theories')) {
+      if (detailedInfo != null && detailedInfo.containsKey('lessons')) {
         setState(() {
           isTyping = true;
         });
@@ -113,7 +113,7 @@ class _ChatbotPageState extends State<ChatbotPage>
               "Sure! Here is the detailed explanation of \"${selected}\". 😉👌";
           _addMessage(introMessage, "Chatbot");
         });
-        for (var theory in detailedInfo['theories']) {
+        for (var lesson in detailedInfo['lessons']) {
           setState(() {
             isTyping = true;
           });
@@ -121,7 +121,7 @@ class _ChatbotPageState extends State<ChatbotPage>
           setState(() {
             isTyping = false;
             String detailedMessage =
-                "${theory['content']}\n\n${theory['subContent']}";
+                "${lesson['content']}\n\n${lesson['subContent']}";
             _addMessage(detailedMessage, "Chatbot");
           });
         }
@@ -331,7 +331,7 @@ class _ChatbotPageState extends State<ChatbotPage>
   List<Widget> _buildPredefinedUserOptions() {
     return predefinedOptions
         .map((option) => _buildPredefinedUserOption(option['question']!, () {
-              if (selectedValue.toLowerCase().contains('theory') ||
+              if (selectedValue.toLowerCase().contains('lesson') ||
                   selectedValue.toLowerCase().contains('dalil')) {
                 _provideDetailedExplanation(option['question']!);
               } else {
