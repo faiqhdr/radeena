@@ -16,13 +16,4 @@ class DeceasedModel {
   void updateHeirQuantity(String heir, int quantity) {
     heirs[heir] = quantity;
   }
-
-  String? validateHeirs() {
-    // Custom validation logic for heirs
-    return null;
-  }
-
-  void resetHeirs() {
-    heirs.clear();
-  }
 }

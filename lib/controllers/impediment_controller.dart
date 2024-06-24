@@ -183,8 +183,23 @@ class ImpedimentController {
         }
       }
     });
-
     return impediments;
+  }
+
+  List<String> getImpededHeirs() {
+    List<String> impededHeirs = [];
+
+    deceased.heirs.forEach((heir, count) {
+      if (count > 0 && impedimentRules.containsKey(heir)) {
+        for (var rule in impedimentRules[heir]!) {
+          if ((deceased.heirs[rule] ?? 0) > 0) {
+            impededHeirs.add(heir);
+            break;
+          }
+        }
+      }
+    });
+    return impededHeirs;
   }
 
   void updateHeirQuantity(String heir, int quantity) {
@@ -193,9 +208,7 @@ class ImpedimentController {
 
   Map<String, int> getFilteredHeirs(Map<String, int> selectedHeirs) {
     Map<String, int> filteredHeirs = {};
-    List<String> impediments = getImpediments().map((impediment) {
-      return impediment.split(' is impeded')[0];
-    }).toList();
+    List<String> impediments = getImpededHeirs();
 
     selectedHeirs.forEach((heir, count) {
       if (!impediments.contains(heir) && count > 0) {
@@ -213,7 +226,7 @@ class ImpedimentController {
     nodes['Deceased'] = deceasedNode;
     graph.addNode(deceasedNode);
 
-    deceased.heirs.forEach((heir, count) {
+    deceased.heirs.keys.forEach((heir) {
       Node node = Node.Id(heir);
       nodes[heir] = node;
       graph.addNode(node);
@@ -277,7 +290,7 @@ class ImpedimentController {
         end: Alignment.bottomRight,
       );
     }
-    if (getImpediments().any((imp) => imp.startsWith(heir))) {
+    if (getImpededHeirs().contains(heir)) {
       return LinearGradient(
         colors: [Colors.red.shade600, Colors.red.shade400],
         begin: Alignment.topLeft,

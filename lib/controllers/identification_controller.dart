@@ -61,8 +61,4 @@ class IdentificationController {
   void updateHeirQuantity(String heir, int quantity) {
     deceased.updateHeirQuantity(heir, quantity);
   }
-
-  String? validateHeirs() {
-    return deceased.validateHeirs();
-  }
 }
