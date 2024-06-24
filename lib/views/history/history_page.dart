@@ -6,22 +6,25 @@ import 'package:radeena/views/history/saved_calculation_page.dart';
 import 'package:radeena/controllers/history_controller.dart';
 
 class HistoryPage extends StatefulWidget {
+  const HistoryPage({Key? key}) : super(key: key);
+
   @override
   _HistoryPageState createState() => _HistoryPageState();
 }
 
 class _HistoryPageState extends State<HistoryPage> {
   late Future<List<Map<String, dynamic>>> _futureHistory;
+  final HistoryController _historyController = HistoryController();
 
   @override
   void initState() {
     super.initState();
-    _futureHistory = HistoryController().getHistory();
+    _futureHistory = _historyController.getHistory();
   }
 
   void _refreshHistory() {
     setState(() {
-      _futureHistory = HistoryController().getHistory();
+      _futureHistory = _historyController.getHistory();
     });
   }
 
@@ -42,7 +45,7 @@ class _HistoryPageState extends State<HistoryPage> {
             TextButton(
               child: Text("Delete"),
               onPressed: () async {
-                await HistoryController().deleteHistory(id);
+                await _historyController.deleteHistory(id);
                 Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text("Calculation successfully deleted!")),

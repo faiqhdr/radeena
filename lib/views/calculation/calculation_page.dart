@@ -9,7 +9,6 @@ import 'package:radeena/views/calculation/heir_page.dart';
 import 'package:radeena/controllers/identification_controller.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/controllers/calculation_controller.dart';
-import 'package:radeena/controllers/history_controller.dart';
 
 class CalculationPage extends StatelessWidget {
   final double totalProperty;
@@ -69,12 +68,13 @@ class CalculationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    CalculationController controller = CalculationController();
+    CalculationController calculationController = CalculationController();
 
     Map<String, int> filteredHeirs =
         impedimentController.getFilteredHeirs(selectedHeirs);
 
-    var result = controller.calculateInheritance(totalProperty, filteredHeirs);
+    var result = calculationController.calculateInheritance(
+        totalProperty, filteredHeirs);
     Map<String, double> distribution = result['distribution'];
     String divisionStatus = result['divisionStatus'];
     int finalShare = result['finalShare'];
@@ -360,9 +360,7 @@ class CalculationPage extends StatelessWidget {
                                 child: Text("Save"),
                                 onPressed: () async {
                                   String calculationName = nameController.text;
-                                  HistoryController historyController =
-                                      HistoryController();
-                                  await historyController.saveCalculation(
+                                  await calculationController.saveCalculation(
                                     calculationName,
                                     totalProperty,
                                     propertyAmount,
