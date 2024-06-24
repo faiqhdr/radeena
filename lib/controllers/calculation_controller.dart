@@ -29,14 +29,6 @@ class CalculationController {
     );
   }
 
-  Future<List<Map<String, dynamic>>> getHistory() async {
-    return await model.getHistory();
-  }
-
-  Future<void> deleteHistory(int id) async {
-    await model.deleteHistory(id);
-  }
-
   int lcm(int a, int b) {
     return (a * b) ~/ gcd(a, b);
   }
