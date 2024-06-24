@@ -32,7 +32,7 @@ class ImpedimentController {
     'Son of Paternal Uncle': 0,
   };
 
-  String deceased = 'Deceased'; // Assuming the position of the deceased
+  String deceased = 'Deceased';
 
   Map<String, List<String>> impedimentRules = {
     'Grandson': ['Son'],
