@@ -1,44 +1,37 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:radeena/models/library_model.dart';
 
 class LibraryController {
-  List<Map<String, dynamic>> dalilList = [];
-  List<Map<String, dynamic>> lessonList = [];
-
-  LibraryController() {
-    loadDalilData();
-    loadLessonData();
-  }
+  final LibraryModel model = LibraryModel();
 
   Future<void> loadDalilData() async {
     final String response =
         await rootBundle.loadString('lib/models/dalil.json');
-    final data = await json.decode(response);
-    dalilList = List<Map<String, dynamic>>.from(data['evidence']);
+    final data = json.decode(response) as Map<String, dynamic>;
+    model.setDalilList(List<Map<String, dynamic>>.from(data['evidence']));
   }
 
   Future<void> loadLessonData() async {
     final String response =
         await rootBundle.loadString('lib/models/lesson.json');
-    final data = await json.decode(response);
-    lessonList = List<Map<String, dynamic>>.from(data['lesson']);
+    final data = json.decode(response) as Map<String, dynamic>;
+    model.setLessonList(List<Map<String, dynamic>>.from(data['lesson']));
   }
 
-  List getUniqueHeirs() {
-    final heirs = dalilList.map((dalil) => dalil['heir']).toSet().toList();
-    return heirs;
+  List<String> getUniqueHeirs() {
+    return model.getUniqueHeirs();
   }
 
   List<Map<String, dynamic>> getDalilForHeir(String heir) {
-    return dalilList.where((dalil) => dalil['heir'] == heir).toList();
+    return model.getDalilForHeir(heir);
   }
 
   List<Map<String, dynamic>> getLessonsByTitle(String title) {
-    return lessonList.where((lesson) => lesson['title'] == title).toList();
+    return model.getLessonsByTitle(title);
   }
 
   Map<String, dynamic> getDalilByHeir(String heir) {
-    return dalilList.firstWhere((dalil) => dalil['heir'] == heir,
-        orElse: () => {});
+    return model.getDalilByHeir(heir);
   }
 }

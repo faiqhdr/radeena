@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/information/dalil_heir_page.dart';
 import 'package:radeena/views/information/topic_list_page.dart';
+import 'package:radeena/controllers/library_controller.dart';
 
 class LibraryPage extends StatelessWidget {
-  const LibraryPage({
-    Key? key,
-  }) : super(key: key);
+  final LibraryController libraryController = LibraryController();
+
+  LibraryPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

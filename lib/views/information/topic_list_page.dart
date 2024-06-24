@@ -11,7 +11,7 @@ class TopicListPage extends StatefulWidget {
 }
 
 class _TopicListPageState extends State<TopicListPage> {
-  late Future<List> lessonsFuture;
+  late Future<void> lessonsFuture;
   final libraryController = LibraryController();
 
   @override
@@ -20,9 +20,8 @@ class _TopicListPageState extends State<TopicListPage> {
     lessonsFuture = _loadData();
   }
 
-  Future<List> _loadData() async {
+  Future<void> _loadData() async {
     await libraryController.loadLessonData();
-    return libraryController.lessonList;
   }
 
   @override
@@ -58,7 +57,7 @@ class _TopicListPageState extends State<TopicListPage> {
             ),
             SizedBox(height: 25),
             Expanded(
-              child: FutureBuilder<List>(
+              child: FutureBuilder<void>(
                 future: lessonsFuture,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
@@ -66,7 +65,7 @@ class _TopicListPageState extends State<TopicListPage> {
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error loading data'));
                   } else {
-                    final titles = snapshot.data!
+                    final titles = libraryController.model.lessonList
                         .map((lesson) => lesson['title'])
                         .toSet()
                         .toList();
@@ -88,7 +87,7 @@ class _TopicListPageState extends State<TopicListPage> {
                           },
                           child: Container(
                             margin: EdgeInsets.only(bottom: 10),
-                            width: 58.0,
+                            width: double.infinity,
                             height: 58.0,
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
