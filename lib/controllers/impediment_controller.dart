@@ -183,6 +183,7 @@ class ImpedimentController {
         }
       }
     });
+    print('Impediments: $impediments');
     return impediments;
   }
 
@@ -226,7 +227,35 @@ class ImpedimentController {
     nodes['Deceased'] = deceasedNode;
     graph.addNode(deceasedNode);
 
-    deceased.heirs.keys.forEach((heir) {
+    Map<String, int> unselectedHeirs = {
+      'Father': 0,
+      'Mother': 0,
+      'Paternal Grandfather': 0,
+      'Paternal Grandmother': 0,
+      'Maternal Grandmother': 0,
+      'Wife': 0,
+      'Husband': 0,
+      'Son': 0,
+      'Daughter': 0,
+      'Grandson': 0,
+      'Granddaughter': 0,
+      'Brother': 0,
+      'Sister': 0,
+      'Paternal Half-Brother': 0,
+      'Paternal Half-Sister': 0,
+      'Maternal Half-Brother': 0,
+      'Maternal Half-Sister': 0,
+      'Son of Brother': 0,
+      'Son of Paternal Half-Brother': 0,
+      'Uncle': 0,
+      'Paternal Uncle': 0,
+      'Son of Uncle': 0,
+      'Son of Paternal Uncle': 0,
+    };
+
+    Map<String, int> allHeirs = {...unselectedHeirs, ...deceased.heirs};
+
+    allHeirs.forEach((heir, count) {
       Node node = Node.Id(heir);
       nodes[heir] = node;
       graph.addNode(node);
@@ -283,7 +312,7 @@ class ImpedimentController {
         end: Alignment.bottomRight,
       );
     }
-    if (deceased.heirs[heir] == 0) {
+    if (!deceased.heirs.containsKey(heir) || deceased.heirs[heir] == 0) {
       return LinearGradient(
         colors: [Colors.grey.shade500, Colors.grey.shade400],
         begin: Alignment.topLeft,
