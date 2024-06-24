@@ -13,10 +13,13 @@ import 'package:radeena/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    IdentificationController identificationController = IdentificationController();
+    ImpedimentController impedimentController = ImpedimentController(identificationController.deceased);
+
     // Build our app and trigger a frame.
     await tester.pumpWidget(MyApp(
-      identificationController: IdentificationController(),
-      impedimentController: ImpedimentController(), // Add the required argument for the named parameter 'impedimentController'
+      identificationController: identificationController,
+      impedimentController: impedimentController,
     ));
 
     // Verify that our counter starts at 0.
@@ -32,3 +35,4 @@ void main() {
     expect(find.text('1'), findsOneWidget);
   });
 }
+

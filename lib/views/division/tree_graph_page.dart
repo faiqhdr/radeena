@@ -21,23 +21,20 @@ class TreeGraphPage extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
 
     Graph graph = impedimentController
-        .buildGraph(identificationController.deceasedGender);
+        .buildGraph(identificationController.deceased.gender);
 
-    // Define the default configuration
     BuchheimWalkerConfiguration config = BuchheimWalkerConfiguration()
       ..siblingSeparation = 60
       ..levelSeparation = 60
       ..subtreeSeparation = 60
       ..orientation = BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM;
 
-    // Node Widget Builder
     NodeWidgetBuilder builder = (node) {
       String label = node.key?.value as String;
       LinearGradient gradient = impedimentController.getNodeGradient(label);
       return gradientCircleWidget(label, gradient);
     };
 
-    // Apply the algorithm
     BuchheimWalkerAlgorithm algorithm =
         BuchheimWalkerAlgorithm(config, TreeEdgeRenderer(config));
 
@@ -111,7 +108,7 @@ class TreeGraphPage extends StatelessWidget {
                           identificationController.property.getTestament(),
                       funeralAmount:
                           identificationController.property.getFuneral(),
-                      selectedHeirs: impedimentController.heirQuantity,
+                      selectedHeirs: impedimentController.deceased.heirs,
                     ),
                   ),
                 );

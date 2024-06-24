@@ -9,14 +9,12 @@ import 'package:radeena/controllers/impediment_controller.dart';
 import 'package:radeena/controllers/identification_controller.dart';
 
 class ImpedimentPage extends StatelessWidget {
-  final List<String> impediments;
   final IdentificationController identificationController;
   final ImpedimentController impedimentController;
   final FlutterTts flutterTts = FlutterTts();
 
   ImpedimentPage({
     Key? key,
-    required this.impediments,
     required this.identificationController,
     required this.impedimentController,
   }) : super(key: key);
@@ -30,6 +28,7 @@ class ImpedimentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
+    List<String> impediments = impedimentController.getImpediments();
 
     return Scaffold(
       backgroundColor: backgroundColor,

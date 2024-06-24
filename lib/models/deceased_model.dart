@@ -1,21 +1,28 @@
-import 'package:radeena/models/enums.dart';
-import 'package:radeena/models/heir_model.dart';
-import 'package:radeena/models/property_model.dart';
-
 class DeceasedModel {
-  Gender gender;
-  List<HeirModel> selectedHeirs;
-  PropertyModel inheritance;
+  String? gender;
+  Map<String, int> heirs = {};
 
-  DeceasedModel({
-    required this.gender,
-    required this.selectedHeirs,
-    required this.inheritance,
-  });
+  String? validateGender() {
+    if (gender == null) {
+      return 'Please select the deceased\'s gender for determining the heirs.';
+    }
+    return null;
+  }
 
-  Gender getGender() { return gender; }
-  List<HeirModel> getSelectedHeirs() { return selectedHeirs; }
-  PropertyModel getInheritance() { return inheritance; }
-  void setGender(Gender deceasedGender) { gender = deceasedGender; }
-  void setInheritance(PropertyModel inheritanceAmount) { inheritance = inheritanceAmount; }
+  void setGender(String gender) {
+    this.gender = gender;
+  }
+
+  void updateHeirQuantity(String heir, int quantity) {
+    heirs[heir] = quantity;
+  }
+
+  String? validateHeirs() {
+    // Custom validation logic for heirs
+    return null;
+  }
+
+  void resetHeirs() {
+    heirs.clear();
+  }
 }

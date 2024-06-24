@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:input_quantity/input_quantity.dart';
 import 'package:radeena/styles/style.dart';
-import 'package:radeena/models/enums.dart';
 import 'package:radeena/views/division/impediment_page.dart';
 import 'package:radeena/controllers/identification_controller.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
@@ -265,24 +264,22 @@ class _IdentificationPageState extends State<IdentificationPage> {
         Row(
           children: [
             Radio(
-              value: Gender.male,
-              groupValue: widget.controller.deceasedGender,
-              onChanged: (Gender? value) {
+              value: 'Male',
+              groupValue: widget.controller.deceased.gender,
+              onChanged: (String? value) {
                 setState(() {
-                  widget.controller.setDeceasedGender(value);
-                  widget.impedimentController.setDeceasedGender(value);
+                  widget.controller.setDeceasedGender(value!);
                 });
               },
             ),
             Text("Male"),
             SizedBox(width: 25.0),
             Radio(
-              value: Gender.female,
-              groupValue: widget.controller.deceasedGender,
-              onChanged: (Gender? value) {
+              value: 'Female',
+              groupValue: widget.controller.deceased.gender,
+              onChanged: (String? value) {
                 setState(() {
-                  widget.controller.setDeceasedGender(value);
-                  widget.impedimentController.setDeceasedGender(value);
+                  widget.controller.setDeceasedGender(value!);
                 });
               },
             ),
@@ -318,7 +315,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
   }
 
   Widget _buildFamilyInputStep() {
-    Gender? gender = widget.controller.deceasedGender;
+    String? gender = widget.controller.deceased.gender;
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -330,7 +327,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
     );
   }
 
-  List<Widget> _buildFamilyMemberInputs(Gender? gender) {
+  List<Widget> _buildFamilyMemberInputs(String? gender) {
     var inputs = <Widget>[];
     List<Map<String, dynamic>> familyMembers = [
       {'title': "Father", 'max': 1},
@@ -339,8 +336,8 @@ class _IdentificationPageState extends State<IdentificationPage> {
       {'title': "Paternal Grandmother", 'max': 1},
       {'title': "Maternal Grandmother", 'max': 1},
       {
-        'title': gender == Gender.male ? "Wife" : "Husband",
-        'max': gender == Gender.male ? 4 : 1
+        'title': gender == 'Male' ? "Wife" : "Husband",
+        'max': gender == 'Male' ? 4 : 1
       },
       {'title': "Son", 'max': 10},
       {'title': "Daughter", 'max': 10},
@@ -400,7 +397,6 @@ class _IdentificationPageState extends State<IdentificationPage> {
         builder: (context) => ImpedimentPage(
           identificationController: widget.controller,
           impedimentController: widget.impedimentController,
-          impediments: widget.impedimentController.getImpediments(),
         ),
       ),
     );

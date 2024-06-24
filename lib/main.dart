@@ -10,7 +10,8 @@ import 'package:radeena/controllers/impediment_controller.dart';
 void main() {
   IdentificationController identificationController =
       IdentificationController();
-  ImpedimentController impedimentController = ImpedimentController();
+  ImpedimentController impedimentController =
+      ImpedimentController(identificationController.deceased);
 
   runApp(MyApp(
     identificationController: identificationController,

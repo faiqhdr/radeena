@@ -156,47 +156,59 @@ class CalculationPage extends StatelessWidget {
                       mainAxisSpacing: 1.0,
                       crossAxisSpacing: 1.0,
                       children: [
-                        buildContainer(
-                          "Net Property",
-                          backgroundColor,
-                          Colors.white,
-                          Colors.teal.shade800,
-                          1,
+                        StaggeredGridTile.fit(
+                          crossAxisCellCount: 1,
+                          child: buildContainer(
+                            "Net Property",
+                            backgroundColor,
+                            Colors.white,
+                            Colors.teal.shade800,
+                          ),
                         ),
-                        buildContainer(
-                          "IDR ${formatNumber(totalProperty)}",
-                          primaryColor,
-                          secondaryColor,
-                          Colors.white,
-                          2,
+                        StaggeredGridTile.fit(
+                          crossAxisCellCount: 1,
+                          child: buildContainer(
+                            "IDR ${formatNumber(totalProperty)}",
+                            primaryColor,
+                            secondaryColor,
+                            Colors.white,
+                          ),
                         ),
-                        buildContainer(
-                          "Final Share",
-                          backgroundColor,
-                          Colors.white,
-                          Colors.teal.shade800,
-                          1,
+                        StaggeredGridTile.fit(
+                          crossAxisCellCount: 1,
+                          child: buildContainer(
+                            "Final Share",
+                            backgroundColor,
+                            Colors.white,
+                            Colors.teal.shade800,
+                          ),
                         ),
-                        buildContainer(
-                          "$finalShare",
-                          primaryColor,
-                          secondaryColor,
-                          Colors.white,
-                          2,
+                        StaggeredGridTile.fit(
+                          crossAxisCellCount: 1,
+                          child: buildContainer(
+                            "$finalShare",
+                            primaryColor,
+                            secondaryColor,
+                            Colors.white,
+                          ),
                         ),
-                        buildContainer(
-                          "Division Status",
-                          backgroundColor,
-                          Colors.white,
-                          Colors.teal.shade800,
-                          1,
+                        StaggeredGridTile.fit(
+                          crossAxisCellCount: 1,
+                          child: buildContainer(
+                            "Division Status",
+                            backgroundColor,
+                            Colors.white,
+                            Colors.teal.shade800,
+                          ),
                         ),
-                        buildContainer(
-                          "$divisionStatus",
-                          primaryColor,
-                          secondaryColor,
-                          Colors.white,
-                          2,
+                        StaggeredGridTile.fit(
+                          crossAxisCellCount: 1,
+                          child: buildContainer(
+                            "$divisionStatus",
+                            primaryColor,
+                            secondaryColor,
+                            Colors.white,
+                          ),
                         ),
                       ],
                     ),
@@ -315,7 +327,7 @@ class CalculationPage extends StatelessWidget {
                                 .getTestament(),
                             funeralAmount:
                                 identificationController.property.getFuneral(),
-                            selectedHeirs: impedimentController.heirQuantity,
+                            selectedHeirs: selectedHeirs,
                           ),
                         ),
                       );
@@ -416,41 +428,36 @@ class CalculationPage extends StatelessWidget {
             ? Text(
                 text,
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                ),
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700),
               )
             : Icon(icon, color: Colors.white, size: 26),
       ),
     );
   }
 
-  Widget buildContainer(
-      String text, Color color1, Color color2, Color color3, int flex) {
-    return Flexible(
-      flex: flex,
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              color1.withOpacity(0.7),
-              color2.withOpacity(0.7),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-          borderRadius: BorderRadius.circular(10),
+  Widget buildContainer(String text, Color color1, Color color2, Color color3) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            color1.withOpacity(0.7),
+            color2.withOpacity(0.7),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        padding: EdgeInsets.all(10),
-        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-        child: Text(
-          text,
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: color3,
-          ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      padding: EdgeInsets.all(10),
+      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          color: color3,
         ),
       ),
     );
