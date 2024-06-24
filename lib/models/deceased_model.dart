@@ -1,6 +1,6 @@
 import 'package:radeena/models/enums.dart';
-import 'heir_model.dart';
-import 'property_model.dart';
+import 'package:radeena/models/heir_model.dart';
+import 'package:radeena/models/property_model.dart';
 
 class DeceasedModel {
   Gender gender;
