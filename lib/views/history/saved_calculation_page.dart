@@ -286,7 +286,7 @@ class SavedCalculationPage extends StatelessWidget {
                   return DataRow(cells: [
                     DataCell(
                       Text(
-                        entry.key,
+                        '${entry.value}-${entry.key}(s)',
                         style: TextStyle(color: Colors.teal.shade800),
                       ),
                     ),
