@@ -122,7 +122,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                   textStyle: TextStyle(
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.green,
+                                    color: Colors.teal.shade800,
                                   ),
                                   speed: const Duration(milliseconds: 50),
                                 ),
