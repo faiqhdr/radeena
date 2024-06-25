@@ -1,7 +1,7 @@
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
-import 'package:restart_app/restart_app.dart';
 import 'package:lottie/lottie.dart';
+import 'package:restart_app/restart_app.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/calculation/inheritance_page.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:radeena/styles/style.dart';
 
 class HeirPage extends StatelessWidget {
@@ -53,6 +54,13 @@ class HeirPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 25),
+            Center(
+              child: Lottie.asset(
+                'assets/lottie/get_money.json',
+                width: 330,
+                height: 330,
+              ),
+            ),
             Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(13),
