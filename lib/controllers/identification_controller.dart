@@ -57,8 +57,4 @@ class IdentificationController {
   String? validateGender() {
     return deceased.validateGender();
   }
-
-  void updateHeirQuantity(String heir, int quantity) {
-    deceased.updateHeirQuantity(heir, quantity);
-  }
 }
