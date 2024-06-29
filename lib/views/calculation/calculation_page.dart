@@ -338,49 +338,67 @@ class CalculationPage extends StatelessWidget {
                     onPressed: () async {
                       TextEditingController nameController =
                           TextEditingController();
+                      bool isNameEmpty = false;
 
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text("Save Calculation"),
-                            content: TextField(
-                              controller: nameController,
-                              decoration: InputDecoration(
-                                  hintText: "Enter calculation name"),
-                            ),
-                            actions: [
-                              TextButton(
-                                child: Text("Cancel"),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                              TextButton(
-                                child: Text("Save"),
-                                onPressed: () async {
-                                  String calculationName = nameController.text;
-                                  await calculationController.saveCalculation(
-                                    calculationName,
-                                    totalProperty,
-                                    propertyAmount,
-                                    debtAmount,
-                                    testamentAmount,
-                                    funeralAmount,
-                                    selectedHeirs,
-                                    distribution,
-                                    divisionStatus,
-                                    finalShare,
-                                  );
-                                  Navigator.of(context).pop();
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                        content: Text(
-                                            "Calculation successfully saved!")),
-                                  );
-                                },
-                              ),
-                            ],
+                          return StatefulBuilder(
+                            builder: (context, setState) {
+                              return AlertDialog(
+                                title: Text("Save Calculation"),
+                                content: TextField(
+                                  controller: nameController,
+                                  maxLength: 30,
+                                  decoration: InputDecoration(
+                                    hintText: "Enter calculation name",
+                                    errorText:
+                                        isNameEmpty ? 'Name is required' : null,
+                                  ),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    child: Text("Cancel"),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: Text("Save"),
+                                    onPressed: () async {
+                                      if (nameController.text.isEmpty) {
+                                        setState(() {
+                                          isNameEmpty = true;
+                                        });
+                                        return;
+                                      }
+                                      String calculationName =
+                                          nameController.text;
+                                      await calculationController
+                                          .saveCalculation(
+                                        calculationName,
+                                        totalProperty,
+                                        propertyAmount,
+                                        debtAmount,
+                                        testamentAmount,
+                                        funeralAmount,
+                                        selectedHeirs,
+                                        distribution,
+                                        divisionStatus,
+                                        finalShare,
+                                      );
+                                      Navigator.of(context).pop();
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                            content: Text(
+                                                "Calculation successfully saved!")),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
                           );
                         },
                       );
