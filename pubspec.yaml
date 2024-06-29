@@ -44,6 +44,7 @@ dependencies:
   restart_app: ^1.2.1
   flutter_staggered_grid_view: ^0.7.0
   marquee_widget: ^1.2.0
+  flutter_native_splash: ^2.4.0
 
 dev_dependencies:
   flutter_test:
@@ -54,7 +55,7 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/radeena_logo.png"
+  image_path: "assets/app.png"
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
