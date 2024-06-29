@@ -230,8 +230,8 @@ class _IdentificationPageState extends State<IdentificationPage> {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Colors.white.withOpacity(0.8),
-            Colors.teal.shade400.withOpacity(0.1),
+            Colors.white.withOpacity(0.1),
+            Colors.white,
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -458,7 +458,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
           Text("Input Family Members", style: textUnderTitleStyle()),
           SizedBox(height: 25.0),
           _buildInputExplanation(
-              "Please input the number of family members of the deceased. This information is required to calculate the inheritance distribution."),
+              "If the deceased left any family members, input the form below. Note that some may not qualify as heirs due to Faraid rules."),
           _buildFamilyMemberSection("Descendants", [
             {'title': "Son", 'max': 10},
             {'title': "Daughter", 'max': 10},
@@ -533,47 +533,44 @@ class _IdentificationPageState extends State<IdentificationPage> {
             ),
           ),
         ),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 2,
-          ),
-          itemCount: members.length,
-          itemBuilder: (context, index) {
-            return _buildFamilyMemberInput(members[index]['title'],
-                max: members[index]['max']);
-          },
+        SizedBox(height: 5), // Adjust spacing between title and cards
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: members.map((member) {
+            return _buildFamilyMemberInput(member['title'], max: member['max']);
+          }).toList(),
         ),
       ],
     );
   }
 
   Widget _buildFamilyMemberInput(String title, {required int max}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          padding: EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.9),
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Text(
-            textAlign: TextAlign.center,
-            title,
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
-          ),
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 5), // Adjust margins as needed
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.white.withOpacity(0.1),
+            Colors.white,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        SizedBox(height: 5),
-        Container(
-          padding: EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.9),
-            borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: Colors.teal.shade700,
+            ),
           ),
-          child: InputQty(
+          InputQty(
             initVal: 0,
             minVal: 0,
             maxVal: max,
@@ -582,8 +579,9 @@ class _IdentificationPageState extends State<IdentificationPage> {
             decoration: QtyDecorationProps(
               isBordered: true,
               border: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1, color: Colors.transparent),
-                  borderRadius: BorderRadius.circular(5)),
+                borderSide: BorderSide(width: 1, color: Colors.transparent),
+                borderRadius: BorderRadius.circular(5),
+              ),
               minusBtn: Icon(Icons.person_remove_alt_1_rounded,
                   color: Colors.red.shade700),
               plusBtn: Icon(Icons.person_add_alt_1_rounded,
@@ -594,8 +592,8 @@ class _IdentificationPageState extends State<IdentificationPage> {
               widget.impedimentController.updateHeirQuantity(title, quantity);
             },
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
