@@ -36,7 +36,6 @@ class _IdentificationPageState extends State<IdentificationPage> {
   @override
   void initState() {
     super.initState();
-
     _propertyAmountController.addListener(_validateTestamentAmount);
   }
 
@@ -382,11 +381,12 @@ class _IdentificationPageState extends State<IdentificationPage> {
     );
   }
 
-  Widget _buildGenderIcon(
-      {required IconData icon,
-      required String label,
-      required String gender,
-      required bool selected}) {
+  Widget _buildGenderIcon({
+    required IconData icon,
+    required String label,
+    required String gender,
+    required bool selected,
+  }) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -456,77 +456,131 @@ class _IdentificationPageState extends State<IdentificationPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text("Input Family Members", style: textUnderTitleStyle()),
-          SizedBox(height: 15.0),
+          SizedBox(height: 25.0),
           _buildInputExplanation(
               "Please input the number of family members of the deceased. This information is required to calculate the inheritance distribution."),
-          ..._buildFamilyMemberInputs(gender),
+          _buildFamilyMemberSection("Descendants", [
+            {'title': "Son", 'max': 10},
+            {'title': "Daughter", 'max': 10},
+            {'title': "Grandson", 'max': 10},
+            {'title': "Granddaughter", 'max': 10},
+          ]),
+          _buildFamilyMemberSection("Spouse", [
+            {
+              'title': gender == 'Male' ? "Wife" : "Husband",
+              'max': gender == 'Male' ? 4 : 1
+            },
+          ]),
+          _buildFamilyMemberSection("Ancestors", [
+            {'title': "Father", 'max': 1},
+            {'title': "Mother", 'max': 4},
+            {'title': "Paternal Grandfather", 'max': 1},
+            {'title': "Paternal Grandmother", 'max': 1},
+            {'title': "Maternal Grandmother", 'max': 1},
+          ]),
+          _buildFamilyMemberSection("Siblings", [
+            {'title': "Brother", 'max': 8},
+            {'title': "Sister", 'max': 8},
+            {'title': "Paternal Half-Brother", 'max': 8},
+            {'title': "Paternal Half-Sister", 'max': 8},
+            {'title': "Maternal Half-Brother", 'max': 8},
+            {'title': "Maternal Half-Sister", 'max': 8},
+          ]),
+          _buildFamilyMemberSection("Sibling Descendants", [
+            {'title': "Son of Brother", 'max': 10},
+            {'title': "Son of Paternal Half-Brother", 'max': 10},
+          ]),
+          _buildFamilyMemberSection("Father's Siblings", [
+            {'title': "Uncle", 'max': 5},
+            {'title': "Paternal Uncle", 'max': 5},
+            {'title': "Son of Uncle", 'max': 10},
+            {'title': "Son of Paternal Uncle", 'max': 10},
+          ]),
           SizedBox(height: 600),
         ],
       ),
     );
   }
 
-  List<Widget> _buildFamilyMemberInputs(String? gender) {
-    var inputs = <Widget>[];
-    List<Map<String, dynamic>> familyMembers = [
-      {'title': "Father", 'max': 1},
-      {'title': "Mother", 'max': 4},
-      {'title': "Paternal Grandfather", 'max': 1},
-      {'title': "Paternal Grandmother", 'max': 1},
-      {'title': "Maternal Grandmother", 'max': 1},
-      {
-        'title': gender == 'Male' ? "Wife" : "Husband",
-        'max': gender == 'Male' ? 4 : 1
-      },
-      {'title': "Son", 'max': 10},
-      {'title': "Daughter", 'max': 10},
-      {'title': "Grandson", 'max': 10},
-      {'title': "Granddaughter", 'max': 10},
-      {'title': "Brother", 'max': 8},
-      {'title': "Sister", 'max': 8},
-      {'title': "Paternal Half-Brother", 'max': 8},
-      {'title': "Paternal Half-Sister", 'max': 8},
-      {'title': "Maternal Half-Brother", 'max': 8},
-      {'title': "Maternal Half-Sister", 'max': 8},
-      {'title': "Son of Brother", 'max': 10},
-      {'title': "Son of Paternal Half-Brother", 'max': 10},
-      {'title': "Uncle", 'max': 5},
-      {'title': "Paternal Uncle", 'max': 5},
-      {'title': "Son of Uncle", 'max': 10},
-      {'title': "Son of Paternal Uncle", 'max': 10},
-    ];
-
-    int midpoint = (familyMembers.length / 2).ceil();
-
-    for (var i = 0; i < midpoint; i++) {
-      var member = familyMembers[i];
-      var nextMemberIndex = i + midpoint;
-
-      inputs.add(
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Expanded(
-              child: _buildFamilyMemberInput(
-                member['title'] as String,
-                max: member['max'] as int,
+  Widget _buildFamilyMemberSection(
+      String title, List<Map<String, dynamic>> members) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          margin: EdgeInsets.symmetric(vertical: 1),
+          padding: EdgeInsets.all(6),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                primaryColor.withOpacity(0.7),
+                secondaryColor.withOpacity(0.7),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(9),
+          ),
+          child: Center(
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
               ),
             ),
-            SizedBox(width: 16),
-            if (nextMemberIndex < familyMembers.length)
-              Expanded(
-                child: _buildFamilyMemberInput(
-                  familyMembers[nextMemberIndex]['title'] as String,
-                  max: familyMembers[nextMemberIndex]['max'] as int,
-                ),
-              ),
-          ],
+          ),
         ),
-      );
-    }
+        GridView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 2,
+          ),
+          itemCount: members.length,
+          itemBuilder: (context, index) {
+            return _buildFamilyMemberInput(members[index]['title'],
+                max: members[index]['max']);
+          },
+        ),
+      ],
+    );
+  }
 
-    inputs.add(SizedBox(height: 0));
-    return inputs;
+  Widget _buildFamilyMemberInput(String title, {required int max}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("$title",
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+        _buildGradientCard(
+          child: InputQty(
+            initVal: 0,
+            minVal: 0,
+            maxVal: max,
+            steps: 1,
+            qtyFormProps: QtyFormProps(enableTyping: true),
+            decoration: QtyDecorationProps(
+              isBordered: true,
+              border: OutlineInputBorder(
+                  borderSide: BorderSide(width: 1, color: Colors.transparent),
+                  borderRadius: BorderRadius.circular(5)),
+              minusBtn: Icon(Icons.person_remove_alt_1_rounded,
+                  color: Colors.red.shade700),
+              plusBtn: Icon(Icons.person_add_alt_1_rounded,
+                  color: Colors.blue.shade600),
+            ),
+            onQtyChanged: (val) {
+              int quantity = val is double ? val.toInt() : val;
+              widget.impedimentController.updateHeirQuantity(title, quantity);
+            },
+          ),
+        ),
+      ],
+    );
   }
 
   void _navigateToImpedimentPage() {
@@ -538,36 +592,6 @@ class _IdentificationPageState extends State<IdentificationPage> {
           impedimentController: widget.impedimentController,
         ),
       ),
-    );
-  }
-
-  Widget _buildFamilyMemberInput(String title, {required int max}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text("$title",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-        InputQty(
-          initVal: 0,
-          minVal: 0,
-          maxVal: max,
-          steps: 1,
-          qtyFormProps: QtyFormProps(enableTyping: true),
-          decoration: QtyDecorationProps(
-            isBordered: true,
-            border: OutlineInputBorder(
-                borderSide: BorderSide(width: 1, color: Colors.grey),
-                borderRadius: BorderRadius.circular(5)),
-            minusBtn: Icon(Icons.remove, color: Colors.red),
-            plusBtn: Icon(Icons.add, color: Colors.green),
-          ),
-          onQtyChanged: (val) {
-            int quantity = val is double ? val.toInt() : val;
-            widget.impedimentController.updateHeirQuantity(title, quantity);
-          },
-        ),
-        SizedBox(height: 16),
-      ],
     );
   }
 
