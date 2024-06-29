@@ -269,7 +269,7 @@ class CalculationPage extends StatelessWidget {
                             child: AnimatedTextKit(
                               animatedTexts: [
                                 TypewriterAnimatedText(
-                                  'No heir has been selected. All assets (IDR ${formatNumber(totalProperty)}) will be distributed to the kinsfolk or to the treasury (baitul maal).',
+                                  'No heir has been selected. All assets (IDR ${formatNumber(totalProperty)}) will be distributed to the kinsfolk (Dzawil Arham) or to the treasury (Baitul Maal).',
                                   textAlign: TextAlign.left,
                                   textStyle: TextStyle(
                                     fontSize: 15.0,
