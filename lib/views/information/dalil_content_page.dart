@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:radeena/styles/style.dart';
 
 class DalilContentPage extends StatelessWidget {
@@ -42,86 +43,183 @@ class DalilContentPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 25),
-              Text(
-                "Portion:",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: green02Color),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            Colors.white.withOpacity(0.7),
+                            Colors.white.withOpacity(0.1),
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Portion:",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: green02Color,
+                            ),
+                          ),
+                          SizedBox(height: 5),
+                          Text(
+                            dalil['portion'],
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.teal.shade800,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Lottie.asset(
+                    'assets/lottie/quran.json',
+                    width: 78,
+                    height: 78,
+                  ),
+                ],
               ),
-              SizedBox(height: 5),
-              Text(
-                dalil['portion'],
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.teal.shade800),
-              ),
-              SizedBox(height: 25),
-              Text(
-                "Explanation:",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: green02Color),
-              ),
-              SizedBox(height: 5),
-              Text(
-                dalil['condition'],
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.teal.shade800),
-              ),
-              SizedBox(height: 25),
-              Text(
-                "Dalil:",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: green02Color),
-              ),
-              SizedBox(height: 5),
-              Text(
-                dalil['evidenceContent'],
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.teal.shade800,
-                  fontStyle: FontStyle.italic,
+              SizedBox(height: 10),
+              Container(
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.white.withOpacity(0.7),
+                      Colors.white.withOpacity(0.1),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Explanation:",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: green02Color,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      dalil['condition'],
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.teal.shade800,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              SizedBox(height: 25),
-              Text(
-                "Complete Dalil:",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: green02Color),
-              ),
-              SizedBox(height: 20),
-              RichText(
-                textAlign: TextAlign.center,
-                text: TextSpan(
+              SizedBox(height: 10),
+              Container(
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.white.withOpacity(0.7),
+                      Colors.white.withOpacity(0.1),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextSpan(
-                      text: arabicPart,
+                    Text(
+                      "Dalil:",
                       style: TextStyle(
-                          fontFamily: 'UthmaniHafs',
-                          fontSize: 22,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.teal.shade800),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: green02Color,
+                      ),
                     ),
-                    TextSpan(
-                      text: '\n\n',
-                    ),
-                    TextSpan(
-                      text: englishPart,
+                    SizedBox(height: 5),
+                    Text(
+                      dalil['evidenceContent'],
                       style: TextStyle(
-                          fontFamily: 'UthmaniHafs',
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.teal.shade800),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.teal.shade800,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              Container(
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.white.withOpacity(0.7),
+                      Colors.white.withOpacity(0.1),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Complete Dalil:",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: green02Color,
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: arabicPart,
+                            style: TextStyle(
+                              fontFamily: 'UthmaniHafs',
+                              fontSize: 22,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.teal.shade800,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '\n\n',
+                          ),
+                          TextSpan(
+                            text: englishPart,
+                            style: TextStyle(
+                              fontFamily: 'UthmaniHafs',
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.teal.shade800,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
