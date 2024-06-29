@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/controllers/library_controller.dart';
 
@@ -44,25 +45,98 @@ class TopicContentPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 25),
-              for (var lesson in lessons) ...[
-                Text(
-                  lesson['content'],
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: green02Color,
+              for (var i = 0; i < lessons.length; i++) ...[
+                if (i == 0)
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.white.withOpacity(0.7),
+                                Colors.white.withOpacity(0.1),
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                lessons[i]['content'],
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  color: green02Color,
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Text(
+                                lessons[i]['subContent'],
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.teal.shade800,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                else
+                  Container(
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.white.withOpacity(0.7),
+                          Colors.white.withOpacity(0.1),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          lessons[i]['content'],
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: green02Color,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          lessons[i]['subContent'],
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.teal.shade800,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(height: 5),
-                Text(
-                  lesson['subContent'],
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.teal.shade800),
-                ),
-                SizedBox(height: 25),
+                SizedBox(height: 10),
               ],
+              Center(
+                child: Lottie.asset(
+                  'assets/lottie/reading.json',
+                  width: 270,
+                  height: 270,
+                ),
+              ),
+              SizedBox(height: 10),
             ],
           ),
         ),
