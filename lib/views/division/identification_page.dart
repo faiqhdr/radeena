@@ -193,7 +193,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
             errorText: _funeralError,
           ),
         ),
-        SizedBox(height: 420),
+        SizedBox(height: 100),
       ],
     );
   }
@@ -355,7 +355,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
           ),
         ),
         _buildGenderSelection(),
-        SizedBox(height: 600),
+        SizedBox(height: 100),
       ],
     );
   }
@@ -496,7 +496,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
             {'title': "Son of Uncle", 'max': 10},
             {'title': "Son of Paternal Uncle", 'max': 10},
           ]),
-          SizedBox(height: 600),
+          SizedBox(height: 100),
         ],
       ),
     );
