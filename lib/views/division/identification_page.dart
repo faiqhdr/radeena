@@ -161,7 +161,16 @@ class _IdentificationPageState extends State<IdentificationPage> {
           ),
         ),
         _buildInputExplanation(
-            "Bequest amount left by the deceased, not exceeding 1/3 of total assets. To be deducted from the Property Amount for inheritance distribution. Enter \"0\" if none."),
+            "Bequest amount left by the deceased, must not exceeding 1/3 of total assets. Enter \"0\" if none."),
+        if (_propertyAmountController.text.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Text(
+              "Max Allowed = IDR ${(double.tryParse(_propertyAmountController.text) ?? 0) / 3}",
+              style: TextStyle(
+                  color: Colors.green.shade700, fontWeight: FontWeight.w500),
+            ),
+          ),
         _buildGradientCard(
           child: Column(
             children: [
@@ -171,14 +180,6 @@ class _IdentificationPageState extends State<IdentificationPage> {
                 hint: "Enter amount",
                 errorText: _testamentError,
               ),
-              if (_propertyAmountController.text.isNotEmpty)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 16.0),
-                  child: Text(
-                    "Max Allowed = IDR ${(double.tryParse(_propertyAmountController.text) ?? 0) / 3}",
-                    style: TextStyle(color: Colors.grey.shade700),
-                  ),
-                ),
             ],
           ),
         ),
