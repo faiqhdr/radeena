@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:lottie/lottie.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/widgets/common_button.dart';
 import 'package:radeena/views/calculation/calculation_page.dart';
@@ -136,15 +138,49 @@ class ConfirmationPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 25),
-                  Text(
-                    "The following are the selected Heirs:",
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.teal.shade800),
-                  ),
-                  SizedBox(height: 16),
-                  ...buildHeirWidgets(filteredHeirs),
+                  if (filteredHeirs.isEmpty)
+                    Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Lottie.asset(
+                            'assets/lottie/no_heirs.json',
+                            width: 300,
+                            height: 270,
+                            fit: BoxFit.cover,
+                          ),
+                          SizedBox(height: 20),
+                          AnimatedTextKit(
+                            animatedTexts: [
+                              TypewriterAnimatedText(
+                                'No heirs are selected.',
+                                textStyle: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.tealAccent.shade700,
+                                ),
+                                speed: const Duration(milliseconds: 50),
+                              ),
+                            ],
+                            totalRepeatCount: 3,
+                            pause: const Duration(milliseconds: 1000),
+                            displayFullTextOnTap: true,
+                            stopPauseOnTap: true,
+                          ),
+                        ],
+                      ),
+                    )
+                  else ...[
+                    Text(
+                      "The following are the selected Heirs:",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.teal.shade800),
+                    ),
+                    SizedBox(height: 16),
+                    ...buildHeirWidgets(filteredHeirs),
+                  ],
                   SizedBox(height: 32),
                   Text(
                     "The inheritable property ready for distribution is:",
