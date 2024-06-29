@@ -41,14 +41,92 @@ class LibraryPage extends StatelessWidget {
                 style: textUnderTitleStyle(),
               ),
             ),
-            SizedBox(height: 25),
             Center(
               child: Lottie.asset(
-                'assets/lottie/reading.json',
+                'assets/lottie/library.json',
                 width: 400,
-                height: 450,
+                height: 300,
               ),
             ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.teal.shade100.withOpacity(0.1),
+                    Colors.white.withOpacity(0.1),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: Text(
+                  "Umar ibn Al-Khattab radhiyallahu 'anhu said,",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.green.shade600,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.white.withOpacity(0.5),
+                    Colors.teal.shade100.withOpacity(0.2),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                "تَعَلَّمُوا الفَرَائِضَ وَاللُّحُونَ - النَّحْوَ - وَالسُّنَنَ كَمَا تَعَلَّمُوا القُرْآنَ",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: 'UthmaniHafs',
+                  fontSize: 34,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.teal,
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.teal.shade100.withOpacity(0.2),
+                    Colors.white.withOpacity(0.5),
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Center(
+                child: Text(
+                  "\"Learn Fara'id and the poetry (Al-Lahn), –Nahwu–, \nas you learn the Sunnah just as you learn the Qur'an.\" \n﴾ Narrated by Ad-Darimi in his Sunan ﴿",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.teal,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 25),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
