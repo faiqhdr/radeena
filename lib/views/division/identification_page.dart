@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:input_quantity/input_quantity.dart';
+import 'package:lottie/lottie.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/division/impediment_page.dart';
 import 'package:radeena/controllers/identification_controller.dart';
@@ -139,7 +140,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("Input the Deceased's Property", style: textUnderTitleStyle()),
-        SizedBox(height: 15.0),
+        SizedBox(height: 25.0),
         _buildInputExplanation(
             "The total assets left by the deceased without any deductions. This field is mandatory to proceed to the next step."),
         _buildGradientCard(
@@ -344,38 +345,84 @@ class _IdentificationPageState extends State<IdentificationPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("Select Deceased's Gender", style: textUnderTitleStyle()),
-        SizedBox(height: 15.0),
+        SizedBox(height: 25.0),
         _buildInputExplanation(
-            "Please select the gender of the deceased. This is required to determine the correct distribution of inheritance."),
-        _buildGradientCard(
-          child: Row(
-            children: [
-              Radio(
-                value: 'Male',
-                groupValue: widget.controller.deceased.gender,
-                onChanged: (String? value) {
-                  setState(() {
-                    widget.controller.setDeceasedGender(value!);
-                  });
-                },
-              ),
-              Text("Male"),
-              SizedBox(width: 25.0),
-              Radio(
-                value: 'Female',
-                groupValue: widget.controller.deceased.gender,
-                onChanged: (String? value) {
-                  setState(() {
-                    widget.controller.setDeceasedGender(value!);
-                  });
-                },
-              ),
-              Text("Female"),
-            ],
+            "To determine the deceased's spouse, either wife or husband."),
+        Center(
+          child: Lottie.asset(
+            'assets/lottie/spouse.json',
+            width: 400,
+            height: 350,
           ),
         ),
+        _buildGenderSelection(),
         SizedBox(height: 600),
       ],
+    );
+  }
+
+  Widget _buildGenderSelection() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _buildGenderIcon(
+          icon: Icons.person,
+          label: "Male",
+          gender: 'Male',
+          selected: widget.controller.deceased.gender == 'Male',
+        ),
+        SizedBox(width: 30),
+        _buildGenderIcon(
+          icon: Icons.person_2,
+          label: "Female",
+          gender: 'Female',
+          selected: widget.controller.deceased.gender == 'Female',
+        ),
+      ],
+    );
+  }
+
+  Widget _buildGenderIcon(
+      {required IconData icon,
+      required String label,
+      required String gender,
+      required bool selected}) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          widget.controller.setDeceasedGender(gender);
+        });
+      },
+      child: Column(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                color: selected ? Colors.teal : Colors.transparent,
+                width: 3,
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Icon(
+                icon,
+                size: 100,
+                color: selected ? Colors.teal : Colors.grey,
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 23,
+              color: selected ? Colors.teal : Colors.grey,
+              fontWeight: selected ? FontWeight.bold : FontWeight.normal,
+            ),
+          ),
+        ],
+      ),
     );
   }
 
