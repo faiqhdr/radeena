@@ -508,7 +508,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.symmetric(vertical: 1),
+          margin: EdgeInsets.only(top: 15, bottom: 5),
           padding: EdgeInsets.all(6),
           decoration: BoxDecoration(
             gradient: LinearGradient(
@@ -552,11 +552,27 @@ class _IdentificationPageState extends State<IdentificationPage> {
 
   Widget _buildFamilyMemberInput(String title, {required int max}) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text("$title",
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-        _buildGradientCard(
+        Container(
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.9),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Text(
+            textAlign: TextAlign.center,
+            title,
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+          ),
+        ),
+        SizedBox(height: 5),
+        Container(
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.9),
+            borderRadius: BorderRadius.circular(8),
+          ),
           child: InputQty(
             initVal: 0,
             minVal: 0,
