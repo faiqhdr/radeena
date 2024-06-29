@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:lottie/lottie.dart';
+import 'package:marquee_widget/marquee_widget.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/history/saved_calculation_page.dart';
 import 'package:radeena/controllers/history_controller.dart';
@@ -56,6 +57,18 @@ class _HistoryPageState extends State<HistoryPage> {
           ],
         );
       },
+    );
+  }
+
+  Map<String, int> parseSelectedHeirs(String selectedHeirsString) {
+    return Map.fromEntries(
+      selectedHeirsString
+          .substring(1, selectedHeirsString.length - 1)
+          .split(', ')
+          .map((entry) {
+        final parts = entry.split(': ');
+        return MapEntry(parts[0], int.parse(parts[1]));
+      }),
     );
   }
 
@@ -141,6 +154,9 @@ class _HistoryPageState extends State<HistoryPage> {
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         final calculation = snapshot.data![index];
+                        final selectedHeirs =
+                            parseSelectedHeirs(calculation['selectedHeirs']);
+
                         return Padding(
                           padding: const EdgeInsets.symmetric(vertical: 5.0),
                           child: Row(
@@ -148,7 +164,6 @@ class _HistoryPageState extends State<HistoryPage> {
                               Expanded(
                                 flex: 5,
                                 child: Container(
-                                  width: 50.0,
                                   decoration: BoxDecoration(
                                     gradient: LinearGradient(
                                       colors: [
@@ -161,21 +176,52 @@ class _HistoryPageState extends State<HistoryPage> {
                                     borderRadius: BorderRadius.circular(13.0),
                                   ),
                                   child: ListTile(
-                                    title: Text(
-                                      calculation['calculationName'],
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        shadows: [
-                                          Shadow(
-                                            blurRadius: 5.0,
-                                            color:
-                                                Colors.black.withOpacity(0.1),
-                                            offset: Offset(3.0, 3.0),
+                                    title: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          calculation['calculationName'],
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            shadows: [
+                                              Shadow(
+                                                blurRadius: 5.0,
+                                                color: Colors.black
+                                                    .withOpacity(0.1),
+                                                offset: Offset(3.0, 3.0),
+                                              ),
+                                            ],
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                        Container(
+                                          height: 20,
+                                          child: Marquee(
+                                            child: Text(
+                                              'Family Members ➜ ' +
+                                                  selectedHeirs.entries
+                                                      .map((e) =>
+                                                          '${e.value}-${e.key}')
+                                                      .join(' ┆ '),
+                                              style: TextStyle(
+                                                  color: Colors.yellow.shade100,
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            autoRepeat: true,
+                                            directionMarguee:
+                                                DirectionMarguee.TwoDirection,
+                                            animationDuration:
+                                                Duration(milliseconds: 4000),
+                                            pauseDuration:
+                                                Duration(milliseconds: 0),
+                                            backDuration:
+                                                Duration(milliseconds: 4000),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                     onTap: () {
                                       Navigator.push(

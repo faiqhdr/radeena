@@ -273,7 +273,7 @@ class SavedCalculationPage extends StatelessWidget {
                   )),
                   DataColumn(
                       label: Text(
-                    'Inheritance',
+                    'Asset',
                     style: TextStyle(
                         color: Colors.teal,
                         fontSize: 20,
