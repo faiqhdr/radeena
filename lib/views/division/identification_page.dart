@@ -33,6 +33,13 @@ class _IdentificationPageState extends State<IdentificationPage> {
   String? _funeralError;
 
   @override
+  void initState() {
+    super.initState();
+
+    _propertyAmountController.addListener(_validateTestamentAmount);
+  }
+
+  @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -97,6 +104,23 @@ class _IdentificationPageState extends State<IdentificationPage> {
     );
   }
 
+  void _validateTestamentAmount() {
+    setState(() {
+      double? propertyAmount = double.tryParse(_propertyAmountController.text);
+      if (propertyAmount != null) {
+        double maxTestamentAmount = propertyAmount / 3;
+        double? testamentAmount =
+            double.tryParse(_testamentAmountController.text);
+        if (testamentAmount != null && testamentAmount > maxTestamentAmount) {
+          _testamentError =
+              'Testament amount cannot exceed 1/3 of the property amount.';
+        } else {
+          _testamentError = null;
+        }
+      }
+    });
+  }
+
   Widget _buildInputStep(int step) {
     switch (step) {
       case 1:
@@ -115,30 +139,58 @@ class _IdentificationPageState extends State<IdentificationPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("Input the Deceased's Property", style: textUnderTitleStyle()),
-        SizedBox(height: 25.0),
-        _buildTextInputField(
-          controller: _propertyAmountController,
-          label: "Property's Amount",
-          hint: "Enter amount",
-          errorText: _propertyError,
+        SizedBox(height: 15.0),
+        _buildInputExplanation(
+            "The total assets left by the deceased without any deductions. This field is mandatory to proceed to the next step."),
+        _buildGradientCard(
+          child: _buildTextInputField(
+            controller: _propertyAmountController,
+            label: "Property's Amount",
+            hint: "Enter amount",
+            errorText: _propertyError,
+          ),
         ),
-        _buildTextInputField(
-          controller: _debtAmountController,
-          label: "Debt Amount",
-          hint: "Enter amount",
-          errorText: _debtError,
+        _buildInputExplanation(
+            "Unpaid debts of the deceased, to be deducted from the Property Amount for inheritance distribution. Enter \"0\" if none."),
+        _buildGradientCard(
+          child: _buildTextInputField(
+            controller: _debtAmountController,
+            label: "Debt Amount",
+            hint: "Enter amount",
+            errorText: _debtError,
+          ),
         ),
-        _buildTextInputField(
-          controller: _testamentAmountController,
-          label: "Testament Amount",
-          hint: "Enter amount",
-          errorText: _testamentError,
+        _buildInputExplanation(
+            "Bequest amount left by the deceased, not exceeding 1/3 of total assets. To be deducted from the Property Amount for inheritance distribution. Enter \"0\" if none."),
+        _buildGradientCard(
+          child: Column(
+            children: [
+              _buildTextInputField(
+                controller: _testamentAmountController,
+                label: "Testament Amount",
+                hint: "Enter amount",
+                errorText: _testamentError,
+              ),
+              if (_propertyAmountController.text.isNotEmpty)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Text(
+                    "Max Allowed = IDR ${(double.tryParse(_propertyAmountController.text) ?? 0) / 3}",
+                    style: TextStyle(color: Colors.grey.shade700),
+                  ),
+                ),
+            ],
+          ),
         ),
-        _buildTextInputField(
-          controller: _funeralAmountController,
-          label: "Funeral Amount",
-          hint: "Enter amount",
-          errorText: _funeralError,
+        _buildInputExplanation(
+            "Funeral expenses for the deceased, to be deducted from the Property Amount for inheritance distribution. Enter \"0\" if none."),
+        _buildGradientCard(
+          child: _buildTextInputField(
+            controller: _funeralAmountController,
+            label: "Funeral Amount",
+            hint: "Enter amount",
+            errorText: _funeralError,
+          ),
         ),
         SizedBox(height: 420),
       ],
@@ -155,6 +207,8 @@ class _IdentificationPageState extends State<IdentificationPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
+          style: TextStyle(
+              fontSize: 24, color: Colors.teal, fontWeight: FontWeight.w700),
           controller: controller,
           decoration: InputDecoration(
             labelText: label,
@@ -165,6 +219,35 @@ class _IdentificationPageState extends State<IdentificationPage> {
         ),
         SizedBox(height: 16.0),
       ],
+    );
+  }
+
+  Widget _buildGradientCard({required Widget child}) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 20),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.white.withOpacity(0.8),
+            Colors.teal.shade400.withOpacity(0.1),
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: child,
+    );
+  }
+
+  Widget _buildInputExplanation(String explanation) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Text(
+        explanation,
+        style: TextStyle(fontSize: 14, color: Colors.grey.shade700),
+      ),
     );
   }
 
@@ -260,31 +343,35 @@ class _IdentificationPageState extends State<IdentificationPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("Select Deceased's Gender", style: textUnderTitleStyle()),
-        SizedBox(height: 25.0),
-        Row(
-          children: [
-            Radio(
-              value: 'Male',
-              groupValue: widget.controller.deceased.gender,
-              onChanged: (String? value) {
-                setState(() {
-                  widget.controller.setDeceasedGender(value!);
-                });
-              },
-            ),
-            Text("Male"),
-            SizedBox(width: 25.0),
-            Radio(
-              value: 'Female',
-              groupValue: widget.controller.deceased.gender,
-              onChanged: (String? value) {
-                setState(() {
-                  widget.controller.setDeceasedGender(value!);
-                });
-              },
-            ),
-            Text("Female"),
-          ],
+        SizedBox(height: 15.0),
+        _buildInputExplanation(
+            "Please select the gender of the deceased. This is required to determine the correct distribution of inheritance."),
+        _buildGradientCard(
+          child: Row(
+            children: [
+              Radio(
+                value: 'Male',
+                groupValue: widget.controller.deceased.gender,
+                onChanged: (String? value) {
+                  setState(() {
+                    widget.controller.setDeceasedGender(value!);
+                  });
+                },
+              ),
+              Text("Male"),
+              SizedBox(width: 25.0),
+              Radio(
+                value: 'Female',
+                groupValue: widget.controller.deceased.gender,
+                onChanged: (String? value) {
+                  setState(() {
+                    widget.controller.setDeceasedGender(value!);
+                  });
+                },
+              ),
+              Text("Female"),
+            ],
+          ),
         ),
         SizedBox(height: 600),
       ],
@@ -320,6 +407,10 @@ class _IdentificationPageState extends State<IdentificationPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text("Input Family Members", style: textUnderTitleStyle()),
+          SizedBox(height: 15.0),
+          _buildInputExplanation(
+              "Please input the number of family members of the deceased. This information is required to calculate the inheritance distribution."),
           ..._buildFamilyMemberInputs(gender),
           SizedBox(height: 600),
         ],

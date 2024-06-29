@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/information/dalil_heir_page.dart';
 import 'package:radeena/views/information/topic_list_page.dart';
@@ -41,6 +42,13 @@ class LibraryPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 25),
+            Center(
+              child: Lottie.asset(
+                'assets/lottie/reading.json',
+                width: 400,
+                height: 450,
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

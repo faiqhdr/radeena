@@ -362,13 +362,6 @@ class CalculationController {
       divisionStatus = "No Aul / Radd";
     }
 
-    // Check for residue
-    // if (residue > 0 && totalResiduaryShares > 0) {
-    //   divisionStatus +=
-    //       "\nThere is residue that can be distributed to the relatives.";
-    // }
-
-    // Correcting final share value calculation
     int finalShare = lcmValue;
 
     return {
