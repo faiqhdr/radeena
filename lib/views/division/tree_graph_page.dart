@@ -24,9 +24,9 @@ class TreeGraphPage extends StatelessWidget {
         .buildGraph(identificationController.deceased.gender);
 
     BuchheimWalkerConfiguration config = BuchheimWalkerConfiguration()
-      ..siblingSeparation = 60
-      ..levelSeparation = 60
-      ..subtreeSeparation = 60
+      ..siblingSeparation = 50
+      ..levelSeparation = 50
+      ..subtreeSeparation = 20
       ..orientation = BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM;
 
     NodeWidgetBuilder builder = (node) {

@@ -259,26 +259,30 @@ class ImpedimentController {
       Node node = Node.Id(heir);
       nodes[heir] = node;
       graph.addNode(node);
-      print('Added node for: $heir');
     });
 
+    // Spouse node
     if (deceasedGender == 'Male') {
       addEdge(graph, nodes, 'Deceased', 'Wife');
     } else {
       addEdge(graph, nodes, 'Deceased', 'Husband');
     }
 
+    // Parent nodes
     addEdge(graph, nodes, 'Paternal Grandfather', 'Father');
     addEdge(graph, nodes, 'Paternal Grandmother', 'Father');
     addEdge(graph, nodes, 'Maternal Grandfather', 'Mother');
     addEdge(graph, nodes, 'Maternal Grandmother', 'Mother');
     addEdge(graph, nodes, 'Father', 'Deceased');
     addEdge(graph, nodes, 'Mother', 'Deceased');
+
+    // Children nodes
     addEdge(graph, nodes, 'Deceased', 'Son');
     addEdge(graph, nodes, 'Deceased', 'Daughter');
     addEdge(graph, nodes, 'Son', 'Grandson');
     addEdge(graph, nodes, 'Son', 'Granddaughter');
 
+    // Siblings nodes
     addEdge(graph, nodes, 'Father', 'Brother');
     addEdge(graph, nodes, 'Father', 'Sister');
     addEdge(graph, nodes, 'Father', 'Paternal Half-Brother');
@@ -286,6 +290,7 @@ class ImpedimentController {
     addEdge(graph, nodes, 'Mother', 'Maternal Half-Brother');
     addEdge(graph, nodes, 'Mother', 'Maternal Half-Sister');
 
+    // Uncles and cousins
     addEdge(graph, nodes, 'Paternal Grandfather', 'Uncle');
     addEdge(graph, nodes, 'Paternal Grandfather', 'Paternal Uncle');
     addEdge(graph, nodes, 'Uncle', 'Son of Uncle');
@@ -300,7 +305,6 @@ class ImpedimentController {
   void addEdge(Graph graph, Map<String, Node> nodes, String from, String to) {
     if (nodes.containsKey(from) && nodes.containsKey(to)) {
       graph.addEdge(nodes[from]!, nodes[to]!);
-      print('Added edge from $from to $to');
     }
   }
 
