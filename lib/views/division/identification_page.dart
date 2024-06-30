@@ -399,7 +399,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: selected ? Colors.teal : Colors.transparent,
+                color: selected ? Colors.pink.shade100 : Colors.transparent,
                 width: 3,
               ),
             ),
@@ -408,7 +408,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
               child: Icon(
                 icon,
                 size: 100,
-                color: selected ? Colors.teal : Colors.grey,
+                color: selected ? Colors.pink : Colors.grey,
               ),
             ),
           ),
@@ -417,7 +417,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
             label,
             style: TextStyle(
               fontSize: 23,
-              color: selected ? Colors.teal : Colors.grey,
+              color: selected ? Colors.brown.shade400 : Colors.grey,
               fontWeight: selected ? FontWeight.bold : FontWeight.normal,
             ),
           ),
