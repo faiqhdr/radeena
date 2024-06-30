@@ -71,6 +71,8 @@ class TreeGraphPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 25),
+                buildLegend(),
+                SizedBox(height: 15),
                 Expanded(
                   child: InteractiveViewer(
                     constrained: false,
@@ -117,6 +119,35 @@ class TreeGraphPage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Widget buildLegend() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        buildLegendItem("Impeded", Colors.red),
+        buildLegendItem("Unselected", Colors.grey),
+        buildLegendItem("Entitled", Colors.green),
+        buildLegendItem("Deceased", Colors.blue),
+      ],
+    );
+  }
+
+  Widget buildLegendItem(String label, Color color) {
+    return Row(
+      children: [
+        Container(
+          width: 20,
+          height: 20,
+          decoration: BoxDecoration(
+            color: color,
+            shape: BoxShape.circle,
+          ),
+        ),
+        SizedBox(width: 8),
+        Text(label, style: TextStyle(color: Colors.teal.shade800)),
+      ],
     );
   }
 
