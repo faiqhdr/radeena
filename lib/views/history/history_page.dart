@@ -214,11 +214,11 @@ class _HistoryPageState extends State<HistoryPage> {
                                             directionMarguee:
                                                 DirectionMarguee.TwoDirection,
                                             animationDuration:
-                                                Duration(milliseconds: 4000),
+                                                Duration(milliseconds: 8000),
                                             pauseDuration:
                                                 Duration(milliseconds: 0),
                                             backDuration:
-                                                Duration(milliseconds: 4000),
+                                                Duration(milliseconds: 8000),
                                           ),
                                         ),
                                       ],

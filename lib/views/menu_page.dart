@@ -25,8 +25,13 @@ class MenuPage extends StatelessWidget {
         elevation: 0.1,
         centerTitle: true,
         title: Text(
-          "Radeena",
-          style: titleGreenStyle(),
+          "رَضِيْنَا ☾",
+          style: TextStyle(
+            fontFamily: 'UthmaniHafs',
+            fontSize: 26,
+            fontWeight: FontWeight.w500,
+            color: teal01nColor,
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -39,11 +44,15 @@ class MenuPage extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(
                   top: height * .03,
-                  bottom: height * .03,
+                  bottom: height * .06,
                 ),
-                child: Image(
-                  image: AssetImage("assets/menu_page/radeena.png"),
-                  width: width * 0.3,
+                child: Column(
+                  children: [
+                    Image(
+                      image: AssetImage("assets/tagline.png"),
+                      width: width * 0.78,
+                    ),
+                  ],
                 ),
               ),
               DeterminationWidget(
