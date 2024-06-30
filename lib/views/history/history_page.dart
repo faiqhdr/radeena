@@ -119,7 +119,7 @@ class _HistoryPageState extends State<HistoryPage> {
                         alignment: Alignment.center,
                         children: [
                           Positioned(
-                            top: 30,
+                            top: -10,
                             child: Lottie.asset(
                               'assets/lottie/no_calculation.json',
                               width: 430,
@@ -128,19 +128,21 @@ class _HistoryPageState extends State<HistoryPage> {
                           ),
                           Positioned(
                             bottom: 250,
+                            left: 30,
+                            right: 30,
                             child: AnimatedTextKit(
                               animatedTexts: [
                                 TypewriterAnimatedText(
-                                  'No calculation history found.',
+                                  'No calculation history found. You can save the calculation first in \"Determine Heirs\" feature ya! 👌',
                                   textStyle: TextStyle(
-                                    fontSize: 20.0,
+                                    fontSize: 18.0,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.teal.shade800,
                                   ),
                                   speed: const Duration(milliseconds: 50),
                                 ),
                               ],
-                              totalRepeatCount: 4,
+                              totalRepeatCount: 3,
                               pause: const Duration(milliseconds: 1000),
                               displayFullTextOnTap: true,
                               stopPauseOnTap: true,
