@@ -35,16 +35,6 @@ class InheritancePage extends StatelessWidget {
   String getCalculationSteps(Map<String, dynamic> portions,
       Map<String, int> filteredHeirs, double totalProperty) {
     StringBuffer steps = StringBuffer();
-    steps.writeln("Calculation Steps:");
-    steps.writeln("\n1. Least Common Multiple (LCM) Calculation:");
-    steps.writeln("   - Determine the LCM of the denominators.");
-
-    filteredHeirs.forEach((heir, count) {
-      if (portions[heir] != 'Residue') {
-        int denominator = int.parse(portions[heir].split('/')[1]);
-        steps.writeln("   - Denominator for $heir: $denominator");
-      }
-    });
 
     // Calculate the LCM
     List<int> denominators = filteredHeirs.entries
@@ -54,16 +44,23 @@ class InheritancePage extends StatelessWidget {
 
     int lcm = denominators.fold(
         1, (prev, element) => prev * element ~/ gcd(prev, element));
-    steps.writeln("   - LCM: $lcm");
+    steps.writeln("1. Least Common Multiple (LCM) Calculation:");
+    steps.writeln("   - Determine the LCM of the denominators.");
+    denominators.forEach(
+        (denominator) => steps.writeln("   - Denominator: $denominator"));
+    steps.writeln("   - LCM: ${denominators.join(' x ')} = $lcm");
 
     // Individual calculations
+    Map<String, double> individualShares = {};
     filteredHeirs.forEach((heir, count) {
       if (portions[heir] != 'Residue') {
         int numerator = int.parse(portions[heir].split('/')[0]);
         int denominator = int.parse(portions[heir].split('/')[1]);
         double share = totalProperty * numerator / denominator;
 
-        steps.writeln("\n2. ${heir}'s Portion:");
+        individualShares[heir] = share;
+
+        steps.writeln("\n${heir}'s Portion:");
         steps.writeln("   - Portion = ${portions[heir]}");
         steps.writeln(
             "   - Convert to common denominator: ${numerator} x $lcm / $denominator = ${numerator * lcm / denominator}/$lcm");
@@ -74,20 +71,50 @@ class InheritancePage extends StatelessWidget {
     });
 
     // Residual calculation
-    double totalDistributed = filteredHeirs.entries
-        .where((entry) => portions[entry.key] != 'Residue')
-        .map((entry) {
-      int numerator = int.parse(portions[entry.key].split('/')[0]);
-      int denominator = int.parse(portions[entry.key].split('/')[1]);
-      return totalProperty * numerator / denominator;
-    }).fold(0.0, (sum, element) => sum + element);
-
+    double totalDistributed =
+        individualShares.values.fold(0.0, (sum, value) => sum + value);
     double residue = totalProperty - totalDistributed;
-    steps.writeln("\n3. Residue:");
+    steps.writeln("\n2. Residual calculation:");
     steps.writeln(
         "   - Total distributed: IDR ${formatNumber(totalDistributed)}");
     steps.writeln(
         "   - Residue: ${formatNumber(totalProperty)} - ${formatNumber(totalDistributed)} = IDR ${formatNumber(residue)}");
+
+    // Residual heirs
+    List<String> residualHeirs = filteredHeirs.entries
+        .where((entry) => portions[entry.key] == 'Residue')
+        .map((entry) => entry.key)
+        .toList();
+
+    if (residualHeirs.isNotEmpty) {
+      int maleHeirsCount = filteredHeirs['Son'] ?? 0;
+      int femaleHeirsCount = filteredHeirs['Daughter'] ?? 0;
+      int totalParts = maleHeirsCount * 2 + femaleHeirsCount;
+      double maleShare = residue * 2 / totalParts;
+      double femaleShare = residue / totalParts;
+
+      residualHeirs.forEach((heir) {
+        if (heir == 'Son') {
+          steps.writeln(
+              "\n${heir} = Get the residue, because male will get twice of female, then the portion is:");
+          steps.writeln("   - Residue x 2/3 = ${formatNumber(residue)} x 2/3");
+          steps.writeln(
+              "   - Result: IDR ${formatNumber(maleShare)} each ${heir}");
+        } else if (heir == 'Daughter') {
+          steps.writeln(
+              "\n${heir} = Get the residue, because male will get twice of female, then the portion is:");
+          steps.writeln("   - Residue x 1/3 = ${formatNumber(residue)} x 1/3");
+          steps.writeln(
+              "   - Result: IDR ${formatNumber(femaleShare)} each daughter");
+        } else {
+          double share = residue / residualHeirs.length;
+          steps.writeln("\n${heir} = Get the residue:");
+          steps.writeln("   - Residue / ${residualHeirs.length}");
+          steps.writeln(
+              "   - Result: IDR ${formatNumber(share)} each (${filteredHeirs[heir]} ${heir.toLowerCase()}(s))");
+        }
+      });
+    }
 
     return steps.toString();
   }
@@ -218,81 +245,96 @@ class InheritancePage extends StatelessWidget {
                   ),
                 ),
               ),
-              DataTable(
-                columns: const [
-                  DataColumn(
-                      label: Text(
-                    'Property',
-                    style: TextStyle(
-                        color: Colors.teal,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'Amount',
-                    style: TextStyle(
-                        color: Colors.teal,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  )),
-                ],
-                rows: [
-                  DataRow(cells: [
-                    DataCell(Text(
-                      "Total Property",
-                      style: TextStyle(color: Colors.teal.shade800),
-                    )),
-                    DataCell(Text(
-                      "IDR ${formatNumber(propertyAmount)}",
-                      style: TextStyle(color: Colors.teal.shade800),
-                    )),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text(
-                      "Deceased's Debt",
-                      style: TextStyle(color: Colors.teal.shade800),
-                    )),
-                    DataCell(Text(
-                      "IDR ${formatNumber(debtAmount)}",
-                      style: TextStyle(color: Colors.teal.shade800),
-                    )),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text(
-                      "Deceased's Testament",
-                      style: TextStyle(color: Colors.teal.shade800),
-                    )),
-                    DataCell(Text(
-                      "IDR ${formatNumber(testamentAmount)}",
-                      style: TextStyle(color: Colors.teal.shade800),
-                    )),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text(
-                      "Funeral Arrangement",
-                      style: TextStyle(color: Colors.teal.shade800),
-                    )),
-                    DataCell(Text(
-                      "IDR ${formatNumber(funeralAmount)}",
-                      style: TextStyle(color: Colors.teal.shade800),
-                    )),
-                  ]),
-                  DataRow(cells: [
-                    DataCell(Text(
-                      "Net Property",
+              SizedBox(height: 10),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.white.withOpacity(0.7),
+                      Colors.white.withOpacity(0.1),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: DataTable(
+                  columns: const [
+                    DataColumn(
+                        label: Text(
+                      'Property',
                       style: TextStyle(
-                          color: Colors.teal.shade800,
-                          fontWeight: FontWeight.w600),
+                          color: Colors.teal,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
                     )),
-                    DataCell(Text(
-                      "IDR ${formatNumber(totalProperty)}",
+                    DataColumn(
+                        label: Text(
+                      'Amount',
                       style: TextStyle(
-                          color: Colors.teal.shade800,
-                          fontWeight: FontWeight.w600),
+                          color: Colors.teal,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
                     )),
-                  ]),
-                ],
+                  ],
+                  rows: [
+                    DataRow(cells: [
+                      DataCell(Text(
+                        "Total Property",
+                        style: TextStyle(color: Colors.teal.shade800),
+                      )),
+                      DataCell(Text(
+                        "IDR ${formatNumber(propertyAmount)}",
+                        style: TextStyle(color: Colors.teal.shade800),
+                      )),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text(
+                        "Deceased's Debt",
+                        style: TextStyle(color: Colors.teal.shade800),
+                      )),
+                      DataCell(Text(
+                        "IDR ${formatNumber(debtAmount)}",
+                        style: TextStyle(color: Colors.teal.shade800),
+                      )),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text(
+                        "Deceased's Testament",
+                        style: TextStyle(color: Colors.teal.shade800),
+                      )),
+                      DataCell(Text(
+                        "IDR ${formatNumber(testamentAmount)}",
+                        style: TextStyle(color: Colors.teal.shade800),
+                      )),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text(
+                        "Funeral Arrangement",
+                        style: TextStyle(color: Colors.teal.shade800),
+                      )),
+                      DataCell(Text(
+                        "IDR ${formatNumber(funeralAmount)}",
+                        style: TextStyle(color: Colors.teal.shade800),
+                      )),
+                    ]),
+                    DataRow(cells: [
+                      DataCell(Text(
+                        "Net Property",
+                        style: TextStyle(
+                            color: Colors.teal.shade800,
+                            fontWeight: FontWeight.w600),
+                      )),
+                      DataCell(Text(
+                        "IDR ${formatNumber(totalProperty)}",
+                        style: TextStyle(
+                            color: Colors.teal.shade800,
+                            fontWeight: FontWeight.w600),
+                      )),
+                    ]),
+                  ],
+                ),
               ),
               SizedBox(height: 20),
               Container(
@@ -323,57 +365,81 @@ class InheritancePage extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.grey.shade700, fontSize: 13),
               ),
-              DataTable(
-                columns: const [
-                  DataColumn(
-                      label: Text(
-                    'Heir',
-                    style: TextStyle(
-                        color: Colors.teal,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'Portion',
-                    style: TextStyle(
-                        color: Colors.teal,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  )),
-                  DataColumn(
-                      label: Text(
-                    'Asset',
-                    style: TextStyle(
-                        color: Colors.teal,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  )),
-                ],
-                rows: filteredHeirs.entries
-                    .where((entry) => entry.value > 0)
-                    .map((entry) {
-                  return DataRow(cells: [
-                    DataCell(
-                      Text(
-                        '${entry.value}-${entry.key}(s)',
-                        style: TextStyle(color: Colors.teal.shade800),
+              SizedBox(height: 15),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 8),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.white.withOpacity(0.7),
+                      Colors.white.withOpacity(0.1),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: DataTable(
+                  columns: const [
+                    DataColumn(
+                        label: Text(
+                      'Heir',
+                      style: TextStyle(
+                          color: Colors.teal,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn(
+                        label: Text(
+                      'Portion',
+                      style: TextStyle(
+                          color: Colors.teal,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold),
+                    )),
+                    DataColumn(
+                        label: Text(
+                      'Asset',
+                      style: TextStyle(
+                          color: Colors.teal,
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold),
+                    )),
+                  ],
+                  rows: filteredHeirs.entries
+                      .where((entry) => entry.value > 0)
+                      .map((entry) {
+                    return DataRow(cells: [
+                      DataCell(
+                        Text(
+                          '${entry.value}-${entry.key}(s)',
+                          style: TextStyle(
+                            color: Colors.teal.shade800,
+                            fontSize: 12,
+                          ),
+                        ),
                       ),
-                    ),
-                    DataCell(
-                      Text(
-                        portions[entry.key].toString(),
-                        style: TextStyle(color: Colors.teal.shade800),
+                      DataCell(
+                        Text(
+                          portions[entry.key].toString(),
+                          style: TextStyle(
+                            color: Colors.teal.shade800,
+                            fontSize: 12,
+                          ),
+                        ),
                       ),
-                    ),
-                    DataCell(
-                      Text(
-                        "IDR ${formatNumber(distribution[entry.key] ?? 0)}",
-                        style: TextStyle(color: Colors.teal.shade800),
+                      DataCell(
+                        Text(
+                          "IDR ${formatNumber(distribution[entry.key] ?? 0)}",
+                          style: TextStyle(
+                            color: Colors.teal.shade800,
+                            fontSize: 12,
+                          ),
+                        ),
                       ),
-                    ),
-                  ]);
-                }).toList(),
+                    ]);
+                  }).toList(),
+                ),
               ),
               SizedBox(height: 20),
               Container(
@@ -399,9 +465,24 @@ class InheritancePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 15),
-              Text(
-                calculationSteps,
-                style: TextStyle(color: Colors.teal.shade800),
+              Container(
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.white.withOpacity(0.7),
+                      Colors.white.withOpacity(0.1),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  calculationSteps,
+                  style: TextStyle(
+                      color: Colors.teal.shade800, fontWeight: FontWeight.w500),
+                ),
               ),
               SizedBox(height: 25),
             ],
