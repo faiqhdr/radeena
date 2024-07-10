@@ -484,7 +484,7 @@ class InheritancePage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Container(
-                  padding: EdgeInsets.all(15),
+                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
