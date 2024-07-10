@@ -32,6 +32,75 @@ class InheritancePage extends StatelessWidget {
         RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => "${m[1]}.");
   }
 
+  String getCalculationSteps(Map<String, dynamic> portions,
+      Map<String, int> filteredHeirs, double totalProperty) {
+    StringBuffer steps = StringBuffer();
+    steps.writeln("Calculation Steps:");
+    steps.writeln("\n1. Least Common Multiple (LCM) Calculation:");
+    steps.writeln("   - Determine the LCM of the denominators.");
+
+    filteredHeirs.forEach((heir, count) {
+      if (portions[heir] != 'Residue') {
+        int denominator = int.parse(portions[heir].split('/')[1]);
+        steps.writeln("   - Denominator for $heir: $denominator");
+      }
+    });
+
+    // Calculate the LCM
+    List<int> denominators = filteredHeirs.entries
+        .where((entry) => portions[entry.key] != 'Residue')
+        .map((entry) => int.parse(portions[entry.key].split('/')[1]))
+        .toList();
+
+    int lcm = denominators.fold(
+        1, (prev, element) => prev * element ~/ gcd(prev, element));
+    steps.writeln("   - LCM: $lcm");
+
+    // Individual calculations
+    filteredHeirs.forEach((heir, count) {
+      if (portions[heir] != 'Residue') {
+        int numerator = int.parse(portions[heir].split('/')[0]);
+        int denominator = int.parse(portions[heir].split('/')[1]);
+        double share = totalProperty * numerator / denominator;
+
+        steps.writeln("\n2. ${heir}'s Portion:");
+        steps.writeln("   - Portion = ${portions[heir]}");
+        steps.writeln(
+            "   - Convert to common denominator: ${numerator} x $lcm / $denominator = ${numerator * lcm / denominator}/$lcm");
+        steps.writeln(
+            "   - Calculation: $numerator/$denominator x ${formatNumber(totalProperty)}");
+        steps.writeln("   - Result: IDR ${formatNumber(share)}");
+      }
+    });
+
+    // Residual calculation
+    double totalDistributed = filteredHeirs.entries
+        .where((entry) => portions[entry.key] != 'Residue')
+        .map((entry) {
+      int numerator = int.parse(portions[entry.key].split('/')[0]);
+      int denominator = int.parse(portions[entry.key].split('/')[1]);
+      return totalProperty * numerator / denominator;
+    }).fold(0.0, (sum, element) => sum + element);
+
+    double residue = totalProperty - totalDistributed;
+    steps.writeln("\n3. Residue:");
+    steps.writeln(
+        "   - Total distributed: IDR ${formatNumber(totalDistributed)}");
+    steps.writeln(
+        "   - Residue: ${formatNumber(totalProperty)} - ${formatNumber(totalDistributed)} = IDR ${formatNumber(residue)}");
+
+    return steps.toString();
+  }
+
+  int gcd(int a, int b) {
+    while (b != 0) {
+      int t = b;
+      b = a % b;
+      a = t;
+    }
+    return a;
+  }
+
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -92,6 +161,9 @@ class InheritancePage extends StatelessWidget {
       'Son of Paternal Uncle': 'Residue',
       'Son of Uncle': 'Residue'
     };
+
+    String calculationSteps =
+        getCalculationSteps(portions, filteredHeirs, totalProperty);
 
     return Scaffold(
       backgroundColor: backgroundColor,
@@ -245,7 +317,7 @@ class InheritancePage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 5),
+              SizedBox(height: 15),
               Text(
                 "Final share is the combined shares ($finalShare portions) of all entitled heirs (${filteredHeirs.values.fold(0, (sum, count) => sum + count)} people). Division status for this calculation case is $divisionStatus.",
                 textAlign: TextAlign.center,
@@ -325,6 +397,11 @@ class InheritancePage extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
+              ),
+              SizedBox(height: 15),
+              Text(
+                calculationSteps,
+                style: TextStyle(color: Colors.teal.shade800),
               ),
               SizedBox(height: 25),
             ],
