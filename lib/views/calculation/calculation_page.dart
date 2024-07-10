@@ -227,34 +227,56 @@ class CalculationPage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    DataTable(
-                      columns: const [
-                        DataColumn(
-                            label: Text(
-                          'Heir',
-                          style: TextStyle(
-                              color: Colors.teal,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        )),
-                        DataColumn(
-                            label: Text(
-                          'Qty',
-                          style: TextStyle(
-                              color: Colors.teal,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        )),
-                        DataColumn(
-                            label: Text(
-                          'Inheritance',
-                          style: TextStyle(
-                              color: Colors.teal,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        )),
-                      ],
-                      rows: heirRows,
+                    SizedBox(height: 15),
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.white.withOpacity(0.7),
+                              Colors.white.withOpacity(0.2),
+                              Colors.white.withOpacity(0.1),
+                              Colors.grey.withOpacity(0.1),
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(13),
+                        ),
+                        child: DataTable(
+                          columns: const [
+                            DataColumn(
+                                label: Text(
+                              'Heir',
+                              style: TextStyle(
+                                  color: Colors.teal,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                            DataColumn(
+                                label: Text(
+                              'Qty',
+                              style: TextStyle(
+                                  color: Colors.teal,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                            DataColumn(
+                                label: Text(
+                              'Inheritance',
+                              style: TextStyle(
+                                  color: Colors.teal,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                          ],
+                          rows: heirRows,
+                        ),
+                      ),
                     ),
                     SizedBox(height: 500),
                   ] else ...[

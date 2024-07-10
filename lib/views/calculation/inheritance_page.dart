@@ -246,94 +246,101 @@ class InheritancePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 8),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.white.withOpacity(0.7),
-                      Colors.white.withOpacity(0.1),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(15),
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                child: DataTable(
-                  columns: const [
-                    DataColumn(
-                        label: Text(
-                      'Property',
-                      style: TextStyle(
-                          color: Colors.teal,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    )),
-                    DataColumn(
-                        label: Text(
-                      'Amount',
-                      style: TextStyle(
-                          color: Colors.teal,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    )),
-                  ],
-                  rows: [
-                    DataRow(cells: [
-                      DataCell(Text(
-                        "Total Property",
-                        style: TextStyle(color: Colors.teal.shade800),
-                      )),
-                      DataCell(Text(
-                        "IDR ${formatNumber(propertyAmount)}",
-                        style: TextStyle(color: Colors.teal.shade800),
-                      )),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text(
-                        "Deceased's Debt",
-                        style: TextStyle(color: Colors.teal.shade800),
-                      )),
-                      DataCell(Text(
-                        "IDR ${formatNumber(debtAmount)}",
-                        style: TextStyle(color: Colors.teal.shade800),
-                      )),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text(
-                        "Deceased's Testament",
-                        style: TextStyle(color: Colors.teal.shade800),
-                      )),
-                      DataCell(Text(
-                        "IDR ${formatNumber(testamentAmount)}",
-                        style: TextStyle(color: Colors.teal.shade800),
-                      )),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text(
-                        "Funeral Arrangement",
-                        style: TextStyle(color: Colors.teal.shade800),
-                      )),
-                      DataCell(Text(
-                        "IDR ${formatNumber(funeralAmount)}",
-                        style: TextStyle(color: Colors.teal.shade800),
-                      )),
-                    ]),
-                    DataRow(cells: [
-                      DataCell(Text(
-                        "Net Property",
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.white.withOpacity(0.7),
+                        Colors.white.withOpacity(0.2),
+                        Colors.white.withOpacity(0.1),
+                        Colors.grey.withOpacity(0.1),
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(13),
+                  ),
+                  child: DataTable(
+                    columns: const [
+                      DataColumn(
+                          label: Text(
+                        'Property',
                         style: TextStyle(
-                            color: Colors.teal.shade800,
-                            fontWeight: FontWeight.w600),
+                            color: Colors.teal,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
                       )),
-                      DataCell(Text(
-                        "IDR ${formatNumber(totalProperty)}",
+                      DataColumn(
+                          label: Text(
+                        'Amount',
                         style: TextStyle(
-                            color: Colors.teal.shade800,
-                            fontWeight: FontWeight.w600),
+                            color: Colors.teal,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
                       )),
-                    ]),
-                  ],
+                    ],
+                    rows: [
+                      DataRow(cells: [
+                        DataCell(Text(
+                          "Total Property",
+                          style: TextStyle(color: Colors.teal.shade800),
+                        )),
+                        DataCell(Text(
+                          "IDR ${formatNumber(propertyAmount)}",
+                          style: TextStyle(color: Colors.teal.shade800),
+                        )),
+                      ]),
+                      DataRow(cells: [
+                        DataCell(Text(
+                          "Deceased's Debt",
+                          style: TextStyle(color: Colors.teal.shade800),
+                        )),
+                        DataCell(Text(
+                          "IDR ${formatNumber(debtAmount)}",
+                          style: TextStyle(color: Colors.teal.shade800),
+                        )),
+                      ]),
+                      DataRow(cells: [
+                        DataCell(Text(
+                          "Deceased's Testament",
+                          style: TextStyle(color: Colors.teal.shade800),
+                        )),
+                        DataCell(Text(
+                          "IDR ${formatNumber(testamentAmount)}",
+                          style: TextStyle(color: Colors.teal.shade800),
+                        )),
+                      ]),
+                      DataRow(cells: [
+                        DataCell(Text(
+                          "Funeral Arrangement",
+                          style: TextStyle(color: Colors.teal.shade800),
+                        )),
+                        DataCell(Text(
+                          "IDR ${formatNumber(funeralAmount)}",
+                          style: TextStyle(color: Colors.teal.shade800),
+                        )),
+                      ]),
+                      DataRow(cells: [
+                        DataCell(Text(
+                          "Net Property",
+                          style: TextStyle(
+                              color: Colors.teal.shade800,
+                              fontWeight: FontWeight.w600),
+                        )),
+                        DataCell(Text(
+                          "IDR ${formatNumber(totalProperty)}",
+                          style: TextStyle(
+                              color: Colors.teal.shade800,
+                              fontWeight: FontWeight.w600),
+                        )),
+                      ]),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(height: 20),
@@ -366,79 +373,86 @@ class InheritancePage extends StatelessWidget {
                 style: TextStyle(color: Colors.grey.shade700, fontSize: 13),
               ),
               SizedBox(height: 15),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 8),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.white.withOpacity(0.7),
-                      Colors.white.withOpacity(0.1),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(15),
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                child: DataTable(
-                  columns: const [
-                    DataColumn(
-                        label: Text(
-                      'Heir',
-                      style: TextStyle(
-                          color: Colors.teal,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold),
-                    )),
-                    DataColumn(
-                        label: Text(
-                      'Portion',
-                      style: TextStyle(
-                          color: Colors.teal,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold),
-                    )),
-                    DataColumn(
-                        label: Text(
-                      'Asset',
-                      style: TextStyle(
-                          color: Colors.teal,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold),
-                    )),
-                  ],
-                  rows: filteredHeirs.entries
-                      .where((entry) => entry.value > 0)
-                      .map((entry) {
-                    return DataRow(cells: [
-                      DataCell(
-                        Text(
-                          '${entry.value}-${entry.key}(s)',
-                          style: TextStyle(
-                            color: Colors.teal.shade800,
-                            fontSize: 12,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.white.withOpacity(0.7),
+                        Colors.white.withOpacity(0.2),
+                        Colors.white.withOpacity(0.1),
+                        Colors.grey.withOpacity(0.1),
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(13),
+                  ),
+                  child: DataTable(
+                    columns: const [
+                      DataColumn(
+                          label: Text(
+                        'Heir',
+                        style: TextStyle(
+                            color: Colors.teal,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold),
+                      )),
+                      DataColumn(
+                          label: Text(
+                        'Portion',
+                        style: TextStyle(
+                            color: Colors.teal,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold),
+                      )),
+                      DataColumn(
+                          label: Text(
+                        'Asset',
+                        style: TextStyle(
+                            color: Colors.teal,
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold),
+                      )),
+                    ],
+                    rows: filteredHeirs.entries
+                        .where((entry) => entry.value > 0)
+                        .map((entry) {
+                      return DataRow(cells: [
+                        DataCell(
+                          Text(
+                            '${entry.value}-${entry.key}(s)',
+                            style: TextStyle(
+                              color: Colors.teal.shade800,
+                              fontSize: 12,
+                            ),
                           ),
                         ),
-                      ),
-                      DataCell(
-                        Text(
-                          portions[entry.key].toString(),
-                          style: TextStyle(
-                            color: Colors.teal.shade800,
-                            fontSize: 12,
+                        DataCell(
+                          Text(
+                            portions[entry.key].toString(),
+                            style: TextStyle(
+                              color: Colors.teal.shade800,
+                              fontSize: 12,
+                            ),
                           ),
                         ),
-                      ),
-                      DataCell(
-                        Text(
-                          "IDR ${formatNumber(distribution[entry.key] ?? 0)}",
-                          style: TextStyle(
-                            color: Colors.teal.shade800,
-                            fontSize: 12,
+                        DataCell(
+                          Text(
+                            "IDR ${formatNumber(distribution[entry.key] ?? 0)}",
+                            style: TextStyle(
+                              color: Colors.teal.shade800,
+                              fontSize: 12,
+                            ),
                           ),
                         ),
-                      ),
-                    ]);
-                  }).toList(),
+                      ]);
+                    }).toList(),
+                  ),
                 ),
               ),
               SizedBox(height: 20),
@@ -465,23 +479,31 @@ class InheritancePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 15),
-              Container(
-                padding: EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.white.withOpacity(0.7),
-                      Colors.white.withOpacity(0.1),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                child: Text(
-                  calculationSteps,
-                  style: TextStyle(
-                      color: Colors.teal.shade800, fontWeight: FontWeight.w500),
+                child: Container(
+                  padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.white.withOpacity(0.7),
+                        Colors.white.withOpacity(0.2),
+                        Colors.white.withOpacity(0.1),
+                        Colors.grey.withOpacity(0.1),
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(13),
+                  ),
+                  child: Text(
+                    calculationSteps,
+                    style: TextStyle(
+                        color: Colors.teal.shade800,
+                        fontWeight: FontWeight.w500),
+                  ),
                 ),
               ),
               SizedBox(height: 25),
