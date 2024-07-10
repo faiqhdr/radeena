@@ -224,7 +224,7 @@ class InheritancePage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 137, vertical: 7),
+                padding: EdgeInsets.symmetric(horizontal: 121, vertical: 7),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -237,7 +237,7 @@ class InheritancePage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
-                  "Total Share",
+                  "Final Share: ${filteredHeirs.values.fold(0, (sum, count) => sum + count)}/$finalShare",
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
@@ -247,7 +247,7 @@ class InheritancePage extends StatelessWidget {
               ),
               SizedBox(height: 5),
               Text(
-                "Total share is the combined shares of all entitled heirs. Division status for this calculation case is $divisionStatus.",
+                "Final share is the combined shares ($finalShare portions) of all entitled heirs (${filteredHeirs.values.fold(0, (sum, count) => sum + count)} people). Division status for this calculation case is $divisionStatus.",
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.grey.shade700, fontSize: 13),
               ),
@@ -305,7 +305,7 @@ class InheritancePage extends StatelessWidget {
               ),
               SizedBox(height: 20),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 121, vertical: 7),
+                padding: EdgeInsets.symmetric(horizontal: 119, vertical: 7),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -318,7 +318,7 @@ class InheritancePage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
-                  "Final Share: ${filteredHeirs.values.fold(0, (sum, count) => sum + count)}/$finalShare",
+                  "Calculation Steps",
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w500,
