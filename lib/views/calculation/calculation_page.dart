@@ -230,7 +230,7 @@ class CalculationPage extends StatelessWidget {
                     SizedBox(height: 15),
                     Card(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(15),
                       ),
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 8),

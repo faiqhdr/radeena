@@ -248,7 +248,7 @@ class InheritancePage extends StatelessWidget {
               SizedBox(height: 10),
               Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(15),
                 ),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 8),
@@ -375,7 +375,7 @@ class InheritancePage extends StatelessWidget {
               SizedBox(height: 15),
               Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(15),
                 ),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 8),
@@ -481,7 +481,7 @@ class InheritancePage extends StatelessWidget {
               SizedBox(height: 15),
               Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(15),
                 ),
                 child: Container(
                   padding: EdgeInsets.all(15),
