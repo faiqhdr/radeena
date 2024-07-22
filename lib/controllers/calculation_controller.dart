@@ -1,8 +1,12 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:radeena/models/calculation_model.dart';
 
 class CalculationController {
   final CalculationModel model = CalculationModel();
 
+  // Save Calculation
   Future<void> saveCalculation(
     String calculationName,
     double totalProperty,
@@ -58,7 +62,7 @@ class CalculationController {
       };
     }
 
-    // Define the portion each heir receives based on Islamic law
+    // Define Portion
     Map<String, dynamic> portions = {
       'Father': {
         'portion': (selectedHeirs.containsKey('Son') ||
@@ -246,7 +250,7 @@ class CalculationController {
       }
     };
 
-    // Filter out heirs not present in selectedHeirs
+    // Filter Out Heirs
     Map<String, dynamic> applicablePortions = {};
     portions.forEach((heir, data) {
       if (selectedHeirs.containsKey(heir)) {
@@ -254,7 +258,7 @@ class CalculationController {
       }
     });
 
-    // If all selected heirs have "Residue" portion, assign all property to them
+    // If All Selected Heirs Have "Residue" Portion, Assign All property to Them
     bool onlyResidueHeirs = applicablePortions.values.every((data) =>
         data['portion'] == 'Residue' || data['portion'] == 'DoubleMother');
     if (onlyResidueHeirs) {
@@ -271,7 +275,7 @@ class CalculationController {
       };
     }
 
-    // Calculate LCM of denominators for applicable Quranic portions
+    // Calculate LCM of Denominators
     List<int> denominators = applicablePortions.values
         .where((data) => data['portion'] is double)
         .map((data) => 1 ~/ data['portion'])
@@ -279,7 +283,7 @@ class CalculationController {
 
     int lcmValue = calculateLCM(denominators);
 
-    // Calculate initial shares based on fixed portions
+    // Calculate Initial Shares Based on Fixed Portions
     Map<String, double> initialShares = {};
     double totalInitialShares = 0;
 
@@ -348,7 +352,7 @@ class CalculationController {
       }
     });
 
-    // Ensure all shares are positive
+    // Ensure All Shares Are Positive
     distribution.forEach((heir, share) {
       if (share < 0) {
         distribution[heir] = -share;
