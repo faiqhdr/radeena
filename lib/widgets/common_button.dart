@@ -1,5 +1,9 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 
+// Custom Button Widget
 class CommonButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
