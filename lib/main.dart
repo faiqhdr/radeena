@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:radeena/views/menu_page.dart';
@@ -9,6 +12,7 @@ import 'package:radeena/controllers/identification_controller.dart';
 import 'package:radeena/controllers/impediment_controller.dart';
 
 void main() {
+  // Initial Controllers
   IdentificationController identificationController =
       IdentificationController();
   ImpedimentController impedimentController =
@@ -45,6 +49,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void initialization() async {
+    // Splash Screen
     await Future.delayed(Duration(seconds: 3));
     FlutterNativeSplash.remove();
   }
@@ -61,6 +66,7 @@ class _MyAppState extends State<MyApp> {
         identificationController: widget.identificationController,
         impedimentController: widget.impedimentController,
       ),
+      // Navigation in Menu Page
       routes: {
         '/identificationPage': (context) => IdentificationPage(
               controller: widget.identificationController,
