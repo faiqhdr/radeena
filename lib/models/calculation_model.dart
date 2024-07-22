@@ -1,7 +1,11 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class CalculationModel {
+  // Create Single Instance of Class
   static final CalculationModel _instance = CalculationModel._internal();
   static Database? _database;
 
@@ -17,6 +21,7 @@ class CalculationModel {
     return _database!;
   }
 
+  // Initialize Database
   Future<Database> _initDatabase() async {
     String path = join(await getDatabasesPath(), 'calculation_history.db');
     return await openDatabase(
@@ -26,6 +31,7 @@ class CalculationModel {
     );
   }
 
+  // Create History Table
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
       CREATE TABLE history(
@@ -44,6 +50,7 @@ class CalculationModel {
     ''');
   }
 
+  // Save Calculation
   Future<void> saveCalculation(
     String calculationName,
     double totalProperty,
@@ -75,11 +82,13 @@ class CalculationModel {
     );
   }
 
+  // Retrieve Calculation
   Future<List<Map<String, dynamic>>> getHistory() async {
     final db = await database;
     return await db.query('history');
   }
 
+  // Delete Calculation by ID
   Future<void> deleteHistory(int id) async {
     final db = await database;
     await db.delete(
