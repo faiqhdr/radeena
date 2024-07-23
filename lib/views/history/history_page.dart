@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:lottie/lottie.dart';
@@ -23,12 +26,14 @@ class _HistoryPageState extends State<HistoryPage> {
     _futureHistory = _historyController.getHistory();
   }
 
+  // Refresh Data
   void _refreshHistory() {
     setState(() {
       _futureHistory = _historyController.getHistory();
     });
   }
 
+  // Delete Confirmation
   void _showDeleteConfirmationDialog(BuildContext context, int id) {
     showDialog(
       context: context,
@@ -60,6 +65,7 @@ class _HistoryPageState extends State<HistoryPage> {
     );
   }
 
+  // Display Heirs
   Map<String, int> parseSelectedHeirs(String selectedHeirsString) {
     return Map.fromEntries(
       selectedHeirsString
@@ -98,6 +104,7 @@ class _HistoryPageState extends State<HistoryPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Page Subtitle
             Padding(
               padding: EdgeInsets.only(top: 0, bottom: 25),
               child: Text(
@@ -109,12 +116,14 @@ class _HistoryPageState extends State<HistoryPage> {
               child: FutureBuilder<List<Map<String, dynamic>>>(
                 future: _futureHistory,
                 builder: (context, snapshot) {
+                  // Loading State
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
                     return Center(child: Text("Error: ${snapshot.error}"));
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                     return Center(
+                      // If No Records, Display Illustration
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
@@ -151,7 +160,9 @@ class _HistoryPageState extends State<HistoryPage> {
                         ],
                       ),
                     );
-                  } else {
+                  }
+                  // If Records Exist, Display Data
+                  else {
                     return ListView.builder(
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
@@ -240,6 +251,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                 ),
                               ),
                               SizedBox(width: 8),
+                              // Trash Icon
                               Container(
                                 width: 58.0,
                                 height: 58.0,

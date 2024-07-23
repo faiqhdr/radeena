@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 
@@ -7,11 +10,13 @@ class SavedCalculationPage extends StatelessWidget {
   const SavedCalculationPage({Key? key, required this.calculation})
       : super(key: key);
 
+  // Number Formatting
   String formatNumber(double number) {
     return number.toStringAsFixed(0).replaceAllMapped(
         RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => "${m[1]}.");
   }
 
+  // Display Heirs
   Map<String, int> parseSelectedHeirs(String selectedHeirsString) {
     return Map.fromEntries(
       selectedHeirsString
@@ -36,6 +41,7 @@ class SavedCalculationPage extends StatelessWidget {
     );
   }
 
+  // Get Calculation Steps
   String getCalculationSteps(Map<String, dynamic> portions,
       Map<String, int> filteredHeirs, double totalProperty) {
     StringBuffer steps = StringBuffer();
@@ -54,7 +60,7 @@ class SavedCalculationPage extends StatelessWidget {
         (denominator) => steps.writeln("   - Denominator: $denominator"));
     steps.writeln("   - LCM: ${denominators.join(' x ')} = $lcm");
 
-    // Individual calculations
+    // Individual Calculations
     Map<String, double> individualShares = {};
     filteredHeirs.forEach((heir, count) {
       if (portions[heir] != 'Residue') {
@@ -74,7 +80,7 @@ class SavedCalculationPage extends StatelessWidget {
       }
     });
 
-    // Residual calculation
+    // Residual Calculation
     double totalDistributed =
         individualShares.values.fold(0.0, (sum, value) => sum + value);
     double residue = totalProperty - totalDistributed;
@@ -84,7 +90,7 @@ class SavedCalculationPage extends StatelessWidget {
     steps.writeln(
         "   - Residue: ${formatNumber(totalProperty)} - ${formatNumber(totalDistributed)} = IDR ${formatNumber(residue)}");
 
-    // Residual heirs
+    // Residual Heirs
     List<String> residualHeirs = filteredHeirs.entries
         .where((entry) => portions[entry.key] == 'Residue')
         .map((entry) => entry.key)
@@ -141,6 +147,7 @@ class SavedCalculationPage extends StatelessWidget {
     Map<String, double> distribution =
         parseDistribution(calculation['distribution']);
 
+    // Heir Portion
     Map<String, dynamic> portions = {
       'Father': '1/6',
       'Mother': (selectedHeirs.containsKey('Son') ||
@@ -215,6 +222,7 @@ class SavedCalculationPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Page Subtitle
               Padding(
                 padding: EdgeInsets.only(top: 0),
                 child: Text(
@@ -223,6 +231,7 @@ class SavedCalculationPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 25),
+              // Property Breakdown
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 123, vertical: 7),
                 decoration: BoxDecoration(
@@ -266,6 +275,7 @@ class SavedCalculationPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(13),
                   ),
                   child: DataTable(
+                    // Table Header
                     columns: const [
                       DataColumn(
                           label: Text(
@@ -284,6 +294,7 @@ class SavedCalculationPage extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       )),
                     ],
+                    // Table Property Data
                     rows: [
                       DataRow(cells: [
                         DataCell(Text(
@@ -344,6 +355,7 @@ class SavedCalculationPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 15),
+              // Heir Share Breakdown
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 121, vertical: 7),
                 decoration: BoxDecoration(
@@ -393,6 +405,7 @@ class SavedCalculationPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(13),
                   ),
                   child: DataTable(
+                    // Table Header
                     columns: const [
                       DataColumn(
                           label: Text(
@@ -419,6 +432,7 @@ class SavedCalculationPage extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       )),
                     ],
+                    // Table Data
                     rows: selectedHeirs.entries
                         .where((entry) => entry.value > 0)
                         .map((entry) {
@@ -456,6 +470,7 @@ class SavedCalculationPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 15),
+              // Calculation Steps
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 119, vertical: 7),
                 decoration: BoxDecoration(
