@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:lottie/lottie.dart';
@@ -34,11 +37,13 @@ class ConfirmationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
 
+    // Number Formatting
     String formatNumber(double number) {
       return number.toStringAsFixed(0).replaceAllMapped(
           RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => "${m[1]}.");
     }
 
+    // Container for Listed Heirs
     List<Widget> buildHeirWidgets(Map<String, int> heirs) {
       List<Widget> heirWidgets = [];
       heirs.forEach((heir, qty) {
@@ -130,6 +135,7 @@ class ConfirmationPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Page Subtitle
                   Padding(
                     padding: EdgeInsets.only(top: 0),
                     child: Text(
@@ -138,6 +144,7 @@ class ConfirmationPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 25),
+                  // If No Heirs Selected, Display Illustration
                   if (filteredHeirs.isEmpty)
                     Center(
                       child: Column(
@@ -170,7 +177,9 @@ class ConfirmationPage extends StatelessWidget {
                         ],
                       ),
                     )
+                  // If Heirs Exist, Display Confirmation
                   else ...[
+                    // Heirs List
                     Text(
                       "The following are the selected Heirs:",
                       style: TextStyle(
@@ -182,6 +191,7 @@ class ConfirmationPage extends StatelessWidget {
                     ...buildHeirWidgets(filteredHeirs),
                   ],
                   SizedBox(height: 32),
+                  // Fixed Property
                   Text(
                     "The inheritable property ready for distribution is:",
                     style: TextStyle(
@@ -231,6 +241,8 @@ class ConfirmationPage extends StatelessWidget {
               ),
             ),
           ),
+
+          // Button Confirmation
           Positioned(
             top: 640,
             left: width * 0.25,

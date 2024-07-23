@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -33,11 +36,13 @@ class CalculationPage extends StatelessWidget {
     required this.impedimentController,
   }) : super(key: key);
 
+  // Number Formatting
   String formatNumber(double number) {
     return number.toStringAsFixed(0).replaceAllMapped(
         RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => "${m[1]}.");
   }
 
+  // Reset Confirmation Dialog
   void _showResetConfirmationDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -79,6 +84,7 @@ class CalculationPage extends StatelessWidget {
     String divisionStatus = result['divisionStatus'];
     int finalShare = result['finalShare'];
 
+    // See Heir Details
     List<DataRow> heirRows = filteredHeirs.entries
         .where((entry) => entry.value > 0)
         .map((entry) => DataRow(
@@ -142,6 +148,7 @@ class CalculationPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Page Subtitle
                   Padding(
                     padding: EdgeInsets.only(top: 0),
                     child: Text(
@@ -150,6 +157,7 @@ class CalculationPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 25),
+                  // If Heirs Exist, Display Result
                   if (filteredHeirs.isNotEmpty) ...[
                     StaggeredGrid.count(
                       crossAxisCount: 2,
@@ -247,6 +255,7 @@ class CalculationPage extends StatelessWidget {
                           ),
                           borderRadius: BorderRadius.circular(13),
                         ),
+                        // Table Result
                         child: DataTable(
                           columns: const [
                             DataColumn(
@@ -279,7 +288,9 @@ class CalculationPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 500),
-                  ] else ...[
+                  ]
+                  // If No Heirs Selected, Display Illustration
+                  else ...[
                     Center(
                       child: Stack(
                         alignment: Alignment.center,
@@ -322,6 +333,8 @@ class CalculationPage extends StatelessWidget {
               ),
             ),
           ),
+
+          // Button for Distribution Details
           Positioned(
             top: 640,
             left: 20,
@@ -355,6 +368,8 @@ class CalculationPage extends StatelessWidget {
                       );
                     },
                   ),
+
+                  // Button for Save Result
                   _buildGradientButton(
                     text: "Save Result",
                     onPressed: () async {
@@ -427,6 +442,8 @@ class CalculationPage extends StatelessWidget {
                     },
                   ),
                 ],
+
+                // Button for Resetting
                 _buildGradientButton(
                   icon: Icons.home,
                   onPressed: () {
@@ -441,6 +458,7 @@ class CalculationPage extends StatelessWidget {
     );
   }
 
+  // Button Styles
   Widget _buildGradientButton(
       {String? text, IconData? icon, required VoidCallback onPressed}) {
     return Container(
@@ -475,6 +493,7 @@ class CalculationPage extends StatelessWidget {
     );
   }
 
+  // Masonry Layout Styles
   Widget buildContainer(String text, Color color1, Color color2, Color color3) {
     return Container(
       decoration: BoxDecoration(

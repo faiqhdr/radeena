@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:radeena/styles/style.dart';
@@ -14,6 +17,7 @@ class HeirPage extends StatelessWidget {
     required this.totalInheritance,
   }) : super(key: key);
 
+  // Number Formattinng
   String formatNumber(double number) {
     return number.toStringAsFixed(0).replaceAllMapped(
         RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => "${m[1]}.");
@@ -46,6 +50,7 @@ class HeirPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Page Subtitle
             Padding(
               padding: EdgeInsets.only(top: 0),
               child: Text(
@@ -83,6 +88,7 @@ class HeirPage extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
+                      // Inheritance
                       Row(
                         children: [
                           Icon(Icons.account_balance_wallet,
@@ -107,6 +113,7 @@ class HeirPage extends StatelessWidget {
                         ],
                       ),
                       Divider(),
+                      // Heir Quantity
                       Row(
                         children: [
                           Icon(Icons.people, color: Colors.teal, size: 20),
@@ -130,6 +137,7 @@ class HeirPage extends StatelessWidget {
                         ],
                       ),
                       Divider(),
+                      // Individual Inheritance
                       Row(
                         children: [
                           Icon(Icons.monetization_on,

@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/controllers/identification_controller.dart';
@@ -27,11 +30,13 @@ class InheritancePage extends StatelessWidget {
     required this.impedimentController,
   }) : super(key: key);
 
+  // Number Formatting
   String formatNumber(double number) {
     return number.toStringAsFixed(0).replaceAllMapped(
         RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => "${m[1]}.");
   }
 
+  // Get Calculation Steps
   String getCalculationSteps(Map<String, dynamic> portions,
       Map<String, int> filteredHeirs, double totalProperty) {
     StringBuffer steps = StringBuffer();
@@ -70,7 +75,7 @@ class InheritancePage extends StatelessWidget {
       }
     });
 
-    // Residual calculation
+    // Residual Calculation
     double totalDistributed =
         individualShares.values.fold(0.0, (sum, value) => sum + value);
     double residue = totalProperty - totalDistributed;
@@ -80,7 +85,7 @@ class InheritancePage extends StatelessWidget {
     steps.writeln(
         "   - Residue: ${formatNumber(totalProperty)} - ${formatNumber(totalDistributed)} = IDR ${formatNumber(residue)}");
 
-    // Residual heirs
+    // Residual Heirs
     List<String> residualHeirs = filteredHeirs.entries
         .where((entry) => portions[entry.key] == 'Residue')
         .map((entry) => entry.key)
@@ -141,6 +146,7 @@ class InheritancePage extends StatelessWidget {
     String divisionStatus = result['divisionStatus'];
     int finalShare = result['finalShare'];
 
+    // Heir Portion
     Map<String, dynamic> portions = {
       'Father': '1/6',
       'Mother': (filteredHeirs.containsKey('Son') ||
@@ -215,6 +221,7 @@ class InheritancePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Page Subtitle
               Padding(
                 padding: EdgeInsets.only(top: 0),
                 child: Text(
@@ -223,6 +230,7 @@ class InheritancePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 25),
+              // Property Breakdown
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 123, vertical: 7),
                 decoration: BoxDecoration(
@@ -266,6 +274,7 @@ class InheritancePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(13),
                   ),
                   child: DataTable(
+                    // Table Header
                     columns: const [
                       DataColumn(
                           label: Text(
@@ -284,6 +293,7 @@ class InheritancePage extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       )),
                     ],
+                    // Table Property Data
                     rows: [
                       DataRow(cells: [
                         DataCell(Text(
@@ -344,6 +354,7 @@ class InheritancePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
+              // Heir Share Breakdown
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 121, vertical: 7),
                 decoration: BoxDecoration(
@@ -393,6 +404,7 @@ class InheritancePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(13),
                   ),
                   child: DataTable(
+                    // Table Header
                     columns: const [
                       DataColumn(
                           label: Text(
@@ -419,6 +431,7 @@ class InheritancePage extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       )),
                     ],
+                    // Table Data
                     rows: filteredHeirs.entries
                         .where((entry) => entry.value > 0)
                         .map((entry) {
@@ -456,6 +469,7 @@ class InheritancePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
+              // Calculation Steps
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 119, vertical: 7),
                 decoration: BoxDecoration(
