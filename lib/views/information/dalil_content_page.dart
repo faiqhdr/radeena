@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:radeena/styles/style.dart';
@@ -35,6 +38,7 @@ class DalilContentPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Page Subtitle
               Padding(
                 padding: EdgeInsets.only(top: 0),
                 child: Text(
@@ -63,6 +67,7 @@ class DalilContentPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          // Portion
                           Text(
                             "Portion:",
                             style: TextStyle(
@@ -109,6 +114,7 @@ class DalilContentPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Explanation
                     Text(
                       "Explanation:",
                       style: TextStyle(
@@ -146,6 +152,7 @@ class DalilContentPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Snippet Dalil
                     Text(
                       "Dalil:",
                       style: TextStyle(
@@ -184,6 +191,7 @@ class DalilContentPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Full Dalil
                     Text(
                       "Complete Dalil:",
                       style: TextStyle(

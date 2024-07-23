@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/controllers/identification_controller.dart';
@@ -55,6 +58,7 @@ class MenuPage extends StatelessWidget {
                   ],
                 ),
               ),
+              // Determine Heirs Service
               DeterminationWidget(
                 height: height,
                 width: width,
@@ -67,6 +71,7 @@ class MenuPage extends StatelessWidget {
                 children: [
                   Column(
                     children: [
+                      // History Service
                       CustomWidget(
                         width: width,
                         height: height * .45,
@@ -87,6 +92,7 @@ class MenuPage extends StatelessWidget {
                   Spacer(),
                   Column(
                     children: [
+                      // Library Service
                       CustomWidget(
                         width: width,
                         height: height * .23,
@@ -102,6 +108,7 @@ class MenuPage extends StatelessWidget {
                           Navigator.pushNamed(context, '/libraryPage');
                         },
                       ),
+                      // Chatbox Service
                       CustomWidget(
                         width: width,
                         height: height * .19,

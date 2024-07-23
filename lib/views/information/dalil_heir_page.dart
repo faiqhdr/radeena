@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/information/dalil_list_page.dart';
@@ -20,6 +23,7 @@ class _DalilHeirPageState extends State<DalilHeirPage> {
     uniqueHeirsFuture = _loadData();
   }
 
+  // Load Data Asynchronously
   Future<List> _loadData() async {
     await libraryController.loadDalilData();
     return libraryController.getUniqueHeirs();

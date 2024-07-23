@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/information/topic_content_page.dart';
@@ -48,6 +51,7 @@ class _TopicListPageState extends State<TopicListPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Page Subtitle
             Padding(
               padding: EdgeInsets.only(top: 0),
               child: Text(

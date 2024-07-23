@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:radeena/styles/style.dart';
@@ -13,10 +16,10 @@ class ChatbotPage extends StatefulWidget {
 class _ChatbotPageState extends State<ChatbotPage>
     with TickerProviderStateMixin {
   final ChatbotController chatbotController = ChatbotController();
-  List<Map<String, String>> messages = [];
-  bool isTyping = false;
+  List<Map<String, String>> messages = []; // Store Chat Messages
+  bool isTyping = false; // Indicator for Typing Status
   List<Map<String, String>> predefinedOptions = [];
-  String selectedValue = '';
+  String selectedValue = ''; // Currently Selected User Option
 
   late AnimationController _animationController;
   late Animation<double> _animation;
@@ -40,6 +43,7 @@ class _ChatbotPageState extends State<ChatbotPage>
     super.dispose();
   }
 
+  // Display Initial Greetingand Load Initial Options
   void _initialGreeting() {
     Future.delayed(Duration(seconds: 1), () {
       _addMessage("Assalamu'alaikum warahmatullah wabarakatuh! 👋", "Chatbot");
@@ -55,12 +59,14 @@ class _ChatbotPageState extends State<ChatbotPage>
     });
   }
 
+  // Add New Message to Chat
   void _addMessage(String message, String sender) {
     setState(() {
       messages.add({"message": message, "sender": sender});
     });
   }
 
+  // Handle Initial User Selection and Get Response from Chatbot
   void _handleInitialSelection(String selected) async {
     _addMessage(selected, "User");
     setState(() {
@@ -76,9 +82,8 @@ class _ChatbotPageState extends State<ChatbotPage>
         isTyping = false;
         if (response.isEmpty) {
           _addMessage(
-            "Sorry, I couldn't find any information on that. Please try another query.",
-            "Chatbot",
-          );
+              "Sorry, I couldn't find any information on that. Please try another query.",
+              "Chatbot");
         } else {
           predefinedOptions = response;
           _addMessage(
@@ -92,6 +97,7 @@ class _ChatbotPageState extends State<ChatbotPage>
     });
   }
 
+  // Provide Detailed Explanation for Selected Topic
   void _provideDetailedExplanation(String selected) async {
     _addMessage(selected, "User");
     setState(() {
@@ -138,10 +144,8 @@ class _ChatbotPageState extends State<ChatbotPage>
         await Future.delayed(Duration(seconds: 2));
         setState(() {
           isTyping = false;
-          _addMessage(
-            "Sorry, I couldn't display the explanation on that. 😵",
-            "Chatbot",
-          );
+          _addMessage("Sorry, I couldn't display the explanation on that. 😵",
+              "Chatbot");
           _restartChat();
         });
       }
@@ -151,6 +155,7 @@ class _ChatbotPageState extends State<ChatbotPage>
     }
   }
 
+  // Display Detailed Dalil Information
   void _showDalilList(List<Map<String, dynamic>> dalilList) async {
     if (dalilList.isNotEmpty) {
       setState(() {
@@ -185,6 +190,7 @@ class _ChatbotPageState extends State<ChatbotPage>
     _restartChat();
   }
 
+  // Restart Chat with Initial Options
   void _restartChat() {
     Future.delayed(Duration(seconds: 2), () {
       setState(() {
@@ -201,6 +207,7 @@ class _ChatbotPageState extends State<ChatbotPage>
     });
   }
 
+  // Chat Bubble for Displaying Messages
   Widget _buildChatBubble(String message, String sender) {
     bool isBot = sender == "Chatbot";
     return Align(
@@ -235,6 +242,7 @@ class _ChatbotPageState extends State<ChatbotPage>
     );
   }
 
+  // Predefined User Option for Quick Selection
   Widget _buildPredefinedUserOption(String text, VoidCallback onTap) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
@@ -269,6 +277,7 @@ class _ChatbotPageState extends State<ChatbotPage>
     );
   }
 
+  // Typing Indicator Animation
   Widget _buildTypingIndicator() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -328,6 +337,7 @@ class _ChatbotPageState extends State<ChatbotPage>
     );
   }
 
+  // List of Predefined User Options
   List<Widget> _buildPredefinedUserOptions() {
     return predefinedOptions
         .map((option) => _buildPredefinedUserOption(option['question']!, () {

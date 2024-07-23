@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:radeena/styles/style.dart';
@@ -62,11 +65,13 @@ class TopicContentPage extends StatelessWidget {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                             ),
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius:
+                                BorderRadius.circular(10), // Rounded corners
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              // Header
                               Text(
                                 lessons[i]['content'],
                                 style: TextStyle(
@@ -107,6 +112,7 @@ class TopicContentPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        // Data
                         Text(
                           lessons[i]['content'],
                           style: TextStyle(

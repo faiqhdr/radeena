@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:radeena/styles/style.dart';
@@ -34,6 +37,7 @@ class LibraryPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Page Subtitle
             Padding(
               padding: EdgeInsets.only(top: 0),
               child: Text(
@@ -48,6 +52,7 @@ class LibraryPage extends StatelessWidget {
                 height: 300,
               ),
             ),
+            // Faraid Dalil
             Container(
               margin: EdgeInsets.symmetric(horizontal: 10),
               padding: EdgeInsets.all(10),
@@ -127,6 +132,7 @@ class LibraryPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 25),
+            // Categories
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

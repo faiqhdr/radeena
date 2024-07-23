@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 import 'package:radeena/styles/style.dart';
 import 'package:radeena/views/information/dalil_content_page.dart';
@@ -21,6 +24,7 @@ class _DalilListPageState extends State<DalilListPage> {
     dalilListFuture = _loadData();
   }
 
+  // Load Data Asynchronously
   Future<List<Map<String, dynamic>>> _loadData() async {
     await libraryController.loadDalilData();
     return libraryController.getDalilForHeir(widget.heir);
@@ -50,6 +54,7 @@ class _DalilListPageState extends State<DalilListPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Page Subtitle
             Padding(
               padding: EdgeInsets.only(top: 0),
               child: Text(
@@ -62,6 +67,7 @@ class _DalilListPageState extends State<DalilListPage> {
               child: FutureBuilder<List<Map<String, dynamic>>>(
                 future: dalilListFuture,
                 builder: (context, snapshot) {
+                  // Loading State
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
@@ -72,6 +78,7 @@ class _DalilListPageState extends State<DalilListPage> {
                       itemCount: dalilList.length,
                       itemBuilder: (context, index) {
                         final dalil = dalilList[index];
+                        // Navigate to Dalil Content
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(
