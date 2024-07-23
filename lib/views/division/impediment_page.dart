@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -52,6 +55,7 @@ class ImpedimentPage extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Page Subtitle
                 Padding(
                   padding: EdgeInsets.only(top: 0),
                   child: Text(
@@ -60,6 +64,7 @@ class ImpedimentPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 25),
+                // If Rules Exsist, Display Impediments
                 Expanded(
                   child: impediments.isNotEmpty
                       ? ListView.builder(
@@ -140,6 +145,7 @@ class ImpedimentPage extends StatelessWidget {
                             ],
                           ),
                         )
+                      // If No Rules Exist, Display Illustration
                       : Center(
                           child: Stack(
                             alignment: Alignment.center,
@@ -178,6 +184,7 @@ class ImpedimentPage extends StatelessWidget {
                 ),
               ],
             ),
+            // Navigate to Family Tree Page
             Positioned(
               bottom: 60,
               left: width * 0.22,

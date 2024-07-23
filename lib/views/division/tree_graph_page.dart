@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 import 'package:graphview/GraphView.dart';
 import 'package:radeena/styles/style.dart';
@@ -63,6 +66,7 @@ class TreeGraphPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Page Subtitle
                 Padding(
                   padding: EdgeInsets.only(top: 0),
                   child: Text(
@@ -88,6 +92,7 @@ class TreeGraphPage extends StatelessWidget {
               ],
             ),
           ),
+          // Navigate to Confirmation
           Positioned(
             bottom: 55,
             left: width * 0.25,
@@ -122,6 +127,7 @@ class TreeGraphPage extends StatelessWidget {
     );
   }
 
+  // Color Indications
   Widget buildLegend() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -151,6 +157,7 @@ class TreeGraphPage extends StatelessWidget {
     );
   }
 
+  // Circle Shape for Nodes
   Widget gradientCircleWidget(String label, LinearGradient gradient) {
     return ConstrainedBox(
       constraints: BoxConstraints(

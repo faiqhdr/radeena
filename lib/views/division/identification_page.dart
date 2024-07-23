@@ -1,3 +1,6 @@
+//  Created by Muhammad Faiq Haidar on 22/07/2024.
+//  Copyright © 2024 Muhammad Faiq Haidar. All rights reserved.
+
 import 'package:flutter/material.dart';
 import 'package:input_quantity/input_quantity.dart';
 import 'package:lottie/lottie.dart';
@@ -68,6 +71,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
             padding: EdgeInsets.symmetric(horizontal: width * 0.06),
             child: _buildInputStep(currentStep),
           ),
+          // Button for Steps
           Positioned(
             right: 40,
             top: 640,
@@ -104,6 +108,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
     );
   }
 
+  // Testament Validation
   void _validateTestamentAmount() {
     setState(() {
       double? propertyAmount = double.tryParse(_propertyAmountController.text);
@@ -134,6 +139,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
     }
   }
 
+  // Property Step
   Widget _buildPropertyInputStep() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,6 +168,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
         ),
         _buildInputExplanation(
             "Bequest amount left by the deceased, must not exceeding 1/3 of total assets. Enter \"0\" if none."),
+        // Real-Time Testament Validation
         if (_propertyAmountController.text.isNotEmpty)
           Padding(
             padding: const EdgeInsets.only(bottom: 16),
@@ -198,6 +205,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
     );
   }
 
+  // Text Input
   Widget _buildTextInputField({
     required TextEditingController controller,
     required String label,
@@ -242,6 +250,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
     );
   }
 
+  // Explanation for Each Input
   Widget _buildInputExplanation(String explanation) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8.0),
@@ -252,6 +261,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
     );
   }
 
+  // Property Submission
   void _submitPropertyDetails() {
     setState(() {
       _propertyError = widget.controller
@@ -339,6 +349,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
     });
   }
 
+  // Gender Step
   Widget _buildGenderInputStep() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -360,6 +371,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
     );
   }
 
+  // Select Gender
   Widget _buildGenderSelection() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -426,6 +438,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
     );
   }
 
+  // Gender Submission
   void _submitGenderDetails() {
     setState(() {
       String? genderError = widget.controller.validateGender();
@@ -449,6 +462,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
     });
   }
 
+  // Family Step
   Widget _buildFamilyInputStep() {
     String? gender = widget.controller.deceased.gender;
     return SingleChildScrollView(
@@ -597,6 +611,7 @@ class _IdentificationPageState extends State<IdentificationPage> {
     );
   }
 
+  // Navigate to Impediment Page
   void _navigateToImpedimentPage() {
     Navigator.push(
       context,
